@@ -17,5 +17,5 @@ Template:
 ## 2026-09-09  session
 **Did:** Scaffolded the project. Added README, AGENTS.md, plan, branching guide, this devlog, and the `dev` branch.
 **Broke / surprised me:** Nothing yet.
-**Decided:** `main` is production, `dev` is where work happens, feature branches come off `dev` with `feat/` `fix/` `chore/` style prefixes. See BRANCHING.md.
+**Decided:** `main` is production, `dev` is where work happens, feature branches come off `dev` with `feat/` `fix/` `chore/` style prefixes. Rules in AGENTS.md.
 **Next:** First real branch.

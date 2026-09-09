@@ -7,8 +7,11 @@ Project: marketing site for the new Vivary.
 - Public-context guardrail: nothing about Jeff's location or living situation.
 - Zo Site. Publishing needs Jeff's approval. Published sites serve `dist/` live; build in a temp dir, never in a published copy.
 
-## Git and devlog
+## Git
 
-- Branching: `main` is production, `dev` is integration, work branches come off `dev` as `feat/`, `fix/`, `chore/`, `docs/`, `refactor/`, `test/`, `hotfix/` (off main). Full rules in BRANCHING.md. Create branches with `scripts/branch.sh <type> <slug>`.
-- Never commit to `main` directly. Never rebase `dev` or `main`.
-- Append a DEVLOG.md entry (newest first, use the template) before opening any PR and at the end of any working session.
+- `main` = production. Only merges from `dev` or `hotfix/`. Never commit to it directly, never rebase it.
+- `dev` = integration and default work branch. Never rebase it.
+- Work branches come off `dev`, named `<type>/<slug>`: `feat/` `fix/` `chore/` `docs/` `refactor/` `test/`. `hotfix/` comes off `main` and merges back to both. Slug is lowercase, hyphenated, three words max. Create with `scripts/branch.sh <type> <slug>`.
+- Commits use the same prefixes, imperative, under 72 chars: `feat: add landing hero`.
+- PRs squash into `dev`. Releases merge `dev` into `main` (merge commit) and tag `vX.Y.Z`.
+- Append a DEVLOG.md entry (newest first, template at the top) before any PR and at the end of every session.
