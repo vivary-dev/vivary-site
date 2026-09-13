@@ -6,6 +6,9 @@ const candidates = [
   { slug: "c3", name: "Ledger", note: "Paper and ink with one cobalt accent. The hero is the published-truth table and a dithered chart of real signals." },
   { slug: "c4", name: "Terrarium", note: "Warm and generative. Dithered gradient washes and a serif display face. The hero blooms." },
   { slug: "c5", name: "Console", note: "Product shot first. A drawn app frame, bold sans, three proof columns." },
+  { slug: "c7", name: "Transmission", note: "Hyperstition. A field report from a workspace three years in, written as if it already happened. Phosphor on black." },
+  { slug: "c8", name: "Familiar", note: "Paranormal. Something lives in your files and it is yours. The memory file reads you back, line by line." },
+  { slug: "c6", name: "Workspace, not chat", note: "The flagship. One idea told in six beats: agents need a workspace, not a better chat. Vapor for what evaporates, paper for what persists." },
 ];
 
 export default function CandidatesIndex() {
