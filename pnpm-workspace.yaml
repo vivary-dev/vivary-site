@@ -1,0 +1,10 @@
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+# Temporary supply-chain holds. Each pins one transitive patch release that was
+# published inside the 72-hour window without a provenance attestation.
+# Remove each on its date, then rerun scripts/publish-scan.mjs.
+overrides:
+  "@tybys/wasm-util": 0.10.3  # 0.10.4 published 2026-09-13; remove 2026-09-16
+  "open@11": 11.0.2  # 11.0.3 published 2026-09-11; remove 2026-09-15

@@ -1,35 +1,39 @@
-# Vivary Marketing Site
+# Vivary website
 
-A new marketing site for Vivary, the agent-workspace scaffold Jeff is building.
-
-## What Vivary is (from the existing portfolio entry)
-
-The create-t3-app for agent workspaces. One command scaffolds a workspace with state, memory boundaries, review gates, and a typed Markdown graph.
-
-- `create-vivary` scaffolds the workspace
-- Tropo adds a typed knowledge graph
-- Ozone adds graph-aware review
-- Exo adds coordination surfaces
-- `doctor` is the proof-point command: self-checks the shell, privacy boundaries, and graph health
-
-Repo: https://github.com/vivary-dev/vivary. Current site: https://vivary.vercel.app/. Status as of the portfolio entry: alpha.
-
-Source of that description: `Projects/jeffkazzee.dev/src/content/projects/vivary.md`.
-
-## Why a new site
-
-Jeff is building a new version of Vivary. This site markets that version. Before writing copy, get the current feature list from Jeff or the repo, since the summary above may be behind.
-
-## Rules
-
-- Copy in Jeff's voice. No em dashes, no AI tells. Run unslop before anything is shown.
-- Ground every feature claim in what the repo actually does today.
-- No location or living-situation details about Jeff.
+The marketing site for Vivary, a local desktop workspace where agents work
+from files you own. Started from scratch on 2026-09-13 to replace the Astro
+site at vivary.vercel.app.
 
 ## Stack
 
-Vite + React + TypeScript + Tailwind as a Zo Site. Publish only when Jeff says so.
+Next.js 16 (App Router, TypeScript), Tailwind CSS 4, shadcn/ui 4 on Base UI,
+pnpm 10, Node 24. Imagery through Dither Kit, icons through icons0, UI audits
+through shadscan, analytics through Umami.
+
+## Run it
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Then open the printed local URL. `pnpm build` produces the production build
+and `pnpm lint` runs ESLint.
+
+## Layout
+
+- `src/app/` holds routes and the root layout.
+- `src/components/ui/` holds shadcn components. Add more with the pinned CLI
+  named in `AGENTS.md`.
+- `public/` holds static assets and imagery.
+- `scripts/` holds the branch helper and the supply-chain scan.
+
+## Rules
+
+`AGENTS.md` is the law for anyone or anything editing this repo: truth rules
+for product claims, the design bar, the tool table, dependency gates, and the
+branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-Scaffolded. No pages yet.
+Scaffold only. No pages beyond the placeholder. Hosting is undecided.
