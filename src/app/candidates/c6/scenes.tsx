@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Capture mode: ?still=1 shows every reveal and stops every loop at its final state.
+const isStill = () => window.location.search.includes("still");
+
 export function Section({
   id,
   className,
@@ -17,10 +20,12 @@ export function Section({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.location.search.includes("still")) {
-      setInView(true);
-      setStill(true);
-      return;
+    if (isStill()) {
+      const t = setTimeout(() => {
+        setInView(true);
+        setStill(true);
+      }, 0);
+      return () => clearTimeout(t);
     }
     const io = new IntersectionObserver(
       (entries) => {
@@ -42,11 +47,7 @@ export function HeroScene() {
   const [play, setPlay] = useState(false);
   const [still, setStill] = useState(false);
   useEffect(() => {
-    if (window.location.search.includes("still")) {
-      setStill(true);
-      return;
-    }
-    const t = setTimeout(() => setPlay(true), 300);
+    const t = setTimeout(() => (isStill() ? setStill(true) : setPlay(true)), isStill() ? 0 : 300);
     return () => clearTimeout(t);
   }, []);
   return (

@@ -37,7 +37,7 @@ export default function Candidate6() {
         <div className="wrap">
           <div>
             <h1 className="display display-xl reveal">
-              Agents don't need a better chat. They need a workspace.
+              Agents don&apos;t need a better chat. They need a workspace.
             </h1>
             <p className="lede reveal">
               Vivary is a desktop where your agents work from files you own. Every project, every
