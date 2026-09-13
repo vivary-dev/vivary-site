@@ -43,3 +43,13 @@ next-env.d.ts
 node_modules/
 dist/
 .env
+
+# Entire hook registrations per agent. Local to each machine; the project config in .entire/ is committed.
+.claude/settings.json
+.codex/hooks.json
+.cursor/hooks.json
+.gemini/settings.json
+.factory/settings.json
+.opencode/plugins/entire.ts
+.pi/
+.github/hooks/
