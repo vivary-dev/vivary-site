@@ -1,10 +1,11 @@
 import { Check } from "lucide-react";
 import { facts } from "@/content/facts";
 
-// A drawing of the desktop workbench, not a screenshot. Every label here is
-// either a file name from facts.shipped.fiveFiles or ordinary window furniture.
+// A drawing of the desktop window, not a screenshot. Every label is either a
+// file name from facts.shipped.fiveFiles, the memory file the app keeps as
+// plain files, or ordinary window furniture.
 const projects = ["my-workspace", "field-guide", "ledger"];
-const capsule = ["AGENTS.md", ".vivary/context.md", "STATE.md"];
+const capsule = ["AGENTS.md", ".vivary/context.md", "STATE.md", "memory/MEMORY.md"];
 
 export function WorkbenchFrame() {
   return (
@@ -15,8 +16,7 @@ export function WorkbenchFrame() {
           <i />
           <i />
         </div>
-        <span className="c5-bartitle">{facts.name}</span>
-        <span className="c5-flag">{facts.inDevelopment.label}</span>
+        <span className="c5-bartitle">{facts.product.name}</span>
       </div>
 
       <div className="c5-panes">
@@ -42,7 +42,7 @@ export function WorkbenchFrame() {
           <div className="c5-msg">
             <p className="c5-who">Agent</p>
             <p>
-              I worked from three files in this workspace. Here is the receipt.
+              I worked from four files in this workspace. Here is the receipt.
             </p>
           </div>
 
@@ -57,7 +57,7 @@ export function WorkbenchFrame() {
               ))}
             </ul>
             <p className="c5-note">
-              Three files in the capsule. Nothing else was read.
+              Four files in the capsule. Nothing else was read.
             </p>
           </div>
 
@@ -76,6 +76,11 @@ export function WorkbenchFrame() {
                 <code>{f}</code>
               </li>
             ))}
+            <li className="c5-folder">memory/</li>
+            <li data-seen="true" data-sub="true">
+              <b aria-hidden="true" />
+              <code>MEMORY.md</code>
+            </li>
           </ul>
         </div>
       </div>

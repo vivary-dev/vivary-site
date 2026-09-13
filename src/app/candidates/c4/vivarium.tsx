@@ -73,26 +73,26 @@ export function StratumMark({
   );
 }
 
-// Thinner and taller as it rises, the way a column of air does.
+// The engine, drawn as strata: thinner and taller as it rises.
 const BANDS = [
-  { key: "exo", label: "exo", y: 34, h: 104, density: 0.16, color: AMBER, delay: 520 },
-  { key: "ozone", label: "ozone", y: 138, h: 92, density: 0.3, color: AMBER, delay: 390 },
-  { key: "strato", label: "strato", y: 230, h: 84, density: 0.46, color: INK, delay: 260 },
-  { key: "tropo", label: "tropo", y: 314, h: 76, density: 0.68, color: INK, delay: 130 },
+  { key: "exo", y: 34, h: 104, density: 0.16, color: AMBER, delay: 520 },
+  { key: "ozone", y: 138, h: 92, density: 0.3, color: AMBER, delay: 390 },
+  { key: "strato", y: 230, h: 84, density: 0.46, color: INK, delay: 260 },
+  { key: "tropo", y: 314, h: 76, density: 0.68, color: INK, delay: 130 },
 ];
 
 const FILE_X = [53, 101, 149, 197, 245];
 
 /**
- * The case: four layers stacked under glass over a band of files. Each band
- * carries the same ordered dither the charts use, thinning as it rises.
+ * A workspace under glass: your files in the tray, the engine stacked above
+ * them. Each band carries the same ordered dither the charts use.
  */
 export function Vivarium() {
   return (
     <svg
       viewBox="0 0 460 520"
       role="img"
-      aria-label="A glass case holding four stacked layers, exo, ozone, strato and tropo, resting on a band of files."
+      aria-label="A workspace under glass. A tray of files sits at the bottom and the engine stands above it as stacked layers."
     >
       <defs>
         <clipPath id="c4-glass-clip">
@@ -111,32 +111,37 @@ export function Vivarium() {
 
       <rect x={16} y={22} width={300} height={474} rx={26} fill="rgba(255,255,255,0.3)" />
 
-      {BANDS.map((band) => {
-        const center = band.y + band.h / 2;
-        return (
-          <g key={band.key} className="c4-band" style={{ transitionDelay: `${band.delay}ms` }}>
-            <rect
-              x={22}
-              y={band.y}
-              width={288}
-              height={band.h}
-              fill={`url(#c4-tile-${band.key})`}
-              clipPath="url(#c4-glass-clip)"
-            />
-            <line x1={316} y1={center} x2={330} y2={center} stroke={INK} strokeOpacity={0.4} />
-            <text
-              x={338}
-              y={center}
-              fill={INK_SOFT}
-              fontSize={16}
-              dominantBaseline="middle"
-              style={{ fontFamily: "var(--c4-sans), system-ui, sans-serif" }}
-            >
-              {band.label}
-            </text>
-          </g>
-        );
-      })}
+      {BANDS.map((band) => (
+        <g key={band.key} className="c4-band" style={{ transitionDelay: `${band.delay}ms` }}>
+          <rect
+            x={22}
+            y={band.y}
+            width={288}
+            height={band.h}
+            fill={`url(#c4-tile-${band.key})`}
+            clipPath="url(#c4-glass-clip)"
+          />
+        </g>
+      ))}
+
+      <g className="c4-band" style={{ transitionDelay: "600ms" }}>
+        <path
+          d="M 320 34 L 328 34 L 328 390 L 320 390"
+          fill="none"
+          stroke={INK}
+          strokeOpacity={0.4}
+        />
+        <text
+          x={336}
+          y={212}
+          fill={INK_SOFT}
+          fontSize={16}
+          dominantBaseline="middle"
+          style={{ fontFamily: "var(--c4-sans), system-ui, sans-serif" }}
+        >
+          the engine
+        </text>
+      </g>
 
       <g className="c4-band" style={{ transitionDelay: "0ms" }}>
         <g clipPath="url(#c4-glass-clip)">

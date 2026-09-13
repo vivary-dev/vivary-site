@@ -15,48 +15,52 @@ const hanken = Hanken_Grotesk({
 
 export const metadata: Metadata = {
   title: "Vivary",
-  description: facts.productLine,
+  description: facts.product.line,
 };
 
-const WHAT_IT_DOES = [
-  { term: "Files, not chat history", detail: facts.claims[0] },
-  { term: "A bounded capsule, and a receipt", detail: facts.claims[3] },
-  { term: "A check you can run", detail: facts.claims[2] },
-  { term: "Nothing leaves the machine", detail: facts.claims[4] },
-];
+// Each promise is written as a short title, a full stop, then the detail.
+// Split on that first stop so the title can set on its own line.
+function splitPromise(text: string): [string, string] {
+  const at = text.indexOf(". ");
+  if (at < 0) return [text, ""];
+  return [text.slice(0, at), text.slice(at + 2)];
+}
 
 export default function CandidateOne() {
+  const { product, engine, shipped, layers, links } = facts;
+
   return (
     <div className={`c1 ${hanken.variable}`}>
       <div className="c1-wrap">
         <header className="c1-top">
           <span className="c1-mark">{facts.name}</span>
           <nav aria-label="Elsewhere">
-            <a href={facts.links.github}>GitHub</a>
-            <a href={facts.links.docs}>Docs</a>
+            <a href={links.github}>GitHub</a>
+            <a href={links.docs}>Docs</a>
           </nav>
         </header>
 
         <main>
           <section className="c1-hero">
             <div>
-              <h1 className="c1-h1">Chat fades, files persist.</h1>
-              <p className="c1-deck">
-                Vivary is the part that decides which of those files your agent gets to
-                see, and shows you what it saw.
-              </p>
-              <p className="c1-sub">{facts.productLine}</p>
+              <h1 className="c1-h1">
+                <span className="c1-h1-meet">{product.meet}</span>
+                <span>{product.line}</span>
+              </h1>
+              <p className="c1-deck">{product.what}</p>
               <div className="c1-act">
-                <CopyCommand command={facts.shipped.install} />
-                <a className="c1-act-link" href={facts.links.github}>
-                  Read the source on GitHub
+                <a className="c1-cta-btn" href={links.github}>
+                  See Vivary on GitHub
+                </a>
+                <a className="c1-act-link" href={links.docs}>
+                  Read the docs
                 </a>
               </div>
             </div>
             <figure className="c1-figure">
               <StrataPlate />
               <figcaption className="c1-caption">
-                A workspace in section. Four layers, read from the ground up.
+                The engine under the app, in section. Four layers, read from the ground up.
               </figcaption>
             </figure>
           </section>
@@ -66,38 +70,52 @@ export default function CandidateOne() {
               What it does
             </h2>
             <dl className="c1-defs">
-              {WHAT_IT_DOES.map((row) => (
-                <div className="c1-def" key={row.term}>
-                  <dt>{row.term}</dt>
-                  <dd>{row.detail}</dd>
-                </div>
-              ))}
+              {product.promises.map((promise) => {
+                const [term, detail] = splitPromise(promise);
+                return (
+                  <div className="c1-def" key={term}>
+                    <dt>{term}</dt>
+                    <dd>{detail}</dd>
+                  </div>
+                );
+              })}
             </dl>
           </section>
 
-          <section className="c1-section" aria-labelledby="c1-install">
-            <h2 className="c1-h2" id="c1-install">
-              What you can install today
+          <section className="c1-section" aria-labelledby="c1-program">
+            <h2 className="c1-h2" id="c1-program">
+              Also in the program
             </h2>
-            <p className="c1-lede">
-              One command creates a workspace. The workspace creator is published on PyPI
-              and on npm, so use whichever runner you already have.
-            </p>
-            <div className="c1-act">
-              <CopyCommand command={facts.shipped.install} />
-              <CopyCommand command={facts.shipped.installNpm} />
-            </div>
-
-            <h3 className="c1-h3">The five files</h3>
-            <ul className="c1-files">
-              {facts.shipped.fiveFiles.map((file) => (
-                <li key={file}>{file}</li>
+            <ul className="c1-list">
+              {product.alsoInTheProgram.map((item) => (
+                <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="c1-note">{facts.claims[1]}</p>
+          </section>
 
+          <section className="c1-section" aria-labelledby="c1-engine">
+            <h2 className="c1-h2" id="c1-engine">
+              The engine underneath
+            </h2>
+            <p className="c1-lede">{engine.summary}</p>
+
+            <h3 className="c1-h3">The four layers</h3>
+            <div className="c1-layers">
+              {layers.map((layer) => (
+                <div className="c1-layer" key={layer.name}>
+                  <StrataSwatch layer={layer.name} />
+                  <span className="c1-layer-name">{layer.name}</span>
+                  <p className="c1-layer-role">{layer.role}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="c1-h3">{engine.line}</h3>
+            <div className="c1-act">
+              <CopyCommand command={shipped.install} />
+            </div>
             <table className="c1-table">
-              <caption>Published packages, verified {facts.shipped.verifiedOn}.</caption>
+              <caption>Published packages, verified {shipped.verifiedOn}.</caption>
               <thead>
                 <tr>
                   <th scope="col">Package</th>
@@ -106,7 +124,7 @@ export default function CandidateOne() {
                 </tr>
               </thead>
               <tbody>
-                {facts.shipped.packages.map((pkg) => (
+                {shipped.packages.map((pkg) => (
                   <tr key={pkg.name}>
                     <td>{pkg.name}</td>
                     <td>{pkg.version}</td>
@@ -117,40 +135,18 @@ export default function CandidateOne() {
             </table>
           </section>
 
-          <section className="c1-section" aria-labelledby="c1-layers">
-            <h2 className="c1-h2" id="c1-layers">
-              The four layers
-            </h2>
-            <p className="c1-lede">
-              Each layer is a band in the drawing above, and the list below reads the same
-              way, from the ground up.
-            </p>
-            <div className="c1-layers">
-              {facts.layers.map((layer) => (
-                <div className="c1-layer" key={layer.name}>
-                  <StrataSwatch layer={layer.name} />
-                  <span className="c1-layer-name">{layer.name}</span>
-                  <p className="c1-layer-role">{layer.role}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="c1-section" aria-labelledby="c1-dev">
-            <h2 className="c1-h2" id="c1-dev">
-              {facts.inDevelopment.label}
-            </h2>
-            <p className="c1-dev">{facts.inDevelopment.summary}</p>
+          <section className="c1-section">
+            <p className="c1-status">{product.status}</p>
           </section>
         </main>
 
         <footer className="c1-foot">
           <span className="c1-mark">{facts.name}</span>
           <nav aria-label="Project links">
-            <a href={facts.links.github}>GitHub</a>
-            <a href={facts.links.docs}>Docs</a>
-            <a href={facts.links.pypi}>PyPI</a>
-            <a href={facts.links.npm}>npm</a>
+            <a href={links.github}>GitHub</a>
+            <a href={links.docs}>Docs</a>
+            <a href={links.pypi}>PyPI</a>
+            <a href={links.npm}>npm</a>
           </nav>
         </footer>
       </div>

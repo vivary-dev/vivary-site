@@ -71,17 +71,29 @@
   .c4-hero-grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); }
 }
 
-.c4-display {
-  margin: 0;
-  font-size: clamp(2.4rem, 8.4vw, 5rem);
-  line-height: 0.96;
-  letter-spacing: -0.025em;
-}
+.c4-display { margin: 0; }
 .c4-display span { display: block; }
-.c4-deck { margin: clamp(1.5rem, 3vw, 2rem) 0 0; font-size: clamp(1.1rem, 2.1vw, 1.3rem); line-height: 1.5; max-width: 34ch; }
-.c4-line { margin: 1.1rem 0 0; color: var(--ink-soft); font-size: 1rem; max-width: 42ch; }
+.c4-meet { font-size: clamp(2.4rem, 8.2vw, 4.75rem); line-height: 0.96; letter-spacing: -0.025em; }
+.c4-claim {
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+  font-size: clamp(1.35rem, 2.9vw, 2rem);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+}
+.c4-deck { margin: clamp(1.4rem, 3vw, 1.9rem) 0 0; font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--ink-soft); max-width: 36ch; }
 .c4-cta { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
-.c4-cta-aside { margin: 1rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+.c4-page a.c4-cta-link {
+  display: inline-block;
+  padding: 0.75rem 1.3rem;
+  border-radius: 5px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.c4-page a.c4-cta-link:hover { background: #1f3729; }
 
 .c4-hero-art { width: 100%; max-width: 26rem; justify-self: start; }
 @media (min-width: 62rem) { .c4-hero-art { justify-self: end; max-width: 25rem; } }
@@ -141,22 +153,31 @@
 .c4-head { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.08; letter-spacing: -0.015em; }
 .c4-lead { margin: 1.25rem 0 0; max-width: 62ch; }
 
-.c4-dl { margin: clamp(2rem, 5vw, 3rem) 0 0; display: grid; gap: 2rem; }
-@media (min-width: 48rem) { .c4-dl { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; } }
-.c4-dl dt { font-family: var(--c4-display), Georgia, serif; font-weight: 500; font-size: 1.2rem; letter-spacing: -0.01em; }
-.c4-dl dd { margin: 0.5rem 0 0; color: var(--ink-soft); }
-.c4-note { margin: clamp(2rem, 5vw, 2.75rem) 0 0; max-width: 58ch; color: var(--ink-soft); }
-.c4-note + .c4-note { margin-top: 0.85rem; }
-.c4-measure { max-width: 58ch; margin: 0; }
+.c4-promises { margin: clamp(2rem, 5vw, 3rem) 0 0; display: grid; gap: 2rem 3rem; }
+@media (min-width: 48rem) { .c4-promises { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 4rem; } }
+.c4-promises dt { font-family: var(--c4-display), Georgia, serif; font-weight: 500; font-size: 1.25rem; letter-spacing: -0.01em; }
+.c4-promises dd { margin: 0.5rem 0 0; color: var(--ink-soft); max-width: 48ch; }
 
-.c4-files { margin: 1.5rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 0.65rem; }
-.c4-files li {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.8125rem;
-  padding: 0.3rem 0.55rem;
-  border: 1px solid var(--hair);
+.c4-also { margin: clamp(1.75rem, 4vw, 2.5rem) 0 0; padding: 0; list-style: none; max-width: 56ch; }
+.c4-also li { position: relative; padding-left: 1.5rem; padding-block: 0.55rem; }
+.c4-also li + li { border-top: 1px solid var(--hair); }
+.c4-also li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35em;
+  width: 7px;
+  height: 7px;
+  background: var(--amber);
+}
+
+.c4-status {
+  margin: 0;
+  max-width: 56ch;
+  background: var(--paper-deep);
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.4);
+  padding: clamp(1.4rem, 3.5vw, 2rem);
+  color: var(--ink-soft);
 }
 
 .c4-alt { margin: 1rem 0 0; font-size: 0.9rem; color: var(--ink-soft); overflow-wrap: anywhere; }
@@ -183,14 +204,6 @@
 @media (min-width: 48rem) {
   .c4-layer { grid-template-columns: 1rem 9rem minmax(0, 1fr); align-items: start; }
   .c4-layer-role { margin-top: 0; }
-}
-
-.c4-dev {
-  margin-top: clamp(2rem, 5vw, 2.75rem);
-  max-width: 46rem;
-  background: var(--paper-deep);
-  border-radius: 3px;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .c4-foot { margin-top: clamp(4.5rem, 11vw, 8rem); border-top: 1px solid var(--hair); padding-block: 2rem 6rem; }

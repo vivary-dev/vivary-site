@@ -15,14 +15,14 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "Vivary, candidate c5",
-  description: facts.productLine,
+  description: facts.product.line,
 };
 
-const proof = [
-  { title: "It starts with five files", body: facts.claims[0] },
-  { title: "The agent gets a capsule", body: facts.claims[3] },
-  { title: "It stays on your machine", body: facts.claims[4] },
-];
+// Each promise is written as a short title, a period, then the detail.
+const promises = facts.product.promises.map((p) => {
+  const cut = p.indexOf(". ");
+  return { title: p.slice(0, cut), body: p.slice(cut + 2) };
+});
 
 const layerIcons = {
   tropo: Network,
@@ -38,7 +38,7 @@ export default function C5Page() {
         <div className="c5-head">
           <p className="c5-mark">
             <span aria-hidden="true" />
-            {facts.name}
+            {facts.product.name}
           </p>
           <nav className="c5-headlinks" aria-label="Product links">
             <a href={facts.links.docs}>Docs</a>
@@ -49,28 +49,25 @@ export default function C5Page() {
 
       <main>
         <section className="c5-wrap c5-hero">
-          <h1 className="c5-h1">Chat fades. Your files stay.</h1>
-          <p className="c5-lead">
-            <strong>
-              Vivary is the part that decides which of those files your agent
-              gets to see, and shows you what it saw.
-            </strong>{" "}
-            {facts.productLine}
-          </p>
+          <h1 className="c5-h1">
+            {facts.product.meet}
+            <em>{facts.product.line}</em>
+          </h1>
+          <p className="c5-lead">One window for every project.</p>
 
           <div className="c5-cta">
-            <CopyCommand command={facts.shipped.install} />
-            <a className="c5-ghlink" href={facts.links.github}>
-              Read the source on GitHub
+            <a className="c5-btn" href={facts.links.github}>
+              Follow the build on GitHub
+            </a>
+            <a className="c5-ghlink" href={facts.links.docs}>
+              Read the docs
             </a>
           </div>
 
           <figure className="c5-figure">
             <WorkbenchFrame />
             <figcaption className="c5-cap">
-              The workbench above is a drawing, not a screenshot. The desktop
-              app is in development and is not released. The command line tool
-              is what you can install today.
+              A drawing of the Vivary desktop window, not a screenshot.
             </figcaption>
           </figure>
         </section>
@@ -79,14 +76,12 @@ export default function C5Page() {
           <div className="c5-grid">
             <div>
               <h2 className="c5-h2" id="c5-what">
-                What it is
+                What it does
               </h2>
-              <p className="c5-sub">
-                Vivary works on the files in your project, not on a chat log.
-              </p>
+              <p className="c5-sub">{facts.product.what}</p>
             </div>
             <div className="c5-cols">
-              {proof.map((p) => (
+              {promises.map((p) => (
                 <div className="c5-col" key={p.title}>
                   <h3>{p.title}</h3>
                   <p>{p.body}</p>
@@ -96,32 +91,46 @@ export default function C5Page() {
           </div>
         </section>
 
-        <section className="c5-wrap c5-sec" aria-labelledby="c5-install">
+        <section className="c5-wrap c5-sec" aria-labelledby="c5-also">
           <div className="c5-grid">
             <div>
-              <h2 className="c5-h2" id="c5-install">
-                What you can install today
+              <h2 className="c5-h2" id="c5-also">
+                Also in the program
               </h2>
-              <p className="c5-sub">
-                A command line tool. Run it in a new folder, or point it at a
-                project you already have.
-              </p>
+            </div>
+            <ul className="c5-also">
+              {facts.product.alsoInTheProgram.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="c5-wrap c5-sec" aria-labelledby="c5-engine">
+          <div className="c5-grid">
+            <div>
+              <h2 className="c5-h2 c5-h2-wide" id="c5-engine">
+                {facts.engine.line}
+              </h2>
             </div>
             <div>
-              <p className="c5-sub c5-sub-wide">
-                A new workspace starts with these five files.
-              </p>
-              <ul className="c5-five">
-                {facts.shipped.fiveFiles.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+              <p className="c5-engine">{facts.engine.summary}</p>
 
+              <div className="c5-layers">
+                {facts.layers.map((layer) => {
+                  const Icon = layerIcons[layer.name];
+                  return (
+                    <div className="c5-layer" key={layer.name}>
+                      <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+                      <h3>{layer.name}</h3>
+                      <p>{layer.role}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <CopyCommand command={facts.shipped.install} />
               <ul className="c5-runs">
-                <li>
-                  <span>With uv</span>
-                  <code>{facts.shipped.install}</code>
-                </li>
                 <li>
                   <span>With npm</span>
                   <code>{facts.shipped.installNpm}</code>
@@ -149,60 +158,18 @@ export default function C5Page() {
                   ))}
                 </tbody>
               </table>
-
-              <ul className="c5-extra">
-                <li>{facts.claims[1]}</li>
-                <li>{facts.claims[2]}</li>
-              </ul>
             </div>
           </div>
         </section>
 
-        <section className="c5-wrap c5-sec" aria-labelledby="c5-layers">
-          <div className="c5-grid">
-            <div>
-              <h2 className="c5-h2" id="c5-layers">
-                The four layers
-              </h2>
-              <p className="c5-sub">
-                Each layer is its own package, and each one has a job.
-              </p>
-            </div>
-            <div className="c5-layers">
-              {facts.layers.map((layer) => {
-                const Icon = layerIcons[layer.name];
-                return (
-                  <div className="c5-layer" key={layer.name}>
-                    <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
-                    <h3>{layer.name}</h3>
-                    <p>{layer.role}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="c5-wrap c5-sec" aria-labelledby="c5-dev">
-          <div className="c5-dev">
-            <h2 className="c5-h2" id="c5-dev">
-              {facts.inDevelopment.label}
-            </h2>
-            <div className="c5-dev-body">
-              <p>{facts.inDevelopment.summary}</p>
-              <p>
-                The workbench drawing at the top of this page is where that work
-                is going. Until it ships, the command line tool is the part you
-                can run.
-              </p>
-            </div>
-          </div>
+        <section className="c5-wrap c5-status">
+          <p>{facts.product.status}</p>
         </section>
       </main>
 
       <footer className="c5-wrap">
         <div className="c5-foot">
-          <small>{facts.productLine}</small>
+          <small>{facts.product.line}</small>
           <ul>
             <li>
               <a href={facts.links.github}>GitHub</a>

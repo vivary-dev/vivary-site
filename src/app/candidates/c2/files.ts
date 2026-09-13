@@ -1,5 +1,3 @@
-import { facts } from "@/content/facts";
-
 export type Entry = {
   kind: "file" | "folder";
   path: string;
@@ -8,9 +6,7 @@ export type Entry = {
   body: string;
 };
 
-const packageLines = facts.shipped.packages
-  .map((p) => `${p.name.padEnd(16)} ${p.version.padEnd(7)} ${p.registry}`)
-  .join("\n");
+export const projectName = "field-notes";
 
 export const entries: Entry[] = [
   {
@@ -20,29 +16,29 @@ export const entries: Entry[] = [
     depth: 0,
     body: `# AGENTS.md
 
-This workspace was made with create-vivary. Vivary is the part
-that decides which of these files the agent gets to see, and
-shows you what it saw.
+This project is open in Vivary, a desktop workspace where agents
+work from files you own.
 
 ## What is here
 
-AGENTS.md               how the agent behaves in this workspace
+AGENTS.md               how agents behave in this project
 STATE.md                what is true right now
-.vivary/context.md      how the agent gets its context
-.vivary/workspace.toml  the settings, all of them
+memory/MEMORY.md        what Vivary has learned, kept as a file
 inbox/                  things that arrived and are not sorted
-projects/               the work
+.vivary/context.md      what an agent gets to see, and the receipt
+.vivary/workspace.toml  the settings, all of them
 
-## How the agent behaves
+## How agents behave here
 
 - Read STATE.md before doing anything.
-- Work from the files in this folder. Chat fades. Files persist.
-- You get a bounded capsule of context, not the whole disk.
-- Leave a receipt of what you saw.
-- Changes that are durable, destructive, or public wait for a
-  human gate.
-- Nothing leaves this folder. No account, no cloud control
-  plane, no telemetry.
+- Work from these files. Plans, memory, decisions, and results
+  live in plain files, not in a chat.
+- You get a capsule of the files that matter, not the whole
+  project. Every run leaves a receipt of what you saw.
+- Plans are editable and tasks have dependencies. Execution is
+  reviewed and leaves evidence a person can open.
+- You run as a local CLI model with the owner's own keys, on
+  this computer. There is no account and no server.
 `,
   },
   {
@@ -52,87 +48,61 @@ projects/               the work
     depth: 0,
     body: `# STATE.md
 
-One visible state surface. Kept by hand, read by everyone.
+One file that says what is true right now. Kept by hand.
 
 ## Today
 
-Fresh workspace. Five small files. Nothing else is written
-until real work needs it.
+Opened in Vivary. Opening it changed nothing in this folder.
+Patterns in use: writing and research. Both can be renamed or
+dropped.
 
-## Installed (verified ${facts.shipped.verifiedOn})
+## Working on
 
-${packageLines}
+- The first plan. Tasks have dependencies, runs are reviewed,
+  and each run leaves evidence you can open.
+- Reading what arrived in inbox/.
 
-## Not here yet
+## Choices made
 
-${facts.inDevelopment.summary}
-
-## Next
-
-- Move the first project into projects/.
-- Run doctor. It checks the contract and the privacy boundary
-  without touching your files.
+Version control: none yet. Git or Jujutsu can come later.
+Hosting: not set up. It is a separate, optional step.
+Agents: local CLI models with my own keys, on this computer.
 `,
   },
   {
     kind: "folder",
-    path: ".vivary",
-    name: ".vivary/",
+    path: "memory",
+    name: "memory/",
     depth: 0,
-    body: `.vivary/
+    body: `memory/
 
-Two files. context.md describes the capsule and the receipt.
-workspace.toml holds the settings.
+One file. MEMORY.md is what Vivary has learned about you and this
+project, saved as a file you can read, edit, and delete.
 `,
   },
   {
     kind: "file",
-    path: ".vivary/context.md",
-    name: "context.md",
+    path: "memory/MEMORY.md",
+    name: "MEMORY.md",
     depth: 1,
-    body: `# context.md
+    body: `# MEMORY.md
 
-How this workspace hands context to an agent.
+What Vivary has learned about you and this project. Plain
+Markdown. Read it, edit it, delete what is wrong.
 
-## Capsule
+## About you
 
-The agent gets a bounded capsule of context. Not the whole
-disk, not the chat history. This file describes the boundary
-so you can read it before the agent does.
+- Prefers short plain sentences.
+- Wants a summary before a change, not after.
+- Keeps decisions in STATE.md, not in chat.
+- Reads sources in inbox/ before they are filed.
 
-## Receipt
+## About this project
 
-A receipt records what the agent saw. Read it after a run to
-check what the agent worked from.
-
-## Boundary
-
-No account. No cloud control plane. No telemetry from this
-workspace. Files stay on this machine.
-
-Last receipt: none yet. Fresh workspace.
-`,
-  },
-  {
-    kind: "file",
-    path: ".vivary/workspace.toml",
-    name: "workspace.toml",
-    depth: 1,
-    body: `# workspace.toml
-# Written by create-vivary ${facts.shipped.packages[0].version}. Small on purpose.
-
-[workspace]
-name = "my-workspace"
-preset = "coding"
-
-[context]
-capsule = "bounded"
-receipt = true
-
-[privacy]
-account = false
-cloud_control_plane = false
-telemetry = false
+- A writing project with a research folder.
+- Sources arrive in inbox/ and stay there until read.
+- Not under version control yet, by choice.
+- The first plan is still being edited.
 `,
   },
   {
@@ -142,19 +112,66 @@ telemetry = false
     depth: 0,
     body: `inbox/
 
-Empty. Things that arrive and are not sorted yet go here.
-Nothing is written until real work needs it.
+Empty. Things that arrive go here until they are sorted.
 `,
   },
   {
     kind: "folder",
-    path: "projects",
-    name: "projects/",
+    path: ".vivary",
+    name: ".vivary/",
     depth: 0,
-    body: `projects/
+    body: `.vivary/
 
-Empty. The work goes here, one folder per project.
-Nothing is written until real work needs it.
+Two files. context.md says what an agent gets to see and where
+the receipt goes. workspace.toml holds the settings.
+`,
+  },
+  {
+    kind: "file",
+    path: ".vivary/context.md",
+    name: "context.md",
+    depth: 1,
+    body: `# context.md
+
+What an agent gets to see in this project.
+
+## Capsule
+
+The agent gets a capsule of the files that matter, not the
+whole project. Bounded, every time.
+
+## Receipt
+
+Every run leaves a receipt of what the agent saw. Open it after
+a run to check what the agent worked from.
+
+Last receipt: none yet. Project just opened.
+`,
+  },
+  {
+    kind: "file",
+    path: ".vivary/workspace.toml",
+    name: "workspace.toml",
+    depth: 1,
+    body: `# workspace.toml
+# Written by Vivary. Small on purpose.
+
+[project]
+name = "${projectName}"
+patterns = ["writing", "research"]
+
+[agents]
+models = "local"
+keys = "yours"
+
+[memory]
+dir = "memory"
+
+[version_control]
+kind = "none"
+
+[hosting]
+enabled = false
 `,
   },
   {
@@ -162,8 +179,8 @@ Nothing is written until real work needs it.
     path: ".gitignore",
     name: ".gitignore",
     depth: 0,
-    body: `# create-vivary ${facts.shipped.packages[0].version}
-# Receipts are for you, not for the repo.
+    body: `# Version control is your choice. This file waits for the day
+# you pick Git or Jujutsu.
 .vivary/receipts/
 `,
   },

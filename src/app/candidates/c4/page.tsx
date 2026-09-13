@@ -33,6 +33,16 @@ const LAYER_MARKS: Record<string, { density: number; tone: "ink" | "amber" }> = 
   exo: { density: 0.16, tone: "amber" },
 };
 
+/** Each promise is written as a title sentence followed by the detail. */
+function splitPromise(promise: string) {
+  const cut = promise.indexOf(". ");
+  if (cut === -1) return { title: promise, body: "" };
+  return { title: promise.slice(0, cut), body: promise.slice(cut + 2) };
+}
+
+// The first sentence of product.what: the one line a stranger needs here.
+const HERO_SENTENCE = `${facts.product.what.split(". ")[0]}.`;
+
 export default function Candidate4() {
   return (
     <div className={`${display.variable} ${sans.variable} c4-page`}>
@@ -47,62 +57,67 @@ export default function Candidate4() {
           </div>
         }
       >
-        <h1 className="c4-serif c4-display">
-          <span>Chat fades,</span>
-          <span>files persist.</span>
+        <h1 className="c4-display">
+          <span className="c4-serif c4-meet">{facts.product.meet}</span>
+          <span className="c4-serif c4-claim">{facts.product.line}</span>
         </h1>
-        <p className="c4-deck">
-          Vivary is the part that decides which of those files your agent gets to see, and shows you
-          what it saw.
-        </p>
-        <p className="c4-line">{facts.productLine}</p>
+        <p className="c4-deck">{HERO_SENTENCE}</p>
         <div className="c4-cta">
-          <InstallCommand command={facts.shipped.install} />
-          <p className="c4-cta-aside">
-            The source is on <a href={facts.links.github}>GitHub</a>.
-          </p>
+          <a className="c4-cta-link" href={facts.links.github}>
+            Read the source on GitHub
+          </a>
         </div>
       </HeroStage>
 
       <main>
         <section className="c4-section c4-wrap">
           <h2 className="c4-serif c4-head">What it does</h2>
-          <dl className="c4-dl">
-            <div>
-              <dt className="c4-serif">Files persist</dt>
-              <dd>
-                A new workspace starts with five small files. Nothing else is written until real work
-                needs it.
-              </dd>
-            </div>
-            <div>
-              <dt className="c4-serif">A bounded capsule</dt>
-              <dd>The agent gets a bounded capsule of context.</dd>
-            </div>
-            <div>
-              <dt className="c4-serif">A receipt</dt>
-              <dd>A receipt records what the agent saw.</dd>
-            </div>
+          <dl className="c4-promises">
+            {facts.product.promises.map((promise) => {
+              const { title, body } = splitPromise(promise);
+              return (
+                <div key={title}>
+                  <dt className="c4-serif">{title}</dt>
+                  <dd>{body}</dd>
+                </div>
+              );
+            })}
           </dl>
-          <p className="c4-note">{facts.claims[4]}</p>
         </section>
 
         <section className="c4-section c4-wrap">
-          <h2 className="c4-serif c4-head">What you can install today</h2>
-          <p className="c4-lead">A new workspace starts with these five files.</p>
-          <ul className="c4-files">
-            {facts.shipped.fiveFiles.map((file) => (
-              <li key={file}>{file}</li>
+          <h2 className="c4-serif c4-head">Also in the program</h2>
+          <ul className="c4-also">
+            {facts.product.alsoInTheProgram.map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
+        </section>
+
+        <section className="c4-section c4-wrap">
+          <h2 className="c4-serif c4-head">{facts.engine.line}</h2>
+          <p className="c4-lead">{facts.engine.summary}</p>
+          <div className="c4-layers">
+            {facts.layers.map((layer) => (
+              <div className="c4-layer" key={layer.name}>
+                <StratumMark
+                  id={`c4-mark-${layer.name}`}
+                  density={LAYER_MARKS[layer.name].density}
+                  tone={LAYER_MARKS[layer.name].tone}
+                  width={16}
+                  height={44}
+                />
+                <span className="c4-serif c4-layer-name">{layer.name}</span>
+                <p className="c4-layer-role">{layer.role}</p>
+              </div>
+            ))}
+          </div>
           <div className="c4-cta">
             <InstallCommand command={facts.shipped.install} />
             <p className="c4-alt">
               With npm instead: <code>{facts.shipped.installNpm}</code>
             </p>
           </div>
-          <p className="c4-note">{facts.claims[1]}</p>
-          <p className="c4-note">{facts.claims[2]}</p>
           <table className="c4-table">
             <caption>Published packages, verified on {facts.shipped.verifiedOn}.</caption>
             <thead>
@@ -125,32 +140,7 @@ export default function Candidate4() {
         </section>
 
         <section className="c4-section c4-wrap">
-          <h2 className="c4-serif c4-head">The four layers</h2>
-          <p className="c4-lead">
-            Four layers, listed from the ground up. Each one has its own package in the table above.
-          </p>
-          <div className="c4-layers">
-            {facts.layers.map((layer) => (
-              <div className="c4-layer" key={layer.name}>
-                <StratumMark
-                  id={`c4-mark-${layer.name}`}
-                  density={LAYER_MARKS[layer.name].density}
-                  tone={LAYER_MARKS[layer.name].tone}
-                  width={16}
-                  height={44}
-                />
-                <span className="c4-serif c4-layer-name">{layer.name}</span>
-                <p className="c4-layer-role">{layer.role}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="c4-section c4-wrap">
-          <h2 className="c4-serif c4-head">{facts.inDevelopment.label}</h2>
-          <div className="c4-dev">
-            <p className="c4-measure">{facts.inDevelopment.summary}</p>
-          </div>
+          <p className="c4-status">{facts.product.status}</p>
         </section>
       </main>
 

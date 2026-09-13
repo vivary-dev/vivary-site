@@ -3,7 +3,7 @@
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { FileText, Folder, FolderOpen } from "lucide-react";
 import { DitherAvatar } from "@/components/dither-kit/avatar";
-import { entries } from "./files";
+import { entries, projectName } from "./files";
 
 export function Workspace() {
   const [selected, setSelected] = useState(entries[0].path);
@@ -28,9 +28,9 @@ export function Workspace() {
   return (
     <figure className="c2-ws">
       <div className="c2-ws-bar">
-        <DitherAvatar name="my-workspace" size={16} animate={false} />
-        <span className="c2-ws-name">my-workspace</span>
-        <span className="c2-ws-note">written by create-vivary init</span>
+        <DitherAvatar name={projectName} size={16} animate={false} />
+        <span className="c2-ws-name">{projectName}</span>
+        <span className="c2-ws-note">open in Vivary</span>
       </div>
       <div className="c2-ws-body">
         <ul
@@ -86,8 +86,8 @@ export function Workspace() {
         </div>
       </div>
       <figcaption className="c2-ws-caption">
-        A workspace as create-vivary writes it. Pick a file to read it. The
-        contents are the whole pitch.
+        A project as Vivary keeps it. Pick a file to read it. The contents
+        are the whole pitch.
       </figcaption>
     </figure>
   );

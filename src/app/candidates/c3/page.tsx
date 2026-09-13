@@ -20,21 +20,19 @@ const bodyFont = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Vivary, what is published today",
-  description: facts.productLine,
+  title: "Vivary, a desktop workspace for your files",
+  description: facts.product.line,
 };
 
-const registries = [...new Set(facts.shipped.packages.map((p) => p.registry))];
+// Each promise opens with a short lead phrase, then explains it. The ledger
+// sets the lead as the row label and the rest as the row text.
+function splitPromise(promise: string) {
+  const cut = promise.indexOf(". ");
+  if (cut === -1) return { label: promise, text: "" };
+  return { label: promise.slice(0, cut), text: promise.slice(cut + 2) };
+}
 
-const whatItIs = [
-  { title: "Files persist", text: facts.claims[0] },
-  {
-    title: "The bounded capsule",
-    text: "The agent gets a bounded capsule of context.",
-  },
-  { title: "The receipt", text: "A receipt records what it saw." },
-  { title: "What stays on your machine", text: facts.claims[4] },
-];
+const registries = [...new Set(facts.shipped.packages.map((p) => p.registry))];
 
 const footerLinks = [
   { label: "Source on GitHub", href: facts.links.github },
@@ -49,172 +47,136 @@ export default function LedgerCandidate() {
       <div className="c3-wrap">
         <header className="c3-masthead">
           <span className="c3-mark">{facts.name}</span>
-          <p>{facts.productLine}</p>
         </header>
 
         <div className="c3-headline">
-          <h1 className="c3-display">Chat fades, files persist.</h1>
+          <h1 className="c3-display">{facts.product.meet}</h1>
+          <p className="c3-headline-line">{facts.product.line}</p>
         </div>
 
-        <div className="c3-hero">
-          <div>
-            <p className="c3-lede">
-              Vivary is the part that decides which of those files your agent
-              gets to see, and shows you what it saw.
-            </p>
-            <p className="c3-sub">
-              It runs on your machine. No account, no cloud control plane, no
-              telemetry from the workspace.
-            </p>
+        <div className="c3-open">
+          <p className="c3-lede">{facts.product.what}</p>
+          <a className="c3-primary" href={facts.links.github}>
+            Read the source on GitHub
+          </a>
+        </div>
+      </div>
 
-            <p className="c3-cta-label">Start a workspace</p>
-            <CopyCommand command={facts.shipped.install} />
-            <p className="c3-cmd-note">
-              Or with npm: <code>{facts.shipped.installNpm}</code>
-            </p>
-
-            <a className="c3-second" href={facts.links.github}>
-              Read the source on GitHub
-            </a>
+      <div className="c3-wrap">
+        <section className="c3-statement" aria-label="What Vivary does">
+          <div className="c3-statement-head">
+            <h2>What Vivary does</h2>
+            <p className="c3-status">{facts.product.status}</p>
           </div>
 
-          <section className="c3-statement" aria-label="Published packages">
-            <div className="c3-statement-head">
-              <h2>Published packages</h2>
-              <span className="c3-verified">
-                Verified {facts.shipped.verifiedOn}
-              </span>
-            </div>
-
-            <div className="c3-statement-body">
-              {facts.shipped.packages.map((pkg) => (
-                <div className="c3-pkg" key={pkg.name}>
-                  <div>
-                    <div className="c3-pkg-name">{pkg.name}</div>
-                    <div className="c3-pkg-reg">{pkg.registry}</div>
-                  </div>
-                  <div className="c3-pkg-ver">{pkg.version}</div>
+          <div className="c3-ledger">
+            {facts.product.promises.map((promise) => {
+              const { label, text } = splitPromise(promise);
+              return (
+                <div className="c3-promise" key={label}>
+                  <h3>{label}</h3>
+                  <p>{text}</p>
                 </div>
-              ))}
-              <div className="c3-pkg-total">
-                <span>{facts.shipped.packages.length} packages</span>
-                <span>{registries.length} registries</span>
-              </div>
-            </div>
-
-            <div className="c3-strip">
-              <div className="c3-strip-head">
-                <p>Weekly downloads reported by the two registries.</p>
-                <div className="c3-legend">
-                  <span>
-                    <i
-                      className="c3-swatch"
-                      style={{ background: "#358ff3" }}
-                      aria-hidden="true"
-                    />
-                    PyPI
-                  </span>
-                  <span>
-                    <i
-                      className="c3-swatch"
-                      style={{ background: "#8c8c96" }}
-                      aria-hidden="true"
-                    />
-                    npm
-                  </span>
-                </div>
-              </div>
-              <SignalChart />
-              <div className="c3-strip-foot">
-                <span>21 June 2026</span>
-                <span>6 July 2026</span>
-              </div>
-            </div>
-          </section>
-        </div>
+              );
+            })}
+          </div>
+        </section>
       </div>
 
       <section className="c3-sec">
         <div className="c3-wrap c3-sec-grid">
           <div>
-            <h2 className="c3-display">What it is</h2>
+            <h2 className="c3-display">Also in the program</h2>
             <p className="c3-sec-note">
-              A workspace your agent reads from, and a record of what it read.
+              The rest of the work the app is being built around.
             </p>
           </div>
-          <div>
-            {whatItIs.map((entry) => (
-              <div className="c3-entry" key={entry.title}>
-                <h3>{entry.title}</h3>
-                <p>{entry.text}</p>
-              </div>
+          <ul className="c3-list">
+            {facts.product.alsoInTheProgram.map((item) => (
+              <li key={item}>{item}</li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       <section className="c3-sec">
         <div className="c3-wrap c3-sec-grid">
           <div>
-            <h2 className="c3-display">What you can install today</h2>
+            <h2 className="c3-display">{facts.engine.line}</h2>
             <p className="c3-sec-note">
-              The six packages above carry the versions checked on{" "}
-              {facts.shipped.verifiedOn}.
+              The library the desktop app runs on. You can use it from the
+              command line right now.
             </p>
           </div>
           <div>
-            <p className="c3-prose">
-              A new workspace starts with five small files. Nothing else is
-              written until real work needs it.
-            </p>
-            <ul className="c3-files">
-              {facts.shipped.fiveFiles.map((file) => (
-                <li key={file}>{file}</li>
-              ))}
-            </ul>
-            <div className="c3-entry">
-              <h3>Adopting a project you already have</h3>
-              <p>{facts.claims[1]}</p>
-            </div>
-            <div className="c3-entry">
-              <h3>Checking the workspace</h3>
-              <p>{facts.claims[2]}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+            <p className="c3-prose">{facts.engine.summary}</p>
 
-      <section className="c3-sec">
-        <div className="c3-wrap c3-sec-grid">
-          <div>
-            <h2 className="c3-display">The four layers</h2>
-            <p className="c3-sec-note">
-              What each published layer is responsible for.
-            </p>
-          </div>
-          <div>
             {facts.layers.map((layer) => (
               <div className="c3-entry" key={layer.name}>
                 <h3 className="c3-pkg-name">{layer.name}</h3>
                 <p>{layer.role}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="c3-sec">
-        <div className="c3-wrap c3-sec-grid">
-          <div>
-            <h2 className="c3-display">Not shipped yet</h2>
-            <p className="c3-sec-note">
-              Listed here so the record stays complete.
+            <p className="c3-cmd-label">Install the engine</p>
+            <CopyCommand command={facts.shipped.install} />
+            <p className="c3-cmd-note">
+              Or with npm: <code>{facts.shipped.installNpm}</code>
             </p>
-          </div>
-          <div className="c3-dev">
-            <h3>{facts.inDevelopment.label}</h3>
-            <p>{facts.inDevelopment.summary}</p>
-            <p>Not released. There is nothing to install yet.</p>
+
+            <div className="c3-record">
+              <div className="c3-statement-head">
+                <h3>Published packages</h3>
+                <span className="c3-verified">
+                  Verified {facts.shipped.verifiedOn}
+                </span>
+              </div>
+
+              <div className="c3-statement-body">
+                {facts.shipped.packages.map((pkg) => (
+                  <div className="c3-pkg" key={pkg.name}>
+                    <div>
+                      <div className="c3-pkg-name">{pkg.name}</div>
+                      <div className="c3-pkg-reg">{pkg.registry}</div>
+                    </div>
+                    <div className="c3-pkg-ver">{pkg.version}</div>
+                  </div>
+                ))}
+                <div className="c3-pkg-total">
+                  <span>{facts.shipped.packages.length} packages</span>
+                  <span>{registries.length} registries</span>
+                </div>
+              </div>
+
+              <div className="c3-strip">
+                <div className="c3-strip-head">
+                  <p>Weekly downloads reported by the two registries.</p>
+                  <div className="c3-legend">
+                    <span>
+                      <i
+                        className="c3-swatch"
+                        style={{ background: "#358ff3" }}
+                        aria-hidden="true"
+                      />
+                      PyPI
+                    </span>
+                    <span>
+                      <i
+                        className="c3-swatch"
+                        style={{ background: "#8c8c96" }}
+                        aria-hidden="true"
+                      />
+                      npm
+                    </span>
+                  </div>
+                </div>
+                <SignalChart />
+                <div className="c3-strip-foot">
+                  <span>21 June 2026</span>
+                  <span>6 July 2026</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -231,9 +193,8 @@ export default function LedgerCandidate() {
         </div>
         <div className="c3-wrap">
           <p>
-            Every figure on this page comes from the published record. Package
-            versions verified {facts.shipped.verifiedOn}. Download counts read
-            from the project stats file on 2026-09-13.
+            Package versions verified {facts.shipped.verifiedOn}. Download
+            counts read from the project stats file on 2026-09-13.
           </p>
         </div>
       </footer>

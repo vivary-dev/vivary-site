@@ -19,43 +19,28 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const { product, engine } = facts;
+
 export const metadata: Metadata = {
   title: "Vivary, candidate 2: Workspace",
-  description: facts.productLine,
+  description: product.line,
 };
 
-const [firstSentence, secondSentence] = splitFirstScreen(facts.firstScreen);
-
-function splitFirstScreen(text: string): [string, string] {
+function splitFirst(text: string): [string, string] {
   const cut = text.indexOf(". ");
   if (cut < 0) return [text, ""];
   return [text.slice(0, cut + 1), text.slice(cut + 2)];
 }
 
-const whatItIs = [
-  {
-    file: "AGENTS.md, STATE.md",
-    term: "Files persist",
-    text: "A new workspace starts with five small files. Nothing else is written until real work needs it. The agent works from those files, and they are still there when the chat is gone.",
-  },
-  {
-    file: ".vivary/context.md",
-    term: "The bounded capsule",
-    text: "The agent gets a bounded capsule of context. Vivary is the part that decides which of your files the agent gets to see.",
-  },
-  {
-    file: "written after each run",
-    term: "The receipt",
-    text: "A receipt records what the agent saw, and Vivary shows it to you. You can read it after a run to check what the agent worked from.",
-  },
-  {
-    file: "the workspace folder",
-    term: "The boundary",
-    text: "No account, no cloud control plane, no telemetry from the workspace. Files stay on your machine.",
-  },
-];
+const whatSentences = product.what.split(". ").map((s) => (s.endsWith(".") ? s : `${s}.`));
+const heroSentence = whatSentences[1] ?? whatSentences[0];
 
-const layerPackages = Object.fromEntries(
+const promises = product.promises.map((p) => {
+  const [title, body] = splitFirst(p);
+  return { title, body };
+});
+
+const layerVersions = Object.fromEntries(
   facts.shipped.packages.map((p) => [p.name.replace("vivary-", ""), p.version]),
 );
 
@@ -63,10 +48,7 @@ export default function CandidateTwo() {
   return (
     <div className={`c2 ${sans.variable} ${mono.variable}`}>
       <header className="c2-wrap c2-masthead">
-        <div>
-          <span className="c2-wordmark">{facts.name}</span>
-          <span className="c2-tagline">{facts.productLine}</span>
-        </div>
+        <span className="c2-wordmark">{product.name}</span>
         <nav aria-label="Project links" className="c2-masthead-links">
           <a href={facts.links.github}>GitHub</a>
           <a href={facts.links.docs}>Docs</a>
@@ -75,55 +57,66 @@ export default function CandidateTwo() {
 
       <main>
         <section className="c2-wrap c2-hero" aria-labelledby="c2-h1">
-          <h1 id="c2-h1">{firstSentence}</h1>
-          <p className="c2-lede">{secondSentence}</p>
-          <div className="c2-install">
-            <code className="c2-cmd">{facts.shipped.install}</code>
-            <CopyButton text={facts.shipped.install} />
+          <h1 id="c2-h1">
+            {product.meet}
+            <span className="c2-h1-line">{product.line}</span>
+          </h1>
+          <p className="c2-lede">{heroSentence}</p>
+          <div className="c2-cta-row">
+            <a className="c2-cta" href={facts.links.github}>
+              Follow the build on GitHub
+            </a>
+            <a className="c2-cta-quiet" href={facts.links.docs}>
+              Read the docs
+            </a>
           </div>
-          <p className="c2-install-note">
-            Also on npm as <code>{facts.shipped.installNpm}</code>. Source on{" "}
-            <a href={facts.links.github}>GitHub</a>.
-          </p>
           <Workspace />
         </section>
 
         <section className="c2-wrap c2-section" aria-labelledby="c2-what">
-          <h2 id="c2-what">What it is</h2>
-          <dl className="c2-defs">
-            {whatItIs.map((item) => (
-              <div key={item.term} className="c2-def">
-                <dt>
-                  <span className="c2-def-term">{item.term}</span>
-                  {item.file.includes(".") ? (
-                    <code className="c2-def-file">{item.file}</code>
-                  ) : (
-                    <span className="c2-def-file">{item.file}</span>
-                  )}
-                </dt>
-                <dd>{item.text}</dd>
+          <h2 id="c2-what">What it does</h2>
+          <dl className="c2-promises">
+            {promises.map((item) => (
+              <div key={item.title} className="c2-promise">
+                <dt>{item.title}</dt>
+                <dd>{item.body}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <section className="c2-wrap c2-section" aria-labelledby="c2-install">
-          <h2 id="c2-install">What you can install today</h2>
-          <div className="c2-two-col">
+        <section className="c2-wrap c2-section" aria-labelledby="c2-also">
+          <h2 id="c2-also">Also in the program</h2>
+          <ul className="c2-list">
+            {product.alsoInTheProgram.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="c2-wrap c2-section" aria-labelledby="c2-engine">
+          <h2 id="c2-engine">{engine.line}</h2>
+          <p className="c2-measure">{engine.summary}</p>
+          <dl className="c2-layers">
+            {facts.layers.map((layer) => (
+              <div key={layer.name} className="c2-layer">
+                <dt>
+                  <code>vivary-{layer.name}</code>
+                  <span className="c2-layer-version">{layerVersions[layer.name]}</span>
+                </dt>
+                <dd>{layer.role}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="c2-two-col c2-engine-install">
             <div>
               <p>One command writes a workspace of five files and stops there.</p>
-              <ul className="c2-files">
-                {facts.shipped.fiveFiles.map((f) => (
-                  <li key={f}>
-                    <code>{f}</code>
-                  </li>
-                ))}
-              </ul>
-              <p>
-                Adopting an existing project starts with a dry run. It adds at
-                most three files and asks for approval against an exact hash
-                before writing. Doctor checks the contract and the privacy
-                boundary without touching your files.
+              <div className="c2-install">
+                <code className="c2-cmd">{facts.shipped.install}</code>
+                <CopyButton text={facts.shipped.install} />
+              </div>
+              <p className="c2-install-note">
+                Also on npm as <code>{facts.shipped.installNpm}</code>.
               </p>
             </div>
             <div>
@@ -151,43 +144,21 @@ export default function CandidateTwo() {
                 </tbody>
               </table>
               <p className="c2-fine">
-                Versions verified on {facts.shipped.verifiedOn} against the
-                release table. Packages on{" "}
-                <a href={facts.links.pypi}>PyPI</a> and{" "}
+                Versions verified on {facts.shipped.verifiedOn} against the release
+                table. Packages on <a href={facts.links.pypi}>PyPI</a> and{" "}
                 <a href={facts.links.npm}>npm</a>.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="c2-wrap c2-section" aria-labelledby="c2-layers">
-          <h2 id="c2-layers">The four layers</h2>
-          <p className="c2-measure">
-            Each layer is its own package. Install the ones you need.
-          </p>
-          <dl className="c2-layers">
-            {facts.layers.map((layer) => (
-              <div key={layer.name} className="c2-layer">
-                <dt>
-                  <code>vivary-{layer.name}</code>
-                  <span className="c2-layer-version">
-                    {layerPackages[layer.name]}
-                  </span>
-                </dt>
-                <dd>{layer.role}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="c2-wrap c2-section" aria-labelledby="c2-dev">
-          <h2 id="c2-dev">{facts.inDevelopment.label}</h2>
-          <p className="c2-dev">{facts.inDevelopment.summary}</p>
+        <section className="c2-wrap c2-section" aria-label="Status">
+          <p className="c2-status">{product.status}</p>
         </section>
       </main>
 
       <footer className="c2-wrap c2-footer">
-        <span className="c2-wordmark">{facts.name}</span>
+        <span className="c2-wordmark">{product.name}</span>
         <nav aria-label="Footer links" className="c2-footer-links">
           <a href={facts.links.github}>GitHub</a>
           <a href={facts.links.docs}>Docs</a>
