@@ -1,0 +1,203 @@
+/* Candidate 4, Terrarium. Every rule is scoped to .c4-page so nothing reaches
+   the shared candidate switcher. */
+
+.c4-page {
+  --paper: #e4e7dc;
+  --paper-deep: #d5dacb;
+  --ink: #16271d;
+  --ink-soft: #3d5145;
+  --amber: #c87a16;
+  --amber-ink: #8f5309;
+  --hair: rgba(22, 39, 29, 0.14);
+  flex: 1 1 auto;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--c4-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  overflow-x: clip;
+}
+
+.c4-page a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, var(--amber) 80%, transparent);
+}
+.c4-page a:hover { text-decoration-color: var(--amber-ink); }
+.c4-page a:focus-visible,
+.c4-page button:focus-visible { outline: 2px solid var(--amber-ink); outline-offset: 3px; border-radius: 2px; }
+
+.c4-wrap { width: 100%; max-width: 66rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3rem); }
+.c4-serif {
+  font-family: var(--c4-display), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+}
+
+/* Hero -------------------------------------------------------------------- */
+
+.c4-hero { position: relative; isolation: isolate; overflow: clip; padding-bottom: clamp(3.5rem, 9vw, 6.5rem); }
+.c4-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  mix-blend-mode: multiply;
+  transition: opacity 1100ms ease-out;
+}
+.c4-hero[data-lit="true"] .c4-wash { opacity: 1; }
+.c4-wash-sun { position: absolute; inset: 0 0 auto 0; height: 38%; }
+/* The moss lands before the section edge so the hero does not end on a seam. */
+.c4-wash-moss {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56%;
+  mask-image: linear-gradient(to top, transparent 0, #000 12%, #000 100%);
+}
+
+.c4-top { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-top: 1.6rem; }
+.c4-mark { font-size: 1.3rem; letter-spacing: -0.01em; }
+.c4-top-links { display: flex; gap: 1.4rem; font-size: 0.9375rem; }
+
+.c4-hero-grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  align-items: center;
+  padding-top: clamp(2.75rem, 7vw, 5rem);
+}
+@media (min-width: 62rem) {
+  .c4-hero-grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); }
+}
+
+.c4-display {
+  margin: 0;
+  font-size: clamp(2.4rem, 8.4vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+}
+.c4-display span { display: block; }
+.c4-deck { margin: clamp(1.5rem, 3vw, 2rem) 0 0; font-size: clamp(1.1rem, 2.1vw, 1.3rem); line-height: 1.5; max-width: 34ch; }
+.c4-line { margin: 1.1rem 0 0; color: var(--ink-soft); font-size: 1rem; max-width: 42ch; }
+.c4-cta { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+.c4-cta-aside { margin: 1rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+
+.c4-hero-art { width: 100%; max-width: 26rem; justify-self: start; }
+@media (min-width: 62rem) { .c4-hero-art { justify-self: end; max-width: 25rem; } }
+.c4-hero-art svg { display: block; width: 100%; height: auto; }
+
+.c4-band { opacity: 0; transform: translateY(14px); transform-box: view-box; }
+.c4-hero[data-lit="true"] .c4-band {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Command block ----------------------------------------------------------- */
+
+.c4-command {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  max-width: 42rem;
+  padding: 1rem 1.1rem;
+  border-radius: 5px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.c4-command code {
+  display: block;
+  width: 100%;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(0.72rem, 2.2vw, 0.82rem);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+.c4-token { white-space: nowrap; }
+.c4-prompt { color: var(--amber); padding-right: 0.6em; }
+.c4-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(228, 231, 220, 0.35);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--paper);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.c4-copy:hover { background: rgba(228, 231, 220, 0.14); }
+.c4-command .c4-copy:focus-visible { outline-color: var(--amber); }
+
+/* Sections ---------------------------------------------------------------- */
+
+.c4-section { padding-top: clamp(4rem, 10vw, 7rem); }
+.c4-head { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.08; letter-spacing: -0.015em; }
+.c4-lead { margin: 1.25rem 0 0; max-width: 62ch; }
+
+.c4-dl { margin: clamp(2rem, 5vw, 3rem) 0 0; display: grid; gap: 2rem; }
+@media (min-width: 48rem) { .c4-dl { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; } }
+.c4-dl dt { font-family: var(--c4-display), Georgia, serif; font-weight: 500; font-size: 1.2rem; letter-spacing: -0.01em; }
+.c4-dl dd { margin: 0.5rem 0 0; color: var(--ink-soft); }
+.c4-note { margin: clamp(2rem, 5vw, 2.75rem) 0 0; max-width: 58ch; color: var(--ink-soft); }
+.c4-note + .c4-note { margin-top: 0.85rem; }
+.c4-measure { max-width: 58ch; margin: 0; }
+
+.c4-files { margin: 1.5rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 0.65rem; }
+.c4-files li {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.c4-alt { margin: 1rem 0 0; font-size: 0.9rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+.c4-alt code { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.85em; color: var(--ink); }
+
+.c4-table { width: 100%; border-collapse: collapse; margin-top: clamp(2rem, 5vw, 2.75rem); font-size: 0.9375rem; }
+.c4-table caption { text-align: left; color: var(--ink-soft); font-size: 0.875rem; padding-bottom: 0.75rem; }
+.c4-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  padding: 0 1rem 0.55rem 0;
+  border-bottom: 1px solid rgba(22, 39, 29, 0.28);
+}
+.c4-table td { padding: 0.6rem 1rem 0.6rem 0; border-bottom: 1px solid var(--hair); }
+.c4-table td:first-child { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.875rem; }
+.c4-table td:last-child, .c4-table th:last-child { padding-right: 0; }
+
+.c4-layers { margin: clamp(2rem, 5vw, 3rem) 0 0; display: grid; gap: 1.75rem; }
+.c4-layer { display: grid; grid-template-columns: 1rem minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+.c4-layer-name { font-family: var(--c4-display), Georgia, serif; font-weight: 500; font-size: 1.35rem; letter-spacing: -0.01em; }
+.c4-layer-role { margin: 0.35rem 0 0; color: var(--ink-soft); max-width: 58ch; }
+@media (min-width: 48rem) {
+  .c4-layer { grid-template-columns: 1rem 9rem minmax(0, 1fr); align-items: start; }
+  .c4-layer-role { margin-top: 0; }
+}
+
+.c4-dev {
+  margin-top: clamp(2rem, 5vw, 2.75rem);
+  max-width: 46rem;
+  background: var(--paper-deep);
+  border-radius: 3px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.c4-foot { margin-top: clamp(4.5rem, 11vw, 8rem); border-top: 1px solid var(--hair); padding-block: 2rem 6rem; }
+.c4-foot-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; }
+.c4-foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.9375rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .c4-wash { transition: none; }
+  .c4-band { opacity: 1; transform: none; transition: none; }
+}

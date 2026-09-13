@@ -1,0 +1,317 @@
+/* Candidate c5, "Console". Everything is scoped under .c5-root. */
+
+.c5-root {
+  --paper: #f4f4f2;
+  --ink: #1b1d1b;
+  --ink-2: #5c625e;
+  --rule: #dcdcd8;
+  --shell: #0d100e;
+  --panel: #171c19;
+  --raised: #202722;
+  --edge: #262d28;
+  --dim: #8e968f;
+  --green: #2fd27c;
+  --mono: var(--font-geist-mono), ui-monospace, monospace;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+.c5-root :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.c5-wrap {
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Header */
+.c5-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.c5-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+}
+.c5-mark span {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  background: var(--green);
+}
+.c5-headlinks {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.c5-headlinks a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Hero */
+.c5-hero { padding-block: clamp(3rem, 7vw, 5.5rem) 0; }
+.c5-h1 {
+  margin: 0;
+  max-width: 14ch;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7.4vw, 4.6rem);
+  line-height: 0.97;
+  letter-spacing: -0.038em;
+}
+.c5-lead {
+  margin: 1.5rem 0 0;
+  max-width: 46rem;
+  font-size: clamp(1.0625rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.c5-lead strong { color: var(--ink); font-weight: 500; }
+.c5-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2.25rem;
+  max-width: 100%;
+}
+.c5-cmd {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: #ffffff;
+}
+.c5-cmd code {
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.c5-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: none;
+  border: 0;
+  border-left: 1px solid var(--ink);
+  padding-inline: 0.85rem;
+  background: var(--green);
+  color: var(--shell);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.c5-copy:hover { background: #27bd6f; }
+.c5-ghlink {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* The drawn workbench */
+.c5-figure { margin: clamp(2.5rem, 5vw, 4rem) 0 0; }
+.c5-frame {
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: var(--shell);
+  overflow: hidden;
+  color: #e6ebe7;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+.c5-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--edge);
+}
+.c5-dots { display: flex; gap: 0.3rem; flex: none; }
+.c5-dots i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #39413b; }
+.c5-bartitle { font-weight: 700; letter-spacing: -0.01em; }
+.c5-flag {
+  margin-left: auto;
+  border: 1px solid #3a443d;
+  border-radius: 3px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.c5-panes { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr) 12.5rem; }
+.c5-pane { padding: 0.85rem 0.9rem; min-width: 0; }
+.c5-pane + .c5-pane { border-left: 1px solid var(--edge); }
+.c5-pane-mid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-height: 20rem;
+  background: var(--panel);
+}
+.c5-ph { margin: 0 0 0.6rem; color: var(--dim); font-size: 0.6875rem; font-weight: 600; }
+.c5-proj { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+.c5-proj li { padding: 0.3rem 0.4rem; border-radius: 4px; color: var(--dim); overflow-wrap: anywhere; }
+.c5-proj li[data-on="true"] { background: var(--raised); color: #e6ebe7; font-weight: 600; }
+.c5-msg { max-width: 34rem; }
+.c5-msg p { margin: 0; }
+.c5-who { margin: 0 0 0.2rem; color: var(--dim); font-size: 0.6875rem; font-weight: 600; }
+.c5-receipt {
+  max-width: 22rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #2c3730;
+  border-left: 2px solid var(--green);
+  border-radius: 4px;
+  background: var(--raised);
+}
+.c5-rtitle { margin: 0 0 0.5rem; font-size: 0.75rem; font-weight: 700; }
+.c5-receipt ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+.c5-receipt li { display: flex; align-items: center; gap: 0.4rem; }
+.c5-receipt svg { color: var(--green); flex: none; }
+.c5-receipt code,
+.c5-files code { font-family: var(--mono); font-size: 0.6875rem; overflow-wrap: anywhere; min-width: 0; }
+.c5-note { margin: 0.55rem 0 0; color: var(--dim); font-size: 0.6875rem; }
+.c5-input {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  margin-top: auto;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #2c3730;
+  border-radius: 4px;
+  color: var(--dim);
+}
+.c5-caret {
+  width: 1px;
+  height: 0.85em;
+  background: var(--green);
+  animation: c5blink 1.1s steps(1, end) infinite;
+}
+@keyframes c5blink { 50% { opacity: 0; } }
+.c5-files { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.c5-files li { display: flex; align-items: center; gap: 0.45rem; color: var(--dim); }
+.c5-files li[data-seen="true"] { color: #e6ebe7; }
+.c5-files b { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--green); flex: none; }
+.c5-files li[data-seen="false"] b { background: #39413b; }
+.c5-cap { margin: 0.9rem 0 0; max-width: 58ch; font-size: 0.8125rem; line-height: 1.55; color: var(--ink-2); }
+
+/* Spec sections */
+.c5-sec { border-top: 1px solid var(--rule); padding-block: clamp(3rem, 6vw, 5rem); }
+.c5-grid, .c5-dev { display: grid; gap: 1.75rem 3rem; }
+.c5-h2 {
+  margin: 0;
+  max-width: 16ch;
+  font-weight: 800;
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.c5-sub { margin: 0.75rem 0 0; max-width: 34ch; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-2); }
+.c5-sub-wide { margin-top: 0; max-width: 48ch; }
+.c5-cols { display: grid; gap: 2rem; }
+.c5-col h3 { margin: 0 0 0.5rem; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.015em; }
+.c5-col p { margin: 0; max-width: 40ch; line-height: 1.6; color: var(--ink-2); }
+.c5-five {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0 0 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+.c5-five li { font-family: var(--mono); font-size: 0.8125rem; overflow-wrap: anywhere; }
+.c5-runs { list-style: none; margin: 0 0 2.25rem; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.c5-runs li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.9rem; }
+.c5-runs span { min-width: 4.5rem; font-size: 0.8125rem; color: var(--ink-2); }
+.c5-runs code {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: #ffffff;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+.c5-extra { list-style: none; margin: 2rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.c5-extra li { padding-left: 1rem; border-left: 1px solid var(--rule); max-width: 58ch; line-height: 1.6; color: var(--ink-2); }
+.c5-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.c5-table caption { padding-bottom: 0.7rem; text-align: left; font-size: 0.8125rem; color: var(--ink-2); }
+.c5-table th {
+  padding: 0 1rem 0.4rem 0;
+  border-bottom: 1px solid var(--ink);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.c5-table td { padding: 0.5rem 1rem 0.5rem 0; border-bottom: 1px solid var(--rule); overflow-wrap: anywhere; }
+.c5-table td:first-child,
+.c5-table td:nth-child(2) { font-family: var(--mono); font-size: 0.8125rem; }
+.c5-layers { display: grid; gap: 1.75rem; }
+.c5-layer svg { color: var(--ink); margin-bottom: 0.55rem; }
+.c5-layer h3 { margin: 0 0 0.3rem; font-family: var(--mono); font-size: 1rem; font-weight: 700; }
+.c5-layer p { margin: 0; font-size: 0.875rem; line-height: 1.55; color: var(--ink-2); }
+.c5-dev-body { max-width: 54ch; }
+.c5-dev-body p { margin: 0 0 0.8rem; font-size: 1.0625rem; line-height: 1.6; }
+.c5-dev-body p:last-child { margin-bottom: 0; font-size: 0.9375rem; color: var(--ink-2); }
+
+/* Footer */
+.c5-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-block: 2rem 5.5rem;
+  border-top: 1px solid var(--ink);
+}
+.c5-foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.875rem; }
+.c5-foot a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+.c5-foot a:hover { color: var(--ink); }
+.c5-foot small { font-size: 0.8125rem; color: var(--ink-2); }
+
+@media (min-width: 48rem) {
+  .c5-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+  .c5-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 62rem) {
+  .c5-grid, .c5-dev { grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); }
+  .c5-layers { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+}
+@media (max-width: 58rem) {
+  .c5-panes { grid-template-columns: minmax(0, 1fr) 11rem; }
+  .c5-pane-proj { display: none; }
+}
+@media (max-width: 38rem) {
+  .c5-panes { grid-template-columns: minmax(0, 1fr); }
+  .c5-pane + .c5-pane { border-left: 0; border-top: 1px solid var(--edge); }
+  .c5-pane-mid { min-height: 0; }
+  .c5-frame { font-size: 0.6875rem; }
+  .c5-receipt { max-width: none; }
+  .c5-runs span { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c5-caret { animation: none; }
+}
