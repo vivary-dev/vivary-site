@@ -26,8 +26,10 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - Copy in Jeff's voice: plain sentences, no em dashes, no semicolons in prose,
   no marketing adjectives, no AI tells. Run the unslop rules before commit.
 - Public-context guardrail: nothing about Jeff's location or living situation.
-- Publishing needs Jeff's approval per deploy. Hosting is undecided between
-  Vercel and Zo. Do not wire a host until it is decided.
+- Publishing needs Jeff's approval per deploy. The final site is hosted on
+  Cloudflare as a static export (`output: "export"` in `next.config.ts`,
+  decided 2026-09-13). Previews are not hosted on Zo. Do not add server-side
+  routes or image optimization that a static export cannot serve.
 
 ## Design bar
 
@@ -52,7 +54,7 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 | icons0 | Icons | `pnpm dlx shadcn@4.21.0 add @icons0/<collection>/<name>`. Review the SVG that lands. |
 | shadscan 0.17.0 | Deterministic UI audit | `pnpm dlx @shadscan/cli@0.17.0` before any PR. Fix findings or record in the devlog why not. |
 | shieldcn | README badges | Optional. Static SVG badges in `README.md` only. |
-| Umami | Analytics | One script tag with the website id from an environment variable, disabled in development. The instance is undecided, Umami Cloud or a host other than Zo, since Zo has no Docker or Postgres. No cookies and no second analytics tool. |
+| Umami | Analytics | One script tag with the website id from an environment variable, disabled in development. The instance is undecided. Zo has no Docker or Postgres and Cloudflare has no Postgres, so Umami Cloud is the likely instance. No cookies and no second analytics tool. |
 
 ## Dependencies
 

@@ -9,4 +9,4 @@ Status: scaffold rebuilt on Next.js and shadcn, 2026-09-13.
    today, get started, docs link.
 4. Imagery pass with Dither Kit and checked-in assets. Icon pass with icons0.
 5. shadscan clean. Unslop pass. Umami wired behind an env variable.
-6. Hosting decision, then publish on approval.
+6. Cloudflare deploy of the static export, then publish on approval.

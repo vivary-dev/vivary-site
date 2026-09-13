@@ -7,6 +7,16 @@ const eslintConfig = defineConfig([
   ...nextTs,
   // Override default ignores of eslint-config-next.
   globalIgnores([
+    ".entire/**",
+    ".claude/**",
+    ".codex/**",
+    ".cursor/**",
+    ".gemini/**",
+    ".factory/**",
+    ".opencode/**",
+    ".pi/**",
+    ".github/hooks/**",
+    "out/**",
     // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
