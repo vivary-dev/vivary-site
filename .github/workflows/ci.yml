@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: pnpm
+
+      - name: Scan dependency publication metadata
+        run: node scripts/publish-scan.mjs .
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create shadscan report
+        run: pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast > shadscan-report.json
+
+      - name: Upload shadscan report
+        if: ${{ always() && hashFiles('shadscan-report.json') != '' }}
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: shadscan-report
+          path: shadscan-report.json
+          if-no-files-found: error

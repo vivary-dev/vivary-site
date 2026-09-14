@@ -3,6 +3,8 @@ import { Big_Shoulders, Fraunces } from "next/font/google";
 import { facts } from "@/content/facts";
 import { Ledger, type Row } from "./ledger";
 import { MemoryScene, Section } from "./scenes";
+import { LucideFolderOpen } from "@/components/icons/lucide/folder-open";
+import { LucideFileText } from "@/components/icons/lucide/file-text";
 import "./home.css";
 
 const display = Big_Shoulders({
@@ -161,6 +163,16 @@ const sessions = [
 
 const layers: Row[] = facts.layers.map((l) => ({ k: l.name, v: l.role }));
 
+function IntroObject({ kind }: { kind: "folder" | "file" }) {
+  const Icon = kind === "folder" ? LucideFolderOpen : LucideFileText;
+  return (
+    <div className="intro-object" aria-hidden="true">
+      <Icon focusable="false" />
+      <span /><span /><span className="recorded" />
+    </div>
+  );
+}
+
 export default function Candidate9() {
   return (
     <div className={`v9 ${display.variable} ${voice.variable}`}>
@@ -263,12 +275,15 @@ export default function Candidate9() {
             <h2 className="display display-lg reveal">
               Every project is a room. One window opens all of them.
             </h2>
-            <div className="reveal">
-              <p className="lede">{facts.product.what}</p>
-              <p className="lede quiet">
-                Second brains, knowledge bases, research, writing, and software, each one composed
-                from patterns you can rename or drop.
-              </p>
+            <div className="intro-detail reveal">
+              <div>
+                <p className="lede">{facts.product.what}</p>
+                <p className="lede quiet">
+                  Second brains, knowledge bases, research, writing, and software, each one composed
+                  from patterns you can rename or drop.
+                </p>
+              </div>
+              <IntroObject kind="folder" />
             </div>
           </div>
           <div className="window reveal" aria-hidden="true">
@@ -334,10 +349,13 @@ export default function Candidate9() {
         <div className="wrap">
           <div className="intro">
             <h2 className="display display-lg reveal">The file gets longer. That is the whole trick.</h2>
-            <p className="lede reveal">
-              Each session adds a line or two. A year later it is still a file, still yours, still
-              plain text you can read from the top. Nothing about you is held anywhere you cannot open.
-            </p>
+            <div className="intro-detail reveal">
+              <p className="lede">
+                Each session adds a line or two. A year later it is still a file, still yours, still
+                plain text you can read from the top. Nothing about you is held anywhere you cannot open.
+              </p>
+              <IntroObject kind="file" />
+            </div>
           </div>
           <p className="filehead group reveal">
             <span>memory/MEMORY.md</span>

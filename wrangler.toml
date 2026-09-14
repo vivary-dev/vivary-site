@@ -1,0 +1,7 @@
+# Cloudflare Pages static export. Build command in Pages: pnpm build.
+# https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/
+# https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+name = "vivary-site"
+pages_build_output_dir = "./out"
+compatibility_date = "2026-09-14"
+send_metrics = false

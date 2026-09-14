@@ -57,9 +57,9 @@ see their output produce brochures.
 - `scripts/dev-server.sh` starts the Next dev server detached on port 3177,
   bound to localhost. Reach it from a laptop with
   `ssh -N -L 3177:127.0.0.1:3177 zo`. Previews are never hosted on Zo.
-- `scripts/shot.sh <route> <name>` renders a route headlessly with
-  Playwright's Chromium at 1440x900, full page, and a phone width, into
-  `/tmp/shots/`. It appends `?still=1`.
+- `scripts/shot.sh <route> <name>` waits for fonts and the settled scene, then
+  captures a 1440x900 viewport, the full page, and a real 390x844 Playwright
+  viewport into `/tmp/shots/`. It appends `?still=1`.
 - Every page honors `?still=1`: reveals shown, loops stopped at their final
   state. Keep that switch working in any new scene.
 - Headless Chrome clamps widths under about 500px. Verify phone layout with
@@ -85,10 +85,15 @@ see their output produce brochures.
 | --- | --- | --- |
 | shadcn/ui 4.21.0 | Components in `src/components/ui` | `pnpm dlx shadcn@4.21.0 add <name>`. Never `@latest`. Review every added file before commit. |
 | Dither Kit | Hero and section imagery | Add through the shadcn registry with the pinned CLI. The packages are young and low-download, so review every added file line by line and never run its CLI in CI. |
-| icons0 | Icons | `pnpm dlx shadcn@4.21.0 add @icons0/<collection>/<name>`. Review the SVG that lands. |
+| icons0 | Icons | Registry: `@icons0=https://icons0.dev/r/{name}.json`. Add with `pnpm dlx shadcn@4.21.0 add @icons0/<collection>/<name>`. Keep one collection per surface, review each SVG, and retain its license. |
 | shadscan 0.17.0 | Deterministic UI audit | `pnpm dlx @shadscan/cli@0.17.0` before any PR. Fix findings or record in the devlog why not. |
 | shieldcn | README badges | Optional. Static SVG badges in `README.md` only. |
 | Umami | Analytics | One script tag with the website id from an environment variable, disabled in development. The instance is undecided. Zo has no Docker or Postgres and Cloudflare has no Postgres, so Umami Cloud is the likely instance. No cookies and no second analytics tool. |
+
+The icons0 namespace and install pattern were confirmed on 2026-09-14 in its
+[first-party playbook](https://github.com/marcoripa96/i0/blob/f2d30130484fa2321bccca2de2e14f63f3dcdbfe/src/prompts/icon-integration-playbook.ts#L14-L16)
+and [registry handler](https://github.com/marcoripa96/i0/blob/f2d30130484fa2321bccca2de2e14f63f3dcdbfe/src/app/r/%5B...name%5D/route.ts#L100-L146).
+The two Lucide SVGs in `src/components/icons/lucide/` retain the upstream license.
 
 ## Dependencies
 
