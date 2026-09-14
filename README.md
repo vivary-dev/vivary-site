@@ -37,4 +37,5 @@ branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-Scaffold only. No pages beyond the placeholder. Hosting is undecided.
+One page, the home route, locked in on 2026-09-13. Static export to `out/`
+for Cloudflare. Not published yet.
