@@ -1,14 +1,30 @@
 #!/usr/bin/env bash
-# Headless screenshots of a route on the local dev server.
-# usage: scripts/shot.sh <route> <name>. Writes /tmp/shots/<name>-{hero,full,mobile}.png
-# with ?still=1 so animations freeze at their final state. Headless Chrome clamps
-# widths under about 500px, so verify phone layout with a real 390px Playwright viewport.
-set -e
-CH=/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome
-mkdir -p /tmp/shots
-URL="http://127.0.0.1:3177$1?still=1"
-common="--headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=12000 --run-all-compositor-stages-before-draw --force-device-scale-factor=1"
-$CH $common --window-size=1440,900  --screenshot=/tmp/shots/$2-hero.png   "$URL" 2>/dev/null
-$CH $common --window-size=1440,7400 --screenshot=/tmp/shots/$2-full.png   "$URL" 2>/dev/null
-$CH $common --window-size=390,6200  --screenshot=/tmp/shots/$2-mobile.png "$URL" 2>/dev/null
-ls -la /tmp/shots/$2-*.png
+# Render a settled desktop viewport, full page, and a real phone viewport.
+# Usage: scripts/shot.sh <route> <name>. Captures stay in /tmp/shots.
+set -euo pipefail
+python3 - "$@" <<'PY'
+from pathlib import Path
+import re
+import sys
+from playwright.sync_api import sync_playwright
+route, name = sys.argv[1:]
+if not route.startswith('/') or not re.fullmatch(r'[a-zA-Z0-9-]+', name):
+    raise SystemExit('Use a local route and a filename made of letters, numbers, and hyphens.')
+url = 'http://127.0.0.1:3177' + route + ('&' if '?' in route else '?') + 'still=1'
+out = Path('/tmp/shots')
+out.mkdir(exist_ok=True)
+with sync_playwright() as p:
+    browser = p.chromium.launch(executable_path='/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome', args=['--no-sandbox'])
+    for width, height, label in [(1440, 900, 'hero'), (390, 844, 'mobile')]:
+        page = browser.new_page(viewport={'width': width, 'height': height}, device_scale_factor=1)
+        page.goto(url, wait_until='networkidle')
+        page.locator('footer').wait_for(state='attached')
+        page.evaluate('document.fonts.ready')
+        page.wait_for_function("document.querySelector('.memory')?.classList.contains('done')")
+        page.screenshot(path=str(out / f'{name}-{label}.png'), full_page=label == 'mobile')
+        if label == 'hero':
+            page.screenshot(path=str(out / f'{name}-full.png'), full_page=True)
+        page.close()
+    browser.close()
+print('Captures: ' + str(out / name) + '-{hero,full,mobile}.png')
+PY

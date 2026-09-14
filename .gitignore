@@ -53,3 +53,6 @@ dist/
 .opencode/plugins/entire.ts
 .pi/
 .github/hooks/
+
+# Local review evidence
+/.tmp/

@@ -93,7 +93,7 @@
 .v9 .two .ledger { --col: 10rem; }
 .v9 .two .block:first-child { margin-top: 0.35rem; }
 .v9 .hero { padding-top: clamp(2rem, 3.5vw, 2.5rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
-.v9 .hero-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; margin-top: clamp(2rem, 3.5vw, 2.75rem); }
+.v9 .hero-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; margin-top: clamp(2rem, 3.5vw, 2.75rem); }
 .v9 .display-xl { letter-spacing: -0.005em; text-wrap: initial; }
 .v9 .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; }
 
@@ -230,3 +230,26 @@
   .v9 .memory .line, .v9 .memory .turn, .v9 .strip { opacity: 1; animation: none; transition: none; }
   .v9 .btn { transition: none; }
 }
+
+/* Small records beside the existing lower-section introductions. */
+.v9 .intro-detail { display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem; gap: 1.5rem; align-items: start; }
+.v9 .intro-object { padding: 1rem; border: 1px solid var(--rule); background: var(--pane); color: var(--text-3); }
+.v9 .intro-object svg { display: block; width: 100%; height: 3.25rem; margin-bottom: 1rem; }
+.v9 .intro-object span { display: block; height: 1px; margin-top: 0.5rem; background: var(--rule); }
+.v9 .intro-object span:nth-of-type(2) { width: 75%; }
+.v9 .intro-object .recorded { width: 45%; background: var(--amber); }
+@media (max-width: 640px) {
+  .v9 .intro-detail { grid-template-columns: minmax(0, 1fr) 4rem; gap: 1rem; }
+  .v9 .intro-object { padding: 0.75rem; }
+  .v9 .intro-object svg { height: 2.25rem; margin-bottom: 0.75rem; }
+}
+
+.v9 .hero-copy { padding-top: 1.25rem; }
+.v9 .intro-object svg path, .v9 .intro-object svg g { stroke-width: 1.25; }
+@media (max-width: 900px) {
+  .v9 .hero-copy { padding-top: 0; }
+}
+
+/* Keep the locked navigation while giving text links a usable hit area. */
+.v9 .top nav a { padding-block: 0.125rem; }
+.v9 footer a { display: inline-block; padding: 0.125rem; }
