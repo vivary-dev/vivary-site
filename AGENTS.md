@@ -49,6 +49,36 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - Quality floor: responsive to 360 pixels, visible keyboard focus, reduced
   motion respected, contrast passes, no horizontal page scroll.
 
+## Seeing your work
+
+Nothing ships from this repo without being looked at. Builders that cannot
+see their output produce brochures.
+
+- `scripts/dev-server.sh` starts the Next dev server detached on port 3177,
+  bound to localhost. Reach it from a laptop with
+  `ssh -N -L 3177:127.0.0.1:3177 zo`. Previews are never hosted on Zo.
+- `scripts/shot.sh <route> <name>` renders a route headlessly with
+  Playwright's Chromium at 1440x900, full page, and a phone width, into
+  `/tmp/shots/`. It appends `?still=1`.
+- Every page honors `?still=1`: reveals shown, loops stopped at their final
+  state. Keep that switch working in any new scene.
+- Headless Chrome clamps widths under about 500px. Verify phone layout with
+  a real 390px Playwright viewport.
+- Do at least three critique passes on any new page: look, name what is
+  weak, fix, re-render.
+
+## What is decided
+
+- 2026-09-13: nine landing candidates were built. Jeff locked candidate 9,
+  a blend of the Transmission and Familiar variants, and it is the home
+  route. History is on `feat/landing-candidates`. Do not rebuild the home
+  page from scratch; tune it.
+- Three typefaces with one job each: Big Shoulders for the claim, Fraunces
+  only where the file itself speaks, Geist Mono for the record. Amber is
+  reserved for what the workspace recorded.
+- The fiction (a workspace three years in) is framed once, in three
+  sentences, and never claims a shipped feature.
+
 ## Tools and the rule for each
 
 | Tool | Use | Rule |
