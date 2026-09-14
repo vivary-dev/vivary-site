@@ -8,6 +8,7 @@ const candidates = [
   { slug: "c5", name: "Console", note: "Product shot first. A drawn app frame, bold sans, three proof columns." },
   { slug: "c7", name: "Transmission", note: "Hyperstition. A field report from a workspace three years in, written as if it already happened. Phosphor on black." },
   { slug: "c8", name: "Familiar", note: "Paranormal. Something lives in your files and it is yours. The memory file reads you back, line by line." },
+  { slug: "c9", name: "Familiar transmission", note: "The blend. Sevens body, eights heart: the record read back from 2029, opening with the memory file that knows you." },
   { slug: "c6", name: "Workspace, not chat", note: "The flagship. One idea told in six beats: agents need a workspace, not a better chat. Vapor for what evaporates, paper for what persists." },
 ];
 
