@@ -11,8 +11,8 @@ if [[ ! -x "$shot_python" ]]; then
   python3 -m venv "$shot_venv"
 fi
 
-if ! "$shot_python" -c 'import importlib.metadata as m; raise SystemExit(m.version("playwright") != "1.52.0")'; then
-  "$shot_python" -m pip install --disable-pip-version-check -r "$script_dir/requirements-shot.txt"
+if ! "$shot_python" -c 'import importlib.metadata as m; expected = {"playwright": "1.52.0", "pyee": "13.0.1", "greenlet": "3.2.4", "typing-extensions": "4.16.0"}; raise SystemExit(any(m.version(package) != version for package, version in expected.items()))'; then
+  "$shot_python" -m pip install --disable-pip-version-check --only-binary=:all: -r "$script_dir/requirements-shot.txt"
 fi
 
 if ! "$shot_python" -c 'from pathlib import Path; from playwright.sync_api import sync_playwright; p = sync_playwright().start(); found = Path(p.chromium.executable_path).is_file(); p.stop(); raise SystemExit(not found)'; then
