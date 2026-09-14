@@ -27,7 +27,8 @@ and `pnpm lint` runs ESLint.
 - `src/components/ui/` holds shadcn components. Add more with the pinned CLI
   named in `AGENTS.md`.
 - `public/` holds static assets and imagery.
-- `scripts/` holds the branch helper and the supply-chain scan.
+- `scripts/` holds the branch helper, the supply-chain scan, the dev-server
+  starter, and the headless screenshot script. See AGENTS.md, "Seeing your work".
 
 ## Rules
 

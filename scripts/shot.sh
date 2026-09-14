@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Headless screenshots of a route on the local dev server.
-# usage: shot.sh <path> <name> ; writes /tmp/shots/<name>-{hero,full,mobile}.png
+# usage: scripts/shot.sh <route> <name>. Writes /tmp/shots/<name>-{hero,full,mobile}.png
+# with ?still=1 so animations freeze at their final state. Headless Chrome clamps
+# widths under about 500px, so verify phone layout with a real 390px Playwright viewport.
 set -e
 CH=/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome
 mkdir -p /tmp/shots
