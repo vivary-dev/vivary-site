@@ -12,6 +12,29 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-14  feat/site-foundations review fixes
+**Did:** Fixed the four confirmed PR review findings. CI now checks pull requests
+into both long-lived branches and scans lockfile publication metadata before
+installing dependencies. The screenshot helper declares and bootstraps its pinned
+Playwright runtime and applies home-only waits only to the home route.
+
+**Broke / surprised me:** The original capture helper used Playwright 1.52.0 and
+a browser executable from Zo's global cache without declaring either one. The
+helper now uses a reusable temporary virtual environment and Playwright's own
+browser resolution. Bootstrap downloads happen only when the pinned runtime or
+its Chromium revision is absent.
+
+**Decided:** Generic routes wait for navigation and fonts. The home route also
+waits for its footer and completed memory scene before capture.
+
+**Verification:** Publication scan, lint, TypeScript, production build, shell
+syntax, embedded Python syntax, and diff whitespace passed. A fresh temporary
+environment bootstrapped Playwright 1.52.0. Real home and generated-404 captures
+each produced desktop, full-page, and phone images. The 404 completed without
+waiting for home-only elements.
+
+**Next:** Let PR CI verify the review-fix commit before merge.
+
 ---
 
 ## 2026-09-14  feat/site-foundations

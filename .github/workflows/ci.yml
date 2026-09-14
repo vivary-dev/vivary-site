@@ -4,7 +4,7 @@ on:
   push:
     branches: [dev, main]
   pull_request:
-    branches: [dev]
+    branches: [dev, main]
 
 permissions:
   contents: read
@@ -34,6 +34,9 @@ jobs:
           node-version: 24.15.0
           cache: pnpm
 
+      - name: Scan dependency publication metadata
+        run: node scripts/publish-scan.mjs .
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -45,9 +48,6 @@ jobs:
 
       - name: Build
         run: pnpm build
-
-      - name: Scan dependency publication metadata
-        run: node scripts/publish-scan.mjs .
 
       - name: Create shadscan report
         run: pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast > shadscan-report.json
