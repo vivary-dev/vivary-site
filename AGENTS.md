@@ -17,12 +17,16 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 
 ## Truth rules
 
-- Verify every product claim against the product repo (origin
+- This site markets the new Vivary, the desktop application, decided by Jeff
+  on 2026-09-13. Claims about the app come from `facts.product`, whose lines
+  cite the program design and release documents in the product repo (origin
   `vivary-dev/Vivary-New`, checked out at
-  `/home/workspace/Projects/vivary-integration`) or against Jeff before writing
-  it. The release table in that repo's `README.md` is the published install
-  truth. The desktop GUI is in development and unreleased. Never describe it
-  as installable, and never describe a pending runtime as runnable.
+  `/home/workspace/Projects/vivary-integration`). Present the app plainly as
+  the product, not as a secret or a waitlist. State its status once per page
+  with `facts.product.status`. Never show a download or install for the app.
+  The engine that ships today is `facts.shipped` and `facts.engine`, and its
+  install command is the only install on the site. The site does not publish
+  until the app ships.
 - Copy in Jeff's voice: plain sentences, no em dashes, no semicolons in prose,
   no marketing adjectives, no AI tells. Run the unslop rules before commit.
 - Public-context guardrail: nothing about Jeff's location or living situation.

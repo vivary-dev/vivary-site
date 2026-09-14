@@ -1,8 +1,9 @@
 # Vivary website
 
-The marketing site for Vivary, a local desktop workspace where agents work
-from files you own. Started from scratch on 2026-09-13 to replace the Astro
-site at vivary.vercel.app.
+The marketing site for the new Vivary, the desktop application where agents
+work from files you own. It markets the app and presents the library that
+ships today as the engine underneath. Started from scratch on 2026-09-13 to
+replace the Astro site at vivary.vercel.app. It goes live with the app.
 
 ## Stack
 
@@ -36,4 +37,5 @@ branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-Scaffold only. No pages beyond the placeholder. Hosting is undecided.
+One page, the home route, locked in on 2026-09-13. Static export to `out/`
+for Cloudflare. Not published yet.

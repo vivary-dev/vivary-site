@@ -1,69 +1,401 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Big_Shoulders, Fraunces } from "next/font/google";
+import { facts } from "@/content/facts";
+import { Ledger, type Row } from "./ledger";
+import { MemoryScene, Section } from "./scenes";
+import "./home.css";
 
-export default function Home() {
+const display = Big_Shoulders({
+  subsets: ["latin"],
+  weight: "variable",
+  axes: ["opsz"],
+  variable: "--font-v9-display",
+});
+
+const voice = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  style: ["italic"],
+  axes: ["SOFT", "WONK", "opsz"],
+  variable: "--font-v9-voice",
+});
+
+export const metadata: Metadata = {
+  title: "Vivary knows you because you wrote it down",
+  description: facts.product.line,
+};
+
+function key(main: string, sub: string) {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <>
+      {main}
+      <small>{sub}</small>
+    </>
+  );
+}
+
+const receipt: Row[] = [
+  { k: "run", v: <span className="rec">04,112</span> },
+  { k: "date", v: <span className="rec">2029-09-13</span> },
+  {
+    k: "what I saw",
+    v: (
+      <>
+        4 of 1,318 files
+        <ul>
+          <li>AGENTS.md</li>
+          <li>STATE.md</li>
+          <li>memory/MEMORY.md</li>
+          <li>decisions/2027-03-18-no-orm.md</li>
+        </ul>
+      </>
+    ),
+  },
+  { k: "what I changed", v: <span className="rec">src/onboarding/flow.ts</span> },
+  {
+    k: "what I left alone",
+    v: (
+      <>
+        <span className="rec">src/db/migrations/</span>. Everything you did not ask for.
+      </>
+    ),
+  },
+  {
+    k: "what I declined",
+    v: (
+      <>
+        <span className="rec">notes/2025-archive.md</span>. It was not in the capsule, so I did not
+        read it.
+      </>
+    ),
+  },
+  { k: "kept", v: "Here, as a file. You can read the same files I read." },
+];
+
+const memory: Row[] = [
+  {
+    k: key("2027-01-06", "entry 1"),
+    v: <em className="voice">You write in the morning. I do not schedule builds then.</em>,
+  },
+  {
+    k: key("2027-03-18", "entry 40"),
+    v: (
+      <em className="voice">
+        You dislike ORMs. You said so today. I wrote it to{" "}
+        <span className="rec">decisions/2027-03-18-no-orm.md</span>.
+      </em>
+    ),
+  },
+  {
+    k: key("2027-11-04", "entry 118"),
+    v: <em className="voice">You told me not to touch the migrations. I have not.</em>,
+  },
+  {
+    k: key("2028-06-21", "entry 240"),
+    v: (
+      <em className="voice">
+        You keep field notes in a second workspace. I do not mix them.
+      </em>
+    ),
+  },
+  {
+    k: key("2029-09-13", "entry 312"),
+    v: (
+      <em className="voice">
+        You asked for the onboarding rewrite. I kept the decision of{" "}
+        <span className="rec">2027-03-18</span>. The receipt is <span className="rec">run-04112</span>.
+      </em>
+    ),
+  },
+];
+
+const promises: Row[] = [
+  { k: "No account", v: "Nothing to sign up for and no server to trust with your work." },
+  {
+    k: "Your machine, your keys",
+    v: "Local CLI models and the keys you already have, running on your computer.",
+  },
+  {
+    k: "Your folder stays yours",
+    v: "Open a folder you already have. Opening it changes nothing inside it until you say so.",
+  },
+  {
+    k: "Version control is your choice",
+    v: "None, Git, or Jujutsu. Hosting a repository is a separate, optional step.",
+  },
+];
+
+const rooms = [
+  { name: "northfield", kind: "software", on: true },
+  { name: "field-notes", kind: "second brain" },
+  { name: "the-second-novel", kind: "writing" },
+  { name: "transit-study", kind: "research" },
+  { name: "ledger", kind: "knowledge base" },
+];
+
+const files = ["AGENTS.md", "STATE.md", "memory/MEMORY.md", "decisions/", "projects/onboarding/", "receipts/"];
+
+const sessions = [
+  { when: "Session 1", said: [{ t: "You write in the morning.", add: true }] },
+  {
+    when: "Session 12",
+    said: [
+      { t: "You write in the morning." },
+      { t: "You dislike ORMs. You said so in March.", add: true },
+      { t: "Short pull requests. One concern each.", add: true },
+    ],
+  },
+  {
+    when: "Session 40",
+    said: [
+      { t: "You write in the morning." },
+      { t: "You dislike ORMs. You said so in March." },
+      { t: "Short pull requests. One concern each." },
+      { t: "Tests run before the pull request opens.", add: true },
+      { t: "Redis is gone. Sessions live in Postgres.", add: true },
+      { t: "You keep field notes in a second workspace.", add: true },
+      { t: "Migrations stay closed unless you open them.", add: true },
+    ],
+  },
+];
+
+const layers: Row[] = facts.layers.map((l) => ({ k: l.name, v: l.role }));
+
+export default function Candidate9() {
+  return (
+    <div className={`v9 ${display.variable} ${voice.variable}`}>
+      <header className="top">
+        <div className="wrap">
+          <a className="brand" href="#top">
+            Vivary
+          </a>
+          <nav aria-label="Site">
+            <a href="#memory">Memory</a>
+            <a href="#engine">Engine</a>
+            <a href={facts.links.github}>GitHub</a>
+            <a href={facts.links.docs}>Docs</a>
+          </nav>
+        </div>
+      </header>
+
+      <Section id="top" className="hero in">
+        <div className="wrap">
+          <h1 className="display display-xl">
+            <span>It knows you.</span>
+            <span>Because you wrote it down.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <div className="hero-row">
+            <div className="hero-copy">
+              <p className="deck">{facts.product.what}</p>
+              <div className="cta">
+                <a className="btn btn-solid" href={facts.links.github}>
+                  See Vivary on GitHub
+                </a>
+                <a className="btn" href="#memory">
+                  What it remembers
+                </a>
+              </div>
+            </div>
+            <MemoryScene />
+          </div>
+        </div>
+      </Section>
+
+      <div className="frame">
+        <div className="wrap">
+          <Ledger
+            label="How to read this page"
+            rows={[
+              {
+                k: "About the dates",
+                v: "The record on this page runs to 2029, three years out. That is the future Vivary is being built toward, not a claim about today. The product facts are from the present.",
+              },
+            ]}
+          />
+        </div>
+      </div>
+
+      <Section className="account">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg reveal">Every run ends with an account of itself.</h2>
+            <p className="lede reveal">
+              Before the agent works, Vivary hands it a capsule, the few files that matter for this
+              task and nothing else. After, it leaves a receipt. The receipt is a file that stays in
+              your project.
+            </p>
+            <p className="lede quiet reveal">
+              You do not have to trust the summary. You can read the same files it read.
+            </p>
+          </div>
+          <div className="body">
+            <div className="block reveal">
+              <h3 className="display display-md">receipts/run-04112.md</h3>
+              <p className="cap">One per run. This is number 4,112.</p>
+              <Ledger rows={receipt} label="Receipt" />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="memory" className="record">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg reveal">Three years in. One workspace, read back.</h2>
+            <p className="lede reveal">
+              northfield, a software workspace opened <span className="nb">2027-01-06</span>. Read on{" "}
+              <span className="nb">2029-09-13</span>, session 1,204. Five entries from a file of 312.
+            </p>
+          </div>
+          <div className="body">
+            <div className="block reveal">
+              <h3 className="display display-md">memory/MEMORY.md</h3>
+              <p className="cap">Written by the agent, kept by you. About you as much as the project.</p>
+              <Ledger rows={memory} label="Memory entries" />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="rooms">
+        <div className="wrap">
+          <div className="intro">
+            <h2 className="display display-lg reveal">
+              Every project is a room. One window opens all of them.
+            </h2>
+            <div className="reveal">
+              <p className="lede">{facts.product.what}</p>
+              <p className="lede quiet">
+                Second brains, knowledge bases, research, writing, and software, each one composed
+                from patterns you can rename or drop.
+              </p>
+            </div>
+          </div>
+          <div className="window reveal" aria-hidden="true">
+            <div className="bar">
+              <span>Vivary</span>
+              <span>2029-09-13</span>
+            </div>
+            <div className="cols">
+              <div className="col">
+                <p className="rail">Projects</p>
+                {rooms.map((r) => (
+                  <p key={r.name} className={r.on ? "room on" : "room"}>
+                    {r.name}
+                    <span>{r.kind}</span>
+                  </p>
+                ))}
+              </div>
+              <div className="col talk">
+                <p className="msg">
+                  <b>you</b>
+                  Finish the onboarding flow. Same rules as the plan.
+                </p>
+                <p className="msg them">
+                  <b>Vivary</b>
+                  Working from projects/onboarding/plan.md, the decision of 2027-03-18, and what I
+                  know about you. The migrations stay closed.
+                </p>
+                <p className="msg them">
+                  <b>Vivary</b>
+                  Done. I read four files and changed one. The receipt is receipts/run-04112.md.
+                </p>
+              </div>
+              <div className="col">
+                <p className="rail">Files</p>
+                {files.map((f) => (
+                  <p key={f} className={f === "memory/MEMORY.md" ? "f open" : "f"}>
+                    {f}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="kept">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg reveal">It keeps the promises you can check.</h2>
+            <p className="lede reveal">
+              Every promise below is one you can verify by looking at your own machine.
+            </p>
+          </div>
+          <div className="body">
+            <div className="reveal">
+              <Ledger rows={promises} plain label="Promises" />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="grow">
+        <div className="wrap">
+          <div className="intro">
+            <h2 className="display display-lg reveal">The file gets longer. That is the whole trick.</h2>
+            <p className="lede reveal">
+              Each session adds a line or two. A year later it is still a file, still yours, still
+              plain text you can read from the top. Nothing about you is held anywhere you cannot open.
+            </p>
+          </div>
+          <p className="filehead group reveal">
+            <span>memory/MEMORY.md</span>
+            <span>one file, three moments</span>
           </p>
+          <div className="moments reveal">
+            {sessions.map((s) => (
+              <div key={s.when} className="moment">
+                <h3 className="display display-md">{s.when}</h3>
+                {s.said.map((l) => (
+                  <p key={l.t} className={l.add ? "voice said add" : "voice said"}>
+                    {l.t}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </Section>
+
+      <Section id="engine" className="engine">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg reveal">{facts.engine.line}</h2>
+            <p className="lede reveal">{facts.engine.summary}</p>
+          </div>
+          <div className="body">
+            <div className="reveal">
+              <Ledger rows={layers} label="Engine layers" />
+            </div>
+            <div className="install reveal">
+              <code>{facts.shipped.install}</code>
+            </div>
+            <p className="packages reveal">
+              {facts.shipped.packages.map((p, i) => (
+                <span key={p.name}>
+                  {p.name} {p.version} on {p.registry}
+                  {i < facts.shipped.packages.length - 1 ? ", " : "."}
+                </span>
+              ))}{" "}
+              Verified {facts.shipped.verifiedOn}.
+            </p>
+            <p className="status reveal">{facts.product.status}</p>
+          </div>
         </div>
-      </main>
+      </Section>
+
+      <footer>
+        <div className="wrap">
+          <span>Vivary. It knows you because you wrote it down.</span>
+          <span>
+            <a href={facts.links.github}>GitHub</a>
+            <a href={facts.links.docs}>Docs</a>
+            <a href={facts.links.pypi}>PyPI</a>
+            <a href={facts.links.npm}>npm</a>
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }
