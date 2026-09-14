@@ -23,6 +23,10 @@ a browser executable from Zo's global cache without declaring either one. The
 helper now uses a reusable temporary virtual environment and Playwright's own
 browser resolution. Bootstrap downloads happen only when the pinned runtime or
 its Chromium revision is absent.
+The pinned [Playwright 1.52.0 wheel](https://pypi.org/project/playwright/1.52.0/)
+was published by Microsoft on 2025-04-30. Its wheel metadata declares no install
+hooks, and PyPI reports no known vulnerabilities for that release.
+
 
 **Decided:** Generic routes wait for navigation and fonts. The home route also
 waits for its footer and completed memory scene before capture.
