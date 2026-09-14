@@ -16,7 +16,9 @@ Template:
 **Did:** Fixed the four confirmed PR review findings. CI now checks pull requests
 into both long-lived branches and scans lockfile publication metadata before
 installing dependencies. The screenshot helper declares and bootstraps its pinned
-Playwright runtime and applies home-only waits only to the home route.
+Playwright runtime and applies home-only waits only to the home route. A
+follow-up review aligned both README command sequences with the CI boundary:
+the publication scan runs before installation or dependency-backed commands.
 
 **Broke / surprised me:** The original capture helper used Playwright 1.52.0 and
 a browser executable from Zo's global cache without declaring either one. The
@@ -36,7 +38,8 @@ only wheels, so it never executes an sdist build or package install hook.
 waits for its footer and completed memory scene before capture.
 
 **Verification:** Publication scan, lint, TypeScript, production build, shell
-syntax, embedded Python syntax, and diff whitespace passed. A fresh temporary
+syntax, embedded Python syntax, README publication scan, and diff whitespace
+passed. A fresh temporary
 environment bootstrapped Playwright 1.52.0. Real home and generated-404 captures
 each produced desktop, full-page, and phone images. The 404 completed without
 waiting for home-only elements.

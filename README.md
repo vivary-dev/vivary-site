@@ -17,6 +17,7 @@ through shadscan, analytics through Umami.
 ## Run it
 
 ```bash
+node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm dev
 ```
@@ -83,16 +84,17 @@ See [Umami's tracker configuration](https://docs.umami.is/docs/tracker-configura
 
 ## Checks
 
-Pull requests run frozen installation, lint, TypeScript, the static build, the
-publication scan, and the pinned shadscan CLI. The workflow retains its JSON
-report as an artifact. Dither Kit's CLI never runs in CI.
+Pull requests run the publication scan before frozen installation or any
+dependency-backed command. They then run lint, TypeScript, the static build,
+and the pinned shadscan CLI. The workflow retains its JSON report as an artifact.
+Dither Kit's CLI never runs in CI.
 
 ```bash
+node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm lint
 pnpm exec tsc --noEmit
 pnpm build
-node scripts/publish-scan.mjs .
 pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast
 ```
 
