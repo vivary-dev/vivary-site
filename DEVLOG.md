@@ -26,6 +26,10 @@ capture used fixed window heights and could capture streaming content before it
 settled. The existing scripts now check `/`, wait for fonts and the settled
 scene, and capture real desktop and phone viewports plus the actual full page.
 No new screenshot framework or package was added.
+The first PR CI run exposed a clean-checkout type error: Next's generated
+`LayoutProps` existed after local development but not before CI's build. The root
+layout now types its only input, `children`, with ReactNode directly. No build
+step or generated-type dependency was added to make typechecking pass.
 
 **Visual critique:**
 1. The baseline deck was centered well below the memory scene's top. Aligned the

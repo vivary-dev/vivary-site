@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 import { Umami } from "@/components/umami";
 import { facts } from "@/content/facts";
 import "./globals.css";
@@ -19,7 +20,11 @@ export const metadata: Metadata = {
   description: facts.product.line,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   return (
     <html
       lang="en"
