@@ -14,9 +14,10 @@ export const facts = {
   // The new product line, from the 2026-09-05 direction in design.md. Draft wording.
   productLine: "Local desktop workspaces where agents work from files you own.",
 
-  // What a stranger can install today. README release table, verified 2026-08-15.
+  // Install-verified baseline from product docs/ORIGINAL-CLI.md, 2026-08-15.
+  // Newer registry availability is listed there separately from runtime evidence.
   shipped: {
-    install: "uvx create-vivary init my-workspace --preset coding --no-wizard",
+    install: "uvx --from create-vivary==0.4.2 create-vivary init my-workspace --preset coding --no-wizard",
     installNpm: "npx @vivary/create@0.4.2 init my-workspace --preset coding --no-wizard",
     packages: [
       { name: "create-vivary", version: "0.4.2", registry: "PyPI" },
@@ -95,7 +96,7 @@ export const facts = {
     ],
     // What is real about the app today, stated once and plainly.
     status:
-      "Vivary desktop is being built in the open in the Vivary-New repository. This site goes live with the app. The engine it runs on ships today.",
+      "Vivary desktop is being built in the Vivary-New repository. This site goes live with the app. The engine it runs on ships today.",
   },
 
   // The engine underneath the app: the Vivary library, shipped today as CLI packages.

@@ -88,7 +88,7 @@ see their output produce brochures.
 | icons0 | Icons | Registry: `@icons0=https://icons0.dev/r/{name}.json`. Add with `pnpm dlx shadcn@4.21.0 add @icons0/<collection>/<name>`. Keep one collection per surface, review each SVG, and retain its license. |
 | shadscan 0.17.0 | Deterministic UI audit | `pnpm dlx @shadscan/cli@0.17.0` before any PR. Fix findings or record in the devlog why not. |
 | shieldcn | README badges | Optional. Static SVG badges in `README.md` only. |
-| Umami | Analytics | One script tag with the website id from an environment variable, disabled in development. The instance is undecided. Zo has no Docker or Postgres and Cloudflare has no Postgres, so Umami Cloud is the likely instance. No cookies and no second analytics tool. |
+| Umami | Analytics | One script tag only when both NEXT_PUBLIC_UMAMI_WEBSITE_ID and NEXT_PUBLIC_UMAMI_SCRIPT_URL are set in production. Development never loads it. Jeff has not selected an instance. No cookies and no second analytics tool. |
 
 The icons0 namespace and install pattern were confirmed on 2026-09-14 in its
 [first-party playbook](https://github.com/marcoripa96/i0/blob/f2d30130484fa2321bccca2de2e14f63f3dcdbfe/src/prompts/icon-integration-playbook.ts#L14-L16)
@@ -109,10 +109,10 @@ The two Lucide SVGs in `src/components/icons/lucide/` retain the upstream licens
 ## Commands
 
 ```bash
+node scripts/publish-scan.mjs .
 pnpm dev
 pnpm build
 pnpm lint
-node scripts/publish-scan.mjs .
 pnpm dlx @shadscan/cli@0.17.0
 ```
 

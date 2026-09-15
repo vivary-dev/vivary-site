@@ -12,7 +12,7 @@ replace the Astro site at vivary.vercel.app. It goes live with the app.
 
 Next.js 16 (App Router, TypeScript), Tailwind CSS 4, shadcn/ui 4 on Base UI,
 pnpm 10, Node 24. Imagery through Dither Kit, icons through icons0, UI audits
-through shadscan, analytics through Umami.
+through shadscan, and optional Umami analytics gated by production configuration.
 
 ## Run it
 
