@@ -12,6 +12,38 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-15  docs/day-end-state
+
+**Did:** Reconciled foundations status with merged PR #4 at 5ddff98. Updated the
+plan, optional analytics wording, and scan-first command order. Removed the
+incorrect claim that private Vivary-New development is public. Pinned the engine
+install example to its dated verified creator version.
+
+**Broke / surprised me:** Current install instructions mixed the August 15
+verification baseline with an unpinned command. September 15 registry metadata
+reports PyPI create-vivary 0.4.3, while the documented baseline is 0.4.2.
+The pin preserves that boundary. It does not claim a new installation proof.
+The longer command exposed horizontal clipping on desktop. It now wraps using
+the same rule as the phone layout, without changing the locked page structure.
+
+**Decided:** Foundations are merged. Cloudflare, Umami, DNS, and publication
+remain unperformed. Candidate 9 remains locked. Current app status comes from
+the product repository. Native conversation persistence and Windows GUI
+acceptance remain open.
+
+**Verification:** The publication scan checked 674 resolved packages with none
+flagged before dependency-backed commands. The previous dev CI run
+34862012409 passed for the foundations merge. This branch passed frozen install, lint, TypeScript, static build, and shadscan.
+Shadscan remains 46/100 with the existing recorded static-site decisions.
+Three visual passes checked desktop composition, the real 390px layout, and
+the complete pinned command/status block at both widths. No page overflow or
+analytics script appeared in the unconfigured preview. Candidate 9 was not redesigned.
+
+**Next:** Follow the product's remaining acceptance before any website
+publication. Read the live PR state before taking on site work.
+
+---
+
 ## 2026-09-14  feat/site-foundations review fixes
 **Did:** Fixed the four confirmed PR review findings. CI now checks pull requests
 into both long-lived branches and scans lockfile publication metadata before
