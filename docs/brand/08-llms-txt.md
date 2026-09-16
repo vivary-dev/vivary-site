@@ -1,0 +1,98 @@
+# The product description for search engines and agents
+
+This is the text served at `/llms.txt` on the site, kept here as Markdown so
+it can be read on GitHub and reused in READMEs, the org profile, and directory
+listings. It is the concise, current statement of what Vivary is and how it
+works, written to be quoted by answer engines. Update `public/llms.txt` first
+and copy it here. Facts come from the product guide in Vivary-New and from
+`src/content/facts.ts`.
+
+---
+
+# Vivary
+
+> Vivary is a desktop application for working with AI agents on your own projects. It brings agent chat, project files, tools, and memory into one window on your computer. It runs the coding agents you already use, such as Claude Code and Codex, with your own keys. No Vivary account. No cloud control plane. Your files, history, and memory stay on your machine.
+
+Status: in development. Windows first. Not released. There is no public download.
+Maker: Jeff Kazzee, The Little AI Company. License for the published packages: MIT.
+Last updated: 2026-09-16.
+
+## What Vivary is
+
+Vivary is one workspace over every project you work on with an agent: software, research, writing, second brains, knowledge bases. You select a project, then continue one of its conversations or start another. Each conversation has its own history and its own bounded model context. Files, plans, and previews open beside the conversation when you ask for them. Plans, memory, decisions, and results are plain files you can open with any editor and keep forever.
+
+The name comes from vivarium, an old word for a small self-contained world where living things are kept in stacked layers. Your project lives inside a small, well-formed world with a substrate, an atmosphere of rules and review, and gates at the edges.
+
+## How it works
+
+1. Choose a project. Open a new folder or one you already have. Opening a folder changes nothing inside it until you say so.
+2. Return to a conversation or start another. A project holds several independent chats. One shows in the center at a time.
+3. Choose a harness and model. New conversations select Claude Code or Codex. Vivary shows what the installed tool actually offers and adds no second tool picker.
+4. Approve or decline work. Send starts immediately. When the selected permission mode requires a decision, you approve or deny the exact request. Stop is always reachable.
+5. Open a file when you need it. Read it beside the conversation. Choose Edit to change it. Viewing a file does not send it to a model.
+6. Leave a continuation record. Ask the agent to update the handoff: goal, state, decisions, evidence, next step.
+
+Before an agent works, Vivary hands it a bounded capsule of the files that matter for the task. After, it leaves a receipt: what it saw, what it changed, what it left alone. What Vivary learns about you and your projects is saved as files you can read, edit, and delete. A transcript is not automatically memory.
+
+## What it promises
+
+- Every project in one place.
+- Files first. Everything durable is a plain file.
+- Runs the agents you already pay for, through adapters. Vivary never requires its own model API key and never resells tokens.
+- No account. The desktop app opens without login. Remote browser access to your own instance is explicit and authenticated.
+- Version control is your choice: none, Git, or Jujutsu. Hosting a repository is a separate, optional step.
+- Bounded context and a receipt for every run.
+- Plan, run, review: editable plans, tasks with dependencies, reviewed execution, evidence you can open.
+
+## Who it is for
+
+Professionals doing coding, research, writing, and second-brain work. You need to be able to install software and message an agent. You do not need to program. Vivary is a tool for doing real work, not a course.
+
+## What it is not
+
+Not a platform you adopt. Not tied to one editor, one AI tool, or one model. Not an AI agent or a model itself. Not a marketplace. No telemetry from the workspace.
+
+## The workspace commands
+
+Inside the app, Vivary sets up and operates workspaces with a small set of commands: vivary, create-vivary, tropo, strato, ozone, exo. A new workspace starts as five small files: AGENTS.md, STATE.md, .gitignore, .vivary/context.md, .vivary/workspace.toml. Adopting an existing project starts with a dry run and writes nothing without approval against an exact hash. The same commands are published on PyPI and npm and work from a terminal without the app. They are a part of Vivary, not a separate product.
+
+- create-vivary on PyPI: https://pypi.org/project/create-vivary/
+- @vivary/create on npm: https://www.npmjs.com/package/@vivary/create
+- Source: https://github.com/vivary-dev/vivary
+
+## Vocabulary
+
+- Workspace: a bounded collection of files, instructions, knowledge, and operating context an agent can use.
+- Project: a named unit of work with a stable identity and a selected folder.
+- Harness: the agent tool that owns its reasoning loop, such as Claude Code or Codex. A model is a choice within a harness.
+- Host: the computer or server you control that runs Vivary and owns its files and state.
+- Capsule: the bounded set of files handed to the agent for one task.
+- Receipt: the record of what a run saw, changed, and left alone.
+- Gate: a stopping point where a human approves something before it happens.
+- Handoff: a reviewed continuation record for the next conversation.
+- Brain: an optional knowledge workspace of sourced knowledge and evidence.
+
+## Questions people ask
+
+Is Vivary an AI model or an agent? No. Vivary is the workspace around the agents you already use.
+
+Does it need an account? No. The desktop app opens without one.
+
+Does my data leave my computer? Vivary itself sends nothing. The harness you select sends model context to its provider according to your own account and settings.
+
+Does it work with Claude Code? Yes. Claude Code and Codex are the first supported harnesses, through adapters.
+
+Does it require Git? No. A project can use no version control, Git, or Jujutsu.
+
+Is it only for developers? No. It serves coding, research, writing, and second-brain work.
+
+Can I download it? Not yet. Vivary is in development and not released. This site goes live with the app.
+
+Is it open source? The workspace commands are published under MIT. The desktop application is in private development.
+
+## Links
+
+- Site: this domain
+- Organization: https://github.com/vivary-dev
+- Workspace commands: https://github.com/vivary-dev/vivary
+- Company: The Little AI Company

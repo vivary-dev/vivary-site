@@ -74,6 +74,10 @@ https://github.com/vivary-dev/Vivary-New/blob/dev/packages/workbench/DESIGN.md
 
 ## The brand working set
 
+The one-page product description written for search engines and agents.
+Read this first if you read nothing else:
+https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/08-llms-txt.md
+
 A condensed account of the product for this work, with vocabulary, accepted
 decisions, status, and every tagline in play:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/01-what-vivary-is.md

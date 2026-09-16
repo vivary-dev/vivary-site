@@ -15,6 +15,7 @@ decision from Jeff.
 | `05-zo-asset-brief.md` | The brief for generating the new brand assets with Zo: decisions first, then one spec per asset. |
 | `06-claude-design-prompt.md` | The prompt to paste into Claude Design, with GitHub links to the files above and the public references. |
 | `07-site-design-and-motion.md` | The locked home page in full: how it was chosen, palette, type, layout, every section, and every animation with its timings. |
+| `08-llms-txt.md` | The concise product description served at `/llms.txt` for search engines and agents. Current, sourced, quotable. |
 
 ## Rules these files follow
 
