@@ -14,6 +14,7 @@ decision from Jeff.
 | `04-url-map.md` | The 33 live URLs on vivary.vercel.app and what should happen to each when this site replaces it. |
 | `05-zo-asset-brief.md` | The brief for generating the new brand assets with Zo: decisions first, then one spec per asset. |
 | `06-claude-design-prompt.md` | The prompt to paste into Claude Design, with GitHub links to the files above and the public references. |
+| `07-site-design-and-motion.md` | The locked home page in full: how it was chosen, palette, type, layout, every section, and every animation with its timings. |
 
 ## Rules these files follow
 

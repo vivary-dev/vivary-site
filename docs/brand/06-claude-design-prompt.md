@@ -51,12 +51,22 @@ https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/05-zo
 Inventory of everything that exists today, with keep or retire verdicts:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/03-asset-inventory.md
 
-The locked home page this brand must sit on. Its palette and type are the
-reference: warm black `#080705`, off-white `#ebe5d8`, amber `#e9a23b` reserved
-for what the workspace recorded, Big Shoulders for headlines, Fraunces italic
-where a file speaks, Geist Mono for the record:
+The locked home page this brand must sit on, written out in full: how it
+was chosen from nine candidates, the palette, the three typefaces and their
+jobs, the layout grid, every section, and every animation with its exact
+timings and easing. Read this before looking at the code:
+https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/07-site-design-and-motion.md
+
+The code that document describes. Palette and type reference: warm black
+`#080705`, off-white `#ebe5d8`, amber `#e9a23b` reserved for what the
+workspace recorded, Big Shoulders for headlines, Fraunces italic where a file
+speaks, Geist Mono for the record:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/app/home.css
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/app/page.tsx
+https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/app/scenes.tsx
+
+The nine candidate pages the home page was chosen from, as code:
+https://github.com/vivary-dev/vivary-site/tree/feat/landing-candidates/src/app/candidates
 
 The only source of product claims, with citations:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/content/facts.ts
