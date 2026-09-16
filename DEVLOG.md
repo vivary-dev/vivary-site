@@ -21,8 +21,10 @@ vocabulary, repository map with cleanup steps, asset inventory with verdicts,
 URL map for the vivary.vercel.app handover, the Zo asset brief, and the prompt
 for Claude Design. No source, dependency, or page changed.
 
-**Broke / surprised me:** Two products share the name. The engine repo says
-"Deprecated: None" and never mentions the app. Three visual systems coexist
+**Broke / surprised me:** Nothing public says Vivary is a desktop app in
+development. The first draft of these docs split Vivary into an old and a new
+product. Jeff corrected that: one product, the workspace commands are a part
+of it. The docs were rewritten from the product guide. Three visual systems coexist
 and no tagline, palette, or vector logo is designated. No application icon
 exists for `Vivary.exe`. The Zo connectors and the preview browser were both
 unavailable in the session, so assets were briefed, not generated, and the

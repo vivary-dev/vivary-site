@@ -8,7 +8,7 @@ decision from Jeff.
 
 | File | What it answers |
 | --- | --- |
-| `01-what-vivary-is.md` | What the new product is, in the repos' own words. Vocabulary, audience, status, and what ships today. |
+| `01-what-vivary-is.md` | What Vivary is, from the product guide and specification. Six steps, sixteen parts, vocabulary, decisions, status, and where the documentation lives. |
 | `02-repo-map.md` | Every repository that carries the name, its role, and the cleanup that would end the confusion. |
 | `03-asset-inventory.md` | Every logo, image, palette, and typeface that exists today, with a keep or retire verdict. |
 | `04-url-map.md` | The 33 live URLs on vivary.vercel.app and what should happen to each when this site replaces it. |

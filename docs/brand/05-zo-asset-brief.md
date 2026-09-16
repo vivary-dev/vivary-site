@@ -97,8 +97,8 @@ is made.
 
 - Deliverable: 1280x640 SVG or PNG replacing
   `vivary-dev/.github/profile/assets/vivary-hero.svg`.
-- Constraints: same composition as the social image, plus one line naming the
-  two surfaces: the desktop app in development and the engine that ships. No
+- Constraints: same composition as the social image, plus one line saying the
+  desktop app is in development. No
   package chips, they go stale.
 
 ### 6. README header

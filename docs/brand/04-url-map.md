@@ -19,12 +19,12 @@ decide against.
 | `/blog/harnesses-explained/` | 2026-06-15 | Keep. The word "harness" is core vocabulary. |
 | `/blog/run-vivary-with-local-models/` | 2026-06-17 | Keep. Check commands against 0.4.x. |
 
-## Engine documentation, 25 pages generated from `docs/` in `vivary-dev/vivary`
+## Command documentation, 25 pages generated from `docs/` in `vivary-dev/vivary`
 
-These document the original CLI. The new site should not rebuild them. Two
-sane options: keep serving them from an `/engine/` or `/docs/` prefix with
-redirects from the old paths, or leave them on a docs subdomain built from the
-engine repo and redirect the old root paths there.
+These document the workspace commands from the terminal. The new site should not rebuild them. Two
+sane options: keep serving them from a `/docs/` prefix with redirects from the
+old paths, or leave them on a docs subdomain built from the package repo and
+redirect the old root paths there.
 
 | Live path | Page |
 | --- | --- |
@@ -58,7 +58,7 @@ engine repo and redirect the old root paths there.
 
 | Live path | Handling |
 | --- | --- |
-| `/llms.txt`, `/llms-full.txt` | Regenerate for the new product. The current ones describe the CLI only. |
+| `/llms.txt`, `/llms-full.txt` | Regenerate from the product guide. The current ones describe the commands only. |
 | `/robots.txt`, `/sitemap-index.xml`, `/sitemap-0.xml` | Regenerate. |
 | `/favicon.png`, `/media/vivary-mark.png` | Replace with the new mark. |
 | `/media/hero-living-strata.webp` | Was the OG image. Redirect to the new social image or let it 404 after a grace period. |
@@ -67,7 +67,7 @@ engine repo and redirect the old root paths there.
 
 ## Already dead on the live site
 
-`/brand/`, `/faq/`, `/product-roadmap/` were retired on the engine site. Leave
+`/brand/`, `/faq/`, `/product-roadmap/` were retired on the current site. Leave
 them dead. FAQ lives at `/#faq` on the live site. If the new home page has a
 FAQ, keep that anchor.
 
@@ -75,5 +75,5 @@ FAQ, keep that anchor.
 
 - The production domain. Nothing names it. `support@vivary.dev` is the only
   hint.
-- Whether engine docs live on this site or stay with the engine repo.
+- Whether command docs live on this site or stay with the package repo.
 - Whether the blog moves.

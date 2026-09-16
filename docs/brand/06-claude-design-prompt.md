@@ -1,35 +1,37 @@
 # Prompt for Claude Design
 
-Paste everything below the line into Claude Design. The links point at the
-`docs/brand-brief` branch of `vivary-dev/vivary-site` and at public files in
-`vivary-dev/vivary`. Links into private repositories only open for a signed in
-member of `vivary-dev`. If the design agent cannot fetch a private link, paste
-that file's contents into the conversation instead. The two that matter most
-are `01-what-vivary-is.md` and `05-zo-asset-brief.md`.
+Paste everything below the line into Claude Design. Links into
+`vivary-dev/vivary-site` and `vivary-dev/Vivary-New` are private and open only
+for a signed-in member of `vivary-dev`. If the design agent cannot fetch a
+link, paste that file's contents. The two that matter most are
+`01-what-vivary-is.md` and `05-zo-asset-brief.md`. The product guide is one
+HTML file that GitHub will not render in the browser. Download it and open it
+locally, or attach it to the conversation.
 
 ---
 
-You are designing the brand identity for Vivary, a desktop application that is
-about to replace an earlier command line product of the same name. Read the
-linked documents before proposing anything. They are the source of truth. Do
-not invent product features, and do not use anything from the old product's
-visual identity unless a document says to keep it.
+You are designing the brand identity for Vivary, a desktop application in
+development. Read the linked documents before proposing anything. They are the
+source of truth. Do not invent product features.
 
 ## What Vivary is
 
-Vivary is a desktop workspace where your agents work from files you own. One
-window holds every project: code, research, writing, second brains, knowledge
-bases. It runs the coding agents the user already pays for, such as Claude
-Code and Codex, on the user's own machine with the user's own keys. There is no
-Vivary account and no cloud control plane. Plans, memory, decisions, and
-results are plain files the user can open with any editor. Before the agent
-works, Vivary hands it a bounded capsule of the files that matter. After, it
-leaves a receipt: what it saw, what it changed, what it left alone. The
-product's claim is: it knows you because you wrote it down.
+A workspace for working with agents on your own projects. Vivary brings agent
+chat, project files, tools, and memory into one desktop app. One window holds
+every project: code, research, writing, second brains, knowledge bases. Select
+a project, then continue one of its conversations or start another. Each
+conversation has its own history and its own bounded context. It runs the
+coding agents the user already pays for, such as Claude Code and Codex, on the
+user's own machine with the user's own keys. There is no Vivary account and no
+cloud control plane. Plans, memory, decisions, and results are plain files the
+user can open with any editor. Before the agent works, Vivary hands it a
+bounded capsule of the files that matter. After, it leaves a receipt: what it
+saw, what it changed, what it left alone. The product's claim is: it knows you
+because you wrote it down.
 
 The name comes from vivarium, an old word for a small self-contained world
-where living things are kept in stacked layers. The engine underneath has four
-layers named for the sky: tropo, strato, ozone, exo.
+where living things are kept in stacked layers. The workspace commands inside
+the app are named for layers of the sky: tropo, strato, ozone, exo.
 
 Audience: professionals doing coding, research, writing, and second-brain
 work. Assume they can install software and message an agent, not that they
@@ -39,22 +41,55 @@ direct and respectful. No marketing adjectives, no "AI magic."
 Status: in development, Windows first, not released. Nothing you make may
 imply a download, a release date, or a price.
 
-## Read these first
+## The product documentation
 
-Product definition, vocabulary, audience, status, and every tagline in play:
+The guide. One offline HTML file with a six-step walkthrough, the map of the
+sixteen parts, every user action, and the accepted decisions. This is the
+document that says what Vivary is:
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/specification/guide.html
+
+The plain-language source the guide renders, as JSON:
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/specification/guide-content.json
+
+The specification overview, the system diagrams, and the sixteen parts:
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/specification/README.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/specification/system.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/specification/modules.md
+
+The workspace interface contract and the shared vocabulary:
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/unified-workspace.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/CONTEXT.md
+
+Product direction, what exists and what is missing, and the acceptance
+register:
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/design.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/desktop-release.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/docs/product/multi-project/desktop-acceptance-status.md
+
+The README and the app's interior design rules. The app runs green-black
+`#0C100E` with a lime `#B8F263` primary and Inter, and the mark must work
+there:
+https://github.com/vivary-dev/Vivary-New/blob/dev/README.md
+https://github.com/vivary-dev/Vivary-New/blob/dev/packages/workbench/DESIGN.md
+
+## The brand working set
+
+A condensed account of the product for this work, with vocabulary, accepted
+decisions, status, and every tagline in play:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/01-what-vivary-is.md
 
-The asset brief with the four open decisions, the idea the mark must carry,
-and one spec per deliverable:
+The asset brief: the four open decisions, the idea the mark must carry, and
+one spec per deliverable:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/05-zo-asset-brief.md
 
-Inventory of everything that exists today, with keep or retire verdicts:
+Inventory of the visual assets that exist today, with keep or retire
+verdicts:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/03-asset-inventory.md
 
-The locked home page this brand must sit on, written out in full: how it
-was chosen from nine candidates, the palette, the three typefaces and their
-jobs, the layout grid, every section, and every animation with its exact
-timings and easing. Read this before looking at the code:
+The locked home page this brand must sit on, written out in full: how it was
+chosen from nine candidates, the palette, the three typefaces and their jobs,
+the layout grid, every section, and every animation with its exact timings
+and easing. Read this before looking at the code:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/07-site-design-and-motion.md
 
 The code that document describes. Palette and type reference: warm black
@@ -68,40 +103,23 @@ https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/app/scenes.t
 The nine candidate pages the home page was chosen from, as code:
 https://github.com/vivary-dev/vivary-site/tree/feat/landing-candidates/src/app/candidates
 
-The only source of product claims, with citations:
+The only source of product claims on the site, with citations:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/src/content/facts.ts
 
 The rules for the site, including the design bar and the voice:
 https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/AGENTS.md
 
-## Context on the old product and the app interior
+## Existing marks
 
-The public engine repository and its plain-language concepts page. This is
-the product being retired as the product and kept as the engine:
-https://github.com/vivary-dev/vivary
-https://github.com/vivary-dev/vivary/blob/dev/docs/CONCEPTS.md
-https://github.com/vivary-dev/vivary/blob/dev/docs/ARCHITECTURE.md
-
-The live site of the old product. Its identity, mint on navy with
-Bricolage Grotesque, is being replaced. Look at it to know what not to repeat:
-https://vivary.vercel.app/
-
-The only logo that exists, a 256 pixel PNG. A mint dome in cross-section with
-four wavy strata bands and a small door. It is the one mark that comes from
-the name. Decide whether to redraw it as a vector or replace it:
+One mark exists, a 256 pixel PNG: a mint dome in cross-section with four wavy
+strata bands and a small door. It is the one mark that comes from the name.
+Decide whether to redraw it as a vector or replace it:
 https://github.com/vivary-dev/vivary/blob/dev/site/public/media/vivary-mark.png
 
-The old hero image, to understand the layers-and-gate metaphor. Not for reuse:
-https://github.com/vivary-dev/vivary/blob/dev/site/public/media/hero-living-strata.webp
-
-The current GitHub organization hero, which is stale and will be replaced:
+The site currently at vivary.vercel.app is being replaced, along with its
+mint-on-navy identity and its Bricolage Grotesque type. Do not draw from it.
+The current GitHub organization hero is also being replaced:
 https://github.com/vivary-dev/.github/blob/main/profile/assets/vivary-hero.svg
-
-The app's own interior design rules. Private. The app runs green-black
-`#0C100E` with a lime `#B8F263` primary and Inter, and the mark must work
-there too:
-https://github.com/vivary-dev/Vivary-New/blob/dev/packages/workbench/DESIGN.md
-https://github.com/vivary-dev/Vivary-New/blob/dev/README.md
 
 ## What to deliver
 

@@ -7,7 +7,7 @@ of 2026-09-16, with a verdict. Paths are relative to each repo root.
 
 | System | Where | Ground | Text | Accent | Type |
 | --- | --- | --- | --- | --- | --- |
-| Living strata (engine site) | `vivary-dev/vivary` `site/` | `#020916` navy | `#f1f7f3` | mint `#49e1b1`, blue `#52b6d8` | Bricolage Grotesque, Hanken Grotesk, JetBrains Mono |
+| Living strata (current site, being replaced) | `vivary-dev/vivary` `site/` | `#020916` navy | `#f1f7f3` | mint `#49e1b1`, blue `#52b6d8` | Bricolage Grotesque, Hanken Grotesk, JetBrains Mono |
 | Workbench (the app) | Vivary-New `packages/workbench/DESIGN.md` | `#0C100E` and `#121715` green-black | `#EDF4EF` | lime `#B8F263` | Inter Variable |
 | Candidate 9 (this site, locked 2026-09-13) | `src/app/home.css` | `#080705` warm black, pane `#0e0c09` | `#ebe5d8` off-white | amber `#e9a23b`, reserved for what the workspace recorded | Big Shoulders, Fraunces italic, Geist Mono |
 
@@ -35,11 +35,11 @@ the one users will look at most, so the logo has to work on both.
 
 | File | What it shows | Verdict |
 | --- | --- | --- |
-| `site/public/media/hero-living-strata.webp` (1672x941) | Cross-section of glowing earth in wavy layers, ferns on top, root filaments descending to a lit arched gate with a keyhole. The OG image of the live site. | Engine-era style. Strongest existing metaphor image. Keep for reference. Not for the new site. |
-| `site/public/media/architecture-layers.webp` (1254x1254) | Four translucent plates stacked in exploded isometric, one light through all four. The four layers. | Engine diagram. Could survive on an engine page. |
-| `docs/assets/walkthrough/01-04*.svg` | Hand-built fake terminal windows showing CLI output. | Engine docs only. |
+| `site/public/media/hero-living-strata.webp` (1672x941) | Cross-section of glowing earth in wavy layers, ferns on top, root filaments descending to a lit arched gate with a keyhole. The OG image of the live site. | Strongest existing metaphor image. Keep for reference. Not for the new site. |
+| `site/public/media/architecture-layers.webp` (1254x1254) | Four translucent plates stacked in exploded isometric, one light through all four. The four layers. | A diagram of the four workspace commands. Could survive on a page about them. |
+| `docs/assets/walkthrough/01-04*.svg` | Hand-built fake terminal windows showing CLI output. | Command docs only. |
 | `docs/proof/homepage-desktop.webp`, `homepage-mobile.webp` | Screenshots of a homepage that no longer exists ("A working memory your agents can inspect.", version 0.1.1). | Stale. Do not reuse. |
-| `docs/proof/graph-blast.webp` | Mint node graph, "4 things depend on it. See it before you touch it." | Best blast-radius visual. Engine-era. |
+| `docs/proof/graph-blast.webp` | Mint node graph, "4 things depend on it. See it before you touch it." | Best blast-radius visual. Current site style. |
 | `public/og-image.png` (1200x630), `src/assets/hero-source.png` | June landing page: cream paper, terminal, file cards, copper gate, green graph. | Archived. Ignore. |
 | `stats/usage-snapshot.svg` | Generated stats card, last data 2026-07-06, shows 3 stars. | Stale. Remove from public pages or refresh. |
 | `Vivary-product-guide.html` (release asset, 2.6 MB) | Self-contained interactive design guide of the accepted app experience. No screenshots inside. Uses `Consolas` and a blue-gray palette of its own. | Internal. Useful to read, not a brand asset. |
@@ -52,7 +52,7 @@ the one users will look at most, so the logo has to work on both.
 - Any screenshot of the new app. The preview ZIP is Windows-only and was not
   run here.
 - A social preview image for the new product.
-- A brand guide. A `/brand/` docs route once existed on the engine site and was
+- A brand guide. A `/brand/` docs route once existed on the current site and was
   retired. No `BRAND.md` survives in any repo.
 - Harness marks. The model picker design calls for "small brand marks" for
   Claude Code, Codex, and OpenCode. Those are third-party logos with their own
