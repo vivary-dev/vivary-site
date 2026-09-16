@@ -1,30 +1,37 @@
 import type { Metadata } from "next";
-import { Big_Shoulders, Fraunces } from "next/font/google";
 import { facts } from "@/content/facts";
 import { Ledger, type Row } from "./ledger";
 import { MemoryScene, Section } from "./scenes";
+import { JsonLd, Shell } from "./shell";
 import { LucideFolderOpen } from "@/components/icons/lucide/folder-open";
 import { LucideFileText } from "@/components/icons/lucide/file-text";
-import "./home.css";
-
-const display = Big_Shoulders({
-  subsets: ["latin"],
-  weight: "variable",
-  axes: ["opsz"],
-  variable: "--font-v9-display",
-});
-
-const voice = Fraunces({
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  variable: "--font-v9-voice",
-});
 
 export const metadata: Metadata = {
-  title: "Vivary knows you because you wrote it down",
+  title: { absolute: "Vivary knows you because you wrote it down" },
   description: facts.product.line,
+  alternates: { canonical: "/" },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "Vivary",
+      description: facts.product.line,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Windows",
+      author: { "@type": "Organization", name: "The Little AI Company" },
+      creator: { "@type": "Person", name: "Jeff Kazzee" },
+      url: "/",
+    },
+    {
+      "@type": "Organization",
+      name: "Vivary",
+      url: "/",
+      sameAs: [facts.links.org, facts.links.github],
+    },
+  ],
 };
 
 function key(main: string, sub: string) {
@@ -173,23 +180,10 @@ function IntroObject({ kind }: { kind: "folder" | "file" }) {
   );
 }
 
-export default function Candidate9() {
+export default function Home() {
   return (
-    <div className={`v9 ${display.variable} ${voice.variable}`}>
-      <header className="top">
-        <div className="wrap">
-          <a className="brand" href="#top">
-            Vivary
-          </a>
-          <nav aria-label="Site">
-            <a href="#memory">Memory</a>
-            <a href="#engine">Engine</a>
-            <a href={facts.links.github}>GitHub</a>
-            <a href={facts.links.docs}>Docs</a>
-          </nav>
-        </div>
-      </header>
-
+    <Shell current="home">
+      <JsonLd data={jsonLd} />
       <Section id="top" className="hero in">
         <div className="wrap">
           <h1 className="display display-xl">
@@ -376,15 +370,15 @@ export default function Candidate9() {
         </div>
       </Section>
 
-      <Section id="engine" className="engine">
+      <Section id="commands" className="engine">
         <div className="wrap two">
           <div className="lead">
-            <h2 className="display display-lg reveal">{facts.engine.line}</h2>
-            <p className="lede reveal">{facts.engine.summary}</p>
+            <h2 className="display display-lg reveal">{facts.commands.line}</h2>
+            <p className="lede reveal">{facts.commands.summary}</p>
           </div>
           <div className="body">
             <div className="reveal">
-              <Ledger rows={layers} label="Engine layers" />
+              <Ledger rows={layers} label="The commands" />
             </div>
             <div className="install reveal">
               <code>{facts.shipped.install}</code>
@@ -403,17 +397,6 @@ export default function Candidate9() {
         </div>
       </Section>
 
-      <footer>
-        <div className="wrap">
-          <span>Vivary. It knows you because you wrote it down.</span>
-          <span>
-            <a href={facts.links.github}>GitHub</a>
-            <a href={facts.links.docs}>Docs</a>
-            <a href={facts.links.pypi}>PyPI</a>
-            <a href={facts.links.npm}>npm</a>
-          </span>
-        </div>
-      </footer>
-    </div>
+    </Shell>
   );
 }

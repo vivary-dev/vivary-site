@@ -1,6 +1,6 @@
 // The only source of product claims for every page. The `product` block
-// describes the new Vivary desktop app from the program design documents.
-// The `shipped` and `engine` blocks describe the library that ships today.
+// describes the Vivary desktop app from the program design documents.
+// The `shipped` and `commands` blocks describe the commands that ship today.
 // Verified 2026-09-13 against vivary-dev/Vivary-New. Do not add a claim
 // here without a source line.
 
@@ -11,7 +11,7 @@ export const facts = {
   firstScreen:
     "Chat fades, files persist. Vivary is the part that decides which of those files your agent gets to see, and shows you what it saw.",
 
-  // The new product line, from the 2026-09-05 direction in design.md. Draft wording.
+  // The product line, from the 2026-09-05 direction in design.md. Draft wording.
   productLine: "Local desktop workspaces where agents work from files you own.",
 
   // Install-verified baseline from product docs/ORIGINAL-CLI.md, 2026-08-15.
@@ -55,10 +55,9 @@ export const facts = {
       "A desktop app that holds every project in one place, remembers you from your files, and runs the agents you already use. Not released.",
   },
 
-  // The new Vivary: the desktop application. This site markets the app.
+  // Vivary, the desktop application. This site markets the app.
   // Each line cites the program document that owns the decision, read
   // 2026-09-13 in docs/product/multi-project of vivary-dev/Vivary-New.
-  // The engine below is what runs underneath and what ships today.
   product: {
     name: "Vivary",
     // Jeff's phrase for the site, 2026-09-13.
@@ -96,19 +95,24 @@ export const facts = {
     ],
     // What is real about the app today, stated once and plainly.
     status:
-      "Vivary desktop is being built in the Vivary-New repository. This site goes live with the app. The engine it runs on ships today.",
+      "Vivary is in development, Windows first, and not released. This site goes live with the app. The workspace commands inside it ship today.",
   },
 
-  // The engine underneath the app: the Vivary library, shipped today as CLI packages.
-  engine: {
-    line: "The same engine, standalone, ships today.",
+  // The workspace commands inside Vivary. Bundled in the app and published
+  // today as packages, so a terminal can use them without the app.
+  // Decided 2026-09-16: one product. Never describe these as a separate or
+  // earlier Vivary.
+  commands: {
+    line: "The workspace commands ship today.",
     summary:
-      "Vivary desktop runs on the Vivary library: a typed knowledge graph, one visible state surface, review with human gates, and coordination for many agents. You can use it from the command line right now.",
+      "Inside the app, Vivary sets up and operates workspaces with a small set of commands: a typed knowledge graph, one visible state surface, review with human gates, and coordination for many agents. The same commands are published as packages, so you can use them from a terminal right now.",
+    names: ["vivary", "create-vivary", "tropo", "strato", "ozone", "exo"],
   },
 
   links: {
     github: "https://github.com/vivary-dev/vivary",
-    docs: "https://vivary.vercel.app/",
+    org: "https://github.com/vivary-dev",
+    commandReference: "https://vivary.vercel.app/commands/",
     pypi: "https://pypi.org/project/create-vivary/",
     npm: "https://www.npmjs.com/package/@vivary/create",
   },

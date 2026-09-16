@@ -42,8 +42,33 @@ branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-One page, the home route, locked in on 2026-09-13. Static export to `out/`
-for Cloudflare. Not published yet.
+The home route, locked in on 2026-09-13, plus two documentation pages added
+on 2026-09-16: `/what-is-vivary/` and `/commands/`. A styled 404, `robots.txt`,
+`sitemap.xml`, Open Graph metadata with a social image, a temporary app icon,
+and JSON-LD for the product and the questions. Static export to `out/` for
+Cloudflare. Not published yet.
+
+## Routes
+
+| Route | What it is |
+| --- | --- |
+| `/` | The locked home page. Do not rebuild it. |
+| `/what-is-vivary/` | The product description as a page, with the six steps, the promises, and the questions people ask. |
+| `/commands/` | The workspace commands, the five files, the four layers, the pinned install command, and the published packages. |
+| `/llms.txt` | Agent-specific guidance. Every documentation page links to it near the top. |
+| `/robots.txt`, `/sitemap.xml` | Generated at build. |
+
+Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
+are in `src/app/pages.css`. Product claims still come only from
+`src/content/facts.ts`.
+
+## Site URL
+
+Absolute URLs in the sitemap, robots, canonical links, and Open Graph tags
+come from `NEXT_PUBLIC_SITE_URL` at build time. The production domain is
+undecided. Without the variable the build uses `http://localhost:3177`, which
+is visibly not production. Set it in the Cloudflare Pages build environment
+when the domain exists.
 
 ## Cloudflare configuration
 

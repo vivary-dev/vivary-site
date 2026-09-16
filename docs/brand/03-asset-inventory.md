@@ -8,7 +8,7 @@ of 2026-09-16, with a verdict. Paths are relative to each repo root.
 | System | Where | Ground | Text | Accent | Type |
 | --- | --- | --- | --- | --- | --- |
 | Living strata (current site, being replaced) | `vivary-dev/vivary` `site/` | `#020916` navy | `#f1f7f3` | mint `#49e1b1`, blue `#52b6d8` | Bricolage Grotesque, Hanken Grotesk, JetBrains Mono |
-| Workbench (the app) | Vivary-New `packages/workbench/DESIGN.md` | `#0C100E` and `#121715` green-black | `#EDF4EF` | lime `#B8F263` | Inter Variable |
+| Workbench (the app) | Vivary-New `packages/workbench/DESIGN.md` | `#0C100E` and `#121715` green-black | `#EDF4EF` | lime `#B8F263` | Inter Variable today. Decided 2026-09-16: replace with Geist. |
 | Candidate 9 (this site, locked 2026-09-13) | `src/app/home.css` | `#080705` warm black, pane `#0e0c09` | `#ebe5d8` off-white | amber `#e9a23b`, reserved for what the workspace recorded | Big Shoulders, Fraunces italic, Geist Mono |
 
 A fourth appears in the Vivary-New README badges: lime `#b5ef4a` on `#101713`,

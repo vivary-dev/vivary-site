@@ -12,6 +12,60 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-16  feat/site-pages
+
+**Did:** Built the site around the locked home page. A shared shell
+(`src/app/shell.tsx`) with the header, footer, skip link, and the three faces,
+used by every route. Two documentation pages, `/what-is-vivary/` and
+`/commands/`, written from the product guide and `facts.ts`, each with the
+agents line near the top. A styled 404. `robots.ts` and `sitemap.ts` marked
+static for the export. Root metadata with `metadataBase` from
+`NEXT_PUBLIC_SITE_URL`, Open Graph and Twitter card tags, a rendered
+1200x630 social image in `public/og/`, and a temporary "V" icon at
+`src/app/icon.png` and `apple-icon.png` until the real mark lands. JSON-LD
+for the product and organization on the home page and an FAQPage on the
+description page. `facts.ts` now calls the commands what they are: a part of
+Vivary. The home page's engine section is the commands section, and the nav
+reads What it is, Memory, Commands, GitHub. The Next starter SVGs and default
+favicon are gone.
+
+**Broke / surprised me:** `robots.ts` and `sitemap.ts` fail the static export
+unless they export `dynamic = "force-static"`. `pnpm build` empties `out/`, so
+scratch HTML used to render the social image and icons lives in `/tmp` now.
+The first social image wrapped its headline into the tagline at 128px; 98px
+fits. The 404 page showed white below the footer at 1440x900 because the
+`.v9` wrapper did not fill the viewport; it is a flex column now. Ledger keys
+on the documentation pages truncated with the home page's nowrap rule; the
+chapter ledgers wrap.
+
+**Visual critique:** three passes at 1440x900 and a real 390 and 360 viewport
+on every route. Pass one moved the page headers onto the 5:7 grid so the right
+half is not empty, fixed the truncated keys, put the two install commands in a
+ledger, and changed the title template. Pass two fixed the 404 fill and the
+social image. Pass three found nothing. No page scrolls horizontally at 360.
+Captures: `/tmp/shots/p3-*.png`.
+
+**Decided:** One product on the site. The commands are named as commands.
+Pages beyond the home route exist now: the description and the commands.
+Absolute URLs need `NEXT_PUBLIC_SITE_URL`; without it the build uses the local
+preview origin so nothing pretends to be production. The icon is a stand-in.
+
+**Verification:** Publication scan checked 674 packages, none flagged, no
+dependency added. Lint, TypeScript, and the static build pass. shadscan
+0.17.0 returns 57/100, up from 46. Its `html-lang-present` error is wrong,
+the root layout sets `lang="en"`. The remaining findings are the recorded
+static-site decisions: no theme provider, command menu, toast, mobile menu,
+loading boundary, or error retry, because the site has no application state.
+`focus-visible-not-suppressed` flags the composer rule inherited in
+`globals.css`; every visible control has an amber focus outline.
+
+**Next:** Jeff reviews the two pages and the commands wording on the home
+page. The production domain unlocks canonical URLs, the sitemap, and robots.
+The real mark replaces the icon and the social image lockup. The brand zip
+lands in `public/brand/` when it arrives.
+
+---
+
 ## 2026-09-16  docs/brand-brief
 
 **Did:** Read every Vivary repository, the live site, the registries, and the

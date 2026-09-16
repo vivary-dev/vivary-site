@@ -89,7 +89,8 @@ Palette, from the locked page:
 
 There is no other color on the page. The mark must also sit inside the app,
 which runs green-black `#0C100E` with off-white `#EDF4EF` text and a lime
-`#B8F263` primary action, set in Inter.
+`#B8F263` primary action. Do not use Inter anywhere. The app's type is
+moving to Geist, and the wordmark is Big Shoulders.
 
 Type: Big Shoulders 800 for the claim and the brand word. Fraunces italic
 only where the memory file speaks. Geist Mono for the record: body, ledgers,

@@ -19,9 +19,14 @@ Jeff owns these. Each one changes the output.
    and amber. The app is green-black and lime. A logo must survive both. The
    simplest resolution: the mark is single-color, drawn for off-white on dark
    and dark on light, and takes the accent of whatever surface it sits on.
-3. **One type family for the wordmark.** Big Shoulders is the site's display
-   face and is free (OFL). Inter carries the app. A wordmark set once in Big
-   Shoulders and exported as paths would end the question.
+3. **Decided 2026-09-16: no Inter anywhere.** The wordmark is set in Big
+   Shoulders and exported as paths. The app's controls and prose move from
+   Inter to Geist, with Geist Mono for code, so the app and the site share
+   one sans and one mono. The app change lives in Vivary-New:
+   `packages/workbench/DESIGN.md` line 29, `packages/workbench/app/global.css`
+   lines 1 and 108, and the `@fontsource-variable/inter` dependency in
+   `packages/workbench/package.json`, replaced by `@fontsource-variable/geist`
+   and `@fontsource-variable/geist-mono`.
 4. **Keep or drop the dome.** The shipped mark is a mint dome with strata bands
    and a door: a vivarium in cross-section with a gate. It is the only mark that
    comes from the name. The question is whether to redraw it or start over.

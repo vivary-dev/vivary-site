@@ -64,13 +64,13 @@ or in its metadata. None changes candidate 9's structure or copy.
 
 | Add | Where | Why |
 | --- | --- | --- |
-| `robots.txt` allowing search and AI crawlers, with the sitemap URL | `public/robots.txt` | Without it, crawlers assume nothing and some stay away. |
-| `sitemap.xml` | Generated at build, or `public/sitemap.xml` while the site has one route | Discovery and freshness. |
-| Meta description from `facts.product.line`, canonical URL, Open Graph, Twitter card | `src/app/layout.tsx` and `page.tsx` metadata | The snippet an engine shows and the card a share shows. Needs the production domain and the social image. |
-| JSON-LD: `SoftwareApplication` (name, description, operatingSystem Windows, applicationCategory, author, offers absent), `Organization`, `FAQPage` | A script tag in the home page head | Machine-readable definition. |
-| A "What is Vivary" page, or a section on the home page, carrying the product description as real HTML with a question-and-answer block | Undecided. Pages beyond the home route are undecided per `_plan.md`. | The description in `08-product-description.md` has to live on a page, not only in a text file. |
-| A status line an agent can quote | Already on the home page from `facts.product.status` | Keeps engines from claiming a download exists. |
-| One line on every documentation page: "If you are an agent, read /llms.txt for agent-specific guidance." | The documentation layout, once documentation pages exist | Crawlers do not probe for the file. A link is the only way they reach it. |
+| `robots.txt` allowing search and AI crawlers, with the sitemap URL | Done 2026-09-16, `src/app/robots.ts` | Without it, crawlers assume nothing and some stay away. |
+| `sitemap.xml` | Done 2026-09-16, `src/app/sitemap.ts` | Discovery and freshness. |
+| Meta description, canonical URL, Open Graph, Twitter card, social image | Done 2026-09-16 in `layout.tsx` and each page. Absolute URLs wait on `NEXT_PUBLIC_SITE_URL`. | The snippet an engine shows and the card a share shows. |
+| JSON-LD: `SoftwareApplication`, `Organization`, `FAQPage` | Done 2026-09-16 on `/` and `/what-is-vivary/` | Machine-readable definition. |
+| The product description as a real page with a question-and-answer block | Done 2026-09-16, `/what-is-vivary/` | The description has to live on a page, not only in a text file. |
+| A status line an agent can quote | On every page from `facts.product.status` | Keeps engines from claiming a download exists. |
+| One line on every documentation page pointing agents to `/llms.txt` | Done 2026-09-16, `AgentsLine` in `shell.tsx` | Crawlers do not probe for the file. A link is the only way they reach it. |
 
 The production domain is undecided. Canonical URLs, the sitemap, robots, and
 Open Graph all need it. Nothing above ships until the domain and the social

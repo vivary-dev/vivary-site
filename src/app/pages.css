@@ -1,0 +1,41 @@
+/* Pages beyond the home route. Same system, no scene, no reveals. */
+
+.v9 .skip { position: absolute; left: 1rem; top: -4rem; z-index: 30; padding: 0.5rem 0.75rem; background: var(--amber); color: var(--ground); font-size: var(--t-sm); text-decoration: none; }
+.v9 .skip:focus { top: 0.75rem; }
+.v9 .top nav a[aria-current="page"] { color: var(--text); }
+
+.v9 .agents { margin: 0 0 1.25rem; font-size: var(--t-xs); color: var(--text-3); }
+.v9 .agents a { color: var(--text-2); text-decoration: none; border-bottom: 1px solid var(--rule); }
+
+.v9 .doc { padding-top: clamp(2rem, 3.5vw, 2.5rem); }
+.v9 .doc .display-lg { max-width: 14ch; }
+.v9 .doc .two { align-items: end; }
+.v9 .doc .two > .lead { position: static; }
+.v9 .doc .define { font-size: var(--t-voice); line-height: 1.45; color: var(--text); max-width: 34ch; margin: 1.5rem 0 0; }
+.v9 .doc .body .lede:first-child { margin-top: 0; }
+.v9 .doc .status { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); max-width: 56ch; }
+
+.v9 .chapter { padding-top: 0; }
+.v9 .chapter + .chapter { border-top: 1px solid var(--rule-soft); padding-top: clamp(3rem, 6vw, 5rem); }
+.v9 .chapter .lead .lede { max-width: 40ch; }
+.v9 .chapter .ledger dd p { margin: 0; }
+.v9 .chapter .ledger dd p + p { margin-top: 0.5rem; }
+.v9 .chapter .ledger dt { white-space: normal; overflow: visible; }
+.v9 .chapter .ledger dt .num { color: var(--amber); }
+.v9 .chapter .ledger dd code { font-family: var(--mono); font-size: var(--t-sm); color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; display: block; padding: 0.85rem 1rem; border: 1px solid var(--rule); background: var(--pane); }
+.v9 .ledger-plain dt .q { color: var(--text); }
+
+.v9 .files { margin: 1.25rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.35rem; color: var(--text-2); }
+.v9 .files li::before { content: "\2014\00a0"; color: var(--rule); }
+.v9 .files .rec { color: var(--amber); }
+
+.v9 { min-height: 100dvh; display: flex; flex-direction: column; }
+.v9 main { flex: 1 0 auto; }
+.v9 .notfound { display: flex; align-items: center; min-height: 60vh; }
+.v9 .notfound .wrap { width: 100%; }
+.v9 .notfound .define { max-width: 44ch; }
+.v9 .notfound .cta { margin-top: 2rem; }
+
+@media (max-width: 900px) {
+  .v9 .chapter + .chapter { padding-top: 2.5rem; }
+}
