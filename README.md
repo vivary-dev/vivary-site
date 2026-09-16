@@ -42,17 +42,27 @@ branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-The home route, locked in on 2026-09-13, plus two documentation pages added
-on 2026-09-16: `/what-is-vivary/` and `/commands/`. A styled 404, `robots.txt`,
-`sitemap.xml`, Open Graph metadata with a social image, a temporary app icon,
-and JSON-LD for the product and the questions. Static export to `out/` for
-Cloudflare. Not published yet.
+The home page is built to Jeff's design canvas of 2026-09-16 as one
+responsive page, with the brand system's jar mark, lockup, hero illustration,
+social image, and app icon. Two documentation pages, `/what-is-vivary/` and
+`/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
+metadata, and JSON-LD. Static export to `out/` for Cloudflare. Not published
+yet.
+
+## Brand and design sources
+
+| Path | What it is |
+| --- | --- |
+| `docs/brand/system/` | The brand system: `tokens.json`, `README.md`, `MARK-DIRECTIONS.md`, fonts, and every asset (marks, wordmark, lockups, app icon, hero, social, org hero, brand sheet). |
+| `docs/design/2026-09-16-home/` | The home page design canvas, desktop and phone, as static HTML. The reference the home route is built to. |
+| `public/brand/` | The assets the site serves: the jar mark, four family marks, the horizontal lockup, the hero in WebP and PNG, the social image. |
+| `docs/brand/` | The working set: product description, repo map, asset notes, URL map, the humans-and-agents rules. |
 
 ## Routes
 
 | Route | What it is |
 | --- | --- |
-| `/` | The locked home page. Do not rebuild it. |
+| `/` | The home page, built to the 2026-09-16 canvas. Tune it, do not redesign it. |
 | `/what-is-vivary/` | The product description as a page, with the six steps, the promises, and the questions people ask. |
 | `/commands/` | The workspace commands, the five files, the four layers, the pinned install command, and the published packages. |
 | `/llms.txt` | Agent-specific guidance. Every documentation page links to it near the top. |

@@ -14,10 +14,11 @@ decision from Jeff.
 | `04-url-map.md` | The 33 live URLs on vivary.vercel.app and what should happen to each when this site replaces it. |
 | `05-zo-asset-brief.md` | The brief for generating the new brand assets with Zo: decisions first, then one spec per asset. |
 | `06-claude-design-prompt.md` | The prompt to paste into Claude Design, with GitHub links to the files above and the public references. |
-| `07-site-design-and-motion.md` | The locked home page in full: how it was chosen, palette, type, layout, every section, and every animation with its timings. |
+| `07-site-design-and-motion.md` | The candidate 9 home page of 2026-09-13, superseded on 2026-09-16 by the design canvas in `docs/design/`. Kept as the record of how the visual system was chosen. |
+| `system/` | The delivered brand system: tokens, marks, lockups, wordmark, app icon, hero, social, org hero, brand sheet, fonts, and the design agent's notes. Source of truth for every asset. |
 | `08-product-description.md` | The concise product description for the site, written for people and quotable by search and answer engines. |
 | `09-humans-and-agents.md` | The site is read by humans and agents alike. What agents actually read, why llms.txt is not it, and what the site needs. |
-| `images/` | Screenshots of the locked home page at desktop, full length, and phone, cropped components, and a rendered palette and type sheet. Attach these to any design brief. |
+| `images/` | Screenshots of the candidate 9 page and a rendered palette sheet, used to brief the design agent. Historical. |
 
 ## Rules these files follow
 

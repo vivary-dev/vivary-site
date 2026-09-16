@@ -9,9 +9,10 @@
 
 .v9 .doc { padding-top: clamp(2rem, 3.5vw, 2.5rem); }
 .v9 .doc .display-lg { max-width: 14ch; }
-.v9 .doc .two { align-items: end; }
+.v9 .doc .two { align-items: start; }
 .v9 .doc .two > .lead { position: static; }
-.v9 .doc .define { font-size: var(--t-voice); line-height: 1.45; color: var(--text); max-width: 34ch; margin: 1.5rem 0 0; }
+.v9 .desk-only { display: inline; }
+.v9 .doc .define { font-size: var(--t-deck); line-height: 1.55; color: var(--text); max-width: 34em; margin: 1.5rem 0 0; }
 .v9 .doc .body .lede:first-child { margin-top: 0; }
 .v9 .doc .status { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); max-width: 56ch; }
 
@@ -29,8 +30,6 @@
 .v9 .files li::before { content: "\2014\00a0"; color: var(--rule); }
 .v9 .files .rec { color: var(--amber); }
 
-.v9 { min-height: 100dvh; display: flex; flex-direction: column; }
-.v9 main { flex: 1 0 auto; }
 .v9 .notfound { display: flex; align-items: center; min-height: 60vh; }
 .v9 .notfound .wrap { width: 100%; }
 .v9 .notfound .define { max-width: 44ch; }

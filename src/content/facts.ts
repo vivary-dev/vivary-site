@@ -109,6 +109,24 @@ export const facts = {
     names: ["vivary", "create-vivary", "tropo", "strato", "ozone", "exo"],
   },
 
+  // Where the build is today. From desktop-acceptance-status.md on dev,
+  // read 2026-09-16, and the private Windows preview notes. Update when the
+  // acceptance register moves.
+  today: {
+    working: [
+      "one window with projects and conversations",
+      "project switching, history that stays with its project",
+      "files open, read and edit beside the conversation",
+      "codex conversations with approve, decline and stop, on windows",
+    ],
+    notYet: [
+      "the full harness catalog and switching between agents in a linked conversation",
+      "several conversations running at the same time",
+      "scheduled and automated work",
+      "a release. nothing on this page is a download",
+    ],
+  },
+
   links: {
     github: "https://github.com/vivary-dev/vivary",
     org: "https://github.com/vivary-dev",

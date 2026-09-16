@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: facts.product.line,
     images: [
       {
-        url: "/og/vivary.png",
+        url: "/brand/vivary-social-1200x630.png",
         width: 1200,
         height: 630,
         alt: "Vivary. It knows you. Because you wrote it down.",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vivary",
     description: facts.product.line,
-    images: ["/og/vivary.png"],
+    images: ["/brand/vivary-social-1200x630.png"],
   },
 };
 

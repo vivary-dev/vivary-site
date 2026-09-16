@@ -59,10 +59,9 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - The bar is a site a marketing professional designed. One strong hero with
   real imagery, one first sentence a stranger understands, one primary call
   to action, and everything around it quiet.
-- Imagery comes from Dither Kit (dithered charts, avatars, gradient washes)
-  and from assets checked into `public/`. No stock photos and no gradient
-  blob defaults. Zo's provider-backed image generation is down, so generated
-  imagery is produced elsewhere and checked in.
+- Imagery is the brand system's line art and dither in `public/brand/`, and
+  Dither Kit where a chart is needed. No stock photos, no gradients, no glow,
+  no gradient blob defaults.
 - Icons come from icons0 collections through the shadcn registry, or from
   lucide. Pick one collection per surface and keep it.
 - Quality floor: responsive to 360 pixels, visible keyboard focus, reduced
@@ -88,15 +87,23 @@ see their output produce brochures.
 
 ## What is decided
 
-- 2026-09-13: nine landing candidates were built. Jeff locked candidate 9,
-  a blend of the Transmission and Familiar variants, and it is the home
-  route. History is on `feat/landing-candidates`. Do not rebuild the home
-  page from scratch; tune it.
-- Three typefaces with one job each: Big Shoulders for the claim, Fraunces
-  only where the file itself speaks, Geist Mono for the record. Amber is
-  reserved for what the workspace recorded.
-- The fiction (a workspace three years in) is framed once, in three
-  sentences, and never claims a shipped feature.
+- 2026-09-16: Jeff delivered the home page design as a canvas
+  (`docs/design/2026-09-16-home/`, desktop and phone) and the brand system
+  (`docs/brand/system/`, with `tokens.json` as the token source). The home
+  route is built to that canvas as one responsive page. It supersedes
+  candidate 9 of 2026-09-13, whose history stays on `feat/landing-candidates`.
+  Tune the built page; do not redesign it.
+- The mark is the jar. Lockups, the wordmark, the app icon, the social image,
+  and the hero illustration are the shipped SVGs and PNGs in
+  `docs/brand/system/assets/`, copied to `public/brand/` for the site. The
+  mark is always the ground's text color, never amber, never two colors.
+- Three typefaces with one job each: Big Shoulders for the claim and the
+  brand word, Fraunces only where the memory file speaks, Geist Mono for the
+  record. The app interior, shown inside a rule frame, uses Geist Sans and
+  the app's own green-black and lime. No Inter anywhere, decided 2026-09-16.
+  Amber is reserved for what the workspace recorded.
+- One product. The workspace commands are a part of Vivary. Nothing on the
+  site calls them an earlier or separate product.
 
 ## Tools and the rule for each
 

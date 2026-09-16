@@ -1,4 +1,10 @@
-# The locked home page: design and motion, in full
+# The candidate 9 home page: design and motion, in full
+
+Superseded on 2026-09-16. Jeff delivered a new home page design as a canvas
+(`docs/design/2026-09-16-home/`) and the home route was rebuilt to it. The
+palette, type roles, and voice below carried over. The sections, the memory
+scene, and its timings did not. This file stays as the record of how the
+system was chosen.
 
 Extracted on 2026-09-16 from the code on `dev` (`src/app/page.tsx`,
 `src/app/home.css`, `src/app/scenes.tsx`, `src/app/ledger.tsx`) and from the

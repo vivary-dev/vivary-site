@@ -12,6 +12,51 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-16  feat/site-pages, the design canvas
+
+**Did:** Jeff delivered the home page design as a canvas (desktop and phone
+HTML) and the brand system (jar mark, wordmark, lockups, app icon, hero,
+social, org hero, brand sheet, tokens, fonts) through GitHub. Both are in the
+repo: the system under `docs/brand/system/`, the canvas under
+`docs/design/2026-09-16-home/`, the served assets under `public/brand/`. The
+home route is rebuilt to the canvas as one responsive page: the claim beside
+the vivarium, four audience cards, capsule and receipt, the memory file, the
+drawn app window with three notes, the agents section, the four layers, and
+where the build is today from `facts.today`. The header carries the
+horizontal lockup and a phone menu. The favicon is the jar, the apple icon is
+the app icon, the social image is the brand's tagline card. The app interior
+is set in Geist Sans. No Inter anywhere. The documentation pages and 404 kept
+their structure on the new shell.
+
+**Broke / surprised me:** The zips could not arrive as chat attachments, so
+they came through GitHub's web upload onto this branch and were unpacked and
+removed from the tree. The canvas uses inline styles and two separate files;
+the stylesheet is new and the responsive rules are mine. On the phone the
+vivarium first landed after the status list because the copy column was one
+flex box; the hero children now flow in the grid with explicit order. The
+drawn app window clipped its approve row on the phone under a fixed height.
+The design's "Ask what changed since last week" line was dropped from the
+Researchers card because chat search is not yet working.
+
+**Visual critique:** three passes at 1440x900 and real 390 and 360
+viewports, plus the phone menu open. Pass one fixed the phone hero order, the
+documentation header alignment, and the lede spacing. Pass two fixed the app
+window clipping. Pass three found nothing. No page scrolls horizontally at
+360. Captures: `/tmp/shots/n3-*.png`.
+
+**Decided:** The 2026-09-16 canvas supersedes candidate 9. The mark is the
+jar. The tagline is "It knows you. Because you wrote it down." AGENTS.md
+records all of it under What is decided.
+
+**Verification:** Publication scan with no dependency added, lint,
+TypeScript, and the static build pass. The app repo was not touched.
+
+**Next:** Jeff reviews the built page against the canvas. The org hero and
+README header go to `vivary-dev/.github` and the READMEs when he says so.
+`Vivary.ico` goes to Vivary-New `packages/desktop/` with the app retheme.
+
+---
+
 ## 2026-09-16  feat/site-pages
 
 **Did:** Built the site around the locked home page. A shared shell

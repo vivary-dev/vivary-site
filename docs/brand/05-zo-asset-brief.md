@@ -1,5 +1,11 @@
 # Brief for generating Vivary brand assets with Zo
 
+Delivered 2026-09-16. The design agent produced the full system, now in
+`docs/brand/system/`. Decisions made: the mark is the jar; the tagline is
+"It knows you. Because you wrote it down."; the wordmark is Big Shoulders;
+no Inter anywhere. Item 9, the harness marks, remains open. This brief stays
+as the record of what was asked for.
+
 Zo was not reachable from the session that wrote this (its MCP connection
 failed and its claude.ai connector was unauthorized). This brief is written so
 it can be handed to Zo as is, or run step by step in a Zo session. `AGENTS.md`

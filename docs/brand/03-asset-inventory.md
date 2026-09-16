@@ -1,5 +1,12 @@
 # Asset inventory
 
+Updated 2026-09-16, evening. The brand system arrived. The jar mark, the
+wordmark, lockups in bone, lime, and black, the app icon with `Vivary.ico`,
+the vivarium hero, the social image, the org hero, the README header, and a
+brand sheet are in `docs/brand/system/assets/`. Every "does not exist" below
+is now filled except the harness marks. The rest of this file is the state
+before delivery.
+
 Every visual identity artifact that exists across the Vivary repositories as
 of 2026-09-16, with a verdict. Paths are relative to each repo root.
 
