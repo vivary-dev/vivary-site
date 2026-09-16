@@ -1,11 +1,14 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { PREVIEW, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 // Every page is for people and for agents. Search and AI crawlers are
 // welcome everywhere. See docs/brand/09-humans-and-agents.md.
 export default function robots(): MetadataRoute.Robots {
+  if (PREVIEW) {
+    return { rules: [{ userAgent: "*", disallow: "/" }] };
+  }
   return {
     rules: [
       { userAgent: "*", allow: "/" },

@@ -104,6 +104,14 @@ loading boundary, or error retry, because the site has no application state.
 `focus-visible-not-suppressed` flags the composer rule inherited in
 `globals.css`; every visible control has an amber focus outline.
 
+Later still: Jeff asked to host it. Zo is unreachable from this session,
+so the export went to GitHub Pages at https://vivary-dev.github.io from a new
+repository that holds only the build. A preview mode
+(`NEXT_PUBLIC_PREVIEW=1`) sets noindex on every page and disallows all
+crawling, so the preview is not a publication. `scripts/deploy-preview.sh`
+repeats it. Pages built in 30 seconds, so Actions is not blocked for public
+repositories on the org, whatever blocked the private one.
+
 **Next:** Jeff reviews the two pages and the commands wording on the home
 page. The production domain unlocks canonical URLs, the sitemap, and robots.
 The real mark replaces the icon and the social image lockup. The brand zip

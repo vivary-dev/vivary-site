@@ -72,6 +72,16 @@ Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
 are in `src/app/pages.css`. Product claims still come only from
 `src/content/facts.ts`.
 
+## Preview host
+
+A temporary preview lives at https://vivary-dev.github.io, served by GitHub
+Pages from the repository `vivary-dev/vivary-dev.github.io`, which holds only
+the built export. It is not the site. Every page there carries `noindex` and
+its `robots.txt` disallows all crawling. Publish a new preview with
+`scripts/deploy-preview.sh`, which builds with `NEXT_PUBLIC_PREVIEW=1` and
+force-pushes `out/` to that repository. Jeff asked for it on 2026-09-16.
+Delete that repository when the real site is up.
+
 ## Site URL
 
 Absolute URLs in the sitemap, robots, canonical links, and Open Graph tags

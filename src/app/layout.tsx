@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { Umami } from "@/components/umami";
 import { facts } from "@/content/facts";
-import { SITE_URL } from "@/lib/site";
+import { PREVIEW, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  robots: PREVIEW ? { index: false, follow: false } : undefined,
   title: { default: "Vivary", template: "%s · Vivary" },
   description: facts.product.line,
   openGraph: {
