@@ -12,6 +12,35 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-16  docs/brand-brief
+
+**Did:** Read every Vivary repository, the live site, the registries, and the
+private Windows preview to build one account of what Vivary is. Wrote the
+brand and marketing working set under `docs/brand/`: product definition and
+vocabulary, repository map with cleanup steps, asset inventory with verdicts,
+URL map for the vivary.vercel.app handover, the Zo asset brief, and the prompt
+for Claude Design. No source, dependency, or page changed.
+
+**Broke / surprised me:** Two products share the name. The engine repo says
+"Deprecated: None" and never mentions the app. Three visual systems coexist
+and no tagline, palette, or vector logo is designated. No application icon
+exists for `Vivary.exe`. The Zo connectors and the preview browser were both
+unavailable in the session, so assets were briefed, not generated, and the
+home page was built but not screenshotted.
+
+**Decided:** Nothing new. The four brand decisions in
+`docs/brand/05-zo-asset-brief.md` are Jeff's. Candidate 9 stays locked and is
+the reference for the new brand.
+
+**Verification:** Frozen install, publication scan (674 packages, none
+flagged), and static build passed on this branch. Registry versions and the
+live sitemap were checked on 2026-09-16.
+
+**Next:** Jeff makes the four decisions. Run the Claude Design prompt. Then the
+GitHub cleanup in `docs/brand/02-repo-map.md` once approved.
+
+---
+
 ## 2026-09-15  docs/day-end-state
 
 **Did:** Reconciled foundations status with merged PR #4 at 5ddff98. Updated the
