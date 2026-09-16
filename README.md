@@ -79,9 +79,8 @@ Zo at `/home/workspace/Projects/vivary-integration`. Product claims in
 `src/content/facts.ts` cite its documents, the status ledger on the home page
 comes from its acceptance register, and its own docs point back here
 (`docs/product/multi-project/research/website-repo.md` and outcome 25). The
-repository's GitHub homepage field points at this site's preview. It stays
-private until the app is released, so public links on the site go to the
-organization page.
+repository's GitHub homepage field points at this site's preview. It went
+public on 2026-09-16, and "Follow the build" on the home page links to it.
 
 ## Preview host
 

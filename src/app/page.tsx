@@ -28,7 +28,7 @@ const jsonLd = {
       creator: { "@type": "Person", name: "Jeff Kazzee" },
       url: "/",
     },
-    { "@type": "Organization", name: "Vivary", url: "/", sameAs: [facts.links.org, facts.links.github] },
+    { "@type": "Organization", name: "Vivary", url: "/", sameAs: [facts.links.org, facts.links.product, facts.links.github] },
   ],
 };
 
@@ -121,7 +121,7 @@ export default function Home() {
               wrote before they work. They leave a receipt after.
             </p>
             <div className="cta">
-              <a className="btn btn-solid" href={facts.links.org}>
+              <a className="btn btn-solid" href={facts.links.product}>
                 Follow the build on GitHub
               </a>
               <a className="btn" href="#how">
@@ -476,7 +476,7 @@ export default function Home() {
           </div>
           <p className="lede reveal" style={{ maxWidth: "none", fontSize: "var(--t-sm)" }}>
             The build happens in the open. Commits, decisions and the specification are on GitHub.{" "}
-            <a className="link" href={facts.links.org}>
+            <a className="link" href={facts.links.product}>
               Follow the build
             </a>{" "}
             is the only ask on this page.

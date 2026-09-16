@@ -7,7 +7,7 @@ Read on 2026-09-16 with the GitHub CLI as Jeff-Kazzee. Orgs: `vivary-dev`,
 
 | Repo | Visibility | Default branch | Role today | Verdict |
 | --- | --- | --- | --- | --- |
-| `vivary-dev/Vivary-New` | private | `main`, work on `dev` | The active product. Desktop app, Workbench, bundled workspace commands. Issues and delivery live here. Created 2026-09-13. | Active. Read `dev`. |
+| `vivary-dev/Vivary-New` | public since 2026-09-16 | `main`, work on `dev` | The active product. Desktop app, Workbench, bundled workspace commands. Issues and delivery live here. Created 2026-09-13. | Active. Read `dev`. |
 | `vivary-dev/vivary` | public, MIT | `dev` | Publishes the workspace command packages the app bundles (`create-vivary`, `tropo`, `strato`, `ozone`, `exo`) and hosts the current site at vivary.vercel.app. 4 stars, 1 fork. | Keep public as the package source. Its site is being replaced by this repo. Needs a notice that the app is in development. |
 | `vivary-dev/vivary-site` | private | `dev` | This repo. The new marketing site. | Active. |
 | `vivary-dev/vivary-workbench-handoff` | private | `docs/context-compaction-policy` | Frozen source checkpoint from 2026-09-11. Its handoff PR #4 closed unmerged on 2026-09-13. Vivary-New calls it a dead salvage path. | Archive. |

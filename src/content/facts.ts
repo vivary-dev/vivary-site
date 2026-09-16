@@ -130,8 +130,7 @@ export const facts = {
   links: {
     github: "https://github.com/vivary-dev/vivary",
     org: "https://github.com/vivary-dev",
-    // The product repository. Private while the app is in development, so
-    // public links go to the organization page, which lists it once it opens.
+    // The product repository. Public since 2026-09-16. "Follow the build" goes here.
     product: "https://github.com/vivary-dev/Vivary-New",
     commandReference: "https://vivary.vercel.app/commands/",
     pypi: "https://pypi.org/project/create-vivary/",
