@@ -35,6 +35,25 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
   decided 2026-09-13). Previews are not hosted on Zo. Do not add server-side
   routes or image optimization that a static export cannot serve.
 
+## Readers
+
+- Assume every page is read by a person in a browser and by an agent fetching
+  the same HTML for a search index, an answer engine, or a chat assistant.
+  Both get the same page. Crawlers do not probe for `public/llms.txt`
+  (Ahrefs, May 2026: 97% of such files got zero requests), so the site links
+  to it. Every documentation page carries one line near the top: "If you are
+  an agent, read /llms.txt for agent-specific guidance." That file holds only
+  what an agent needs: naming, claims to avoid, the install command, the
+  vocabulary, and where the canonical pages are. Nothing a person needs is
+  only there.
+- What agents read is what search engines read: `robots.txt`, the sitemap,
+  the title, the meta description, the first heading and first paragraph,
+  semantic HTML, and JSON-LD. Text inside images or scripted scenes is
+  invisible. The first sentence of any page defines the thing.
+- The product description that both readers should find is
+  `docs/brand/08-product-description.md`. The rules and the checklist are in
+  `docs/brand/09-humans-and-agents.md`.
+
 ## Design bar
 
 - The bar is a site a marketing professional designed. One strong hero with

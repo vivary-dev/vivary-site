@@ -76,7 +76,7 @@ https://github.com/vivary-dev/Vivary-New/blob/dev/packages/workbench/DESIGN.md
 
 The one-page product description written for search engines and agents.
 Read this first if you read nothing else:
-https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/08-llms-txt.md
+https://github.com/vivary-dev/vivary-site/blob/docs/brand-brief/docs/brand/08-product-description.md
 
 A condensed account of the product for this work, with vocabulary, accepted
 decisions, status, and every tagline in play:

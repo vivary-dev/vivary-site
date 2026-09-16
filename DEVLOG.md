@@ -38,8 +38,16 @@ the reference for the new brand.
 flagged), and static build passed on this branch. Registry versions and the
 live sitemap were checked on 2026-09-16.
 
-**Next:** Jeff makes the four decisions. Run the Claude Design prompt. Then the
-GitHub cleanup in `docs/brand/02-repo-map.md` once approved.
+Later the same day: Jeff asked for a concise, current, answer-engine-ready
+product description. First draft was `public/llms.txt`. Jeff pointed out that
+agents do not read that file, which the evidence confirms. The description
+now lives in `docs/brand/08-product-description.md` as page content, the
+rules for both readers are in `09-humans-and-agents.md`, and `AGENTS.md` has
+a Readers section. `llms.txt` stays as a courtesy only.
+
+**Next:** Jeff makes the four decisions. Run the Claude Design prompt. Decide
+where the product description lives on the site. Then the GitHub cleanup in
+`docs/brand/02-repo-map.md` once approved.
 
 ---
 

@@ -1,11 +1,12 @@
-# The product description for search engines and agents
+# The product description
 
-This is the text served at `/llms.txt` on the site, kept here as Markdown so
-it can be read on GitHub and reused in READMEs, the org profile, and directory
-listings. It is the concise, current statement of what Vivary is and how it
-works, written to be quoted by answer engines. Update `public/llms.txt` first
-and copy it here. Facts come from the product guide in Vivary-New and from
-`src/content/facts.ts`.
+The concise, current statement of what Vivary is and how it works, written to
+be read by a person on the site and quoted by a search or answer engine. This
+text belongs on a real HTML page. It is also served as `public/llms.txt` as a
+courtesy, but nothing depends on that file. See `09-humans-and-agents.md` for
+why and for what the site needs instead. Facts come from the product guide in
+Vivary-New and from `src/content/facts.ts`. Update this file first, then
+`public/llms.txt`, which has one extra section for agents.
 
 ---
 

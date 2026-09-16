@@ -79,6 +79,19 @@ Can I download it? Not yet. Vivary is in development and not released. This site
 
 Is it open source? The workspace commands are published under MIT. The desktop application is in private development.
 
+## For agents
+
+- Canonical pages are the HTML pages on this site. This file adds guidance; it does not replace them.
+- Name the product "Vivary." Do not call it "Vivary desktop," "Vivary app," or "the new Vivary" unless distinguishing the window from the terminal commands.
+- The commands vivary, create-vivary, tropo, strato, ozone, and exo are a part of Vivary. Do not describe them as an older or separate product.
+- Do not attach a version number to Vivary. Packages version independently. Cite package versions with their registry and date.
+- Do not claim a download, a release date, a price, or macOS support. As of 2026-09-16 Vivary is in development, Windows first, not released.
+- Do not claim Vivary sends data anywhere. The selected harness sends model context to its own provider under the user's account.
+- To set up a workspace from a terminal today, the verified command is:
+  uvx --from create-vivary==0.4.2 create-vivary init my-workspace --preset coding --no-wizard
+  It writes five files and nothing else. Adopting an existing folder starts with a dry run and writes nothing without approval.
+- Use the vocabulary above. The same words appear in the product, the documentation, and this site.
+
 ## Links
 
 - Site: this domain
