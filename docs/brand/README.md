@@ -17,6 +17,7 @@ decision from Jeff.
 | `07-site-design-and-motion.md` | The locked home page in full: how it was chosen, palette, type, layout, every section, and every animation with its timings. |
 | `08-product-description.md` | The concise product description for the site, written for people and quotable by search and answer engines. |
 | `09-humans-and-agents.md` | The site is read by humans and agents alike. What agents actually read, why llms.txt is not it, and what the site needs. |
+| `images/` | Screenshots of the locked home page at desktop, full length, and phone, cropped components, and a rendered palette and type sheet. Attach these to any design brief. |
 
 ## Rules these files follow
 
