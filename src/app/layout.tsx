@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { Umami } from "@/components/umami";
 import { facts } from "@/content/facts";
+import { PREVIEW, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,8 +17,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vivary",
+  metadataBase: new URL(SITE_URL),
+  robots: PREVIEW ? { index: false, follow: false } : undefined,
+  title: { default: "Vivary", template: "%s · Vivary" },
   description: facts.product.line,
+  openGraph: {
+    type: "website",
+    siteName: "Vivary",
+    title: "Vivary",
+    description: facts.product.line,
+    images: [
+      {
+        url: "/brand/vivary-social-1200x630.png",
+        width: 1200,
+        height: 630,
+        alt: "Vivary. It knows you. Because you wrote it down.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vivary",
+    description: facts.product.line,
+    images: ["/brand/vivary-social-1200x630.png"],
+  },
 };
 
 export default function RootLayout({

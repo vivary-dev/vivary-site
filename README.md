@@ -42,8 +42,63 @@ branch model. `DEVLOG.md` records every session.
 
 ## Status
 
-One page, the home route, locked in on 2026-09-13. Static export to `out/`
-for Cloudflare. Not published yet.
+The home page is built to Jeff's design canvas of 2026-09-16 as one
+responsive page, with the brand system's jar mark, lockup, hero illustration,
+social image, and app icon. Two documentation pages, `/what-is-vivary/` and
+`/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
+metadata, and JSON-LD. Static export to `out/` for Cloudflare. Not published
+yet.
+
+## Brand and design sources
+
+| Path | What it is |
+| --- | --- |
+| `docs/brand/system/` | The brand system: `tokens.json`, `README.md`, `MARK-DIRECTIONS.md`, fonts, and every asset (marks, wordmark, lockups, app icon, hero, social, org hero, brand sheet). |
+| `docs/design/2026-09-16-home/` | The home page design canvas, desktop and phone, as static HTML. The reference the home route is built to. |
+| `public/brand/` | The assets the site serves: the jar mark, four family marks, the horizontal lockup, the hero in WebP and PNG, the social image. |
+| `docs/brand/` | The working set: product description, repo map, asset notes, URL map, the humans-and-agents rules. |
+
+## Routes
+
+| Route | What it is |
+| --- | --- |
+| `/` | The home page, built to the 2026-09-16 canvas. Tune it, do not redesign it. |
+| `/what-is-vivary/` | The product description as a page, with the six steps, the promises, and the questions people ask. |
+| `/commands/` | The workspace commands, the five files, the four layers, the pinned install command, and the published packages. |
+| `/llms.txt` | Agent-specific guidance. Every documentation page links to it near the top. |
+| `/robots.txt`, `/sitemap.xml` | Generated at build. |
+
+Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
+are in `src/app/pages.css`. Product claims still come only from
+`src/content/facts.ts`.
+
+## The product repository
+
+The app this site markets is built in `vivary-dev/Vivary-New`, checked out on
+Zo at `/home/workspace/Projects/vivary-integration`. Product claims in
+`src/content/facts.ts` cite its documents, the status ledger on the home page
+comes from its acceptance register, and its own docs point back here
+(`docs/product/multi-project/research/website-repo.md` and outcome 25). The
+repository's GitHub homepage field points at this site's preview. It went
+public on 2026-09-16, and "Follow the build" on the home page links to it.
+
+## Preview host
+
+A temporary preview lives at https://vivary-dev.github.io, served by GitHub
+Pages from the repository `vivary-dev/vivary-dev.github.io`, which holds only
+the built export. It is not the site. Every page there carries `noindex` and
+its `robots.txt` disallows all crawling. Publish a new preview with
+`scripts/deploy-preview.sh`, which builds with `NEXT_PUBLIC_PREVIEW=1` and
+force-pushes `out/` to that repository. Jeff asked for it on 2026-09-16.
+Delete that repository when the real site is up.
+
+## Site URL
+
+Absolute URLs in the sitemap, robots, canonical links, and Open Graph tags
+come from `NEXT_PUBLIC_SITE_URL` at build time. The production domain is
+undecided. Without the variable the build uses `http://localhost:3177`, which
+is visibly not production. Set it in the Cloudflare Pages build environment
+when the domain exists.
 
 ## Cloudflare configuration
 

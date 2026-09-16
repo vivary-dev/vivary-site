@@ -12,6 +12,178 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-16  session end
+
+**Did:** Hosted the preview two ways: GitHub Pages at
+https://vivary-dev.github.io from a build-only repository, and a static server
+on Zo port 3177 behind the existing sshd tunnel, which Jeff then asked to turn
+off. It is off. Connected the product repository to the site: `facts.links.product`,
+the llms.txt links, the README, and the GitHub homepage fields on
+`vivary-dev/Vivary-New` and `vivary-dev/vivary-site`, both set to the preview.
+
+**Broke / surprised me:** This session runs on Zo itself, not a separate
+sandbox. Early work happened in a clone under `/root/projects` before the real
+checkout at `/home/workspace/Projects/vivary-site` was synced to the branch.
+Both are on `feat/site-pages` now. The Zo MCP connector never connected and
+the Zo ask API timed out three times, so no Zo Site was created. A `pkill`
+pattern matched its own shell twice. The workspace AGENTS.md says previews
+are not hosted on Zo; Jeff asked for one, then asked for it off.
+
+**Decided:** The preview stays on GitHub Pages, noindex, until the domain
+and publication decision. A Zo Site, if wanted, is one line in Jeff's Zo chat.
+
+**Next:** Review the home page copy on the preview. Decide the domain. Merge
+`feat/site-pages` into `dev` when satisfied. Delete the Pages repository when
+the real site is up.
+
+---
+
+## 2026-09-16  feat/site-pages, the design canvas
+
+**Did:** Jeff delivered the home page design as a canvas (desktop and phone
+HTML) and the brand system (jar mark, wordmark, lockups, app icon, hero,
+social, org hero, brand sheet, tokens, fonts) through GitHub. Both are in the
+repo: the system under `docs/brand/system/`, the canvas under
+`docs/design/2026-09-16-home/`, the served assets under `public/brand/`. The
+home route is rebuilt to the canvas as one responsive page: the claim beside
+the vivarium, four audience cards, capsule and receipt, the memory file, the
+drawn app window with three notes, the agents section, the four layers, and
+where the build is today from `facts.today`. The header carries the
+horizontal lockup and a phone menu. The favicon is the jar, the apple icon is
+the app icon, the social image is the brand's tagline card. The app interior
+is set in Geist Sans. No Inter anywhere. The documentation pages and 404 kept
+their structure on the new shell.
+
+**Broke / surprised me:** The zips could not arrive as chat attachments, so
+they came through GitHub's web upload onto this branch and were unpacked and
+removed from the tree. The canvas uses inline styles and two separate files;
+the stylesheet is new and the responsive rules are mine. On the phone the
+vivarium first landed after the status list because the copy column was one
+flex box; the hero children now flow in the grid with explicit order. The
+drawn app window clipped its approve row on the phone under a fixed height.
+The design's "Ask what changed since last week" line was dropped from the
+Researchers card because chat search is not yet working.
+
+**Visual critique:** three passes at 1440x900 and real 390 and 360
+viewports, plus the phone menu open. Pass one fixed the phone hero order, the
+documentation header alignment, and the lede spacing. Pass two fixed the app
+window clipping. Pass three found nothing. No page scrolls horizontally at
+360. Captures: `/tmp/shots/n3-*.png`.
+
+**Decided:** The 2026-09-16 canvas supersedes candidate 9. The mark is the
+jar. The tagline is "It knows you. Because you wrote it down." AGENTS.md
+records all of it under What is decided.
+
+**Verification:** Publication scan with no dependency added, lint,
+TypeScript, and the static build pass. The app repo was not touched.
+
+**Next:** Jeff reviews the built page against the canvas. The org hero and
+README header go to `vivary-dev/.github` and the READMEs when he says so.
+`Vivary.ico` goes to Vivary-New `packages/desktop/` with the app retheme.
+
+---
+
+## 2026-09-16  feat/site-pages
+
+**Did:** Built the site around the locked home page. A shared shell
+(`src/app/shell.tsx`) with the header, footer, skip link, and the three faces,
+used by every route. Two documentation pages, `/what-is-vivary/` and
+`/commands/`, written from the product guide and `facts.ts`, each with the
+agents line near the top. A styled 404. `robots.ts` and `sitemap.ts` marked
+static for the export. Root metadata with `metadataBase` from
+`NEXT_PUBLIC_SITE_URL`, Open Graph and Twitter card tags, a rendered
+1200x630 social image in `public/og/`, and a temporary "V" icon at
+`src/app/icon.png` and `apple-icon.png` until the real mark lands. JSON-LD
+for the product and organization on the home page and an FAQPage on the
+description page. `facts.ts` now calls the commands what they are: a part of
+Vivary. The home page's engine section is the commands section, and the nav
+reads What it is, Memory, Commands, GitHub. The Next starter SVGs and default
+favicon are gone.
+
+**Broke / surprised me:** `robots.ts` and `sitemap.ts` fail the static export
+unless they export `dynamic = "force-static"`. `pnpm build` empties `out/`, so
+scratch HTML used to render the social image and icons lives in `/tmp` now.
+The first social image wrapped its headline into the tagline at 128px; 98px
+fits. The 404 page showed white below the footer at 1440x900 because the
+`.v9` wrapper did not fill the viewport; it is a flex column now. Ledger keys
+on the documentation pages truncated with the home page's nowrap rule; the
+chapter ledgers wrap.
+
+**Visual critique:** three passes at 1440x900 and a real 390 and 360 viewport
+on every route. Pass one moved the page headers onto the 5:7 grid so the right
+half is not empty, fixed the truncated keys, put the two install commands in a
+ledger, and changed the title template. Pass two fixed the 404 fill and the
+social image. Pass three found nothing. No page scrolls horizontally at 360.
+Captures: `/tmp/shots/p3-*.png`.
+
+**Decided:** One product on the site. The commands are named as commands.
+Pages beyond the home route exist now: the description and the commands.
+Absolute URLs need `NEXT_PUBLIC_SITE_URL`; without it the build uses the local
+preview origin so nothing pretends to be production. The icon is a stand-in.
+
+**Verification:** Publication scan checked 674 packages, none flagged, no
+dependency added. Lint, TypeScript, and the static build pass. shadscan
+0.17.0 returns 57/100, up from 46. Its `html-lang-present` error is wrong,
+the root layout sets `lang="en"`. The remaining findings are the recorded
+static-site decisions: no theme provider, command menu, toast, mobile menu,
+loading boundary, or error retry, because the site has no application state.
+`focus-visible-not-suppressed` flags the composer rule inherited in
+`globals.css`; every visible control has an amber focus outline.
+
+Later still: Jeff asked to host it. Zo is unreachable from this session,
+so the export went to GitHub Pages at https://vivary-dev.github.io from a new
+repository that holds only the build. A preview mode
+(`NEXT_PUBLIC_PREVIEW=1`) sets noindex on every page and disallows all
+crawling, so the preview is not a publication. `scripts/deploy-preview.sh`
+repeats it. Pages built in 30 seconds, so Actions is not blocked for public
+repositories on the org, whatever blocked the private one.
+
+**Next:** Jeff reviews the two pages and the commands wording on the home
+page. The production domain unlocks canonical URLs, the sitemap, and robots.
+The real mark replaces the icon and the social image lockup. The brand zip
+lands in `public/brand/` when it arrives.
+
+---
+
+## 2026-09-16  docs/brand-brief
+
+**Did:** Read every Vivary repository, the live site, the registries, and the
+private Windows preview to build one account of what Vivary is. Wrote the
+brand and marketing working set under `docs/brand/`: product definition and
+vocabulary, repository map with cleanup steps, asset inventory with verdicts,
+URL map for the vivary.vercel.app handover, the Zo asset brief, and the prompt
+for Claude Design. No source, dependency, or page changed.
+
+**Broke / surprised me:** Nothing public says Vivary is a desktop app in
+development. The first draft of these docs split Vivary into an old and a new
+product. Jeff corrected that: one product, the workspace commands are a part
+of it. The docs were rewritten from the product guide. Three visual systems coexist
+and no tagline, palette, or vector logo is designated. No application icon
+exists for `Vivary.exe`. The Zo connectors and the preview browser were both
+unavailable in the session, so assets were briefed, not generated, and the
+home page was built but not screenshotted.
+
+**Decided:** Nothing new. The four brand decisions in
+`docs/brand/05-zo-asset-brief.md` are Jeff's. Candidate 9 stays locked and is
+the reference for the new brand.
+
+**Verification:** Frozen install, publication scan (674 packages, none
+flagged), and static build passed on this branch. Registry versions and the
+live sitemap were checked on 2026-09-16.
+
+Later the same day: Jeff asked for a concise, current, answer-engine-ready
+product description. First draft was `public/llms.txt`. Jeff pointed out that
+agents do not read that file, which the evidence confirms. The description
+now lives in `docs/brand/08-product-description.md` as page content, the
+rules for both readers are in `09-humans-and-agents.md`, and `AGENTS.md` has
+a Readers section. `llms.txt` stays as a courtesy only.
+
+**Next:** Jeff makes the four decisions. Run the Claude Design prompt. Decide
+where the product description lives on the site. Then the GitHub cleanup in
+`docs/brand/02-repo-map.md` once approved.
+
+---
+
 ## 2026-09-15  docs/day-end-state
 
 **Did:** Reconciled foundations status with merged PR #4 at 5ddff98. Updated the
