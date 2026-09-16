@@ -96,5 +96,7 @@ Is it open source? The workspace commands are published under MIT. The desktop a
 
 - Site: this domain
 - Organization: https://github.com/vivary-dev
+- The application, in development: https://github.com/vivary-dev/Vivary-New (private until release)
 - Workspace commands: https://github.com/vivary-dev/vivary
+- This site's source: https://github.com/vivary-dev/vivary-site
 - Company: The Little AI Company

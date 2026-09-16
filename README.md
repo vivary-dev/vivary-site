@@ -72,6 +72,17 @@ Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
 are in `src/app/pages.css`. Product claims still come only from
 `src/content/facts.ts`.
 
+## The product repository
+
+The app this site markets is built in `vivary-dev/Vivary-New`, checked out on
+Zo at `/home/workspace/Projects/vivary-integration`. Product claims in
+`src/content/facts.ts` cite its documents, the status ledger on the home page
+comes from its acceptance register, and its own docs point back here
+(`docs/product/multi-project/research/website-repo.md` and outcome 25). The
+repository's GitHub homepage field points at this site's preview. It stays
+private until the app is released, so public links on the site go to the
+organization page.
+
 ## Preview host
 
 A temporary preview lives at https://vivary-dev.github.io, served by GitHub

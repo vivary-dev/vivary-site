@@ -12,6 +12,32 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-09-16  session end
+
+**Did:** Hosted the preview two ways: GitHub Pages at
+https://vivary-dev.github.io from a build-only repository, and a static server
+on Zo port 3177 behind the existing sshd tunnel, which Jeff then asked to turn
+off. It is off. Connected the product repository to the site: `facts.links.product`,
+the llms.txt links, the README, and the GitHub homepage fields on
+`vivary-dev/Vivary-New` and `vivary-dev/vivary-site`, both set to the preview.
+
+**Broke / surprised me:** This session runs on Zo itself, not a separate
+sandbox. Early work happened in a clone under `/root/projects` before the real
+checkout at `/home/workspace/Projects/vivary-site` was synced to the branch.
+Both are on `feat/site-pages` now. The Zo MCP connector never connected and
+the Zo ask API timed out three times, so no Zo Site was created. A `pkill`
+pattern matched its own shell twice. The workspace AGENTS.md says previews
+are not hosted on Zo; Jeff asked for one, then asked for it off.
+
+**Decided:** The preview stays on GitHub Pages, noindex, until the domain
+and publication decision. A Zo Site, if wanted, is one line in Jeff's Zo chat.
+
+**Next:** Review the home page copy on the preview. Decide the domain. Merge
+`feat/site-pages` into `dev` when satisfied. Delete the Pages repository when
+the real site is up.
+
+---
+
 ## 2026-09-16  feat/site-pages, the design canvas
 
 **Did:** Jeff delivered the home page design as a canvas (desktop and phone
