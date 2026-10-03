@@ -59,9 +59,11 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - The bar is a site a marketing professional designed. One strong hero with
   real imagery, one first sentence a stranger understands, one primary call
   to action, and everything around it quiet.
-- Imagery is the brand system's line art and dither in `public/brand/`, and
-  Dither Kit where a chart is needed. No stock photos, no gradients, no glow,
-  no gradient blob defaults.
+- Imagery follows `docs/brand/system/README.md`: the approved tactile mascot
+  is Vivary's lead character and project-agent identity. Existing product
+  illustrations use line art and dither, with Dither Kit where a chart is
+  needed. Use the versioned mascot originals and checksum manifest. No stock
+  photos, gradients or glow. The jar remains the product mark.
 - Icons come from icons0 collections through the shadcn registry, or from
   lucide. Pick one collection per surface and keep it.
 - Quality floor: responsive to 360 pixels, visible keyboard focus, reduced
@@ -87,6 +89,12 @@ see their output produce brochures.
 
 ## What is decided
 
+- 2026-10-03: The approved mascot is Vivary's lead character and default
+  project-agent identity. `docs/brand/system/README.md` replaces older brand
+  briefs. `mascot-manifest.v1.json` pins the artwork and consumer copies.
+  Its public name is undecided. The jar, valid design tokens and accessibility
+  rules stay in place. The Little AI Company retains its skullbunny identity.
+
 - 2026-09-16: Jeff delivered the home page design as a canvas
   (`docs/design/2026-09-16-home/`, desktop and phone) and the brand system
   (`docs/brand/system/`, with `tokens.json` as the token source). The home
@@ -100,7 +108,9 @@ see their output produce brochures.
 - Three typefaces with one job each: Big Shoulders for the claim and the
   brand word, Fraunces only where the memory file speaks, Geist Mono for the
   record. The app interior, shown inside a rule frame, uses Geist Sans and
-  the app's own green-black and lime. No Inter anywhere, decided 2026-09-16.
+  the app's own green-black and lime. The website specimen uses Geist Sans.
+  The desktop app still uses Inter. Do not treat the specimen decision as a
+  completed app font migration.
   Amber is reserved for what the workspace recorded.
 - One product. The workspace commands are a part of Vivary. Nothing on the
   site calls them an earlier or separate product.

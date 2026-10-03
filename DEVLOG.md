@@ -12,6 +12,60 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  feat/mascot-brand
+
+**Plan:** Add the approved mascot as static decoration in the existing memory
+section, extend the current brand authority, verify exact copies and the real
+static export, then prepare a draft PR into dev. No deployment.
+
+**Did:** Added the exact approved hero and SVG under the versioned brand assets,
+a checksum manifest and consumer paths, and a 120px decorative hero in the
+home memory section. Rewrote the current guide around the approved lead character, voice, state,
+motion and accessibility rules. Replaced obsolete asset briefs and prompts in
+place and updated AGENTS and mark-study cross-references. The jar and TLAC
+skullbunny keep their roles.
+
+**Broke / surprised me:** The guide's Inter entry conflated the real app with
+the website specimen. Documented the existing Geist Sans specimen decision
+without changing either implementation or tokens. The site is public now and
+Vivary-New redirects to vivary-dev/vivary. Updated the repository map. The
+first isolated build rejected a node_modules symlink outside Turbopack's root.
+A frozen local install fixed that. One cache miss required a registry fetch.
+No dependency versions or lockfile entries changed.
+
+**Decided:** Reuse exact approved files. The public character name is undecided.
+No review-pack drafts or generation prompts enter public source. Created an
+isolated worktree from origin/dev with git worktree instead of branch.sh, which
+would switch the active canonical checkout. Existing checkpoints stay enabled.
+
+**Verification:** Publication scan checked 674 packages with no flags. Frozen
+install, lint, TypeScript and preview static export passed. Both master asset
+hashes and sizes match the approved originals. The served PNG is byte-identical.
+Independent source and guide review found no blocker. Real Chromium renders
+at 1440, 390 and 360px passed: no overflow or page errors, exact 120px mascot
+width, empty alt and no keyboard stop, reduced-motion static content, keyboard
+skip focus, preserved jar/hero/heading and working phone menu. Visually
+inspected desktop and both phone layouts. The mascot stays legible and quiet.
+Tall element captures include the sticky header at a scrolled offset, so the
+review evidence also includes clean phone viewport screenshots. No UI fix was
+needed. Screenshots and render-check.json are in `.tmp/mascot-review/`.
+
+Pinned shadscan 0.17.0 exited successfully, score 57/100. Its full JSON report
+is in `.tmp/mascot-review/`. Theme providers/shortcut, command menu/shortcut
+and toast providers are not added to this fixed-theme static marketing site.
+It has no data collection requiring an empty state. A custom runtime error
+boundary is outside this static image change. The existing mobile menu is
+not recognized by the audit, but opened and closed correctly in the real
+390px phone render.
+The audit's rendered accessibility advisories remain visible. This rollout
+adds no controls, status messages or text colors.
+
+**Next:** Review the draft PR into dev. Publication remains
+separate. The existing preview script force-pushes the Pages export and was
+not run.
+
+---
+
 ## 2026-09-16  session end
 
 **Did:** Hosted the preview two ways: GitHub Pages at

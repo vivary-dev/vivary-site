@@ -162,6 +162,7 @@
 .v9 .memfig figcaption { font-size: var(--t-xs); color: var(--text-3); }
 .v9 .memory-copy { display: flex; flex-direction: column; gap: 1.5rem; }
 .v9 .memory-copy .lede { max-width: none; }
+.v9 .memory-mascot { display: block; width: 120px; max-width: 100%; height: auto; }
 
 /* The app window, inside a rule frame, in the app's own palette. */
 .v9 .app-frame { border: 1px solid var(--rule); padding: 0.75rem; background: var(--pane); }

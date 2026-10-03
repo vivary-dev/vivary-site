@@ -259,6 +259,17 @@ export default function Home() {
             </figcaption>
           </figure>
           <div className="memory-copy">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="memory-mascot"
+              src="/brand/mascot/v1/lead-transparent.png"
+              width={1402}
+              height={1122}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
             <h2 className="display display-lg reveal">The memory is a file you can open.</h2>
             <p className="lede reveal">
               That is a memory file. You wrote it, or the agent proposed a line and you approved
