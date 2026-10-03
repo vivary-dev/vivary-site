@@ -12,6 +12,31 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  controlled recording review
+
+**Did:** Completed the owner's approved website folder trust and seven-hook
+review through Codex's UI. A fresh Codex/GPT-6 Astra session then reviewed the
+actual recording change at `c01e444f2c95252b28c773d23ed0fc0ee89606d9` without
+editing source. Entire tracked its one completed turn. This is a controlled
+review task, not evidence that earlier website work was captured.
+
+**Verification:** The reviewer inspected the four changed files and parent
+settings, checked Entire status and ran the focused whitespace check. It found
+no blocking source or configuration defect. The runtime sandbox failed to
+initialize, so only the displayed read-only commands received one-time approval.
+No persistent command grant was added. The review did not independently prove
+remote privacy or delivery.
+
+**Decided:** Preserve the historical app queue and all existing workers. Use
+Entire's supported review attachment for this fresh session and identify its
+checkpoint through this receipt commit's trailer. No earlier commit is rewritten.
+The private index owns remote-delivery evidence. PRs remain unmerged.
+
+**Next:** Verify private delivery of this fresh review checkpoint. Keep normal
+automatic uploads held and keep configuration distinct from demonstrated capture.
+
+---
+
 ## 2026-10-03  chore/private-recording
 
 **Did:** Added the approved dedicated private checkpoint destination to shared
