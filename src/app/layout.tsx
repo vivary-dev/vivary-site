@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  robots: PREVIEW ? { index: false, follow: false } : undefined,
+  robots: PREVIEW ? { index: false, follow: false } : { index: true, follow: true },
   title: { default: "Vivary", template: "%s · Vivary" },
   description: facts.product.line,
   openGraph: {
@@ -54,6 +54,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <noscript><style>{".v9 .reveal { opacity: 1 !important; }"}</style></noscript>
         {children}
         <Umami />
       </body>

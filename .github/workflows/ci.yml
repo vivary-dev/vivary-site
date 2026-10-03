@@ -49,6 +49,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Verify public export
+        run: node scripts/verify-public-export.mjs
+
       - name: Create shadscan report
         run: pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast > shadscan-report.json
 

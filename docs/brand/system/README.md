@@ -2,7 +2,7 @@
 
 Current direction, approved 2026-10-03. This file replaces earlier brand briefs and generation prompts. Use it with `tokens.json` and `mascot-manifest.v1.json`. Git history preserves superseded guidance. Existing brand sheets and mark studies document the shipped logo and tokens. This guide governs character identity and resolves any older conflicting imagery or font instructions.
 
-Vivary is a desktop workspace where your agents work from files you own. One window holds every project: code, research, writing, second brains, knowledge bases. It runs the coding agents you already pay for, such as Claude Code and Codex, on your machine with your keys. There is no Vivary account and no cloud control plane. Plans, memory, decisions and results are plain files. Before the agent works, Vivary hands it a bounded capsule of the files that matter. After, it leaves a receipt: what it saw, what it changed, what it left alone.
+Vivary is a desktop workspace for working with agents on files you own. It brings projects, agent chat and tools into one window. Project files and the app profile live on the host; the selected runtime or provider can receive context under your settings. Notes and instructions can be plain files, while history and settings also use a local database. Capsule and receipt examples illustrate a bounded workflow, not a guarantee about every desktop turn. Current availability and capability claims come from `src/content/facts.ts` and the verified release links it cites.
 
 Product status and availability come from the current product repository, `vivary-dev/vivary`, and the site's sourced content rules. This guide grants no permission to announce a release, price or deployment.
 
@@ -173,5 +173,5 @@ Per the asset brief: the mark on a rounded tile with its own background, because
 - Rotate or stretch the mark, straighten the waves, fill the glass, drop the sprout, or drop the door.
 - Reuse the old mint, the old navy, Bricolage Grotesque, the dome PNG, the sparkle favicon, the org hero's diamond, or the glowing strata image.
 - Use chat bubbles, sparkles, robots, brains, network graphs or generic AI glyphs anywhere.
-- Show a download button, a price or a release date.
+- Present an unsigned preview as a stable release, invent pricing or announce an unverified release date. Link downloads only to a verified public release and its installation instructions.
 - Split the tagline.

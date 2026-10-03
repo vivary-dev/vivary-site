@@ -120,7 +120,7 @@ export default function Commands() {
             />
             <div className="block">
               <Ledger rows={packages} label="Published packages" />
-              <p className="packages">Verified against the registries on {facts.shipped.verifiedOn}.</p>
+              <p className="packages">Historical installation baseline verified on {facts.shipped.verifiedOn}. These are not claims about the latest package versions.</p>
             </div>
             <p className="packages">
               <a href={facts.links.commandReference}>Command reference</a>,{" "}

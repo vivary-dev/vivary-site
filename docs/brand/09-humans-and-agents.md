@@ -1,99 +1,59 @@
-# The site is read by humans and by agents
+# Public discovery and agent access
 
-Assume both. A person opens the page in a browser. An agent fetches the same
-page for a search index, an answer engine, a chat assistant grounding an
-answer, or a coding agent deciding whether to install something. Both readers
-get the same HTML. There is no separate channel for agents that works.
+Updated 2026-10-03. The canonical site is https://vivary-dev.github.io/.
+People and agents get the same static HTML. Keep product information readable
+without JavaScript, semantic headings and named landmarks, accurate metadata,
+canonical URLs, and a sitemap containing the three public content pages.
+The generated 404 remains noindex.
 
-## What the evidence says about llms.txt
+`src/content/facts.ts` owns current product claims and links. Each page states
+preview status plainly. Distinguish the dated unsigned Windows download from
+newer dev work and a stable release. `08-product-description.md` records the
+copy boundaries. Never publish private profile data, credentials or internal
+session links.
 
-- Ahrefs analyzed 137,000 domains in May 2026. 97% of `llms.txt` files
-  received zero requests. Of the requests that arrived, AI retrieval bots were
-  1.1%. Most came from SEO audit tools checking whether the file exists.
-- A 14-day server log study across 18 named AI crawler families counted 723
-  fetches of `robots.txt` and zero of `llms.txt`.
-- Google's John Mueller, June 2025: "no AI system currently uses llms.txt."
-  Gary Illyes confirmed in July 2025 that Google does not support it and has
-  no plans to.
+Every documentation page links `/llms.txt` near the top, and the shared footer
+links it on the home page. It points to the canonical HTML, source, dated
+preview, installation instructions, command reference and published skills.
+Do not assume an agent will discover an unlinked text file. Nothing a person
+needs belongs only in agent guidance. A skill link neither installs software
+nor grants tools or permission.
 
-Sources: [Ahrefs data via No Hacks](https://nohacks.co/episode/229-does-llmstxt-work-what-137000-domains-server-logs-show),
-[Saaslinks server log study](https://saaslinks.net/blog/llms-txt-server-log-study),
-[Search Engine Roundtable on Mueller](https://www.seroundtable.com/google-ai-llms-txt-39607.html),
-[Search Engine Land](https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422).
+## Crawl policy
 
-So crawlers will not find `llms.txt` on their own. The site points them to
-it. Every documentation page carries one visible line near the top: "If you
-are an agent, read /llms.txt for agent-specific guidance." An agent that
-fetches a page and follows links will find it. `llms.txt` carries what only
-an agent needs: how to name and describe the product, what not to claim, the
-exact install command for the workspace commands, the vocabulary, and where
-the canonical pages are. The human-facing description is maintained in
-`08-product-description.md` and lives on a real page. Nothing that a person
-needs is only in `llms.txt`.
+The public site allows ordinary search crawling and user-directed retrieval.
+The previous global `Disallow: /` also blocked training bots. Preserve those
+restrictions when enabling discovery, using separate disallow rules for
+`GPTBot`, `ClaudeBot`, `Google-Extended` and `Applebot-Extended`. No positive
+AI-training Content-Signal or additional license is added.
 
-## What agents actually read
+The providers describe the controls separately:
 
-The same things search engines read, because answer engines are built on
-search indexes and on fetching pages.
+- [OpenAI crawler documentation](https://developers.openai.com/api/docs/bots)
+  distinguishes OAI-SearchBot discovery and user requests from GPTBot training.
+- [Anthropic crawler documentation](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)
+  distinguishes Claude-SearchBot and Claude-User from ClaudeBot training.
+- [Google crawler documentation](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers#google-extended)
+  says Google-Extended controls Gemini training and some grounding uses. Its
+  block therefore also limits those grounding uses. It does not block Google
+  Search inclusion.
+- [Apple crawler documentation](https://support.apple.com/en-us/119829)
+  distinguishes Applebot search from Applebot-Extended model-training use.
 
-1. `robots.txt`. Every AI crawler fetches it. It must allow the crawlers we
-   want (GPTBot, OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot,
-   Google-Extended, Bingbot) and point at the sitemap.
-2. `sitemap.xml`. Lists every page with a last-modified date.
-3. The HTML itself. The `<title>`, the meta description, the first heading,
-   and the first paragraph carry most of the weight. Agents quote the first
-   sentence that answers the question. Ours has to be the definition.
-4. Semantic structure. One `h1`, real `h2` sections, real lists, a `<dl>` or
-   `<details>` for questions and answers, `<main>` and `<nav>` landmarks. The
-   locked home page already does this. Text in images, canvases, or scripted
-   scenes is invisible. The memory scene's lines are real text in the DOM,
-   which is why it works.
-5. Structured data. JSON-LD in the head: `SoftwareApplication` for Vivary,
-   `Organization` for the maker, `FAQPage` for the question block. This is
-   the one thing an answer engine can read without guessing.
-6. Open Graph and Twitter card tags, so a shared link carries the definition
-   and the social image from the Zo brief.
-7. Plain, direct sentences. The voice rules in `AGENTS.md` are also the best
-   answer-engine practice: one idea per sentence, no adjectives, the fact
-   first.
+These are crawler instructions, not an access-control system or a guarantee
+of indexing. Review purpose changes against provider documentation before
+changing the policy.
 
-## What this means for the site
+## Publication checks
 
-The home page is locked and stays locked. The additions below sit around it
-or in its metadata. None changes candidate 9's structure or copy.
+- Build with the canonical site URL and `NEXT_PUBLIC_PREVIEW=0`.
+- Run `node scripts/verify-public-export.mjs` to check public metadata, sitemap,
+  crawler groups and local asset/link targets in the actual export.
+- Read the HTML without JavaScript. Verify the preview, installation and skill
+  links, human-readable status and JSON-LD agree.
+- Inspect desktop and phone layouts, keyboard focus and reduced motion.
+- After approved publication, fetch live HTML, robots, sitemap and changed
+  assets. Confirm their bytes match the reviewed export.
 
-| Add | Where | Why |
-| --- | --- | --- |
-| `robots.txt` allowing search and AI crawlers, with the sitemap URL | Done 2026-09-16, `src/app/robots.ts` | Without it, crawlers assume nothing and some stay away. |
-| `sitemap.xml` | Done 2026-09-16, `src/app/sitemap.ts` | Discovery and freshness. |
-| Meta description, canonical URL, Open Graph, Twitter card, social image | Done 2026-09-16 in `layout.tsx` and each page. Absolute URLs wait on `NEXT_PUBLIC_SITE_URL`. | The snippet an engine shows and the card a share shows. |
-| JSON-LD: `SoftwareApplication`, `Organization`, `FAQPage` | Done 2026-09-16 on `/` and `/what-is-vivary/` | Machine-readable definition. |
-| The product description as a real page with a question-and-answer block | Done 2026-09-16, `/what-is-vivary/` | The description has to live on a page, not only in a text file. |
-| A status line an agent can quote | On every page from `facts.product.status` | Keeps engines from claiming a download exists. |
-| One line on every documentation page pointing agents to `/llms.txt` | Done 2026-09-16, `AgentsLine` in `shell.tsx` | Crawlers do not probe for the file. A link is the only way they reach it. |
-
-The production domain is undecided. Canonical URLs, the sitemap, robots, and
-Open Graph all need it. Nothing above ships until the domain and the social
-image exist, which is the same gate as publication.
-
-## Writing rules for pages agents will quote
-
-- The first sentence of any page defines the thing. "Vivary is a desktop
-  application for working with AI agents on your own projects."
-- Answer the question in the heading. "Does Vivary need an account?" then
-  "No." then the reason.
-- One fact per sentence. Numbers and versions dated.
-- Say what is not true. "Not released." "No download." Engines repeat
-  absence badly unless it is stated.
-- Never describe the workspace commands as a separate or earlier product.
-  They are a part of Vivary.
-- Keep the same words everywhere: workspace, project, harness, host,
-  capsule, receipt, gate, handoff. An engine matches strings.
-
-## Checks before publication
-
-- Fetch the built page with `curl` and read it with no CSS or JavaScript.
-  Everything a reader needs must be in that text.
-- Validate the JSON-LD with the Schema.org validator.
-- Confirm `robots.txt` returns 200 and names the sitemap.
-- Confirm the meta description is under 160 characters and is the definition.
+`NEXT_PUBLIC_PREVIEW=1` remains available for unpublished local previews.
+`scripts/deploy-site.sh` is the public publisher. Source CI does not deploy.

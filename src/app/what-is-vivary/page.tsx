@@ -11,7 +11,7 @@ import { AgentsLine, JsonLd, Shell } from "../shell";
 export const metadata: Metadata = {
   title: "What Vivary is",
   description:
-    "Vivary is a desktop application for working with AI agents on your own projects. One window for every project. No account. Your files stay on your machine.",
+    facts.product.line,
   alternates: { canonical: "/what-is-vivary/" },
 };
 
@@ -61,7 +61,7 @@ const not: Row[] = [
   { k: "Not a platform", v: "Nothing to adopt. Not tied to one editor, one AI tool, or one model." },
   { k: "Not a course", v: "A tool for doing real work, not for learning how." },
   { k: "Not a marketplace", v: "Templates start as an offline baseline. Downloads never imply execution." },
-  { k: "Not a cloud", v: "No control plane, no telemetry from the workspace, no account." },
+  { k: "Your host", v: facts.product.dataBoundary },
 ];
 
 const faq: { q: string; a: string }[] = [
@@ -69,15 +69,15 @@ const faq: { q: string; a: string }[] = [
   { q: "Does it need an account?", a: "No. The desktop app opens without one." },
   {
     q: "Does my data leave my computer?",
-    a: "Vivary itself sends nothing. The harness you select sends model context to its provider according to your own account and settings.",
+    a: facts.product.dataBoundary,
   },
   { q: "Does it work with Claude Code?", a: "Yes. Claude Code and Codex are the first supported harnesses, through adapters." },
   { q: "Does it require Git?", a: "No. A project can use no version control, Git, or Jujutsu." },
   { q: "Is it only for developers?", a: "No. It serves coding, research, writing, and second-brain work." },
-  { q: "Can I download it?", a: "Not yet. Vivary is in development and not released. This site goes live with the app." },
+  { q: "Can I download it?", a: facts.product.status },
   {
     q: "Is it open source?",
-    a: "The workspace commands are published under MIT. The desktop application is in private development.",
+    a: "The public app source and the original command-line repository are licensed under MIT. The Windows download is an unsigned development preview.",
   },
 ];
 
@@ -106,8 +106,8 @@ export default function WhatIsVivary() {
             <div className="body">
               <p className="lede">
                 It runs the coding agents you already use, such as Claude Code and Codex, with your
-                own keys. No Vivary account. No cloud control plane. Your files, history, and memory
-                stay on your machine.
+                own authentication and provider settings. Project files and the app profile live
+                on the host. Local use needs no Vivary account.
               </p>
               <p className="lede quiet">
                 The name comes from vivarium, an old word for a small self-contained world where
@@ -116,6 +116,11 @@ export default function WhatIsVivary() {
                 the edges.
               </p>
               <p className="status">{facts.product.status}</p>
+              <p className="packages">
+                <a href={facts.links.preview}>Windows preview and release notes</a>{" · "}
+                <a href={facts.links.installGuide}>Installation instructions</a>{" · "}
+                <a href={facts.links.product}>Source and current documentation</a>
+              </p>
             </div>
           </div>
         </div>
@@ -126,8 +131,9 @@ export default function WhatIsVivary() {
           <div className="lead">
             <h2 className="display display-lg">How it works, in six steps.</h2>
             <p className="lede">
-              Before an agent works, Vivary hands it a bounded capsule of the files that matter.
-              After, it leaves a receipt: what it saw, what it changed, what it left alone.
+              The steps describe the intended workspace flow. The dated preview guide records
+              installation requirements and limitations. Check the selected runtime before
+              assuming a tool, approval mode or receipt is available.
             </p>
           </div>
           <div className="body">
@@ -155,8 +161,8 @@ export default function WhatIsVivary() {
       <Section className="chapter in">
         <div className="wrap two">
           <div className="lead">
-            <h2 className="display display-lg">What it promises.</h2>
-            <p className="lede">Each one is something you can check on your own machine.</p>
+            <h2 className="display display-lg">Product boundaries.</h2>
+            <p className="lede">Check the dated preview guide for what the downloaded build supports.</p>
           </div>
           <div className="body">
             <Ledger rows={promises} plain label="Promises" />
@@ -175,8 +181,13 @@ export default function WhatIsVivary() {
               able to install software and message an agent. You do not need to program.
             </p>
             <p className="lede quiet">
-              Existing Claude Code and Codex subscriptions are the intended first connection. The
-              desired action is one button to connect the coding agent you already have.
+              Claude Code and Codex keep their own authentication and settings. Read the
+              installation guide before choosing and connecting a runtime.
+            </p>
+            <p className="packages">
+              For reusable agent instructions, see <a href={facts.links.skills}>The Little AI Company skills collection</a>
+              {" and its "}<a href={facts.links.statechartSkill}>Statechart Design and Review skill</a>.
+              Read the skill before installing it. This website does not install skills or grant tools.
             </p>
           </div>
         </div>

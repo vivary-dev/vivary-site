@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import { facts } from "@/content/facts";
 import { Section } from "./scenes";
 import { JsonLd, Shell } from "./shell";
@@ -26,9 +27,9 @@ const jsonLd = {
       operatingSystem: "Windows",
       author: { "@type": "Organization", name: "The Little AI Company" },
       creator: { "@type": "Person", name: "Jeff Kazzee" },
-      url: "/",
+      url: `${SITE_URL}/`,
     },
-    { "@type": "Organization", name: "Vivary", url: "/", sameAs: [facts.links.org, facts.links.product, facts.links.github] },
+    { "@type": "Organization", name: "The Little AI Company", url: "https://littleaicompany.com/", sameAs: ["https://github.com/The-Little-AI-Company"] },
   ],
 };
 
@@ -62,17 +63,17 @@ const audiences = [
   {
     mark: "dome-sprout",
     name: "Writers",
-    text: "A book, a newsletter, a script. The agent reads your outline, your style notes and the last draft before it touches a word. It does not read your other projects.",
+    text: "A book, a newsletter, a script. Choose the outline, style notes and draft to share with your agent. Review your runtime permissions to control access beyond the project.",
   },
   {
     mark: "wave-globe",
     name: "Researchers",
-    text: "Sources, notes and claims stay inside the project. Ask for a summary and the answer names the files it came from.",
+    text: "Keep sources, notes and claims together in a project. Ask the agent to cite source files in its summary, then check those references.",
   },
   {
     mark: "seed-world",
     name: "Second brain keepers",
-    text: "Your notes are already the memory. Vivary reads the files you keep instead of building a memory you cannot open. Obsidian vault, plain folder, either works.",
+    text: "Keep notes in an Obsidian vault or a plain folder. Choose which files to give the agent as context, and review any proposed changes before saving them.",
   },
   {
     mark: "strata-sprout",
@@ -90,12 +91,12 @@ const agentsCards = [
   {
     ord: "02",
     name: "No account",
-    text: "There is no Vivary account and no cloud control plane. Vivary never sees your files. Nothing leaves your machine unless the agent you chose sends it, under the rules you gave it.",
+    text: facts.product.dataBoundary,
   },
   {
     ord: "03",
     name: "Plain files",
-    text: "Plans, memory, decisions and receipts are text files in the project folder. Git is optional. Sync them, back them up, or open them in another tool. Nothing is locked in.",
+    text: "Project instructions, notes and handoffs can be text files in the project folder. App history and settings also live in its local profile and database. Back up both when needed.",
   },
 ];
 
@@ -117,8 +118,8 @@ export default function Home() {
             <h1 className="display display-xl">It knows you. Because you wrote it down.</h1>
             <p className="deck">
               Vivary is a desktop workspace for people who think in files. Notes, research, drafts,
-              plans and code, each in its own project, in one window. Your agents read what you
-              wrote before they work. They leave a receipt after.
+              plans and code, each in its own project, in one window. Open a project, choose an
+              agent and keep its work beside your files.
             </p>
             <div className="cta">
               <a className="btn btn-solid" href={facts.links.product}>
@@ -130,7 +131,7 @@ export default function Home() {
             </div>
             <KV
               rows={[
-                ["status", "in development"],
+                ["status", "public Windows preview"],
                 ["platform", "windows first"],
                 ["account", "none. it runs on your machine"],
                 ["agents", "claude code, codex. yours, with your keys"],
@@ -179,9 +180,9 @@ export default function Home() {
           <div className="intro">
             <h2 className="display display-lg reveal">Before the agent works. After it is done.</h2>
             <p className="lede reveal">
-              An agent with your whole disk in front of it guesses. An agent with six files in
-              front of it reads. Vivary does the choosing before the turn starts and the accounting
-              after it ends.
+              The workspace commands support bounded context and inspectable records. These
+              examples illustrate that workflow. They do not promise an automatic receipt for
+              every turn in the downloaded desktop preview.
             </p>
           </div>
           <div className="cards cards-2 reveal">
@@ -192,9 +193,9 @@ export default function Home() {
               </div>
               <h3>The capsule</h3>
               <p>
-                Before a turn starts, Vivary hands the agent a bounded set of files: the ones that
-                matter for this conversation, and nothing else. You can open the list. You can
-                change it.
+                A capsule lists the files selected for a task. This example uses a field guide,
+                its plan and project instructions. Inspect the actual context and permissions
+                offered by the selected runtime.
               </p>
               <KV
                 rows={[
@@ -219,8 +220,9 @@ export default function Home() {
               </div>
               <h3>The receipt</h3>
               <p>
-                After the turn ends, Vivary writes down what happened. What it saw, what it
-                changed, what it left alone. It is a text file. Read it, keep it, or delete it.
+                A receipt records what a workflow saw, changed and left alone. This example
+                shows a text record you can inspect. Check the relevant command or runtime
+                documentation for the records it actually produces.
               </p>
               <KV
                 rows={[
@@ -270,16 +272,15 @@ export default function Home() {
               loading="lazy"
               decoding="async"
             />
-            <h2 className="display display-lg reveal">The memory is a file you can open.</h2>
+            <h2 className="display display-lg reveal">Project memory you can open.</h2>
             <p className="lede reveal">
-              That is a memory file. You wrote it, or the agent proposed a line and you approved
-              it. It sits in the project folder as text. Open it in any editor. Change a line and
-              the next conversation knows. Delete it and the agent forgets. There is no hidden
-              store and no account holding a copy.
+              This is an example project memory file. You can write it yourself or review a line
+              proposed by an agent. Keep instructions and handoffs in files you can inspect.
+              Conversation history is stored separately in the app profile.
             </p>
             <p className="lede reveal">
-              Memory is scoped to the project. Your field guide does not know about your grant
-              application unless you say so.
+              Choose which project files to share with an agent. Editing a memory file does not
+              erase context already sent to a provider or retained in conversation history.
             </p>
           </div>
         </div>
@@ -455,9 +456,9 @@ export default function Home() {
           <div className="lead engine-copy">
             <h2 className="display display-lg reveal">Four layers, named for the sky.</h2>
             <p className="lede reveal">
-              Underneath the window is the Vivary engine, open source: the workspace commands. It
-              is what decides which files go in the capsule, what gets written down, and what
-              needs a human before it becomes permanent.
+              The open-source workspace commands can assemble context, record work and support
+              review steps in a configured workflow. Your selected runtime controls its own
+              permissions; these commands do not guarantee approval for every desktop action.
             </p>
             <p className="reveal" style={{ margin: 0, fontSize: "var(--t-sm)" }}>
               <a className="link" href="/commands/">
@@ -476,21 +477,19 @@ export default function Home() {
           <div className="intro">
             <h2 className="display display-lg reveal">Where it is today.</h2>
             <p className="lede reveal">
-              Vivary is in development, Windows first. It is not released. This page describes
-              what it is built to do. The list below says what is working now and what is not. It
-              is updated when the build moves.
+              {facts.product.status}
             </p>
           </div>
           <div className="today reveal">
-            <Rows tight label="Working now" rows={facts.today.working.map((w) => ["working", w] as [string, string])} />
+            <Rows tight label="Available preview" rows={facts.today.working.map((w) => ["available", w] as [string, string])} />
             <Rows tight label="Not yet" rows={facts.today.notYet.map((w) => ["not yet", w] as [string, string])} />
           </div>
           <p className="lede reveal" style={{ maxWidth: "none", fontSize: "var(--t-sm)" }}>
-            The build happens in the open. Commits, decisions and the specification are on GitHub.{" "}
-            <a className="link" href={facts.links.product}>
-              Follow the build
-            </a>{" "}
-            is the only ask on this page.
+            <a className="link" href={facts.links.preview}>Windows preview and release notes</a>{" · "}
+            <a className="link" href={facts.links.installGuide}>Installation instructions</a>{" · "}
+            <a className="link" href={facts.links.product}>Current source</a>{" · "}
+            <a className="link" href={facts.links.skills}>Company skills collection</a>.
+            The skill collection is separate from the Windows download. A link does not install a skill.
           </p>
         </div>
       </Section>
