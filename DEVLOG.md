@@ -12,6 +12,35 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  chore/private-recording
+
+**Did:** Added the approved dedicated private checkpoint destination to shared
+Entire settings, retained the automatic upload hold and documented the website
+hook trust check and source-to-checkpoint delivery record. Source branch roles
+and the public website are unchanged.
+
+**Broke / surprised me:** Local routing is insufficient for Entire's web lookup.
+The service reads committed project settings. The seven installed Codex hooks
+still require client trust review, and an external MCP controller is outside
+local agent capture.
+
+**Decided:** Keep previous source and checkpoint locations intact. Preserve the
+historical shared queue for its separate review. Use the next real fresh session
+for capture verification, with no imported history or dummy coding run.
+
+**Verification:** Entire 0.10.6 generated the settings. Effective status reports
+the private dedicated destination. JSON validation and whitespace checks cover
+this configuration and documentation change. No page, dependency or build input
+changed; existing visual and build evidence remains the prior session's evidence.
+The required pinned shadscan 0.17.0 audit also exited successfully. Existing
+application-infrastructure findings and browser-only advisories remain recorded
+in the earlier website verification. This change adds no UI to re-test.
+
+**Next:** Accept the shared settings, complete the actual client's hook review
+and verify the next real website checkpoint. Upload delivery remains held.
+
+---
+
 ## 2026-10-03  feat/public-site
 
 **Plan:** Publish the approved canonical Pages site for people, search and user-directed agents after a factual/link/privacy review. Preserve the approved mascot, layout and training-crawler restrictions; do not promote unrelated source history to main.
