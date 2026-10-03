@@ -24,8 +24,12 @@ nor grants tools or permission.
 The public site allows ordinary search crawling and user-directed retrieval.
 The previous global `Disallow: /` also blocked training bots. Preserve those
 restrictions when enabling discovery, using separate disallow rules for
-`GPTBot`, `ClaudeBot`, `Google-Extended` and `Applebot-Extended`. No positive
-AI-training Content-Signal or additional license is added.
+`GPTBot`, `ClaudeBot`, `Google-Extended` and `Applebot-Extended`. The wildcard
+rule also declares `Content-Signal: search=yes, ai-train=no` using the
+[Content Signals vocabulary](https://contentsignals.org/): search is permitted
+and model training is refused. `ai-input` remains unspecified, so this change
+does not infer a new permission for that use. The specific bot blocks remain
+in place alongside the signal. Local preview mode still denies all crawling.
 
 The providers describe the controls separately:
 
@@ -48,7 +52,7 @@ changing the policy.
 
 - Build with the canonical site URL and `NEXT_PUBLIC_PREVIEW=0`.
 - Run `node scripts/verify-public-export.mjs` to check public metadata, sitemap,
-  crawler groups and local asset/link targets in the actual export.
+  crawler groups, the exact Content-Signal and local asset/link targets in the actual export.
 - Read the HTML without JavaScript. Verify the preview, installation and skill
   links, human-readable status and JSON-LD agree.
 - Inspect desktop and phone layouts, keyboard focus and reduced motion.

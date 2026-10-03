@@ -12,6 +12,20 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  feat/content-signals
+
+**Did:** Added the explicit robots policy `Content-Signal: search=yes, ai-train=no` to the public wildcard group. Kept AI input permission unspecified, all four existing training-bot blocks, the canonical sitemap and the preview deny-all branch. Extended the public-export gate and current policy documentation.
+
+**Broke / surprised me:** Installed Next 16.3.5 documentation supports non-standard directives through the typed per-rule `other` field, added in 16.3.0. A custom response route or unsupported metadata property was unnecessary.
+
+**Decided:** Declare the requested search/training policy without adding AI input consent, new hosting, headers that the static host cannot emit, or unrelated UI. Content Signals are declarative crawler policy, not access control or an indexing guarantee. The Cloudflare score must be measured after publication rather than inferred from source.
+
+**Validation:** Lint (excluding the existing git-ignored temporary export), TypeScript, dependency publication scan (674 packages, none flagged), canonical static build and public-export gate passed. A loopback HTTP fetch of the exported robots file returned 200 text/plain, 226 bytes, SHA-256 `93cde7bf4343813adb215142ad3818fc07c67f5cff1965cf61b88436ce23d9a2`, with the exact wildcard signal, four disallow agents and canonical sitemap. Executing the preview branch through the installed Next serializer returned only deny-all rules. Required shadscan 0.17.0 remains 57/100 with the previously recorded app-infrastructure findings; no UI changes are warranted for this policy-only change. Existing Big Shoulders fallback-metrics build warning remains.
+
+**Next:** Review the PR into dev. Publication and live checker verification remain separate approved steps owned by the rollout coordinator.
+
+---
+
 ## 2026-10-03  feat/public-site
 
 **Plan:** Publish the approved canonical Pages site for people, search and user-directed agents after a factual/link/privacy review. Preserve the approved mascot, layout and training-crawler restrictions; do not promote unrelated source history to main.

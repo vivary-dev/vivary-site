@@ -12,7 +12,11 @@ export default function robots(): MetadataRoute.Robots {
   }
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
+      {
+        userAgent: "*",
+        allow: "/",
+        other: { "Content-Signal": "search=yes, ai-train=no" },
+      },
       // Public discovery does not grant new model-training permission.
       // Keep these blocked as they were under the previous global disallow.
       // Google-Extended also controls Gemini grounding, but not Google Search.
