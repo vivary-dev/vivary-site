@@ -1,6 +1,10 @@
+# Vivary brand system
+
+Current direction, approved 2026-10-03. This file replaces earlier brand briefs and generation prompts. Use it with `tokens.json` and `mascot-manifest.v1.json`. Git history preserves superseded guidance. Existing brand sheets and mark studies document the shipped logo and tokens. This guide governs character identity and resolves any older conflicting imagery or font instructions.
+
 Vivary is a desktop workspace where your agents work from files you own. One window holds every project: code, research, writing, second brains, knowledge bases. It runs the coding agents you already pay for, such as Claude Code and Codex, on your machine with your keys. There is no Vivary account and no cloud control plane. Plans, memory, decisions and results are plain files. Before the agent works, Vivary hands it a bounded capsule of the files that matter. After, it leaves a receipt: what it saw, what it changed, what it left alone.
 
-The product is in development, Windows first, not released. Nothing made with this system may imply a download, a release date or a price.
+Product status and availability come from the current product repository, `vivary-dev/vivary`, and the site's sourced content rules. This guide grants no permission to announce a release, price or deployment.
 
 This system replaces the retired command line product's identity (mint on navy, Bricolage Grotesque, the dome PNG). Keep nothing from it except the name and the engine's four layer names: tropo, strato, ozone, exo.
 
@@ -13,6 +17,104 @@ Write for professionals who can install software and message an agent. Do not as
 - Name the agents the user already has. Claude Code and Codex are the user's tools, not features of Vivary.
 - The four engine layers are named for the sky. Use the names in lowercase in running text: tropo, strato, ozone, exo.
 
+## Mascot and agent character
+
+The approved Vivary mascot review pack v1, dated 2026-10-03, establishes
+Vivary's lead character and the identity behind its default project agent.
+Its public name is undecided. Use "Vivary mascot" in asset descriptions until
+the name is selected.
+
+Vivary is the product. The Little AI Company is its maker and keeps its
+skullbunny identity. The jar remains Vivary's logo, favicon and app icon.
+The mascot carries Vivary's character and agent voice across the website,
+GitHub and app. The jar carries product identification. Other company products
+do not inherit Vivary's character.
+
+### Approved artwork
+
+The canonical hero is [lead-transparent.png](assets/Mascot/v1/lead-transparent.png).
+Keep its broad charcoal felt body, asymmetric brown branch horns, olive leaf
+on viewer right, two ochre arm stripes on viewer left, calm face and olive
+notebook. Preserve its proportions and orientation. Do not mirror, recolor,
+stretch, crop off the horns or add a background treatment.
+
+The approved [lead-icon.svg](assets/Mascot/v1/lead-icon.svg) is a separate
+simplified drawing with a bone tile. It is intended for small decorative
+placements. It omits the hero's texture and stripes by design. It is not a
+replacement favicon or a vector trace of the hero.
+
+The visual system uses the approved tactile mascot for character identity
+and line art and dither for product diagrams and the existing vivarium hero.
+This replaces the earlier line-art-only imagery direction. The mascot's
+natural olive and ochre colors belong to its artwork. They do not add UI
+color tokens or change the amber and lime rules.
+Scale the originals in layout. Do not generate new art, poses, crops, icon
+exports or animation frames as part of this rollout.
+
+[mascot-manifest.v1.json](mascot-manifest.v1.json) records exact byte sizes,
+SHA-256 hashes and intended consumers. The versioned masters live here.
+Consumer copies must match their hashes. New approved art gets a new version
+and a manifest update. The private review sheet, naming draft, generation
+prompts and draft persona contract are not public brand assets.
+
+### Placements
+
+| Consumer | Placement |
+| --- | --- |
+| Website home | Static 120px hero above the existing memory-section heading. Keep the vivarium hero, jar lockup, page copy and calls to action. |
+| Product GitHub README | Canonical hero beside the product introduction. Keep the product mark and existing project facts. |
+| Desktop app | Static 48px icon in the empty conversation. Keep the composer, settings and project controls. |
+| Other Vivary repositories | Link to this guide where relevant. Assess each repository before adding art. |
+| Other company products | Keep their own identities. Do not apply this mascot based on common ownership alone. |
+
+These are the current rollout destinations, not a statement that each has
+shipped. The manifest and the relevant pull requests identify the copies.
+
+### Agent voice and behavior
+
+The character gives Vivary's project agent a calm, resourceful woodland-scout
+identity. Express that through useful work and concise language. Use
+short, concrete sentences about the user's work. State what was checked,
+what changed and what still needs a decision. Keep personality independent
+of the model or provider. Avoid fantasy roleplay, baby talk, invented feelings,
+guilt, claims of unlimited ability or claims that the mascot grants access.
+
+For example: "I found the relevant files. I am checking the two conflicting
+requirements." A blocked response names the problem and next action:
+"The connection expired. The draft is saved. Reconnect the account to continue."
+A completion message names the deliverable and checks. Do not call a tool
+response a completed task without verifying the result.
+
+This is a voice and presentation contract. It does not install an agent,
+add tools, grant permissions or create durable memory. The host owns real
+execution, authentication, approval, cancellation and run state.
+
+### State and motion
+
+The current image placements are static and decorative for accessibility.
+They introduce the character without representing an activity or run status.
+Future stateful appearances must follow verified host events:
+
+| State | Required accompanying information |
+| --- | --- |
+| Working | A real admitted run and its current stage. |
+| Waiting | What is awaited, including whether it is a user answer, a connection or an external process. |
+| Finished | A verified deliverable and completion criteria. |
+| Blocked | The reason and a safe next action. |
+| Approval | The exact proposed action and the host's approve and cancel controls. The character cannot approve. |
+| Stopped | Distinguish a requested stop from confirmed termination. |
+
+Write the state in text. Never communicate it only by pose or color. Any
+future motion must be brief, interruptible and triggered by a real transition.
+No infinite bouncing, fabricated typing, fake percentages or sadness when
+unused. Reduced motion keeps the same static content and controls.
+
+Decorative art uses empty alt text and stays out of the keyboard order. A
+future interactive character needs a visible keyboard focus, an accessible
+name and a labeled Activity alternative. Never make the character the only
+way to find status, approvals or cancellation. No interactive mascot or
+state wiring is implemented by these assets.
+
 ## The mark
 
 The mark is a jar: glass around wavy strata, a sprout growing inside, a door at the base. It is the vivarium as anyone keeps one on a shelf. Read it as: a small contained world (the glass), the layers (the strata), something alive that grows (the sprout), the gate the agent passes through (the door). One ink, always the ground's text color.
@@ -21,7 +123,7 @@ The mark is a jar: glass around wavy strata, a sprout growing inside, a door at 
 - Files: `assets/Marks/vivary-mark-jar-bone.svg` (site), `-lime.svg` and `-apptext.svg` (app), `-black.svg` (white and print). One flattened path on a 64 unit canvas, the jar body at units 14 to 50 across and 8 to 56 down.
 - One mark at every size. There is no small cut. At 16 px the jar is a jar and the sprout is a dot. Never a lockup below 24 px.
 - Clear space is the mark's own height on every side. The shipped lockup SVGs carry this space in their viewBox. Nothing enters it.
-- The jar has a family. Six more marks in the same language (a dome of strata with a sprout, a cloche over wavy strata, the strata V with a sprout, a wave globe, a seed world, the cloche vivarium) are in `assets/Marks` for section objects, empty states and illustration, never as a second logo. The section "Mark directions" records them and the choice.
+- The jar has a family. Six more marks in the same language (a dome of strata with a sprout, a cloche over wavy strata, the strata V with a sprout, a wave globe, a seed world, the cloche vivarium) are in `assets/Marks` for section objects and product illustration, never as a second logo or an agent character. The section "Mark directions" records them and the choice.
 
 ## Wordmark and lockups
 
@@ -49,8 +151,8 @@ The site palette is locked (candidate 9, 2026-09-13) and is the brand reference.
 - `display`: Big Shoulders. The claim and the brand word. Nothing else. 800 for the hero and the brand word, 700 for section heads. Optical size 72 for headlines, 40 for the brand word. Line height 0.9 for the hero, 0.95 for section heads.
 - `speaks`: Fraunces italic 400, SOFT 30, WONK 1, tracking -0.006em. Only where the memory file speaks. Never for UI, never for the claim.
 - `record`: Geist Mono. Everything else on the site: body, deck, ledgers, nav, buttons, captions, code. 500 for buttons, 400 elsewhere. Tabular numerals for counts. A ledger is key in `amber`, value in `text`, lists inside a value in `text-2`.
-- `app`: Inter, per the app's own interior rules. Inside the app Big Shoulders appears only in the wordmark.
-- The four font files are in `fonts/` and listed in tokens.json. Google Fonts serves the same families on the site.
+- `app`: Inter in the desktop app. The website's drawn app specimen uses Geist Sans, per the 2026-09-16 site decision in `AGENTS.md`. These are separate consumers. This mascot rollout does not change either font. Inside the app Big Shoulders appears only in the wordmark.
+- The four source font files are in `fonts/` and listed in `tokens.json`. That file retains the desktop app's Inter token. The site loads Geist Sans for its app specimen and uses Big Shoulders, Fraunces and Geist Mono for the surrounding page. Typography is not fully unified across the two implementations.
 
 ## Windows app icon
 
@@ -58,7 +160,7 @@ Per the asset brief: the mark on a rounded tile with its own background, because
 
 ## Hero illustration
 
-`assets/Hero/vivary-hero-vivarium.svg` is the vivarium in cross section for the home page: a glass cloche over four strata, ferns and sprouts, stones, a door at the edge of the world, and a label leaning on the plate with three lines, the last in amber. Line art and dither only, in `text`, `text-2` and `text-3` on `ground`. Amber appears once, on the recorded line. PNG and WebP at 1600 by 900 are beside it. It is drawn to sit in the 7fr column beside the headline or to replace the memory scene on a page that needs an image.
+`assets/Hero/vivary-hero-vivarium.svg` is the vivarium in cross section for the home page: a glass cloche over four strata, ferns and sprouts, stones, a door at the edge of the world, and a label leaning on the plate with three lines, the last in amber. This product illustration uses line art and dither, in `text`, `text-2` and `text-3` on `ground`. Amber appears once, on the recorded line. PNG and WebP at 1600 by 900 are beside it. It is drawn to sit in the 7fr column beside the headline or to replace the memory scene on a page that needs an image.
 
 ## Social preview
 
