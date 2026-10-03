@@ -12,6 +12,30 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  routine recording delivery
+
+**Did:** Verified that the approved fresh review checkpoint reaches the private
+checkpoint destination during an ordinary source push. The supported pre-push
+hook reported successful transfer, the local queue cleared, and the GitHub and
+Entire checkpoint ref object IDs match. The private index holds the receipt.
+
+**Decided:** The website Git family has no historical backlog and can enable
+routine delivery locally. The app's separate 16-checkpoint historical queue
+stays held. Shared settings retain the safe upload hold for new checkouts until
+their own queue and project scope are checked. Existing workers stay intact.
+
+**Verification:** Merged current dev and retained both development log entries.
+The normal source push delivered the one approved checkpoint without importing
+history or manually changing queue markers. The CLI flag to clear an upload
+hold does not set an existing false value to true in 0.10.6; the documented local
+JSON setting does. Remote storage is verified; a website web trail link remains
+unverified.
+
+**Next:** Complete CI and the authorized PR merge. Start future coding work in a
+fresh supported project session and verify its checkpoint before delivery.
+
+---
+
 ## 2026-10-03  controlled recording review
 
 **Did:** Completed the owner's approved website folder trust and seven-hook
@@ -63,6 +87,20 @@ in the earlier website verification. This change adds no UI to re-test.
 
 **Next:** Accept the shared settings, complete the actual client's hook review
 and verify the next real website checkpoint. Upload delivery remains held.
+
+---
+
+## 2026-10-03  feat/search-copy
+
+**Did:** Rewrote the three public pages around desktop use, preview setup, prerequisites, provider/data boundaries and terminal workspace commands. Kept the approved layout, mascot, full brand tagline and robots policy. Gave each route a descriptive title, description and matching social metadata. The home CTA now opens the dated preview release. Product FAQ markup comes from the visible answers. Removed the nonvisible creator claim from home structured data and extended export checks for unique metadata and canonical social URLs.
+
+**Evidence:** Read the current public app README, CLI command reference, dated original CLI quickstart and the September 22 `INSTALL-WINDOWS.md` release asset. The download remains unsigned Windows x64 source `9884670`; current development is separate. Preserved the explicit noninteractive npm and uv 0.4.2 commands. Independent inspection of the published npm launcher and Python 0.4.2 wheel confirmed the forwarded init arguments and --no-wizard flag. The npm path needs Python plus uv or pipx. No package versions changed and no CLI installation was executed.
+
+**Broke / surprised me:** Current copy still used internal acceptance terminology and implied bundled features were universal desktop behavior. It now names the remaining preview workflows and runtime-owned permissions. Both requested writing skills were read, but packaged references for the writing patterns, detailed clear-writing guide, frontend standards/exceptions and SEO rules failed through the skill provider. Applied the available main instructions and current primary Google Search documentation instead, without claiming a full checklist audit.
+
+**Validation:** Publication scan (674 packages, none flagged), frozen dependency install, lint excluding the existing git-ignored temporary export, TypeScript, static build and public-export gate passed. Rendered all three pages at 1440, 390 and 360 pixels, with 18 PNGs and a 12-check receipt including JavaScript-disabled pages. Verified no horizontal overflow or page errors, keyboard skip links, menu Enter/Escape, reduced-motion configuration, image alternatives, named links, exact visible FAQ/schema agreement and internal fragment targets. Visually inspected desktop home and all three phone pages. Nine external link targets returned HTTP 200. The npm website blocked the scripted request with 403, while the official npm registry returned 200 and confirmed pinned version 0.4.2. Pinned shadscan 0.17.0 stays at 57/100 with existing app-infrastructure findings. The existing Big Shoulders fallback-metrics warning remains. Search or ranking gains are not claimed.
+
+**Next:** Independent review and PR into dev. The rollout coordinator owns merge, publication and live verification.
 
 ---
 

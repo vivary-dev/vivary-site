@@ -17,9 +17,19 @@ entire agent list
 ```
 
 The destination must be `vivary-dev/vivary-workbench-handoff`, with capture enabled
-and the `git-refs` backend. Keep automatic uploads held with `push_sessions:false`
-until the shared historical queue has its separate review and authorization.
-Linked worktrees share that queue. Do not bypass the hold with raw ref pushes.
+and the `git-refs` backend. Shared settings default to an upload hold. Check the
+Git family's queue before enabling routine delivery: linked worktrees share it.
+If it contains historical checkpoints without upload approval, keep
+`push_sessions:false` until that backlog is separately reviewed.
+
+For an approved project queue with no unapproved backlog, set the documented
+`strategy_options.push_sessions` value to `true` in ignored
+`.entire/settings.local.json`. Preserve the other local settings. Entire 0.10.6's
+`--skip-push-sessions=false` flag does not clear an existing hold. The normal
+pre-push hook then delivers checkpoints to the dedicated private destination.
+Verify the queue clears and the checkpoint is retrievable after the source push.
+The website's approved fresh review passed this check on October 3; the app's
+separate historical queue remains held.
 
 Use `entire agent add codex` to install the seven Codex hooks. Read the discovered
 hook path in status; a linked worktree may use the root checkout's file. Complete
@@ -33,8 +43,8 @@ At delivery, keep the source commit and verify its real checkpoint with
 Record PR, source commit, execution location, native agent/session, checkpoint ID,
 trail URL, capture state and upload state in the private index. Local capture and
 remote delivery are separate. Verify the web link after an authorized real future
-checkpoint reaches the destination; no fresh website capture is claimed by this
-configuration change.
+checkpoint reaches the destination. The private index distinguishes the verified
+fresh website review and storage receipt from an unverified website web trail.
 
 The [Vivary contributor guide](https://github.com/vivary-dev/vivary/blob/dev/docs/ENTIRE.md)
 owns the common setup and controller limitations. A controller editing Zo through

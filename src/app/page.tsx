@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { SITE_URL } from "@/lib/site";
 import { facts } from "@/content/facts";
 import { Section } from "./scenes";
@@ -9,12 +9,11 @@ import { JsonLd, Shell } from "./shell";
 // for, capsule and receipt, the memory file, the window, the agents, the
 // four layers, and where the build is today. Product claims come from facts.
 
-export const metadata: Metadata = {
-  title: { absolute: "Vivary knows you because you wrote it down" },
-  description:
-    "Vivary is a desktop workspace where your agents work from the files you own. It knows you. Because you wrote it down.",
-  alternates: { canonical: "/" },
-};
+export const metadata = pageMetadata(
+  "Vivary | Desktop workspace for AI agents",
+  "Work with AI agents, conversations and project files in one desktop workspace. Explore Vivary and its unsigned Windows preview for writing, research and code.",
+  "/",
+);
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,7 +25,6 @@ const jsonLd = {
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Windows",
       author: { "@type": "Organization", name: "The Little AI Company" },
-      creator: { "@type": "Person", name: "Jeff Kazzee" },
       url: `${SITE_URL}/`,
     },
     { "@type": "Organization", name: "The Little AI Company", url: "https://littleaicompany.com/", sameAs: ["https://github.com/The-Little-AI-Company"] },
@@ -72,38 +70,38 @@ const audiences = [
   },
   {
     mark: "seed-world",
-    name: "Second brain keepers",
+    name: "Note keepers",
     text: "Keep notes in an Obsidian vault or a plain folder. Choose which files to give the agent as context, and review any proposed changes before saving them.",
   },
   {
     mark: "strata-sprout",
-    name: "Builders",
-    text: "Claude Code and Codex run here the same way they run in your terminal, with your keys and your permission settings. The plan and the decisions sit next to the code as files.",
+    name: "Developers",
+    text: "Keep code, plans and decisions in a project. Connect a supported coding runtime, ask it to inspect a change, and review its edits and test results.",
   },
 ];
 
 const agentsCards = [
   {
     ord: "01",
-    name: "Runs the agents you already pay for",
-    text: "Claude Code and Codex are your tools, installed on your machine, on your subscription. Vivary shows what the one you picked can actually do and keeps unknown states unknown.",
+    name: "Connect your agent tools",
+    text: "Install and authenticate Claude Code or Codex separately, then check runtime readiness in Settings. Provider accounts, tools and permissions belong to the selected runtime.",
   },
   {
     ord: "02",
-    name: "No account",
+    name: "Know where context goes",
     text: facts.product.dataBoundary,
   },
   {
     ord: "03",
-    name: "Plain files",
+    name: "Keep files and history",
     text: "Project instructions, notes and handoffs can be text files in the project folder. App history and settings also live in its local profile and database. Back up both when needed.",
   },
 ];
 
 const layers: [string, string][] = [
   ["tropo", "What the workspace knows. Your files, indexed and typed, so the engine can tell a plan from a draft from a source."],
-  ["strato", "One visible state. The boundaries between projects, and the loop a turn runs in: capsule, work, receipt."],
-  ["ozone", "Review. A change that would last, to memory, to a plan, to a rule, waits for you."],
+  ["strato", "Workspace state and policy decisions in configured command workflows."],
+  ["ozone", "Review rules and human gates for configured workflows. The runtime still owns its permissions."],
   ["exo", "Claims and conflicts. When more than one agent works in a project, who holds which file, and what happens when two want the same one."],
 ];
 
@@ -115,15 +113,16 @@ export default function Home() {
       <Section id="top" className="hero in">
         <div className="wrap">
           <div className="hero-copy">
-            <h1 className="display display-xl">It knows you. Because you wrote it down.</h1>
+            <h1 className="display display-xl">Your projects. Your AI agents.</h1>
             <p className="deck">
-              Vivary is a desktop workspace for people who think in files. Notes, research, drafts,
-              plans and code, each in its own project, in one window. Open a project, choose an
-              agent and keep its work beside your files.
+              Vivary is a desktop workspace for working with AI agents on your own projects.
+              Keep conversations beside your notes, research, drafts and code. Use Claude Code
+              or Codex with its own account and permissions.
             </p>
+            <p className="cap">It knows you. Because you wrote it down.</p>
             <div className="cta">
-              <a className="btn btn-solid" href={facts.links.product}>
-                Follow the build on GitHub
+              <a className="btn btn-solid" href={facts.links.preview}>
+                Get the Windows preview
               </a>
               <a className="btn" href="#how">
                 See how it works
@@ -131,10 +130,10 @@ export default function Home() {
             </div>
             <KV
               rows={[
-                ["status", "public Windows preview"],
-                ["platform", "windows first"],
-                ["account", "none. it runs on your machine"],
-                ["agents", "claude code, codex. yours, with your keys"],
+                ["status", "unsigned Windows preview"],
+                ["platform", "Windows x64"],
+                ["account", "no Vivary account for local use"],
+                ["agents", "Claude Code and Codex, separately installed"],
               ]}
             />
           </div>
@@ -155,11 +154,11 @@ export default function Home() {
       <Section id="for" className="sec">
         <div className="wrap stack">
           <div className="intro">
-            <h2 className="display display-lg reveal">Made for people who write things down.</h2>
+            <h2 className="display display-lg reveal">Writing, research, notes and code.</h2>
             <p className="lede reveal">
-              Most agent tools were built for code and then pointed at everything else. Vivary
-              starts from the other end. A project is a folder of things you wrote. Code is one
-              kind of project. It is not the only kind.
+              Start with a project folder and a task. Ask an agent to revise a draft, compare
+              research notes or work on code. These are ways to use the workspace, with tools
+              and access determined by the runtime you choose.
             </p>
           </div>
           <div className="cards reveal">
@@ -178,7 +177,7 @@ export default function Home() {
       <Section id="how" className="sec">
         <div className="wrap stack">
           <div className="intro">
-            <h2 className="display display-lg reveal">Before the agent works. After it is done.</h2>
+            <h2 className="display display-lg reveal">Choose context. Review the record.</h2>
             <p className="lede reveal">
               The workspace commands support bounded context and inspectable records. These
               examples illustrate that workflow. They do not promise an automatic receipt for
@@ -289,15 +288,15 @@ export default function Home() {
       <Section id="projects" className="sec">
         <div className="wrap stack">
           <div className="intro">
-            <h2 className="display display-lg reveal">One window. Every project.</h2>
+            <h2 className="display display-lg reveal">Projects, conversations and files.</h2>
             <p className="lede reveal">
-              Projects on the left. One conversation in the middle. Files open beside it when you
-              ask. A project can hold several conversations, each with its own history and its
-              own context.
+              The workspace brings project conversations and files together. This illustration
+              shows the intended arrangement, not a screenshot of the Windows preview. Read the
+              preview guide for the downloaded build and its remaining limits.
             </p>
           </div>
 
-          <div className="app-frame reveal" aria-label="The Vivary window, drawn" role="img">
+          <div className="app-frame reveal" aria-label="Illustration of project navigation, an agent conversation and a file in Vivary" role="img">
             <div className="app" aria-hidden="true">
               <div className="app-nav">
                 <div className="rail">PROJECTS</div>
@@ -412,22 +411,22 @@ export default function Home() {
             <div className="note">
               <div className="key">conversations</div>
               <p>
-                Each project holds several. Start another when the context is full or the work is
-                separate. The old one stays where it was.
+                Keep separate tasks in separate conversations. Ask for a handoff when you need
+                to carry decisions and unfinished work into another conversation.
               </p>
             </div>
             <div className="note">
               <div className="key">files</div>
               <p>
-                Open beside the conversation when you ask. Reading a file does not send it to the
-                model. Adding it to the conversation is a separate, visible step.
+                Keep project files available while you work. Check what context you send to the
+                selected runtime and what file access its permissions allow.
               </p>
             </div>
             <div className="note">
               <div className="key">control</div>
               <p>
-                Approve, decline and Stop stay in view while the agent works. The agent you chose
-                keeps its own tools and permission rules. Vivary does not add a second set.
+                Review permission requests from the runtime you selected. Check its approval
+                mode before starting work, and use Stop when you need to interrupt a run.
               </p>
             </div>
           </div>
@@ -437,7 +436,7 @@ export default function Home() {
       <Section className="sec">
         <div className="wrap stack">
           <h2 className="display display-lg reveal" style={{ maxWidth: "22ch" }}>
-            Your agents. Your keys. Your machine.
+            Agent setup and your data.
           </h2>
           <div className="cards cards-3 reveal">
             {agentsCards.map((c) => (
@@ -454,7 +453,7 @@ export default function Home() {
       <Section id="engine" className="sec">
         <div className="wrap two">
           <div className="lead engine-copy">
-            <h2 className="display display-lg reveal">Four layers, named for the sky.</h2>
+            <h2 className="display display-lg reveal">Workspace commands for context and review.</h2>
             <p className="lede reveal">
               The open-source workspace commands can assemble context, record work and support
               review steps in a configured workflow. Your selected runtime controls its own
@@ -462,7 +461,7 @@ export default function Home() {
             </p>
             <p className="reveal" style={{ margin: 0, fontSize: "var(--t-sm)" }}>
               <a className="link" href="/commands/">
-                Read about the commands
+                Explore the workspace commands
               </a>
             </p>
           </div>
@@ -475,7 +474,7 @@ export default function Home() {
       <Section id="status" className="sec">
         <div className="wrap stack">
           <div className="intro">
-            <h2 className="display display-lg reveal">Where it is today.</h2>
+            <h2 className="display display-lg reveal">Windows preview: download and limits.</h2>
             <p className="lede reveal">
               {facts.product.status}
             </p>
@@ -489,6 +488,7 @@ export default function Home() {
             <a className="link" href={facts.links.installGuide}>Installation instructions</a>{" · "}
             <a className="link" href={facts.links.product}>Current source</a>{" · "}
             <a className="link" href={facts.links.skills}>Company skills collection</a>.
+            Read <a className="link" href="/what-is-vivary/">setup steps and preview limits</a> before starting.
             The skill collection is separate from the Windows download. A link does not install a skill.
           </p>
         </div>
