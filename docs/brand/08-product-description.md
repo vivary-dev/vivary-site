@@ -10,7 +10,7 @@ It brings conversations and project files into one window. It is made by The
 Little AI Company. Local desktop use needs no Vivary account.
 
 A public, unsigned Windows x64 preview is available. Development continues,
-and full desktop acceptance is incomplete. Link the dated preview release and
+and some desktop workflows still need testing. Link the dated preview release and
 its installation instructions from `facts.links`. Do not use GitHub's latest
 release shortcut for a prerelease. Newer dev code is not proof that a feature
 ships in the downloadable preview.

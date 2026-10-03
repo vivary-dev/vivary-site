@@ -7,7 +7,7 @@ Vivary is a desktop workspace for working with AI agents on your own projects. I
 
 ## Current availability
 
-A public, unsigned Windows x64 preview is available. Development continues; full desktop acceptance is incomplete. The linked September 22 preview was built from source 9884670. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
+A public, unsigned Windows x64 preview is available. Development continues. Some desktop workflows still need testing. The linked September 22 preview was built from source 9884670. It is a portable ZIP with no setup wizard. The desktop app needs no global Node, Python or source checkout, but the chosen coding CLI must be installed and authenticated separately. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
 
 - Windows preview, release notes and checksum: https://github.com/vivary-dev/vivary/releases/tag/desktop-preview-2026-09-22
 - Installation instructions for that download: https://github.com/vivary-dev/vivary/releases/download/desktop-preview-2026-09-22/INSTALL-WINDOWS.md
@@ -26,7 +26,7 @@ The jar remains Vivary's product mark. The approved mascot is the lead character
 ## Canonical human-readable pages
 
 - Overview and current preview: https://vivary-dev.github.io/
-- Product boundaries, questions and skill links: https://vivary-dev.github.io/what-is-vivary/
+- Windows preview setup, product boundaries, questions and skill links: https://vivary-dev.github.io/what-is-vivary/
 - Workspace commands and dated installation baseline: https://vivary-dev.github.io/commands/
 - Sitemap: https://vivary-dev.github.io/sitemap.xml
 
