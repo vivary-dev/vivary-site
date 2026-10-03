@@ -52,9 +52,9 @@ export const facts = {
   // Public GitHub prerelease and its installation asset, verified 2026-10-03.
   product: {
     name: "Vivary",
-    line: "A desktop workspace where your agents work from files you own.",
+    line: "A desktop workspace for working with AI agents on your own projects.",
     status:
-      "A public, unsigned Windows x64 preview is available. Development continues; full desktop acceptance is incomplete.",
+      "A public, unsigned Windows x64 preview is available. Development continues. Some desktop workflows still need testing.",
     previewTag: "desktop-preview-2026-09-22",
     previewPublished: "2026-09-22",
     previewSource: "9884670",
@@ -93,7 +93,7 @@ export const facts = {
       "public app source under the MIT license",
     ],
     notYet: [
-      "a stable desktop release with completed acceptance",
+      "a stable desktop release",
       "a guarantee that newer dev changes are in the September preview",
       "verified support for every provider, tool or workflow",
       "an automatic installation from a website or skill link",
@@ -109,6 +109,7 @@ export const facts = {
     installGuide: "https://github.com/vivary-dev/vivary/releases/download/desktop-preview-2026-09-22/INSTALL-WINDOWS.md",
     skills: "https://github.com/The-Little-AI-Company/skills",
     statechartSkill: "https://github.com/The-Little-AI-Company/skills/blob/main/skills/design/statechart-design-review/SKILL.md",
+    commandSource: "https://github.com/vivary-dev/vivary-cli",
     commandReference: "https://github.com/vivary-dev/vivary-cli/blob/dev/docs/COMMANDS.md",
     pypi: "https://pypi.org/project/create-vivary/",
     npm: "https://www.npmjs.com/package/@vivary/create",

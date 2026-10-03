@@ -5,11 +5,22 @@ import { join } from "node:path";
 const origin = "https://vivary-dev.github.io";
 const pages = ["/", "/commands/", "/what-is-vivary/"];
 const read = (file) => readFileSync(join("out", file), "utf8");
+const titles = new Set();
+const descriptions = new Set();
 for (const route of pages) {
   const html = read(`${route.slice(1)}index.html`);
   assert(!/<meta[^>]+name="robots"[^>]+noindex/.test(html), `${route} must be indexable`);
   assert(html.includes(`rel="canonical" href="${origin}${route}"`), `${route} canonical`);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1, `${route} needs one h1`);
+  const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  const description = html.match(/<meta name="description" content="([^"]+)"/ )?.[1];
+  assert(title && description, `${route} needs a title and description`);
+  assert(!titles.has(title) && !descriptions.has(description), `${route} needs distinct metadata`);
+  titles.add(title);
+  descriptions.add(description);
+  assert(html.includes(`property="og:title" content="${title}"`), `${route} social title must match`);
+  assert(html.includes(`property="og:description" content="${description}"`), `${route} social description must match`);
+  assert(html.includes(`property="og:url" content="${origin}${route}"`), `${route} social URL must be canonical`);
   assert(html.includes("/llms.txt"), `${route} must link agent guidance`);
   for (const [, reference] of html.matchAll(/(?:src|href)="(\/[^"\s]*)"/g)) {
     const path = decodeURIComponent(new URL(reference, origin).pathname);
