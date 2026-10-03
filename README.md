@@ -104,7 +104,10 @@ The former `deploy-preview.sh` stops with a pointer to the public publisher,
 so an old command cannot restore noindex on the canonical site. An unpublished
 local preview can still use `NEXT_PUBLIC_PREVIEW=1`. Set
 `NEXT_PUBLIC_SITE_URL` explicitly when testing an alternative local origin.
-The normal build defaults to the chosen public address.
+The normal build defaults to the chosen public address. Its robots wildcard
+allows search and declares `Content-Signal: search=yes, ai-train=no`. AI input
+permission remains unspecified and the four specific training-crawler blocks
+remain in place. See `docs/brand/09-humans-and-agents.md` for the policy.
 
 `wrangler.toml` records the previous Cloudflare proposal. It does not deploy
 anything and is not the current publishing route. No custom domain or DNS
