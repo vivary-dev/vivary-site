@@ -1,16 +1,16 @@
-// The production domain is undecided. Absolute URLs (canonical, sitemap,
-// Open Graph) come from NEXT_PUBLIC_SITE_URL at build time. Without it the
-// build uses the local preview origin, which is visibly not production.
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3177").replace(/\/$/, "");
+// Jeff selected this public canonical address on 2026-10-03. Absolute URLs
+// for canonical links, sitemap and Open Graph use it unless a local build
+// explicitly supplies another origin. The public publisher fixes this value.
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
 
-// A preview host is not the site. Set NEXT_PUBLIC_PREVIEW=1 for any build
-// that goes to a temporary address: every page carries noindex and robots
-// disallows all crawling, so nothing is published before the app ships.
+// Explicit local/review builds can opt out of indexing. The public publisher
+// sets NEXT_PUBLIC_PREVIEW=0. Preview mode never changes the canonical host
+// by itself.
 export const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW === "1";
 
 // Last substantive change per route, for the sitemap.
 export const routes = [
-  { path: "/", updated: "2026-09-16" },
-  { path: "/what-is-vivary/", updated: "2026-09-16" },
-  { path: "/commands/", updated: "2026-09-16" },
+  { path: "/", updated: "2026-10-03" },
+  { path: "/what-is-vivary/", updated: "2026-10-03" },
+  { path: "/commands/", updated: "2026-10-03" },
 ] as const;

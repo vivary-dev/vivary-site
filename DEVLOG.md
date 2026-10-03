@@ -12,6 +12,22 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  feat/public-site
+
+**Plan:** Publish the approved canonical Pages site for people, search and user-directed agents after a factual/link/privacy review. Preserve the approved mascot, layout and training-crawler restrictions; do not promote unrelated source history to main.
+
+**Did:** Set the default canonical origin, enabled public indexing and sitemap discovery, retained specific training crawler blocks, made revealed content visible without JavaScript, and replaced outdated availability/privacy claims with verified release evidence. Linked the unsigned September 22 Windows preview, installation guide, current source and separately published company skills. Added a public export validation gate to CI and an approved manual publisher that requires clean committed source, preserves Pages history and rejects concurrent updates with a normal push. Retired the public-host preview publisher to prevent reintroducing noindex.
+
+**Broke / surprised me:** Local lint initially scanned generated JavaScript inside a git-ignored temporary copy of the prior Pages export. Verification excludes only that temporary directory; clean CI has no such copy. The existing agent checker measures some host capabilities rather than factual readiness: GitHub Pages cannot supply custom content negotiation or HTTP Link headers through this static export.
+
+**Evidence:** Parent verified public release metadata and anonymous installation/documentation/skill links on October 3. A direct registry check at about 18:51 UTC found PyPI create-vivary 0.4.3 (September 3) and npm @vivary/create 0.4.2 (August 16); the command page retains its explicitly dated 0.4.2 baseline rather than calling it latest or changing an untested command. Validation passed: dependency publication scan (674, none flagged), lint excluding the git-ignored temporary export, TypeScript, public static build, export policy/local-link gate and independent source review. Headless browser checks passed at 1440, 390 and 360 pixels, including reduced motion, keyboard skip link, mobile menu, unchanged mascot and no overflow/errors. All three content routes remained readable, indexable and correctly canonical with JavaScript disabled. Visual inspection covered the phone memory and public-status sections. The pinned shadscan 0.17.0 audit remains 57/100 with the existing unresolved app-infrastructure findings (command menu, theme shortcut and similar features); no unused infrastructure was added to increase its score. Next still warns that Big Shoulders fallback-font metrics are unavailable; the built font rendered successfully.
+
+**Decided:** Public search and user-directed agent access do not add model-training consent. GPTBot, ClaudeBot, Google-Extended and Applebot-Extended remain blocked. Google-Extended also governs some Gemini grounding, not Google Search. No Content-Signal license is added. Newer development source does not change what the dated preview download contains.
+
+**Next:** Review the source PR into dev, publish the reviewed public export to the existing Pages repository, then verify live bytes and metadata.
+
+---
+
 ## 2026-10-03  feat/mascot-brand
 
 **Plan:** Add the approved mascot as static decoration in the existing memory

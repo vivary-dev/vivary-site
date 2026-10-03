@@ -1,8 +1,9 @@
 // The only source of product claims for every page. The `product` block
 // describes the Vivary desktop app from the program design documents.
 // The `shipped` and `commands` blocks describe the commands that ship today.
-// Verified 2026-09-13 against vivary-dev/Vivary-New. Do not add a claim
-// here without a source line.
+// Public availability and links verified 2026-10-03 against vivary-dev/vivary.
+// Release: releases/tag/desktop-preview-2026-09-22, INSTALL-WINDOWS.md asset.
+// Keep downloaded-preview evidence separate from newer dev source.
 
 export const facts = {
   name: "Vivary",
@@ -37,7 +38,7 @@ export const facts = {
     "Adopting an existing project starts with a dry run. It adds at most three files and asks for approval against an exact hash before writing.",
     "Doctor checks the contract and the privacy boundary without touching your files.",
     "The agent gets a bounded capsule of context, and a receipt records what it saw.",
-    "No account, no cloud control plane, no telemetry from the workspace. Files stay on your machine.",
+    "Workspace files stay in your project. An agent runtime may send context to its provider under your settings.",
   ],
 
   // The four layers, as the product describes them.
@@ -48,54 +49,27 @@ export const facts = {
     { name: "exo", role: "Claims, conflicts, and role contracts for the moment one agent becomes many." },
   ],
 
-  // In development. Never describe as installable.
-  inDevelopment: {
-    label: "In development",
-    summary:
-      "A desktop app that holds every project in one place, remembers you from your files, and runs the agents you already use. Not released.",
-  },
-
-  // Vivary, the desktop application. This site markets the app.
-  // Each line cites the program document that owns the decision, read
-  // 2026-09-13 in docs/product/multi-project of vivary-dev/Vivary-New.
+  // Public GitHub prerelease and its installation asset, verified 2026-10-03.
   product: {
     name: "Vivary",
-    // Jeff's phrase for the site, 2026-09-13.
-    meet: "Meet the new Vivary.",
-    // Draft product line for the app. Jeff picks the final wording.
     line: "A desktop workspace where your agents work from files you own.",
-    // design.md, product direction and the 2026-09-12 local desktop delivery decision.
-    what:
-      "One window for every project. Your files, your machine, and the agents and models you already use. No Vivary account, no cloud control plane.",
-    promises: [
-      // design.md: new and existing projects, registration inspects read-only first.
-      "Every project in one place. Open a new folder or one you already have. Opening it changes nothing inside it until you say so.",
-      // design.md: files remain authoritative; release.md: find its real files.
-      "Files first. Plans, memory, decisions, and results live in plain files you can open with any editor and keep forever.",
-      // 2026-09-12 decision and the repo AGENTS.md self-hosted rule.
-      "Runs the agents you already use. Local CLI models, your own keys, on your computer. No account to create and no server to trust.",
-      // 2026-09-13 Vivary-New decision: useful setup and memory slices; the memory research folded into the plan.
-      "It knows you from your files. What Vivary learns about you and your projects is saved as files you can read, edit, and delete.",
-      // 2026-09-13 workspace setup direction: composable patterns for second brains, knowledge bases, research, writing, and code.
-      "Workspaces for more than code. Second brains, knowledge bases, research, writing, and software, composed from patterns you can rename or drop.",
-      // design.md: version control optional; hosting separate.
-      "Version control is your choice. None, Git, or Jujutsu. Hosting a repository is a separate, optional step.",
-      // The engine's verified behavior: bounded capsule and receipt.
-      "Bounded context, every time. The agent gets a capsule of the files that matter, and every run leaves a receipt of what it saw.",
-      // release.md guide inventory: plan and execute work with review and evidence.
-      "Plan, run, review. Editable plans, tasks with dependencies, reviewed execution, and evidence you can open.",
-    ],
-    // design.md: the full little-agent scope survives. Named plainly, not as a secret.
-    alsoInTheProgram: [
-      "Workspace templates installed inside a project",
-      "An optional Brain that learns from verified work",
-      "Portable handoffs between sessions and agents",
-      "Bounded automation: factory runs, email intake, heartbeat maintenance, with stop and recovery",
-      "Agent integration with structured operations and discovery",
-    ],
-    // What is real about the app today, stated once and plainly.
     status:
-      "Vivary is in development, Windows first, and not released. This site goes live with the app. The workspace commands inside it ship today.",
+      "A public, unsigned Windows x64 preview is available. Development continues; full desktop acceptance is incomplete.",
+    previewTag: "desktop-preview-2026-09-22",
+    previewPublished: "2026-09-22",
+    previewSource: "9884670",
+    // Current public README and preview installation guide. These describe
+    // product boundaries, not acceptance claims for every provider or workflow.
+    promises: [
+      "Projects and conversations. Work with agents and files in one desktop workspace.",
+      "Your files. Project documents stay in their folders. App history and settings also use a local profile and database.",
+      "Your agent tools. Claude Code and Codex use their own authentication and provider settings.",
+      "Local use. No Vivary account is needed for local desktop use. Self-hosted browser access is explicit and authenticated.",
+      "Inspectable project memory. Keep instructions and handoffs in files you can read and edit. Conversation history is separate.",
+      "Preview limits. Read the dated installation guide and release notes before using the Windows preview.",
+    ],
+    dataBoundary:
+      "Project files and the app profile live on the host. The selected runtime or provider can receive context under your settings. Self-hosted browser access is explicit and authenticated.",
   },
 
   // The workspace commands inside Vivary. Bundled in the app and published
@@ -109,21 +83,20 @@ export const facts = {
     names: ["vivary", "create-vivary", "tropo", "strato", "ozone", "exo"],
   },
 
-  // Where the build is today. From desktop-acceptance-status.md on dev,
-  // read 2026-09-16, and the private Windows preview notes. Update when the
-  // acceptance register moves.
+  // Distribution facts verified from the September 22 public GitHub prerelease.
+  // This is not a fresh acceptance matrix for all code currently on dev.
   today: {
     working: [
-      "one window with projects and conversations",
-      "project switching, history that stays with its project",
-      "files open, read and edit beside the conversation",
-      "codex conversations with approve, decline and stop, on windows",
+      "public Windows x64 preview, published 2026-09-22",
+      "unsigned development build from source 9884670",
+      "installation instructions, release notes and SHA-256 file with the release",
+      "public app source under the MIT license",
     ],
     notYet: [
-      "the full harness catalog and switching between agents in a linked conversation",
-      "several conversations running at the same time",
-      "scheduled and automated work",
-      "a release. nothing on this page is a download",
+      "a stable desktop release with completed acceptance",
+      "a guarantee that newer dev changes are in the September preview",
+      "verified support for every provider, tool or workflow",
+      "an automatic installation from a website or skill link",
     ],
   },
 
@@ -131,8 +104,12 @@ export const facts = {
     github: "https://github.com/vivary-dev/vivary",
     org: "https://github.com/vivary-dev",
     // The product repository. Public since 2026-09-16. "Follow the build" goes here.
-    product: "https://github.com/vivary-dev/Vivary-New",
-    commandReference: "https://vivary.vercel.app/commands/",
+    product: "https://github.com/vivary-dev/vivary",
+    preview: "https://github.com/vivary-dev/vivary/releases/tag/desktop-preview-2026-09-22",
+    installGuide: "https://github.com/vivary-dev/vivary/releases/download/desktop-preview-2026-09-22/INSTALL-WINDOWS.md",
+    skills: "https://github.com/The-Little-AI-Company/skills",
+    statechartSkill: "https://github.com/The-Little-AI-Company/skills/blob/main/skills/design/statechart-design-review/SKILL.md",
+    commandReference: "https://github.com/vivary-dev/vivary-cli/blob/dev/docs/COMMANDS.md",
     pypi: "https://pypi.org/project/create-vivary/",
     npm: "https://www.npmjs.com/package/@vivary/create",
   },

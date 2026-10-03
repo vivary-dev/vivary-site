@@ -23,14 +23,13 @@ dates and are evidence, not instructions to restore an old identity.
 ## Rules these files follow
 
 - Product claims come from `src/content/facts.ts` and the program documents in
-  `vivary-dev/Vivary-New` on `dev`. Nothing here adds a claim without a source.
-- The app is in development. Nothing here implies a download or a release date.
+  `vivary-dev/vivary` on `dev`. Nothing here adds a claim without a source.
+- The app is in development with a dated, unsigned Windows preview. Keep public release evidence separate from newer development capabilities.
 - Copy follows the voice rules in `AGENTS.md`.
 
 ## Status of the underlying facts
 
-- Product repo read at `vivary-dev/Vivary-New` commit `b81dcd7` on `dev`.
-  Codex was merging documentation into `dev` the same day, so re-read
-  `docs/product/multi-project/desktop-acceptance-status.md` before quoting status.
+- Public preview availability was verified on 2026-10-03 against release `desktop-preview-2026-09-22` in `vivary-dev/vivary`. See `08-product-description.md` and `src/content/facts.ts` for current boundaries.
+- Earlier research used product commit `b81dcd7`; those dated notes are historical, not current release claims.
 - Registry versions checked live on 2026-09-16. See `01-what-vivary-is.md`.
 - Live site crawled on 2026-09-16. See `04-url-map.md`.

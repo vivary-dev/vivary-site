@@ -6,7 +6,7 @@
 The marketing site for the new Vivary, the desktop application where agents
 work from files you own. It markets the app and presents the library that
 ships today as the engine underneath. Started from scratch on 2026-09-13 to
-replace the Astro site at vivary.vercel.app. It goes live with the app.
+replace the Astro site at vivary.vercel.app. The public site is https://vivary-dev.github.io/.
 
 ## Stack
 
@@ -46,8 +46,7 @@ The home page is built to Jeff's design canvas of 2026-09-16 as one
 responsive page, with the brand system's jar mark, lockup, hero illustration,
 social image, and app icon. Two documentation pages, `/what-is-vivary/` and
 `/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
-metadata, and JSON-LD. Static export to `out/` for Cloudflare. Not published
-yet.
+metadata, and JSON-LD. Static export to `out/`, published on GitHub Pages.
 
 ## Brand and design sources
 
@@ -74,52 +73,42 @@ are in `src/app/pages.css`. Product claims still come only from
 
 ## The product repository
 
-The app this site markets is built in `vivary-dev/Vivary-New`, checked out on
-Zo at `/home/workspace/Projects/vivary-integration`. Product claims in
-`src/content/facts.ts` cite its documents, the status ledger on the home page
-comes from its acceptance register, and its own docs point back here
-(`docs/product/multi-project/research/website-repo.md` and outcome 25). The
-repository's GitHub homepage field points at this site's preview. It went
-public on 2026-09-16, and "Follow the build" on the home page links to it.
+The app this site markets is built in `vivary-dev/vivary`. Product claims in
+`src/content/facts.ts` cite its documents and the dated public Windows preview
+release. The September 22 download and newer development source have separate
+status; the preview does not establish complete desktop acceptance. The public
+site links the release, installation guide, current source and company skills.
 
-## Preview host
+## Public site and publishing
 
-A temporary preview lives at https://vivary-dev.github.io, served by GitHub
-Pages from the repository `vivary-dev/vivary-dev.github.io`, which holds only
-the built export. It is not the site. Every page there carries `noindex` and
-its `robots.txt` disallows all crawling. Publish a new preview with
-`scripts/deploy-preview.sh`, which builds with `NEXT_PUBLIC_PREVIEW=1` and
-force-pushes `out/` to that repository. Jeff asked for it on 2026-09-16.
-Delete that repository when the real site is up.
+The canonical website is https://vivary-dev.github.io/, selected by Jeff on
+2026-10-03. GitHub Pages serves the built export from `main:/` in
+`vivary-dev/vivary-dev.github.io`. That repository contains generated output.
+This repository owns source. Source CI verifies changes and does not deploy.
 
-## Site URL
+After a source change is reviewed, merged into `dev` and approved to publish:
 
-Absolute URLs in the sitemap, robots, canonical links, and Open Graph tags
-come from `NEXT_PUBLIC_SITE_URL` at build time. The production domain is
-undecided. Without the variable the build uses `http://localhost:3177`, which
-is visibly not production. Set it in the Cloudflare Pages build environment
-when the domain exists.
+```bash
+scripts/deploy-site.sh
+```
 
-## Cloudflare configuration
+The script builds with `NEXT_PUBLIC_SITE_URL=https://vivary-dev.github.io` and
+`NEXT_PUBLIC_PREVIEW=0`, checks public indexing and canonical metadata, then
+commits the export on top of the existing Pages history. A normal push rejects
+concurrent changes. Existing unrelated files and old hashed assets are preserved.
+Check the Pages run and live HTML, robots, sitemap and changed assets afterward.
+A source merge alone is not a deployment. Do not promote source `main` merely
+to publish this reviewed export.
 
-`wrangler.toml` points Cloudflare Pages at the static export in `out/`.
-When Jeff creates the Pages project, use these build settings:
+The former `deploy-preview.sh` stops with a pointer to the public publisher,
+so an old command cannot restore noindex on the canonical site. An unpublished
+local preview can still use `NEXT_PUBLIC_PREVIEW=1`. Set
+`NEXT_PUBLIC_SITE_URL` explicitly when testing an alternative local origin.
+The normal build defaults to the chosen public address.
 
-| Setting | Value |
-| --- | --- |
-| Framework preset | Next.js (Static HTML Export) |
-| Production branch | `main` |
-| Build command | `pnpm build` |
-| Build output directory | `out` |
-| Node version | `24.15.0`, also recorded in `.node-version` |
-| pnpm version | `10.33.2`, recorded in `package.json` |
-
-Cloudflare's [static Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/)
-and [Pages configuration reference](https://developers.cloudflare.com/pages/functions/wrangler-configuration/)
-are the source for these settings. Pages manages the build command in its build
-settings. It is not a Wrangler Pages configuration key.
-Creating the project, connecting the repository, choosing preview branches, and
-DNS setup remain Jeff's actions. Nothing in this repository deploys from CI.
+`wrangler.toml` records the previous Cloudflare proposal. It does not deploy
+anything and is not the current publishing route. No custom domain or DNS
+change is part of this setup.
 
 ## Optional analytics
 
@@ -150,6 +139,7 @@ pnpm install --frozen-lockfile
 pnpm lint
 pnpm exec tsc --noEmit
 pnpm build
+node scripts/verify-public-export.mjs
 pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast
 ```
 
