@@ -21,6 +21,8 @@ const groups = robots.split(/\n\s*\n/).map((group) => group.toLowerCase());
 const wildcard = groups.find((group) => /^user-agent: \*$/m.test(group));
 assert(wildcard?.includes("allow: /"), "Public wildcard must allow crawling");
 assert(!/^disallow: \/$/m.test(wildcard), "Public wildcard must not block crawling");
+assert(/^content-signal: search=yes, ai-train=no$/m.test(wildcard), "Public wildcard must allow search and refuse training");
+assert(!/ai-input\s*=/i.test(robots), "AI input permission must remain unspecified");
 for (const bot of ["GPTBot", "ClaudeBot", "Google-Extended", "Applebot-Extended"]) {
   const group = groups.find((item) => item.includes(`user-agent: ${bot.toLowerCase()}\n`));
   assert(group && /^disallow: \/$/m.test(group), `${bot} training control must remain blocked`);
