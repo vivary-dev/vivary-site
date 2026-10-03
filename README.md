@@ -22,6 +22,9 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
+The build also requires Python 3 (standard library only) to derive Markdown
+from the exported HTML. No Python packages are installed.
+
 Then open the printed local URL. `pnpm build` produces the production build
 and `pnpm lint` runs ESLint.
 
@@ -109,9 +112,12 @@ allows search and declares `Content-Signal: search=yes, ai-train=no`. AI input
 permission remains unspecified and the four specific training-crawler blocks
 remain in place. See `docs/brand/09-humans-and-agents.md` for the policy.
 
-`wrangler.toml` records the previous Cloudflare proposal. It does not deploy
-anything and is not the current publishing route. No custom domain or DNS
-change is part of this setup.
+`wrangler.toml` describes the optional Cloudflare Pages target. It is staged
+for `www.vivaryagent.xyz` and the read-only documentation endpoint at
+`mcp.vivaryagent.xyz`. It does not deploy or change DNS. The GitHub origin
+remains the default until the approved cutover is verified. Build commands,
+operator enable flags, protocol limits and rollback are in
+[docs/CLOUDFLARE.md](docs/CLOUDFLARE.md).
 
 ## Optional analytics
 
@@ -141,6 +147,7 @@ node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm lint
 pnpm exec tsc --noEmit
+pnpm test:transport
 pnpm build
 node scripts/verify-public-export.mjs
 pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast

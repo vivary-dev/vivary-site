@@ -12,6 +12,20 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  feat/pages-functions
+
+**Did:** Staged an optional Cloudflare Pages Free target for www.vivaryagent.xyz and a root-only public documentation MCP on mcp.vivaryagent.xyz. Preserved the GitHub canonical default, publisher, approved layout/artwork and private Entire configuration. The existing HTML main content generates three Markdown documents through Python's standard-library parser. A standalone worker handles Accept negotiation, HEAD, actual Link/Content-Signal headers and fixed resource reads. No new package, server-side Next route, private file access, arbitrary fetch, account integration or model call was added.
+
+**Decided:** The operator owns account/DNS/deployment actions. Both Function endpoints require explicit enable settings. Static assets bypass Functions and those flags. Cloudflare Runtime must be set to Fail closed before MCP exposure so quota exhaustion cannot serve HTML as an MCP response. Website variants use no-store and remove upstream validators. The pinned MCP protocol is 2025-11-25 with initialization, not the newer 2026-07-28 protocol. Read results include the exact source HTML digest. The current GitHub target remains the fallback until an approved live cutover.
+
+**Broke / surprised me:** The initial Markdown conversion joined adjacent labels whose spacing came only from CSS. Added a focused regression and preserved word boundaries. Independent review found inherited production Content-Signal could survive on a staging host. The handler now removes it and the test fixture covers inherited headers. Staging robots denies crawling. The detailed frontend skill references remain unavailable through the provider; read the main frontend and TypeScript skills plus installed Next export docs and primary Cloudflare/MCP specifications. Node's direct TypeScript test import emits a harmless module-format warning. No global module-mode change was made to silence it.
+
+**Validation:** Publication scan checked 674 packages with none flagged. Frozen install, lint, TypeScript, 9 transport tests and 4 Markdown tests passed. The GitHub build/public gate passed and contained no worker. The Cloudflare noindex build passed the compiled-module export gate, checking source HTML hashes, exact Markdown bytes and disabled preview MCP. CI now runs tests and both public export targets. A loopback adapter exercised the compiled worker for all three pages at 1440, 390 and 360px: 12 browser checks, 18 screenshots, no overflow or page errors, keyboard skip/menu, reduced motion, visible FAQ/schema parity and JavaScript-disabled reading. Visually inspected phone pages; exact screenshot receipts are ignored under .tmp/pages-functions/render. Pinned shadscan remains 57/100 with existing app-infrastructure findings, not suppressed or inflated with unrelated UI. The existing Big Shoulders font-metrics build warning remains. No deployment or provider setting was changed by this task.
+
+**Next:** Independent final review, PR into dev, and operator preview acceptance. Produce and publish the public Cloudflare artifact only after acceptance. Record platform-level fail-closed, TLS, DNS and live protocol evidence separately.
+
+---
+
 ## 2026-10-03  routine recording delivery
 
 **Did:** Verified that the approved fresh review checkpoint reaches the private

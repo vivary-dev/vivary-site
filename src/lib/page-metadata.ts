@@ -7,7 +7,7 @@ export function pageMetadata(title: string, description: string, path: string): 
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, types: { "text/markdown": `${path}index.md` } },
     openGraph: {
       type: "website",
       siteName: "Vivary",
