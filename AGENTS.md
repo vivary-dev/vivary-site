@@ -162,7 +162,7 @@ pnpm dlx @shadscan/cli@0.17.0
 - Work branches come off `dev`, named `<type>/<slug>`: `feat/` `fix/` `chore/` `docs/` `refactor/` `test/`. `hotfix/` comes off `main` and merges back to both. Slug is lowercase, hyphenated, three words max. Create with `scripts/branch.sh <type> <slug>`.
 - Commits use the same prefixes, imperative, under 72 chars: `feat: add landing hero`.
 - PRs squash into `dev`. Releases merge `dev` into `main` (merge commit) and tag `vX.Y.Z`.
-- Entire checkpoints are enabled. Do not disable them.
+- Entire checkpoints are enabled. Do not disable them. Follow [the recording guide](docs/ENTIRE.md) before the next fresh agent session. Keep the configured private destination and historical upload hold; installed hooks are not capture proof.
 
 ## Next.js managed block
 

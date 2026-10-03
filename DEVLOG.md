@@ -12,6 +12,84 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-03  routine recording delivery
+
+**Did:** Verified that the approved fresh review checkpoint reaches the private
+checkpoint destination during an ordinary source push. The supported pre-push
+hook reported successful transfer, the local queue cleared, and the GitHub and
+Entire checkpoint ref object IDs match. The private index holds the receipt.
+
+**Decided:** The website Git family has no historical backlog and can enable
+routine delivery locally. The app's separate 16-checkpoint historical queue
+stays held. Shared settings retain the safe upload hold for new checkouts until
+their own queue and project scope are checked. Existing workers stay intact.
+
+**Verification:** Merged current dev and retained both development log entries.
+The normal source push delivered the one approved checkpoint without importing
+history or manually changing queue markers. The CLI flag to clear an upload
+hold does not set an existing false value to true in 0.10.6; the documented local
+JSON setting does. Remote storage is verified; a website web trail link remains
+unverified.
+
+**Next:** Complete CI and the authorized PR merge. Start future coding work in a
+fresh supported project session and verify its checkpoint before delivery.
+
+---
+
+## 2026-10-03  controlled recording review
+
+**Did:** Completed the owner's approved website folder trust and seven-hook
+review through Codex's UI. A fresh Codex/GPT-6 Astra session then reviewed the
+actual recording change at `c01e444f2c95252b28c773d23ed0fc0ee89606d9` without
+editing source. Entire tracked its one completed turn. This is a controlled
+review task, not evidence that earlier website work was captured.
+
+**Verification:** The reviewer inspected the four changed files and parent
+settings, checked Entire status and ran the focused whitespace check. It found
+no blocking source or configuration defect. The runtime sandbox failed to
+initialize, so only the displayed read-only commands received one-time approval.
+No persistent command grant was added. The review did not independently prove
+remote privacy or delivery.
+
+**Decided:** Preserve the historical app queue and all existing workers. Use
+Entire's supported review attachment for this fresh session and identify its
+checkpoint through this receipt commit's trailer. No earlier commit is rewritten.
+The private index owns remote-delivery evidence. PRs remain unmerged.
+
+**Next:** Verify private delivery of this fresh review checkpoint. Keep normal
+automatic uploads held and keep configuration distinct from demonstrated capture.
+
+---
+
+## 2026-10-03  chore/private-recording
+
+**Did:** Added the approved dedicated private checkpoint destination to shared
+Entire settings, retained the automatic upload hold and documented the website
+hook trust check and source-to-checkpoint delivery record. Source branch roles
+and the public website are unchanged.
+
+**Broke / surprised me:** Local routing is insufficient for Entire's web lookup.
+The service reads committed project settings. The seven installed Codex hooks
+still require client trust review, and an external MCP controller is outside
+local agent capture.
+
+**Decided:** Keep previous source and checkpoint locations intact. Preserve the
+historical shared queue for its separate review. Use the next real fresh session
+for capture verification, with no imported history or dummy coding run.
+
+**Verification:** Entire 0.10.6 generated the settings. Effective status reports
+the private dedicated destination. JSON validation and whitespace checks cover
+this configuration and documentation change. No page, dependency or build input
+changed; existing visual and build evidence remains the prior session's evidence.
+The required pinned shadscan 0.17.0 audit also exited successfully. Existing
+application-infrastructure findings and browser-only advisories remain recorded
+in the earlier website verification. This change adds no UI to re-test.
+
+**Next:** Accept the shared settings, complete the actual client's hook review
+and verify the next real website checkpoint. Upload delivery remains held.
+
+---
+
 ## 2026-10-03  feat/search-copy
 
 **Did:** Rewrote the three public pages around desktop use, preview setup, prerequisites, provider/data boundaries and terminal workspace commands. Kept the approved layout, mascot, full brand tagline and robots policy. Gave each route a descriptive title, description and matching social metadata. The home CTA now opens the dated preview release. Product FAQ markup comes from the visible answers. Removed the nonvisible creator claim from home structured data and extended export checks for unique metadata and canonical social URLs.
