@@ -1,4 +1,6 @@
-# Cloudflare Pages static export. Build command in Pages: pnpm build.
+# Optional Cloudflare Pages target, not the current GitHub publisher.
+# Build: VIVARY_DEPLOY_TARGET=cloudflare NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz pnpm build
+# Runtime enable flags and fail-closed quota behavior: docs/CLOUDFLARE.md.
 # https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/
 # https://developers.cloudflare.com/pages/functions/wrangler-configuration/
 name = "vivary-site"

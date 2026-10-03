@@ -56,3 +56,6 @@ dist/
 
 # Local review evidence
 /.tmp/
+
+# Python standard-library build/test caches
+__pycache__/

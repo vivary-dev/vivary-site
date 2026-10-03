@@ -1,6 +1,7 @@
 // Jeff selected this public canonical address on 2026-10-03. Absolute URLs
 // for canonical links, sitemap and Open Graph use it unless a local build
-// explicitly supplies another origin. The public publisher fixes this value.
+// explicitly supplies another origin. GitHub publication fixes this value;
+// the optional Cloudflare build requires the separately approved www origin.
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
 
 // Explicit local/review builds can opt out of indexing. The public publisher

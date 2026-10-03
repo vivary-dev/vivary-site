@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const origin = "https://vivary-dev.github.io";
+const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
 const pages = ["/", "/commands/", "/what-is-vivary/"];
 const read = (file) => readFileSync(join("out", file), "utf8");
 const titles = new Set();
@@ -21,6 +21,7 @@ for (const route of pages) {
   assert(html.includes(`property="og:title" content="${title}"`), `${route} social title must match`);
   assert(html.includes(`property="og:description" content="${description}"`), `${route} social description must match`);
   assert(html.includes(`property="og:url" content="${origin}${route}"`), `${route} social URL must be canonical`);
+  assert(read(`${route.slice(1)}index.md`).includes(`Canonical page: ${origin}${route}`), `${route} Markdown canonical`);
   assert(html.includes("/llms.txt"), `${route} must link agent guidance`);
   for (const [, reference] of html.matchAll(/(?:src|href)="(\/[^"\s]*)"/g)) {
     const path = decodeURIComponent(new URL(reference, origin).pathname);

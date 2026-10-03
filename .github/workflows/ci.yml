@@ -46,11 +46,20 @@ jobs:
       - name: Typecheck
         run: pnpm exec tsc --noEmit
 
+      - name: Transport and Markdown tests
+        run: pnpm test:transport
+
       - name: Build
         run: pnpm build
 
       - name: Verify public export
         run: node scripts/verify-public-export.mjs
+
+      - name: Build optional Cloudflare target
+        run: VIVARY_DEPLOY_TARGET=cloudflare NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz NEXT_PUBLIC_PREVIEW=0 pnpm build
+
+      - name: Verify Cloudflare export
+        run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
 
       - name: Create shadscan report
         run: pnpm dlx @shadscan/cli@0.17.0 . --format json --no-interactive --no-roast > shadscan-report.json

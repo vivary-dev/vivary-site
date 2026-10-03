@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-site.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:transport": "node --test tests/transport.test.mjs && python3 -m unittest discover -s tests -p \"test_*.py\""
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

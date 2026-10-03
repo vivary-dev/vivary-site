@@ -30,13 +30,15 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - Copy in Jeff's voice: plain sentences, no em dashes, no semicolons in prose,
   no marketing adjectives, no AI tells. Run the unslop rules before commit.
 - Public-context guardrail: nothing about Jeff's location or living situation.
-- Publishing needs Jeff's approval per deploy. The final site is hosted on
+- Publishing needs Jeff's approval per deploy. The current public site is hosted on
   GitHub Pages at https://vivary-dev.github.io as a static export, selected
   by Jeff on 2026-10-03. The public publisher is `scripts/deploy-site.sh` and
   must allow crawling, link the canonical sitemap and use this address.
   Local previews may set `NEXT_PUBLIC_PREVIEW=1`. Previews are not hosted on Zo.
-  Do not add server-side routes or image optimization that a static export
-  cannot serve.
+  Keep the Next application statically exportable. The separately authorized
+  Cloudflare Pages target adds a bounded edge handler after export, described
+  in `docs/CLOUDFLARE.md`. It does not change the default canonical or deploy
+  anything. The rollout coordinator owns infrastructure and cutover.
 
 ## Readers
 
