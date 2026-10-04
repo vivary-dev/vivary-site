@@ -12,6 +12,22 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-04  feat/site-refresh
+
+**Did:** Built a review-only visual refresh of the existing three pages after Jeff asked to prioritize the product and website design. The home page now leads with the unchanged approved character, clear Windows download/setup links and a real, explicitly labeled development-interface capture. The setup page uses numbered steps and a page index. Commands appear before the layer explanation. Kept the palette, type roles, jar logo, sourced preview qualifications, runtime/data boundaries and existing routes/fragments. Fixed the phone menu panel and Escape focus restoration.
+
+**Brand proposals:** Prepared three wordmark/native-icon options under docs/design/2026-10-04-refresh/brand-options. Each reuses canonical path letterforms and jar geometry, with 16/24/32px light/dark comparisons, PNG/ICO exports and labeled overlays over real app/site captures. Option A is recommended for selection, not installed. The character name remains undecided. No frozen app binary, Windows acceptance process or desktop input was touched.
+
+**Broke / surprised me:** The first visual pass left guide introductions too long on a phone. Shortened them and inspected setup steps, wrapped commands and the memory example in the second pass. Independent review exposed a real Markdown defect after numbered multi-paragraph steps were introduced: a ten-item CommonMark fixture parsed as one item with instructions outside it. Added a failing regression before fixing continuation indentation to match marker width. The real parser now retains ten items/two paragraphs each, including the two-digit marker, and the actual setup export retains six items/two paragraphs each. Intermittent tool transport delayed the second pass; verified the completed mutation before resuming.
+
+**Validation:** Publication scan checked 674 packages with none flagged before the frozen install. Lint, TypeScript, 9 transport tests and 5 Markdown tests pass. Public www and preview edge export gates check exact HTML/Markdown hashes and the noindex/MCP-disabled review boundary. Browser checks cover three routes at 1440/390/360, no overflow/errors/broken images, visible keyboard focus, mobile menu Enter/Escape, reduced motion, FAQ/schema parity and no-JavaScript reading. Additional captures check the actual setup/command/memory sections and 200% text sizing. Three critique passes covered initial hierarchy, shorter mobile guides/detail views and independent final source/pixel review. Required pinned shadscan completed; its existing application-infrastructure findings do not justify adding unrelated UI. Detailed supplementary skill references remained unavailable, so this is a scoped frontend pass, not a full 386-rule audit.
+
+**Isolation:** Created a separate worktree from origin/dev at 534df27 because the branch helper would switch the occupied dev checkout. The hosting owner's chore/domain-cutover checkout remains unmodified. All preview builds explicitly use https://www.vivaryagent.xyz. Their pending canonical defaults/mirror changes must be preserved when integrating. No new dependencies, deployment, DNS changes, new credentials or spend. MCP-controller edits are outside Entire local hooks and are not claimed as captured.
+
+**Next:** Deliver the noindex preview bundle and branding choices with a draft PR into dev. Jeff's visual selection precedes a live replacement. Integrate the hosting owner's canonical-source changes before publication. Native icon integration and Windows taskbar/favicon acceptance remain later work.
+
+---
+
 ## 2026-10-03  feat/pages-functions
 
 **Did:** Staged an optional Cloudflare Pages Free target for www.vivaryagent.xyz and a root-only public documentation MCP on mcp.vivaryagent.xyz. Preserved the GitHub canonical default, publisher, approved layout/artwork and private Entire configuration. The existing HTML main content generates three Markdown documents through Python's standard-library parser. A standalone worker handles Accept negotiation, HEAD, actual Link/Content-Signal headers and fixed resource reads. No new package, server-side Next route, private file access, arbitrary fetch, account integration or model call was added.

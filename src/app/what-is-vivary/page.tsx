@@ -3,7 +3,7 @@ import Link from "next/link";
 import { facts } from "@/content/facts";
 import { Ledger, type Row } from "../ledger";
 import { Section } from "../scenes";
-import { AgentsLine, JsonLd, Shell } from "../shell";
+import { AgentsLine, GuideNav, JsonLd, Shell } from "../shell";
 
 // The product description as a real page. Same facts as public/llms.txt and
 // docs/brand/08-product-description.md. The first sentence defines the thing.
@@ -15,7 +15,7 @@ export const metadata = pageMetadata(
 );
 
 const define =
-  "Vivary is a desktop application for working with AI agents on your own projects. It brings agent chat, project files, tools, and memory into one window on your computer.";
+  "Vivary is a desktop workspace for working with AI agents on your own projects. Keep conversations and project files in one window.";
 
 const steps: { k: string; v: string; why: string }[] = [
   {
@@ -90,30 +90,31 @@ export default function WhatIsVivary() {
       <JsonLd data={jsonLd} />
       <Section className="doc in">
         <div className="wrap">
-          <AgentsLine />
+          <p className="eyebrow">The desktop guide</p>
           <div className="two">
             <div className="lead">
-              <h1 className="display display-lg">What is Vivary?</h1>
+              <h1 className="display display-lg">Meet your workspace.</h1>
               <p className="define">{define}</p>
             </div>
             <div className="body">
               <p className="lede">
-                Use it to work on a draft, a research folder, a collection of notes or a codebase.
-                Choose a supported runtime for the task and review its output beside your files.
-              </p>
-              <p className="lede quiet">
-                Claude Code and Codex keep their own authentication and provider settings.
-                Local use needs no Vivary account. A provider can receive the context you send
-                through its runtime.
+                Install the Windows preview, connect your coding runtime and open a project.
+                Start here for the setup steps and current limits.
               </p>
               <p className="status">{facts.product.status}</p>
-              <p className="packages">
-                <a href={facts.links.preview}>Windows preview and release notes</a>{" · "}
-                <a href={facts.links.installGuide}>Installation instructions</a>{" · "}
-                <a href={facts.links.product}>Source and current documentation</a>
-              </p>
+              <div className="cta">
+                <a className="btn btn-solid" href={facts.links.preview}>Get the Windows preview <span aria-hidden="true">↗</span></a>
+                <a className="text-link" href="#install">See the steps <span aria-hidden="true">↓</span></a>
+              </div>
             </div>
           </div>
+          <GuideNav items={[
+            { href: "#install", label: "Installation" },
+            { href: "#workspace", label: "Files and agents" },
+            { href: "#limits", label: "Preview limits" },
+            { href: "#questions", label: "Questions" },
+          ]} />
+          <AgentsLine />
         </div>
       </Section>
 
@@ -128,28 +129,19 @@ export default function WhatIsVivary() {
             </p>
           </div>
           <div className="body">
-            <Ledger
-              label="Windows preview setup steps"
-              rows={steps.map((s, i) => ({
-                k: (
-                  <>
-                    <span className="num">{i + 1}</span>
-                    <small>{s.k}</small>
-                  </>
-                ),
-                v: (
-                  <>
-                    <p>{s.v}</p>
-                    <p className="cap">{s.why}</p>
-                  </>
-                ),
-              }))}
-            />
+            <ol className="setup-steps" role="list">
+              {steps.map((step, i) => (
+                <li key={step.k}>
+                  <span className="step-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  <div><h3>{step.k}</h3><p>{step.v}</p><p className="cap">{step.why}</p></div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </Section>
 
-      <Section className="chapter in">
+      <Section id="workspace" className="chapter in">
         <div className="wrap two">
           <div className="lead">
             <h2 className="display display-lg">How agents, files and memory fit together.</h2>
@@ -185,7 +177,7 @@ export default function WhatIsVivary() {
         </div>
       </Section>
 
-      <Section className="chapter in">
+      <Section id="limits" className="chapter in">
         <div className="wrap two">
           <div className="lead">
             <h2 className="display display-lg">Known preview limits.</h2>
