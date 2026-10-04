@@ -18,6 +18,12 @@ class Markdown(unittest.TestCase):
         for excluded in ['Skip navigation', 'SECRET', 'NOT REAL WORK', 'decoration.svg']:
             self.assertNotIn(excluded, md)
 
+    def test_ordered_step_paragraphs_follow_marker_width(self):
+        items = ''.join(f'<li><h3>Step {n}</h3><p>Action {n}.</p><p>Reason {n}.</p></li>' for n in range(1, 11))
+        _, md = module.convert(f'<title>Setup</title><main><h1>Setup</h1><ol>{items}</ol></main>', 'https://example.com/')
+        self.assertIn('1. ### Step 1\n\n   Action 1.\n\n   Reason 1.', md)
+        self.assertIn('10. ### Step 10\n\n    Action 10.\n\n    Reason 10.', md)
+
     def test_adjacent_visual_labels_keep_word_boundaries(self):
         _, md = module.convert('<title>X</title><main><h1>X</h1><div><span>before the turn</span><span>capsule.json</span></div></main>', 'https://example.com/')
         self.assertIn('before the turn capsule.json', md)

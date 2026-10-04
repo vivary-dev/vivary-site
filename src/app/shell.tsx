@@ -5,6 +5,7 @@ import { facts } from "@/content/facts";
 import { MobileNav, type NavItem } from "./mobile-nav";
 import "./home.css";
 import "./pages.css";
+import "./refresh.css";
 
 // Three faces, one job each. The display face for the claim, the serif
 // italic only where the file itself speaks, and Geist Mono (from the root
@@ -27,26 +28,15 @@ const voice = Fraunces({
 
 export type Route = "home" | "what" | "commands";
 
-// The header navigation from the design canvas. Section links resolve on
-// the home page; other routes prefix them with the home path.
-const sections: NavItem[] = [
-  { href: "/#for", label: "Who it is for" },
-  { href: "/#how", label: "How it works" },
-  { href: "/#memory", label: "Memory" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#engine", label: "Engine" },
-  { href: "/#status", label: "Status" },
-];
-
 const pages: NavItem[] = [
-  { href: "/what-is-vivary/", label: "What it is" },
+  { href: "/#projects", label: "The workspace" },
+  { href: "/what-is-vivary/", label: "Setup guide" },
   { href: "/commands/", label: "Commands" },
+  { href: facts.links.product, label: "Source", external: true },
 ];
-
-const github: NavItem = { href: facts.links.org, label: "GitHub", external: true };
 
 export function Shell({ current, children }: { current: Route; children: ReactNode }) {
-  const items: NavItem[] = current === "home" ? [...sections, github] : [...pages, ...sections.slice(0, 1), github];
+  const items = pages;
   const routeOf = (href: string): Route | undefined =>
     href === "/what-is-vivary/" ? "what" : href === "/commands/" ? "commands" : undefined;
   return (
@@ -87,7 +77,7 @@ export function Shell({ current, children }: { current: Route; children: ReactNo
           <nav aria-label="Footer">
             <a href={facts.links.org}>GitHub</a>
             <Link href="/#status">Status</Link>
-            <Link href="/what-is-vivary/">What it is</Link>
+            <Link href="/what-is-vivary/">Setup guide</Link>
             <Link href="/commands/">Commands</Link>
             <a href="/llms.txt">For agents</a>
             <a href="mailto:support@vivary.dev">Email</a>
@@ -110,4 +100,13 @@ export function AgentsLine() {
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
+export function GuideNav({ items }: { items: { href: string; label: string }[] }) {
+  return (
+    <nav className="guide-nav" aria-label="On this page">
+      <span>On this page</span>
+      <ul>{items.map((item) => <li key={item.href}><a href={item.href}>{item.label}</a></li>)}</ul>
+    </nav>
+  );
 }

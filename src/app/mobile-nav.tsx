@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 
 export type NavItem = { href: string; label: string; external?: boolean };
@@ -10,11 +10,15 @@ export type NavItem = { href: string; label: string; external?: boolean };
 export function MobileNav({ items }: { items: NavItem[] }) {
   const [open, setOpen] = useState(false);
   const id = useId();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -23,6 +27,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
   return (
     <>
       <button
+        ref={buttonRef}
         type="button"
         className="menu-button"
         aria-label={open ? "Close menu" : "Open menu"}

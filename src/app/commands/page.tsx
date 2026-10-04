@@ -3,7 +3,7 @@ import Link from "next/link";
 import { facts } from "@/content/facts";
 import { Ledger, type Row } from "../ledger";
 import { Section } from "../scenes";
-import { AgentsLine, Shell } from "../shell";
+import { AgentsLine, GuideNav, Shell } from "../shell";
 
 // The workspace commands: a part of Vivary, bundled in the app and published
 // as packages. Claims come from facts.shipped and facts.claims, verified
@@ -39,10 +39,10 @@ export default function Commands() {
     <Shell current="commands">
       <Section className="doc in">
         <div className="wrap">
-          <AgentsLine />
+          <p className="eyebrow">The terminal guide</p>
           <div className="two">
             <div className="lead">
-              <h1 className="display display-lg">Vivary workspace commands.</h1>
+              <h1 className="display display-lg">Your workspace.<br />From a terminal.</h1>
               <p className="define">
                 The Vivary CLI tools create and check project workspaces, assemble context and
                 support review workflows. You can use the published packages from a terminal.
@@ -50,27 +50,64 @@ export default function Commands() {
             </div>
             <div className="body">
               <p className="lede">
-                {facts.commands.names.map((n, i) => (
-                  <span key={n}>
-                    <span className="rec">{n}</span>
-                    {i < facts.commands.names.length - 1 ? ", " : "."}
-                  </span>
-                ))}{" "}
-                These commands are part of Vivary. Installing them does not install the desktop
-                app. This page keeps the recorded installation baseline separate from newer
-                command documentation.
+                These commands are part of Vivary. Installing them does not install the desktop app.
+                The examples below use the recorded 0.4.2 baseline.
               </p>
-              <p className="status">{facts.product.status}</p>
               <p className="packages">
                 Looking for the app? <Link href="/what-is-vivary/#install">Read Windows preview setup</Link>
                 {" or "}<a href={facts.links.preview}>open the desktop download</a>.
               </p>
             </div>
           </div>
+          <GuideNav items={[
+            { href: "#install", label: "Install commands" },
+            { href: "#files", label: "Workspace files" },
+            { href: "#layers", label: "Layer tools" },
+            { href: "#packages", label: "Package baseline" },
+          ]} />
+          <AgentsLine />
         </div>
       </Section>
 
-      <Section className="chapter in">
+      <Section id="install" className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">Create a workspace from a terminal.</h2>
+            <p className="lede">
+              Use a new workspace directory for this example. Both paths require Python 3.11
+              or newer. The uvx command needs uv. The npm launcher needs Node.js, npm and
+              either uv or pipx to run the Python scaffolder.
+            </p>
+          </div>
+          <div className="body">
+            <div className="command-block">
+              <h3>With uv</h3>
+              <pre><code>{facts.shipped.install}</code></pre>
+            </div>
+            <div className="command-block">
+              <h3>With npm</h3>
+              <pre><code>{facts.shipped.installNpm}</code></pre>
+            </div>
+            <div id="packages" className="block">
+              <h3 className="subheading">Recorded package baseline</h3>
+              <Ledger rows={packages} label="Published packages" />
+              <p className="packages">Historical installation baseline verified on {facts.shipped.verifiedOn}. The commands stay pinned to 0.4.2. These are not the latest-version labels. Review current documentation before choosing another release.</p>
+            </div>
+            <p className="packages">
+              The current command reference includes newer source-only features. Check its release
+              notes and required versions before using those features with these pinned packages.
+              For an existing folder, read the adoption instructions before running a command that writes files.
+            </p>
+            <p className="packages">
+              <a href={facts.links.commandReference}>Command reference</a>,{" "}
+              <a href={facts.links.commandSource}>CLI source on GitHub</a>, <a href={facts.links.pypi}>PyPI</a>,{" "}
+              <a href={facts.links.npm}>npm</a>.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="files" className="chapter in">
         <div className="wrap two">
           <div className="lead">
             <h2 className="display display-lg">A workspace starts as five files.</h2>
@@ -91,7 +128,7 @@ export default function Commands() {
         </div>
       </Section>
 
-      <Section className="chapter in">
+      <Section id="layers" className="chapter in">
         <div className="wrap two">
           <div className="lead">
             <h2 className="display display-lg">Context, state, review and coordination.</h2>
@@ -106,41 +143,14 @@ export default function Commands() {
         </div>
       </Section>
 
-      <Section className="chapter in">
-        <div className="wrap two">
-          <div className="lead">
-            <h2 className="display display-lg">Create a workspace from a terminal.</h2>
-            <p className="lede">
-              Use a new workspace directory for this example. Both paths require Python 3.11
-              or newer. The uvx command needs uv. The npm launcher needs Node.js, npm and
-              either uv or pipx to run the Python scaffolder.
-            </p>
-          </div>
-          <div className="body">
-            <Ledger
-              label="Pinned workspace setup commands"
-              rows={[
-                { k: "with uv", v: <code>{facts.shipped.install}</code> },
-                { k: "with npm", v: <code>{facts.shipped.installNpm}</code> },
-              ]}
-            />
-            <div className="block">
-              <Ledger rows={packages} label="Published packages" />
-              <p className="packages">Historical installation baseline verified on {facts.shipped.verifiedOn}. The commands stay pinned to 0.4.2. These are not the latest-version labels. Review current documentation before choosing another release.</p>
-            </div>
-            <p className="packages">
-              The current command reference includes newer source-only features. Check its release
-              notes and required versions before using those features with these pinned packages.
-              For an existing folder, read the adoption instructions before running a command that writes files.
-            </p>
-            <p className="packages">
-              <a href={facts.links.commandReference}>Command reference</a>,{" "}
-              <a href={facts.links.commandSource}>CLI source on GitHub</a>, <a href={facts.links.pypi}>PyPI</a>,{" "}
-              <a href={facts.links.npm}>npm</a>.
-            </p>
-          </div>
+
+      <section className="sec">
+        <div className="wrap command-desktop-note">
+          <h2 className="display display-lg">Looking for the desktop app?</h2>
+          <p className="lede">{facts.product.status}</p>
+          <Link className="text-link" href="/what-is-vivary/#install">Read Windows preview setup <span aria-hidden="true">→</span></Link>
         </div>
-      </Section>
+      </section>
     </Shell>
   );
 }

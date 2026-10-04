@@ -107,7 +107,16 @@ def render(node, origin, in_pre=False):
         return f'*{content}*'
     if tag in ('ul', 'ol'):
         items = [child for child in node.children if isinstance(child, Node) and child.tag == 'li']
-        content = '\n'.join((f'{i}. ' if tag == 'ol' else '- ') + render(child, origin).strip().replace('\n', '\n  ') for i, child in enumerate(items, 1))
+        rendered_items = []
+        for i, child in enumerate(items, 1):
+            marker = f'{i}. ' if tag == 'ol' else '- '
+            lines = render(child, origin).strip().splitlines()
+            if not lines:
+                continue
+            # Continuation blocks must align after the complete list marker.
+            continuation = [(' ' * len(marker) + line) if line.strip() else '' for line in lines[1:]]
+            rendered_items.append(marker + lines[0] + ''.join('\n' + line for line in continuation))
+        content = '\n'.join(rendered_items)
     if tag == 'dt':
         return f'\n\n**{content.strip()}**\n\n'
     if tag == 'dd':
