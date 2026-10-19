@@ -35,10 +35,10 @@ export default function Automations() {
 
       <DocSection id="create" title="Create an automation">
         <Steps>
-          <li>Open <Ui>Settings</Ui>. Under <Ui>Agent</Ui>, choose <Ui>Automations</Ui>.</li>
+          <li>Open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Automations</Ui>.</li>
           <li>
-            Choose <Ui>New automation</Ui>. A box named <Ui>Ask the agent</Ui> opens with the start of
-            a request: <code>Create an automation that does this:</code>
+            Choose <Ui>New automation</Ui>. A box titled <Ui>Create an automation</Ui> opens with the
+            start of a request: <code>Create an automation that does this:</code>
           </li>
           <li>Finish the request. Say what the automation does, when it runs, and your time zone. Then send it.</li>
           <li>
@@ -54,7 +54,7 @@ export default function Automations() {
       </DocSection>
 
       <DocSection id="manage" title="Pause, run, edit or delete an automation">
-        <p>Each automation in <Ui>Settings</Ui> &gt; <Ui>Automations</Ui> has a switch and a <Ui>Manage</Ui> menu.</p>
+        <p>Each automation in <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Automations</Ui> has a switch and a <Ui>Manage</Ui> menu.</p>
         <DocTable
           caption="Automation controls"
           head={["To", "Do this"]}
@@ -95,7 +95,7 @@ export default function Automations() {
           you decide, chats and automation runs keep using the previous accepted version.
         </p>
         <Steps>
-          <li>Open <Ui>Settings</Ui>. Under <Ui>Agent</Ui>, choose <Ui>Automation files</Ui>.</li>
+          <li>Open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Automation files</Ui>.</li>
           <li>Read the proposed text for each file.</li>
           <li>
             Choose <Ui>Accept</Ui> to use the proposed text. Choose <Ui>Discard</Ui> to restore the saved

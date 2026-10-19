@@ -65,7 +65,7 @@ export default function Troubleshooting() {
             [<>Claude Code or Codex shows <Ui key="n">Not installed</Ui> or <Ui key="s">Sign-in required</Ui></>, <>Install the tool and sign in from a terminal, then choose <Ui key="r">Refresh</Ui> in <Ui key="c">Coding runtimes</Ui>. See <Link key="l" href="/docs/runtime-setup/#coding-runtimes">Connect Claude Code or Codex</Link>.</>],
             ["Vivary finds a different copy of Codex than your terminal", <>Vivary uses the first copy on <code key="p">PATH</code> that has a launcher such as <code key="x">codex.exe</code> or <code key="m">codex.cmd</code>. Remove or reorder the other copy on <code key="p2">PATH</code>, then choose <Ui key="r">Refresh</Ui>.</>],
             [<>A Native chat shows <Ui key="c">Connect AI</Ui></>, <>Add a provider key. See <Link key="l" href="/docs/runtime-setup/#provider-key">Add a provider key for Native chat</Link>.</>],
-            [<>Text shows <code key="a">[redacted NAME]</code> or <code key="b">[redacted credential]</code></>, "Vivary replaced a credential before a model, the screen or storage received it. The original stays where it is kept. Keep keys in settings or project configuration, not in messages."],
+            [<>Text shows <code key="a">[redacted NAME]</code> or <code key="b">[redacted credential]</code></>, "Vivary replaced a key it holds, or text in a common key format, before a model, the screen or storage received it. The original stays where it is kept. Keep keys in settings or project configuration, not in messages."],
           ]}
         />
       </DocSection>
@@ -102,8 +102,8 @@ export default function Troubleshooting() {
           caption="Remote access symptoms"
           head={["Symptom", "Action"]}
           rows={[
-            [<Ui key="l">Remote access listener unavailable</Ui>, <>Vivary could not use the saved loopback port and shows <Ui key="m">The saved browser ingress port is unavailable</Ui>. The desktop app keeps working. In <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui>, enter a different <Ui key="p">Loopback ingress port</Ui>, choose <Ui key="e">Enable remote access</Ui> and confirm. Then point your HTTPS connection at the new port.</>],
-            ["The other device shows Still waiting for approval on the desktop", <>On this computer, open <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui> and choose <Ui key="c">Compare and approve</Ui> for the request. Requests expire after five minutes.</>],
+            [<Ui key="l">Remote access listener unavailable</Ui>, <>Vivary could not use the saved loopback port and shows <Ui key="m">The saved browser ingress port is unavailable</Ui>. The desktop app keeps working. In <Ui key="s">Settings</Ui> &gt; <Ui key="g">Agent</Ui> &gt; <Ui key="r">Remote access</Ui>, enter a different <Ui key="p">Loopback ingress port</Ui>, choose <Ui key="e">Enable remote access</Ui> and confirm. Then point your HTTPS connection at the new port.</>],
+            ["The other device shows Still waiting for approval on the desktop", <>On this computer, open <Ui key="s">Settings</Ui> &gt; <Ui key="g">Agent</Ui> &gt; <Ui key="r">Remote access</Ui> and choose <Ui key="c">Compare and approve</Ui> for the request. Requests expire after five minutes.</>],
             ["A remote browser cannot open a folder", <>Use <Ui key="o">Open folder</Ui> in the desktop app on this computer.</>],
           ]}
         />

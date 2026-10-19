@@ -163,10 +163,9 @@ export default function InstallWindows() {
           need it.
         </p>
         <p>
-          Going back to an older version is not tested across database changes. An older version does
-          not undo changes a newer version made to your data. To go back, keep a copy of your current
-          data, then restore the backup you made before the upgrade. Restoring a backup can lose work
-          you did after it.
+          An older version does not undo changes a newer version made to your data. Keep the backup
+          you made before the upgrade. To go back, keep a copy of your current data, then restore that
+          backup. Restoring a backup can lose work you did after it.
         </p>
       </DocSection>
 

@@ -49,7 +49,7 @@ export default function RuntimeSetup() {
         </p>
         <Steps>
           <li>
-            Open <Ui>Settings</Ui> and choose <Ui>Coding runtimes</Ui>. You can also choose{" "}
+            Open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Coding runtimes</Ui>. You can also choose{" "}
             <Ui>Set up coding runtimes</Ui> on the general settings page, or the <Ui>Runtime settings</Ui>{" "}
             button in a Code conversation.
           </li>
@@ -107,13 +107,20 @@ export default function RuntimeSetup() {
           keeps one saved key per provider. Native chat uses one provider at a time.
         </p>
         <Steps>
-          <li>Open <Ui>Settings</Ui>. On the general settings page, choose <Ui>Set up providers</Ui>.</li>
-          <li>In the <Ui>LLM</Ui> section, open <Ui>Custom keys</Ui>.</li>
+          <li>
+            Open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Overview</Ui> and find the <Ui>LLM</Ui> section. The general settings page
+            links there with <Ui>Set up providers</Ui>.
+          </li>
+          <li>
+            Open the key settings. Before any key is saved, the button reads <Ui>Custom keys</Ui>.
+            After a key is saved, it reads <Ui>Manage</Ui>.
+          </li>
           <li>Choose your provider.</li>
           <li>Paste your key into the key field and choose <Ui>Save</Ui>. This saves the key only.</li>
           <li>
             To make that provider the one Native chat uses, choose <Ui>Apply</Ui>. The change takes
-            effect in your next conversation.
+            effect in your next conversation. <Ui>Apply</Ui> appears only when the provider or model
+            you chose differs from the one Native chat uses now.
           </li>
         </Steps>
         <p>
@@ -122,9 +129,11 @@ export default function RuntimeSetup() {
           also makes that provider the one Native chat uses.
         </p>
         <Note>
-          Keep keys in Vivary settings, not in chat messages. When text that looks like a credential
-          reaches a model, the screen or storage, Vivary replaces it with a placeholder such as{" "}
-          <code>[redacted credential]</code>.
+          Keep keys in Vivary settings, not in chat messages. Before text reaches a model, the screen
+          or storage, Vivary replaces the keys it holds and common key formats with a placeholder such
+          as <code>[redacted credential]</code>. This does not cover everything. A Codex approval
+          request is stored as Codex sent it. Claude Code and Codex send their own context to their
+          providers, and Vivary does not filter it.
         </Note>
       </DocSection>
 
@@ -139,7 +148,7 @@ export default function RuntimeSetup() {
           uses. You can keep chatting with another provider.
         </p>
         <Steps>
-          <li>Open <Ui>Settings</Ui>, choose <Ui>Set up providers</Ui>, and open <Ui>Custom keys</Ui> in the <Ui>LLM</Ui> section.</li>
+          <li>Open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Overview</Ui>. In the <Ui>LLM</Ui> section, choose <Ui>Custom keys</Ui>, or <Ui>Manage</Ui> if a key is already saved.</li>
           <li>Choose Anthropic as the provider.</li>
           <li>Paste your Anthropic key into the key field and choose <Ui>Save</Ui>.</li>
           <li>To keep chatting with your current provider, do not choose <Ui>Apply</Ui>. <Ui>Apply</Ui> switches Native chat to Anthropic.</li>

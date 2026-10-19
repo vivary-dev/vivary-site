@@ -51,8 +51,10 @@ export default function Projects() {
         <Steps>
           <li>In the sidebar, choose <Ui>New project</Ui>.</li>
           <li>
-            Enter a <Ui>Project name</Ui>. Use up to 128 letters, numbers, periods, underscores or
-            hyphens.
+            Enter a <Ui>Project name</Ui> of up to 128 ASCII letters, numbers, periods, underscores
+            or hyphens. It must start with a letter or number and must not end with a period. Reserved
+            Windows names such as <code>CON</code>, <code>NUL</code>, <code>COM1</code> or{" "}
+            <code>LPT1</code> are not allowed.
           </li>
           <li>
             Choose a <Ui>Workspace type</Ui>: <Ui>Coding</Ui>, <Ui>Second brain</Ui>,{" "}
@@ -66,8 +68,8 @@ export default function Projects() {
           <li>Choose <Ui>Create project</Ui>.</li>
         </Steps>
         <p>
-          Vivary creates the project in its own Projects folder, inside{" "}
-          <code>%USERPROFILE%\.vivary\workbench</code>. To keep a project somewhere else, create the
+          Vivary creates the project in its own folder,{" "}
+          <code>%USERPROFILE%\.vivary\workbench\projects</code>. To keep a project somewhere else, create the
           folder yourself and use <Ui>Open folder</Ui>.
         </p>
       </DocSection>
@@ -191,9 +193,14 @@ export default function Projects() {
             ["See what agents get", <>Open <Ui key="w">What agents receive</Ui>.</>],
           ]}
         />
-        <Note>
+        <p>
           A change, including <Ui>Forget</Ui>, applies to your next message, including in open
           conversations. A reply already in progress keeps what it started with.
+        </p>
+        <Note>
+          <Ui>Forget</Ui> removes the fact from Memory only. As the app warns, earlier conversation
+          transcripts, Codex thread history, Git history and other file versions, and backups may
+          still contain it. Vivary does not erase those.
         </Note>
         <p>
           To record where the work stands for the next session, use a handoff. See{" "}

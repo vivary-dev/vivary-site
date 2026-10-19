@@ -33,10 +33,7 @@ export default function RemoteAccess() {
             firewall.
           </li>
           <li>It is off until you turn it on. Each browser must be paired and approved on this computer.</li>
-          <li>
-            It only opens Vivary itself. It is not a feature that lets an agent control a web browser.
-            Vivary does not include agent browser control.
-          </li>
+          <li>It opens Vivary itself. In the app&apos;s words, remote access is separate from an agent controlling a browser.</li>
         </ul>
       </DocSection>
 
@@ -47,7 +44,7 @@ export default function RemoteAccess() {
           forwards requests to that port.
         </p>
         <Steps>
-          <li>In the desktop app, open <Ui>Settings</Ui> and choose <Ui>Remote access</Ui>.</li>
+          <li>In the desktop app, open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Remote access</Ui>.</li>
           <li>Enter a <Ui>Host name</Ui> that identifies this computer on the other device. The default is <Ui>My Vivary laptop</Ui>.</li>
           <li>Enter the <Ui>Private HTTPS origin</Ui> of your protected connection, for example <code>https://your-private-host</code>.</li>
           <li>
@@ -68,7 +65,7 @@ export default function RemoteAccess() {
         <Steps>
           <li>On the other device, open your private HTTPS origin followed by <code>/pair</code> in a browser.</li>
           <li>On the <Ui>Connect to your Vivary host</Ui> page, fill in <Ui>Name this browser</Ui>, for example <code>My phone</code>, and choose <Ui>Request pairing</Ui>. A six-digit code appears.</li>
-          <li>On this computer, open <Ui>Settings</Ui> &gt; <Ui>Remote access</Ui>. The request is listed under <Ui>Waiting for approval</Ui>.</li>
+          <li>On this computer, open <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Remote access</Ui>. The request is listed under <Ui>Waiting for approval</Ui>.</li>
           <li>Check that the code matches the code on the other device. Then choose <Ui>Compare and approve</Ui>.</li>
           <li>Windows asks you to confirm the pairing and shows the code again. Choose <Ui>Confirm</Ui>.</li>
           <li>On the other device, choose <Ui>Finish pairing and open Vivary</Ui>.</li>
