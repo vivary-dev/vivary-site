@@ -9,9 +9,15 @@ import json
 import os
 import re
 
-ROUTES = ('/', '/commands/', '/what-is-vivary/')
+# The documentation articles come from the same list the site renders.
+DOCS = json.loads((Path(__file__).resolve().parents[1] / 'src/content/docs.json').read_text())
+DOC_ROUTES = tuple(f"/docs/{article['slug']}/" for article in DOCS['articles'])
+ROUTES = ('/', '/commands/', '/what-is-vivary/', '/docs/') + DOC_ROUTES
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
 SKIP = {'script', 'style', 'noscript', 'svg', 'button'}
+# Elements that separate words when a page is flattened into search text.
+BLOCK = {'p', 'li', 'dt', 'dd', 'td', 'th', 'tr', 'caption', 'pre', 'div', 'section', 'article', 'header', 'footer',
+         'nav', 'ul', 'ol', 'dl', 'table', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
 
 @dataclass
 class Node:
@@ -62,7 +68,23 @@ def escape(text):
 
 
 def hidden(node):
-    return node.tag in SKIP or node.attrs.get('aria-hidden') == 'true' or 'hidden' in node.attrs
+    # data-export-skip marks interactive page furniture, such as a search form.
+    return (node.tag in SKIP or node.attrs.get('aria-hidden') == 'true' or 'hidden' in node.attrs
+            or 'data-export-skip' in node.attrs)
+
+
+def table(node, origin):
+    """A simple table becomes a GitHub-style pipe table. Each cell stays on one line."""
+    lines = []
+    for row in find(node, 'tr'):
+        cells = [child for child in row.children if isinstance(child, Node) and child.tag in ('th', 'td') and not hidden(child)]
+        text = [re.sub(r'\s+', ' ', render(cell, origin)).strip().replace('|', r'\|') for cell in cells]
+        lines.append('| ' + ' | '.join(text) + ' |')
+        if len(lines) == 1:
+            lines.append('|' + '|'.join([' --- '] * len(cells)) + '|')
+    caption = find(node, 'caption')
+    title = re.sub(r'\s+', ' ', render(caption[0], origin)).strip() + '\n\n' if caption else ''
+    return '\n\n' + title + '\n'.join(lines) + '\n\n'
 
 
 def render(node, origin, in_pre=False):
@@ -71,6 +93,8 @@ def render(node, origin, in_pre=False):
     if hidden(node):
         return ''
     tag = node.tag
+    if tag == 'table':
+        return table(node, origin)
     if tag == 'pre':
         text = plain(node).strip('\n')
         fence = '`' * max(3, 1 + max((len(x) for x in re.findall(r'`+', text)), default=0))
@@ -148,23 +172,61 @@ def convert(html, canonical):
     return title, f'Canonical page: {canonical}\n\n{body}\n'
 
 
+def words(node):
+    if isinstance(node, str):
+        return node
+    # Table captions and column headings repeat on every row of a table. They add noise to results.
+    if hidden(node) or node.tag in ('caption', 'thead'):
+        return ''
+    inner = ''.join(words(child) for child in node.children)
+    return f' {inner} ' if node.tag in BLOCK else inner
+
+
+def clean(text):
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def search_entry(html, route):
+    """One article's searchable text, split at its sections so a result links to an anchor."""
+    main = find(Document(html).root, 'main')[0]
+    summary = [node for node in find(main, 'p') if 'define' in node.attrs.get('class', '').split()]
+    sections = []
+    for section in find(main, 'section'):
+        if 'data-search-section' not in section.attrs:
+            continue
+        anchor = section.attrs.get('id', '')
+        heading = find(section, 'h2')
+        if not re.fullmatch(r'[a-z0-9-]+', anchor) or len(heading) != 1:
+            raise ValueError(f'{route}: each search section needs an id and one h2')
+        body = ''.join(words(child) for child in section.children if not (isinstance(child, Node) and child.tag == 'h2'))
+        sections.append({'id': anchor, 'heading': clean(words(heading[0])), 'text': clean(body)})
+    if not sections or len(summary) != 1:
+        raise ValueError(f'{route}: an article needs one summary and at least one section')
+    return {'path': route, 'title': clean(words(find(main, 'h1')[0])), 'summary': clean(words(summary[0])), 'sections': sections}
+
+
 def export():
     out = Path('out')
     origin = os.environ.get('NEXT_PUBLIC_SITE_URL', 'https://vivary-dev.github.io').rstrip('/')
     docs = []
+    index = []
     for route in ROUTES:
         path = out / route.strip('/')
         html = (path / 'index.html').read_text()
+        if route in DOC_ROUTES:
+            index.append(search_entry(html, route))
         title, markdown = convert(html, origin + route)
         (path / 'index.md').write_text(markdown)
         docs.append({'path': route, 'markdownPath': route + 'index.md', 'title': title, 'uri': origin + route, 'markdown': markdown, 'htmlSha256': hashlib.sha256(html.encode()).hexdigest()})
     # The checked-in guidance stays authoritative; only its origin is build-specific.
     guidance = Path('public/llms.txt').read_text().replace('https://vivary-dev.github.io', origin)
     (out / 'llms.txt').write_text(guidance)
+    # The docs search reads this file in the browser. No server is involved.
+    (out / 'docs' / 'search-index.json').write_text(json.dumps({'articles': index}, ensure_ascii=False, separators=(',', ':')) + '\n')
     cache = Path('.tmp/pages-functions')
     cache.mkdir(parents=True, exist_ok=True)
     (cache / 'documents.json').write_text(json.dumps(docs, ensure_ascii=False, indent=2) + '\n')
-    print(f'Exported {len(docs)} Markdown documents from public HTML.')
+    print(f'Exported {len(docs)} Markdown documents and a search index of {len(index)} articles from public HTML.')
 
 if __name__ == '__main__':
     export()

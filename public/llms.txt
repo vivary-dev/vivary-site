@@ -32,6 +32,22 @@ The jar remains Vivary's product mark. The approved mascot is the lead character
 
 These HTML pages are the primary content. This file is linked guidance, not a separate product specification.
 
+## Desktop app documentation
+
+Task-based articles for the Windows desktop app. Each has numbered steps that name the app's own labels. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://vivary-dev.github.io/docs/search-index.json.
+
+- Documentation index and search: https://vivary-dev.github.io/docs/
+- Install, upgrade and uninstall on Windows: https://vivary-dev.github.io/docs/install-windows/
+- Coding runtimes and provider keys: https://vivary-dev.github.io/docs/runtime-setup/
+- Projects, Files and Memory: https://vivary-dev.github.io/docs/projects/
+- Conversations: https://vivary-dev.github.io/docs/conversations/
+- Handoffs to STATE.md: https://vivary-dev.github.io/docs/handoffs/
+- Automations: https://vivary-dev.github.io/docs/automations/
+- Remote access from another device: https://vivary-dev.github.io/docs/remote-access/
+- Troubleshooting: https://vivary-dev.github.io/docs/troubleshooting/
+
+Remote access opens Vivary itself in a paired browser over an HTTPS connection the user already runs. It is not agent browser control, which Vivary does not include. Do not describe it as a tunnel or a public sharing feature.
+
 ## Workspace commands
 
 The workspace commands are part of Vivary and also usable from a terminal. The commands page labels its pinned 0.4.2 installation example as the historical installation baseline verified on 2026-08-15. Do not call that the newest package version. Inspect current command documentation and package metadata before running or recommending a different version.

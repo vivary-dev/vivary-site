@@ -4,7 +4,8 @@ Updated 2026-10-03. The canonical site is https://vivary-dev.github.io/.
 People and agents get the same content. HTML remains the authority. Markdown
 is derived from each exported page, never maintained as a second copy. Keep product information readable
 without JavaScript, semantic headings and named landmarks, accurate metadata,
-canonical URLs, and a sitemap containing the three public content pages.
+canonical URLs, and a sitemap containing every public content page, including
+the documentation articles listed in `src/content/docs.json`.
 The generated 404 remains noindex.
 
 `src/content/facts.ts` owns current product claims and links. Each page states
@@ -72,7 +73,7 @@ and exclusions select HTML or Markdown. Responses use `Vary: Accept` and
 `Cache-Control: no-store` so intermediaries cannot confuse representations.
 Static image, font and script delivery bypasses Functions.
 
-The optional public MCP serves only the three generated website documents.
+The optional public MCP serves only the generated website documents.
 It does not connect to a desktop installation, user files, accounts or models.
 The operator must enable it and choose fail-closed quota handling before
 cutover. Its pinned protocol and transport boundaries are in the deployment

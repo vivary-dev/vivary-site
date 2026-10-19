@@ -12,6 +12,26 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-10-19  feat/user-docs-20261019
+
+**Did:** Added a `/docs/` section for issue #14: an index with search and eight task-based articles (install, upgrade and uninstall on Windows, runtimes and keys, projects, conversations, handoffs, automations, remote access, troubleshooting). Each article has stable section anchors, related links, previous and next links, the status line and the agent line. `src/content/docs.json` is the single article list. The sitemap, Markdown export, export checks, MCP catalog and `llms.txt` all cover the new pages. Added Docs to the header and footer navigation. The three existing pages and their download links are unchanged.
+
+**Sources:** Every step was checked against vivary-dev/vivary at 96d3a8c (application identical to 2aaf04f): the workbench UI source, the bundled Core settings and automation UI, and the release INSTALL-WINDOWS.md and RELEASE-NOTES.md drafts. Labels are quoted as the code spells them. Claims the code did not support were left out. Development history, issue numbers and acceptance evidence stay in their existing records.
+
+**Review follow-up:** Every claim first flagged as unverified was traced to code or rewritten. Conditions read the saved Anthropic key apart from the chat provider. In Settings, **Save** stores a key and **Apply** switches the chat provider. The Connect AI card's **Save and use** does both. The state document is `state = "STATE.md"` in `.vivary/workspace.toml`, written by New project and Vivary setup. The remote access port fix, the webhook port-change notice, the Automation files wording, the Run now refusal and the Memory timing now quote the app. The webhook-as-password note and the HTTPS-uptime line were removed. Search now matches terms only at word starts, so "review" no longer finds or marks "preview".
+
+**Search:** `scripts/export-docs.py` writes `out/docs/search-index.json` from the exported article HTML, split at each section. The index page filters it in the browser and keeps the query in `?q=`. The search form on each article submits to the index, so it works without JavaScript on any static host. No dependency, server or service was added. The exporter also gained pipe-table output and a `data-export-skip` marker for page furniture, with unit tests.
+
+**Broke / surprised me:** `scripts/shot.sh` cannot run on the build server because `python3-venv` is missing. Renders at 1440, 390 and 360 px came from a one-off script that drives the system Chrome over the DevTools protocol with Node's built-in WebSocket. It stayed outside the repo. Inherited `.v9 section` padding opened large gaps between article sections until the docs styles reset it.
+
+**Audit decisions:** Pinned shadscan 0.17.0 exits 0 with score 54, the same as the tree without this branch's tracked changes. Its five new findings point at `src/app/docs/article.tsx` and are not fixed: the article list is plain links that stack below the article on phones, so it needs no menu trigger. The tables hold fixed article content, not data that can be empty. The search form is a native GET form with no async action and no input to validate. Link names come from `docs.json` at build time and are checked in the export.
+
+**Decided:** Tables in articles turn into labelled stacks below 640 px, so long Windows paths never scroll sideways. The install article links the release through `facts.links.preview` and writes file names as `Vivary-Setup-<commit>.exe`, so the release session's facts update is the only change needed when the tag moves.
+
+**Next:** Review the PR. Once the release session's facts update lands, check that the install article's release link points at the installer release. Publishing waits for Jeff.
+
+---
+
 ## 2026-10-04  feat/site-refresh
 
 **Did:** Built a review-only visual refresh of the existing three pages after Jeff asked to prioritize the product and website design. The home page now leads with the unchanged approved character, clear Windows download/setup links and a real, explicitly labeled development-interface capture. The setup page uses numbered steps and a page index. Commands appear before the layer explanation. Kept the palette, type roles, jar logo, sourced preview qualifications, runtime/data boundaries and existing routes/fragments. Fixed the phone menu panel and Escape focus restoration.

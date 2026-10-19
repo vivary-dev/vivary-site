@@ -3,7 +3,9 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const preview = process.argv.includes('--preview');
 const docs = JSON.parse(readFileSync('.tmp/pages-functions/documents.json', 'utf8'));
-assert.equal(docs.length, 3);
+const { articles } = JSON.parse(readFileSync('src/content/docs.json', 'utf8'));
+// Home, commands, setup guide and the docs index, plus one document per article.
+assert.equal(docs.length, 4 + articles.length);
 for (const doc of docs) {
   const html = readFileSync(`out${doc.path}index.html`);
   assert.equal(createHash('sha256').update(html).digest('hex'), doc.htmlSha256, 'Markdown catalog must describe this exact HTML build');
@@ -34,4 +36,4 @@ else {
 const routes = JSON.parse(readFileSync('out/_routes.json', 'utf8'));
 assert(routes.exclude.includes('/_next/*') && routes.exclude.includes('/brand/*'));
 assert(!source.includes('ai-input='));
-console.log(`Compiled edge export verified: three exact HTML/Markdown resources, ${preview ? 'preview MCP disabled (503)' : 'public MCP parity'}, and static asset exclusions.`);
+console.log(`Compiled edge export verified: ${docs.length} exact HTML/Markdown resources, ${preview ? 'preview MCP disabled (503)' : 'public MCP parity'}, and static asset exclusions.`);
