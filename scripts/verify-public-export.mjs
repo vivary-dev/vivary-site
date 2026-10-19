@@ -3,7 +3,9 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
-const pages = ["/", "/commands/", "/what-is-vivary/"];
+const { articles } = JSON.parse(readFileSync("src/content/docs.json", "utf8"));
+const docRoutes = articles.map((article) => `/docs/${article.slug}/`);
+const pages = ["/", "/commands/", "/what-is-vivary/", "/docs/", ...docRoutes];
 const read = (file) => readFileSync(join("out", file), "utf8");
 const titles = new Set();
 const descriptions = new Set();
@@ -44,5 +46,17 @@ const sitemap = read("sitemap.xml");
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 assert.deepEqual(locations.sort(), pages.map((route) => `${origin}${route}`).sort());
 assert(read("404.html").includes("noindex"), "404 should remain noindex");
-assert(read("llms.txt").includes(`Canonical site: ${origin}/`), "Agent guidance canonical");
-console.log("Public export verified: canonical pages, indexing, training controls, sitemap and local targets.");
+const guidance = read("llms.txt");
+assert(guidance.includes(`Canonical site: ${origin}/`), "Agent guidance canonical");
+for (const route of ["/docs/", ...docRoutes]) assert(guidance.includes(`${origin}${route}\n`), `Agent guidance must list ${route}`);
+const search = JSON.parse(read("docs/search-index.json")).articles;
+assert.deepEqual(search.map((entry) => entry.path), docRoutes, "Search index must cover every article in order");
+for (const entry of search) {
+  assert(entry.title && entry.summary && entry.sections.length > 0, `${entry.path} search entry is empty`);
+  const html = read(`${entry.path.slice(1)}index.html`);
+  for (const section of entry.sections) {
+    assert(section.text.length > 0, `${entry.path}#${section.id} has no searchable text`);
+    assert(html.includes(`id="${section.id}"`), `${entry.path}#${section.id} anchor`);
+  }
+}
+console.log(`Public export verified: ${pages.length} canonical pages, indexing, training controls, sitemap, local targets, agent guidance and docs search index.`);

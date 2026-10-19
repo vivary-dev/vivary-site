@@ -153,8 +153,8 @@ async function rpc(request: Request, config: Config): Promise<Response> {
   }
   if (body.method === 'ping') return json({ jsonrpc: '2.0', id, result: {} });
   if (body.method === 'resources/list') {
-    if ('cursor' in params) return error(id, -32602, 'This three-document collection has no pagination cursor');
-    return json({ jsonrpc: '2.0', id, result: { resources: config.docs.map((doc) => ({ uri: doc.uri, name: doc.path === '/' ? 'overview' : doc.path.replaceAll('/', ''), title: doc.title, mimeType: 'text/markdown', _meta: { 'xyz.vivaryagent/source-html-sha256': doc.htmlSha256 } })) } });
+    if ('cursor' in params) return error(id, -32602, 'This document collection has no pagination cursor');
+    return json({ jsonrpc: '2.0', id, result: { resources: config.docs.map((doc) => ({ uri: doc.uri, name: doc.path === '/' ? 'overview' : doc.path.slice(1, -1).replaceAll('/', '-'), title: doc.title, mimeType: 'text/markdown', _meta: { 'xyz.vivaryagent/source-html-sha256': doc.htmlSha256 } })) } });
   }
   if (body.method === 'resources/read') {
     if (typeof params.uri !== 'string') return error(id, -32602, 'uri must be a listed resource URI');
