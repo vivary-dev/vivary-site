@@ -192,8 +192,8 @@ export default function Projects() {
           ]}
         />
         <Note>
-          Memory is separate from conversation history. Forgetting a fact does not remove it from
-          earlier conversations.
+          Memory facts are separate from conversation history. Forgetting a fact removes it from
+          Memory, not from messages that already used it.
         </Note>
         <p>
           To record where the work stands for the next session, use a handoff. See{" "}

@@ -29,7 +29,7 @@ export default function InstallWindows() {
     <DocPage slug={slug} sections={sections}>
       <DocSection id="requirements" title="Requirements">
         <ul>
-          <li>64-bit Windows (x64). Vivary does not run on 32-bit Windows, macOS or Linux.</li>
+          <li>64-bit Windows (x64). Setup refuses 32-bit Windows. macOS and Linux are not supported.</li>
           <li>No administrator rights. Setup installs Vivary for your Windows account only.</li>
           <li>No Vivary account. Vivary opens locally.</li>
           <li>
