@@ -192,8 +192,8 @@ export default function Projects() {
           ]}
         />
         <Note>
-          Memory facts are separate from conversation history. Forgetting a fact removes it from
-          Memory, not from messages that already used it.
+          A change, including <Ui>Forget</Ui>, applies to your next message, including in open
+          conversations. A reply already in progress keeps what it started with.
         </Note>
         <p>
           To record where the work stands for the next session, use a handoff. See{" "}

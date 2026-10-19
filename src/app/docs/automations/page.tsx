@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DocPage, DocSection, DocTable, Note, Steps, Ui, docMetadata } from "../article";
+import { DocPage, DocSection, DocTable, Steps, Ui, docMetadata } from "../article";
 
 // Sources: the bundled Core automation settings (AgentJobsTab, AutomationScheduleDialog,
 // AutomationDetailsDialog, triggers/dispatcher), packages/workbench/app/lib/
@@ -67,8 +67,8 @@ export default function Automations() {
           ]}
         />
         <p>
-          An automation never runs twice at the same time. Vivary refuses a new run while one is
-          still running.
+          An automation never runs twice at the same time. While a run is in progress or waiting for
+          your approval, <Ui>Run now</Ui> is refused with <Ui>The automation is already running.</Ui>
         </p>
       </DocSection>
 
@@ -92,12 +92,15 @@ export default function Automations() {
       <DocSection id="files" title="Review file changes from automations">
         <p>
           When a run changes an instruction, skill or memory file, the change waits for you. Until
-          you decide, chats and later runs keep using the current text.
+          you decide, chats and automation runs keep using the previous accepted version.
         </p>
         <Steps>
           <li>Open <Ui>Settings</Ui>. Under <Ui>Agent</Ui>, choose <Ui>Automation files</Ui>.</li>
           <li>Read the proposed text for each file.</li>
-          <li>Choose <Ui>Accept</Ui> to use the new text, or <Ui>Discard</Ui> to keep the previous version.</li>
+          <li>
+            Choose <Ui>Accept</Ui> to use the proposed text. Choose <Ui>Discard</Ui> to restore the saved
+            previous version. If no previous version was saved, <Ui>Discard</Ui> removes the proposed file.
+          </li>
         </Steps>
       </DocSection>
 
@@ -122,15 +125,15 @@ export default function Automations() {
           <li>Have a program on this computer send an HTTP POST request to that URL.</li>
         </Steps>
         <p>
-          The URL starts with <code>http://127.0.0.1:</code> and a port between 42100 and 42999. Only
-          programs on this computer can call it, and only while Vivary is open. The port stays the
-          same across launches. If Vivary has to change it, Vivary tells you. Copy the new URL from{" "}
-          <Ui>Details</Ui>.
+          The URL starts with <code>http://127.0.0.1:</code> and a port between 42100 and 42999.{" "}
+          <Ui>Who can call it</Ui> shows <Ui>Reachable only from this computer while Vivary is open.</Ui>
         </p>
-        <Note>
-          Treat the webhook URL like a password. Anyone on this computer who has it can start the
-          automation.
-        </Note>
+        <p>
+          Vivary keeps the same port across launches. If that port is unavailable when Vivary starts,
+          Vivary picks another one and shows <Ui>Vivary changed its local port</Ui>. Webhook URLs with
+          the old port no longer work. Copy each new URL from <Ui>Details</Ui> and update the program
+          that calls it.
+        </p>
       </DocSection>
     </DocPage>
   );

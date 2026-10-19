@@ -106,11 +106,10 @@ export default function RemoteAccess() {
             It cannot open the Windows folder window, so <Ui>Open folder</Ui> works only on this
             computer. See <Link href="/docs/projects/#open-folder">Open a folder you already have</Link>.
           </li>
-          <li>It works only while Vivary is running on this computer and your HTTPS connection is up.</li>
         </ul>
         <p>
           If the status shows <Ui>Remote access listener unavailable</Ui>, Vivary could not use the
-          loopback port. The desktop app keeps working. See{" "}
+          saved loopback port. The desktop app keeps working. See{" "}
           <Link href="/docs/troubleshooting/#remote-access">Troubleshooting</Link>.
         </p>
       </DocSection>

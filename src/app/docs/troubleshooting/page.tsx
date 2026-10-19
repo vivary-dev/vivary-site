@@ -102,7 +102,7 @@ export default function Troubleshooting() {
           caption="Remote access symptoms"
           head={["Symptom", "Action"]}
           rows={[
-            [<Ui key="l">Remote access listener unavailable</Ui>, "Vivary could not use the loopback port. The desktop app keeps working. Close the program that uses that port, or choose another port and point your HTTPS connection at it."],
+            [<Ui key="l">Remote access listener unavailable</Ui>, <>Vivary could not use the saved loopback port and shows <Ui key="m">The saved browser ingress port is unavailable</Ui>. The desktop app keeps working. In <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui>, enter a different <Ui key="p">Loopback ingress port</Ui>, choose <Ui key="e">Enable remote access</Ui> and confirm. Then point your HTTPS connection at the new port.</>],
             ["The other device shows Still waiting for approval on the desktop", <>On this computer, open <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui> and choose <Ui key="c">Compare and approve</Ui> for the request. Requests expire after five minutes.</>],
             ["A remote browser cannot open a folder", <>Use <Ui key="o">Open folder</Ui> in the desktop app on this computer.</>],
           ]}

@@ -3,7 +3,11 @@ import { DocPage, DocSection, DocTable, Note, Steps, Ui, docMetadata } from "../
 
 // Sources in vivary-dev/vivary at 96d3a8c: packages/workbench/app/components/workspace/
 // HandoffControl.tsx, server/handoff.ts, shared/handoff.ts, the README section
-// "Prepare and save a handoff", and the release notes' handoff limits.
+// "Prepare and save a handoff", and the release notes' handoff limits. The state document:
+// server/project-memory.ts 968-988 reads `state` from a thin workspace's settings.
+// packages/create-vivary/create_vivary.py writes `state = "STATE.md"` in
+// .vivary/workspace.toml (6354) for New project (scaffold_thin_workspace, called from
+// server/creation_workspace.py 42) and for Vivary setup (plan_adopt, 7048).
 
 const slug = "handoffs";
 export const metadata = docMetadata(slug);
@@ -33,10 +37,15 @@ export default function Handoffs() {
 
       <DocSection id="state-document" title="Check the project's state document">
         <p>
-          Vivary writes handoffs only to the state document that the project&apos;s{" "}
-          <code>.vivary/workspace.toml</code> names, such as <code>STATE.md</code>. Projects you create
-          with <Ui>New project</Ui> and folders you set up with <Ui>Preview Vivary setup</Ui> have
-          these files. See <Link href="/docs/projects/">Open and set up projects</Link>.
+          Vivary writes handoffs only to the project&apos;s state document. That is the file named by{" "}
+          <code>state</code> in the <code>[workspace]</code> table of <code>.vivary/workspace.toml</code>.
+          When Vivary writes that file for <Ui>New project</Ui> or <Ui>Preview Vivary setup</Ui>, it
+          sets <code>state = &quot;STATE.md&quot;</code>. See{" "}
+          <Link href="/docs/projects/">Open and set up projects</Link>.
+        </p>
+        <p>
+          A folder without Vivary workspace settings has no state document. Its handoff control says{" "}
+          <Ui>This project has no designated state document.</Ui>
         </p>
         <p>Vivary does not write a handoff to a state document that:</p>
         <ul>

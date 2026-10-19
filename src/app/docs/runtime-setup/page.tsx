@@ -2,9 +2,11 @@ import Link from "next/link";
 import { DocPage, DocSection, DocTable, Note, Steps, Ui, docMetadata } from "../article";
 
 // Sources in vivary-dev/vivary at 96d3a8c: packages/workbench/app/components/settings/
-// LocalRuntimeSettings.tsx, app/routes/settings.tsx, the bundled Core provider form
-// (LLM section, Custom keys, API key, Save and use), the Core condition check, and
-// the release INSTALL-WINDOWS.md.
+// LocalRuntimeSettings.tsx, app/routes/settings.tsx, the bundled Core 0.176.5 settings
+// (client/settings/SettingsPanel.js: handleSave at 425 saves a key only, handleApply at
+// 515 switches the chat provider), the Connect AI form (ProviderSetupForm.js 71-99 saves
+// and switches), the condition key lookup (triggers/dispatcher.js 278 and 434,
+// agent/production-agent.js 373-377), and the release INSTALL-WINDOWS.md.
 
 const slug = "runtime-setup";
 export const metadata = docMetadata(slug);
@@ -101,16 +103,24 @@ export default function RuntimeSetup() {
 
       <DocSection id="provider-key" title="Add a provider key for Native chat">
         <p>
-          Native chat sends your messages to a model provider with an API key that you add. If no key
-          is set, an empty chat shows a <Ui>Connect AI</Ui> card where you can add one.
+          Native chat sends your messages to a model provider with an API key that you add. Vivary
+          keeps one saved key per provider. Native chat uses one provider at a time.
         </p>
         <Steps>
           <li>Open <Ui>Settings</Ui>. On the general settings page, choose <Ui>Set up providers</Ui>.</li>
           <li>In the <Ui>LLM</Ui> section, open <Ui>Custom keys</Ui>.</li>
           <li>Choose your provider.</li>
-          <li>Paste your key into <Ui>API key</Ui>.</li>
-          <li>Choose <Ui>Save and use</Ui> followed by the provider name, for example <Ui>Save and use Anthropic</Ui>.</li>
+          <li>Paste your key into the key field and choose <Ui>Save</Ui>. This saves the key only.</li>
+          <li>
+            To make that provider the one Native chat uses, choose <Ui>Apply</Ui>. The change takes
+            effect in your next conversation.
+          </li>
         </Steps>
+        <p>
+          If no key is set, an empty chat shows a <Ui>Connect AI</Ui> card instead. Its{" "}
+          <Ui>Save and use</Ui> button, for example <Ui>Save and use OpenAI</Ui>, saves the key and
+          also makes that provider the one Native chat uses.
+        </p>
         <Note>
           Keep keys in Vivary settings, not in chat messages. When text that looks like a credential
           reaches a model, the screen or storage, Vivary replaces it with a placeholder such as{" "}
@@ -125,10 +135,20 @@ export default function RuntimeSetup() {
           and sends the call or event data to Anthropic for the check.
         </p>
         <p>
-          Conditions use the Anthropic key saved in Vivary. Add it with the steps in{" "}
-          <a href="#provider-key">Add a provider key for Native chat</a> and choose Anthropic as the
-          provider. Without the key, an automation with a condition does not run, and its details
-          show the reason. See <Link href="/docs/automations/#conditions">Run automations</Link>.
+          Conditions use the Anthropic key saved in Vivary, separately from the provider Native chat
+          uses. You can keep chatting with another provider.
+        </p>
+        <Steps>
+          <li>Open <Ui>Settings</Ui>, choose <Ui>Set up providers</Ui>, and open <Ui>Custom keys</Ui> in the <Ui>LLM</Ui> section.</li>
+          <li>Choose Anthropic as the provider.</li>
+          <li>Paste your Anthropic key into the key field and choose <Ui>Save</Ui>.</li>
+          <li>To keep chatting with your current provider, do not choose <Ui>Apply</Ui>. <Ui>Apply</Ui> switches Native chat to Anthropic.</li>
+        </Steps>
+        <p>
+          Do not use <Ui>Save and use Anthropic</Ui> on the <Ui>Connect AI</Ui> card for this. That
+          button also switches Native chat to Anthropic. Without an Anthropic key, an automation with
+          a condition does not run, and its details show the reason. See{" "}
+          <Link href="/docs/automations/#conditions">Run automations</Link>.
         </p>
       </DocSection>
     </DocPage>

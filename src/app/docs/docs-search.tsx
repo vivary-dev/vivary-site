@@ -20,18 +20,22 @@ function terms(query: string) {
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+// A term matches only where a word starts, so "review" finds "Review connection"
+// but not "preview". A term can still be the start of a longer word: "check" finds "checksum".
+const NOT_AFTER_WORD = "(?<![\\p{L}\\p{N}])";
+const atWordStart = (term: string) => new RegExp(NOT_AFTER_WORD + escapeRegExp(term), "iu");
+
 function snippet(text: string, words: string[], phrase: string): ReactNode {
-  const lower = text.toLowerCase();
-  let at = phrase ? lower.indexOf(phrase) : -1;
-  if (at < 0) at = Math.min(...words.map((w) => lower.indexOf(w)).filter((i) => i >= 0), text.length);
+  const firstMatch = (term: string) => text.search(atWordStart(term));
+  let at = phrase ? firstMatch(phrase) : -1;
+  if (at < 0) at = Math.min(...words.map(firstMatch).filter((i) => i >= 0), text.length);
   if (at >= text.length) at = 0;
   let start = Math.max(0, at - 70);
   let end = Math.min(text.length, at + 170);
   if (start > 0) start = text.indexOf(" ", start) + 1 || start;
   if (end < text.length) end = text.lastIndexOf(" ", end) > at ? text.lastIndexOf(" ", end) : end;
   const excerpt = text.slice(start, end);
-  // Highlight matches only at the start of a word, so "review" does not mark "preview".
-  const pattern = new RegExp(`(?<![\\p{L}\\p{N}])(${[phrase, ...words].filter(Boolean).sort((a, b) => b.length - a.length).map(escapeRegExp).join("|")})`, "giu");
+  const pattern = new RegExp(`${NOT_AFTER_WORD}(${[phrase, ...words].filter(Boolean).sort((a, b) => b.length - a.length).map(escapeRegExp).join("|")})`, "giu");
   return (
     <>
       {start > 0 && "… "}
@@ -45,20 +49,21 @@ function search(index: Entry[], query: string): Hit[] {
   const words = terms(query);
   const phrase = query.trim().toLowerCase().replace(/\s+/g, " ");
   if (phrase.length < 2 || words.length === 0) return [];
+  const wordPatterns = words.map(atWordStart);
+  const phrasePattern = atWordStart(phrase);
   const hits: Hit[] = [];
   for (const entry of index) {
     const parts: Section[] = [{ id: "", heading: "", text: entry.summary }, ...entry.sections];
     for (const part of parts) {
-      const title = entry.title.toLowerCase();
-      const heading = part.heading.toLowerCase();
-      const text = part.text.toLowerCase();
+      const { title } = entry;
+      const { heading, text } = part;
       const haystack = `${title} ${heading} ${text}`;
-      if (!words.every((w) => haystack.includes(w))) continue;
+      if (!wordPatterns.every((w) => w.test(haystack))) continue;
       let score = 0;
-      if (text.includes(phrase) || heading.includes(phrase)) score += 10;
-      for (const w of words) {
-        if (heading.includes(w)) score += 3;
-        if (title.includes(w)) score += 2;
+      if (phrasePattern.test(text) || phrasePattern.test(heading)) score += 10;
+      for (const w of wordPatterns) {
+        if (w.test(heading)) score += 3;
+        if (w.test(title)) score += 2;
       }
       hits.push({
         key: `${entry.path}#${part.id}`,
