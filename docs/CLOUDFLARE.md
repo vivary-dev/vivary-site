@@ -34,6 +34,8 @@ The JSX and `facts.ts` remain the content authority. After Next exports HTML,
 | `/` | `/index.md` |
 | `/commands/` | `/commands/index.md` |
 | `/what-is-vivary/` | `/what-is-vivary/index.md` |
+| `/docs/` | `/docs/index.md` |
+| `/docs/<slug>/` | `/docs/<slug>/index.md`, one per article in `src/content/docs.json` |
 
 The conversion preserves headings, paragraphs, lists, definition lists, links,
 code whitespace, source anchors and meaningful image alternatives. Navigation,
@@ -76,7 +78,7 @@ requests belong exclusively at its root endpoint and never fall through to HTML.
 
 ## HTTP behavior
 
-The three website paths offer HTML and `text/markdown`. Accept quality values,
+The website document paths offer HTML and `text/markdown`. Accept quality values,
 media-range specificity and explicit exclusions are honored. HTML wins ties.
 Unsupported preferences receive 406. HEAD returns the selected GET headers
 without a body. Only GET and HEAD serve website documents.
@@ -100,7 +102,7 @@ compatibility is made.
 
 The endpoint supports initialize, ping, resources/list, resources/read and an
 empty resources/templates/list. It accepts initialized/cancelled notifications
-with HTTP 202. It exposes only three fixed canonical URIs. Listed resources and read results
+with HTTP 202. It exposes only the fixed canonical URIs of the exported documents. Listed resources and read results
 include `_meta["xyz.vivaryagent/source-html-sha256"]`, the SHA-256 of the exact
 exported source HTML. This identifies the content revision without inventing
 a modification date. Unknown methods and
