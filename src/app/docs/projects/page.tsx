@@ -216,8 +216,8 @@ export default function Projects() {
           <li>Click <Ui>Save fact</Ui>.</li>
         </Steps>
         <p>
-          <strong>Result:</strong> Vivary saves the fact as a Markdown file in{" "}
-          <code>.vivary/knowledge/</code> in the project.
+          <strong>Result:</strong> Vivary saves the fact as a Markdown file in the memory folder that{" "}
+          <Ui>Memory</Ui> shows. The default folder is <code>.vivary/knowledge/</code> in the project.
         </p>
         <h3>Change or remove a fact</h3>
         <DocTable

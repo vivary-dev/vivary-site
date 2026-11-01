@@ -60,6 +60,11 @@ export default function RuntimeSetup() {
           <li>In Vivary, click <Ui>Refresh</Ui>.</li>
         </Steps>
         <p><strong>Result:</strong> The status changes to <Ui>Signed in</Ui>.</p>
+        <p>
+          Vivary reads <code>PATH</code> when it starts. If the installer added a folder to{" "}
+          <code>PATH</code> and the status stays <Ui>Not installed</Ui>, close all Vivary windows. Then
+          open Vivary again.
+        </p>
         <DocTable
           caption="Coding runtime status"
           head={["Status", "What it means"]}
