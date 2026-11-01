@@ -61,7 +61,8 @@ changing the policy.
   assets. Confirm their bytes match the reviewed export.
 
 `NEXT_PUBLIC_PREVIEW=1` remains available for unpublished local previews.
-`scripts/deploy-site.sh` is the public publisher. Source CI does not deploy.
+When CI succeeds for a push to `main`, `.github/workflows/deploy.yml` deploys
+the public site. The GitHub Pages copy is retired and only redirects.
 
 ## Staged Cloudflare transport
 
