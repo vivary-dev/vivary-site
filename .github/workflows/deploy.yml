@@ -57,9 +57,27 @@ jobs:
       - name: Verify Cloudflare export
         run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
 
+      # Rerunning CI for an older main commit must not deploy it over a newer one.
+      # Deploy only the commit that is still the tip of main. A deliberate
+      # rollback uses Cloudflare's deployment history instead.
+      - name: Skip a commit that is no longer the tip of main
+        id: current
+        env:
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          test -n "$tip"
+          if [ "$tip" = "$COMMIT" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+          fi
+
       # A Direct Upload deployment becomes production only when its branch name
       # matches the project's production branch, so read it instead of guessing.
       - name: Read the production branch
+        if: steps.current.outputs.deploy == 'true'
         id: project
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -79,6 +97,7 @@ jobs:
       # truth, and this repository's file does not carry the dashboard variables
       # (SITE_ENABLED, MCP_ENABLED, MCP_ALLOWED_ORIGINS) the edge handler needs.
       - name: Deploy to Cloudflare Pages
+        if: steps.current.outputs.deploy == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -97,6 +116,7 @@ jobs:
 
       # The live home page must link the same release as the build just deployed.
       - name: Check the live site
+        if: steps.current.outputs.deploy == 'true'
         run: |
           release=$(grep -o -m1 'https://github.com/vivary-dev/vivary/releases/tag/[^>)" ]*' out/index.md)
           test -n "$release"

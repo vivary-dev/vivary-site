@@ -16,8 +16,10 @@ deploy that finds a Wrangler file makes that file the project's source of truth,
 this repository's file does not carry the dashboard variables listed below.
 After the upload it checks that the live home page links the same release as the
 build. It uses two repository secrets: `CLOUDFLARE_API_TOKEN`, a token limited to
-Account > Cloudflare Pages > Edit, and `CLOUDFLARE_ACCOUNT_ID`. To deploy `main`
-again without a new merge, rerun the CI run for its latest commit.
+Account > Cloudflare Pages > Edit, and `CLOUDFLARE_ACCOUNT_ID`. It deploys only the commit that
+is still the tip of `main`, so rerunning CI for an older commit cannot replace a newer
+deployment. To deploy `main` again without a new merge, rerun the CI run for its
+latest commit. To roll back, use the project's deployment history in Cloudflare.
 
 ## Build and content ownership
 
