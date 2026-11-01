@@ -193,9 +193,10 @@ export default function Projects() {
           <li>In <Ui>Project health</Ui>, click <Ui>Check project health</Ui>.</li>
         </Steps>
         <p>
-          <strong>Result:</strong> <Ui>Healthy</Ui> means that the check found no problems.{" "}
-          <Ui>Needs attention</Ui> lists the errors and warnings that it found. To run the check again,
-          click <Ui>Check again</Ui>.
+          <strong>Result:</strong> <Ui>Healthy</Ui> means that the check found no errors.{" "}
+          <Ui>Needs attention</Ui> means that it found one or more errors. Warnings can show under
+          either status, so read them too. If the check found no errors and no warnings, it shows{" "}
+          <Ui>No findings.</Ui> To run the check again, click <Ui>Check again</Ui>.
         </p>
       </DocSection>
 
