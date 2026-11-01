@@ -6,7 +6,7 @@
 The marketing site for the new Vivary, the desktop application where agents
 work from files you own. It markets the app and presents the library that
 ships today as the engine underneath. Started from scratch on 2026-09-13 to
-replace the Astro site at vivary.vercel.app. The public site is https://vivary-dev.github.io/.
+replace the Astro site at vivary.vercel.app. The public site is https://www.vivaryagent.xyz/.
 
 ## Stack
 
@@ -27,6 +27,10 @@ from the exported HTML. No Python packages are installed.
 
 Then open the printed local URL. `pnpm build` produces the production build
 and `pnpm lint` runs ESLint.
+
+Docs search reads `out/docs/search-index.json`, which only `pnpm build` writes.
+To test search, build and serve `out/`, for example with
+`python3 -m http.server 3177 --directory out`.
 
 ## Layout
 
@@ -49,7 +53,9 @@ The home page is built to Jeff's design canvas of 2026-09-16 as one
 responsive page, with the brand system's jar mark, lockup, hero illustration,
 social image, and app icon. Two documentation pages, `/what-is-vivary/` and
 `/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
-metadata, and JSON-LD. Static export to `out/`, published on GitHub Pages.
+metadata, and JSON-LD. Static export to `out/`, published on Cloudflare Pages.
+The `/docs/` section holds eight task-based articles for the desktop app with
+browser-side search.
 
 ## Brand and design sources
 
@@ -67,12 +73,24 @@ metadata, and JSON-LD. Static export to `out/`, published on GitHub Pages.
 | `/` | The home page, built to the 2026-09-16 canvas. Tune it, do not redesign it. |
 | `/what-is-vivary/` | The product description as a page, with the six steps, the promises, and the questions people ask. |
 | `/commands/` | The workspace commands, the five files, the four layers, the pinned install command, and the published packages. |
+| `/docs/` | The desktop app documentation index, with client-side search over every article. |
+| `/docs/<slug>/` | One task-based article per slug in `src/content/docs.json`: install, runtimes, projects, conversations, handoffs, automations, remote access and troubleshooting. |
 | `/llms.txt` | Agent-specific guidance. Every documentation page links to it near the top. |
 | `/robots.txt`, `/sitemap.xml` | Generated at build. |
 
 Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
 are in `src/app/pages.css`. Product claims still come only from
 `src/content/facts.ts`.
+
+The documentation articles live in `src/app/docs/<slug>/page.tsx` and share the
+frame in `src/app/docs/article.tsx`. `src/content/docs.json` is the one list of
+articles, in reading order. The sitemap, the Markdown export, both export checks
+and the MCP catalog read it. Each article names the product sources it was checked
+against in a comment at the top. After export, `scripts/export-docs.py` writes
+`out/docs/search-index.json` from the article HTML, and the docs index searches
+that file in the browser. Search needs no server, database or paid service. To
+add an article, add its entry to `docs.json`, add its page, and list it in
+`public/llms.txt`. The export check fails if any of the three is missing.
 
 ## The product repository
 
@@ -84,40 +102,23 @@ site links the release, installation guide, current source and company skills.
 
 ## Public site and publishing
 
-The canonical website is https://vivary-dev.github.io/, selected by Jeff on
-2026-10-03. GitHub Pages serves the built export from `main:/` in
-`vivary-dev/vivary-dev.github.io`. That repository contains generated output.
-This repository owns source. Source CI verifies changes and does not deploy.
+The public website is https://www.vivaryagent.xyz/, served by the Cloudflare Pages project `vivary`.
+This repository owns its source. When CI succeeds for a push to `main`,
+`.github/workflows/deploy.yml` builds and deploys that commit.
+[docs/CLOUDFLARE.md](docs/CLOUDFLARE.md) covers the build, the deploy, the
+operator enable flags, protocol limits and rollback. The deploy does not change DNS.
 
-After a source change is reviewed, merged into `dev` and approved to publish:
+The GitHub Pages copy at https://vivary-dev.github.io/ was retired on 2026-11-01.
+Its repository, `vivary-dev/vivary-dev.github.io`, now holds only redirect pages
+to the same paths on the public site. `scripts/deploy-site.sh` and the former
+`deploy-preview.sh` stop with a pointer instead of publishing.
 
-```bash
-scripts/deploy-site.sh
-```
-
-The script builds with `NEXT_PUBLIC_SITE_URL=https://vivary-dev.github.io` and
-`NEXT_PUBLIC_PREVIEW=0`, checks public indexing and canonical metadata, then
-commits the export on top of the existing Pages history. A normal push rejects
-concurrent changes. Existing unrelated files and old hashed assets are preserved.
-Check the Pages run and live HTML, robots, sitemap and changed assets afterward.
-A merge into `main` deploys the Cloudflare site, not this GitHub Pages copy.
-
-The former `deploy-preview.sh` stops with a pointer to the public publisher,
-so an old command cannot restore noindex on the canonical site. An unpublished
-local preview can still use `NEXT_PUBLIC_PREVIEW=1`. Set
-`NEXT_PUBLIC_SITE_URL` explicitly when testing an alternative local origin.
-The normal build defaults to the chosen public address. Its robots wildcard
-allows search and declares `Content-Signal: search=yes, ai-train=no`. AI input
-permission remains unspecified and the four specific training-crawler blocks
-remain in place. See `docs/brand/09-humans-and-agents.md` for the policy.
-
-`wrangler.toml` describes the Cloudflare Pages target, the project `vivary`. It
-serves `www.vivaryagent.xyz` and the read-only documentation endpoint at
-`mcp.vivaryagent.xyz`. When CI succeeds for a push to `main`,
-`.github/workflows/deploy.yml` builds and deploys that commit. The workflow does
-not change DNS. Build commands,
-operator enable flags, protocol limits and rollback are in
-[docs/CLOUDFLARE.md](docs/CLOUDFLARE.md).
+An unpublished local preview can use `NEXT_PUBLIC_PREVIEW=1`. Set
+`NEXT_PUBLIC_SITE_URL` explicitly when testing another local origin. The normal
+build defaults to the public address. Its robots wildcard allows search and
+declares `Content-Signal: search=yes, ai-train=no`. AI input permission remains
+unspecified and the four specific training-crawler blocks remain in place. See
+`docs/brand/09-humans-and-agents.md` for the policy.
 
 ## Optional analytics
 

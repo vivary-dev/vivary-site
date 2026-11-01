@@ -3,7 +3,7 @@
 This target serves `https://www.vivaryagent.xyz` and
 `https://mcp.vivaryagent.xyz/` from the Pages project `vivary`. When CI succeeds
 for a push to `main`, `.github/workflows/deploy.yml` builds and deploys that
-commit. The GitHub Pages copy keeps its own publisher.
+commit. The GitHub Pages copy was retired on 2026-11-01 and redirects here.
 
 ## Automatic deployment
 
@@ -39,8 +39,8 @@ node scripts/verify-edge-export.mjs
 
 Publish directory: `out`. This is one Pages project using advanced-mode
 `_worker.js`. No Next server, database, model, external fetch proxy, paid service
-or new npm dependency is required. The normal `pnpm build` still targets
-GitHub Pages. `scripts/deploy-site.sh` remains GitHub-only.
+or new npm dependency is required. The normal `pnpm build` targets the same
+public address without the edge handler.
 
 The JSX and `facts.ts` remain the content authority. After Next exports HTML,
 `scripts/export-docs.py` converts each page's semantic main content to Markdown:
@@ -50,6 +50,8 @@ The JSX and `facts.ts` remain the content authority. After Next exports HTML,
 | `/` | `/index.md` |
 | `/commands/` | `/commands/index.md` |
 | `/what-is-vivary/` | `/what-is-vivary/index.md` |
+| `/docs/` | `/docs/index.md` |
+| `/docs/<slug>/` | `/docs/<slug>/index.md`, one per article in `src/content/docs.json` |
 
 The conversion preserves headings, paragraphs, lists, definition lists, links,
 code whitespace, source anchors and meaningful image alternatives. Navigation,
@@ -93,7 +95,7 @@ requests belong exclusively at its root endpoint and never fall through to HTML.
 
 ## HTTP behavior
 
-The three website paths offer HTML and `text/markdown`. Accept quality values,
+The website document paths offer HTML and `text/markdown`. Accept quality values,
 media-range specificity and explicit exclusions are honored. HTML wins ties.
 Unsupported preferences receive 406. HEAD returns the selected GET headers
 without a body. Only GET and HEAD serve website documents.
@@ -117,7 +119,7 @@ compatibility is made.
 
 The endpoint supports initialize, ping, resources/list, resources/read and an
 empty resources/templates/list. It accepts initialized/cancelled notifications
-with HTTP 202. It exposes only three fixed canonical URIs. Listed resources and read results
+with HTTP 202. It exposes only the fixed canonical URIs of the exported documents. Listed resources and read results
 include `_meta["xyz.vivaryagent/source-html-sha256"]`, the SHA-256 of the exact
 exported source HTML. This identifies the content revision without inventing
 a modification date. Unknown methods and
@@ -128,21 +130,20 @@ this server selects JSON responses. Request bodies are capped at 16 KiB while
 streaming, must be uncompressed UTF-8 JSON and cannot be batches. MCP responses
 are never cached. Origin validation applies before method handling.
 
-## Cutover and rollback evidence
+## Rollback and change evidence
 
-Before cutover, review the exact source revision, run both export gates and
-check the compiled worker with real Request/Response objects. Inspect desktop
-and phone renders. The operator should then test the deployed Pages hostname,
-custom-domain TLS, HTML/Markdown/HEAD headers and full MCP initialize/list/read
+To undo a bad deployment, roll back to an earlier deployment in the `vivary`
+project's deployment history in Cloudflare, then fix `main`. The deploy workflow
+refuses to deploy a commit that is not the tip of `main`, so a rerun cannot roll
+back for you. The retired GitHub Pages copy is not a rollback target.
+
+For a change to the edge handler or the export, review the exact source revision,
+run both export gates and check the compiled worker with real Request/Response
+objects. Inspect desktop and phone renders. After the deploy, test the custom
+domain's HTML, Markdown and HEAD headers and the MCP initialize, list and read
 sequence from outside the hosting account. Check the platform fail-closed setting
-and asset exclusions, then verify the final canonical, sitemap, robots and
-agent-guide origins. DNSSEC, existing mail records and registrar settings remain
-operator-owned and must be preserved through the approved DNS plan.
-
-Keep the existing GitHub publication available as the rollback target until
-cutover succeeds. This source does not create redirects, alter DNS, promote
-source main or change any desktop application release. After live approval,
-record the Pages deployment ID, source commit, actual headers and response hashes.
+and asset exclusions, and the canonical, sitemap, robots and agent-guide origins.
+DNSSEC, existing mail records and registrar settings remain operator-owned.
 
 Primary references:
 
