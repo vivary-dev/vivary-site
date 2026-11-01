@@ -4,7 +4,7 @@ import { handleRequest, representation, quality } from '../src/edge/worker.ts';
 
 const site = 'https://www.vivaryagent.xyz';
 const mcp = 'https://mcp.vivaryagent.xyz';
-const docs = ['/', '/commands/', '/what-is-vivary/'].map((path) => ({ path, markdownPath: `${path}index.md`, title: path, uri: `${site}${path}`, markdown: `# ${path}\nPublic content`, htmlSha256: 'a'.repeat(64) }));
+const docs = ['/', '/commands/', '/what-is-vivary/', '/docs/', '/docs/install-windows/'].map((path) => ({ path, markdownPath: `${path}index.md`, title: path, uri: `${site}${path}`, markdown: `# ${path}\nPublic content`, htmlSha256: 'a'.repeat(64) }));
 const config = { siteOrigin: site, mcpOrigin: mcp, preview: false, docs };
 const env = {
   SITE_ENABLED: 'true', MCP_ENABLED: 'true', MCP_ALLOWED_ORIGINS: site,
@@ -77,7 +77,8 @@ test('MCP initialization, notifications, resource list/read and exact URI bounda
   const notification = await invoke(rpc('notifications/initialized', undefined, { requestId: null }));
   assert.equal(notification.status, 202); assert.equal(await notification.text(), '');
   const list = (await (await invoke(rpc('resources/list'))).json()).result.resources;
-  assert.equal(list.length, 3);
+  assert.equal(list.length, docs.length);
+  assert.deepEqual(list.map((resource) => resource.name), ['overview', 'commands', 'what-is-vivary', 'docs', 'docs-install-windows']);
   assert.equal(list[0]._meta['xyz.vivaryagent/source-html-sha256'], 'a'.repeat(64));
   for (const resource of list) {
     const read = (await (await invoke(rpc('resources/read', { uri: resource.uri }))).json()).result.contents[0];

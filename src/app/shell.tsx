@@ -26,11 +26,12 @@ const voice = Fraunces({
   variable: "--font-v9-voice",
 });
 
-export type Route = "home" | "what" | "commands";
+export type Route = "home" | "what" | "commands" | "docs";
 
 const pages: NavItem[] = [
   { href: "/#projects", label: "The workspace" },
   { href: "/what-is-vivary/", label: "Setup guide" },
+  { href: "/docs/", label: "Docs" },
   { href: "/commands/", label: "Commands" },
   { href: facts.links.product, label: "Source", external: true },
 ];
@@ -38,7 +39,7 @@ const pages: NavItem[] = [
 export function Shell({ current, children }: { current: Route; children: ReactNode }) {
   const items = pages;
   const routeOf = (href: string): Route | undefined =>
-    href === "/what-is-vivary/" ? "what" : href === "/commands/" ? "commands" : undefined;
+    href === "/what-is-vivary/" ? "what" : href === "/commands/" ? "commands" : href === "/docs/" ? "docs" : undefined;
   return (
     <div className={`v9 ${display.variable} ${voice.variable}`}>
       <a className="skip" href="#main">
@@ -78,6 +79,7 @@ export function Shell({ current, children }: { current: Route; children: ReactNo
             <a href={facts.links.org}>GitHub</a>
             <Link href="/#status">Status</Link>
             <Link href="/what-is-vivary/">Setup guide</Link>
+            <Link href="/docs/">Docs</Link>
             <Link href="/commands/">Commands</Link>
             <a href="/llms.txt">For agents</a>
             <a href="mailto:support@vivary.dev">Email</a>

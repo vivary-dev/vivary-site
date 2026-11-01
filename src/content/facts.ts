@@ -106,7 +106,9 @@ export const facts = {
     // The product repository. Public since 2026-09-16. "Follow the build" goes here.
     product: "https://github.com/vivary-dev/vivary",
     preview: "https://github.com/vivary-dev/vivary/releases/tag/v0.1.0-beta.1",
-    installGuide: "https://github.com/vivary-dev/vivary/blob/dev/docs/desktop-preview.md",
+    // The site's own install article covers download, verification, install,
+    // first launch, upgrade and uninstall for the release in `preview`.
+    installGuide: "/docs/install-windows/",
     skills: "https://github.com/The-Little-AI-Company/skills",
     statechartSkill: "https://github.com/The-Little-AI-Company/skills/blob/main/skills/design/statechart-design-review/SKILL.md",
     commandSource: "https://github.com/vivary-dev/vivary-cli",

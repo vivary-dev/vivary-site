@@ -28,6 +28,10 @@ from the exported HTML. No Python packages are installed.
 Then open the printed local URL. `pnpm build` produces the production build
 and `pnpm lint` runs ESLint.
 
+Docs search reads `out/docs/search-index.json`, which only `pnpm build` writes.
+To test search, build and serve `out/`, for example with
+`python3 -m http.server 3177 --directory out`.
+
 ## Layout
 
 - `src/app/` holds routes and the root layout.
@@ -50,6 +54,8 @@ responsive page, with the brand system's jar mark, lockup, hero illustration,
 social image, and app icon. Two documentation pages, `/what-is-vivary/` and
 `/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
 metadata, and JSON-LD. Static export to `out/`, published on Cloudflare Pages.
+The `/docs/` section holds eight task-based articles for the desktop app with
+browser-side search.
 
 ## Brand and design sources
 
@@ -67,12 +73,24 @@ metadata, and JSON-LD. Static export to `out/`, published on Cloudflare Pages.
 | `/` | The home page, built to the 2026-09-16 canvas. Tune it, do not redesign it. |
 | `/what-is-vivary/` | The product description as a page, with the six steps, the promises, and the questions people ask. |
 | `/commands/` | The workspace commands, the five files, the four layers, the pinned install command, and the published packages. |
+| `/docs/` | The desktop app documentation index, with client-side search over every article. |
+| `/docs/<slug>/` | One task-based article per slug in `src/content/docs.json`: install, runtimes, projects, conversations, handoffs, automations, remote access and troubleshooting. |
 | `/llms.txt` | Agent-specific guidance. Every documentation page links to it near the top. |
 | `/robots.txt`, `/sitemap.xml` | Generated at build. |
 
 Shared chrome lives in `src/app/shell.tsx`. Page styles beyond the home page
 are in `src/app/pages.css`. Product claims still come only from
 `src/content/facts.ts`.
+
+The documentation articles live in `src/app/docs/<slug>/page.tsx` and share the
+frame in `src/app/docs/article.tsx`. `src/content/docs.json` is the one list of
+articles, in reading order. The sitemap, the Markdown export, both export checks
+and the MCP catalog read it. Each article names the product sources it was checked
+against in a comment at the top. After export, `scripts/export-docs.py` writes
+`out/docs/search-index.json` from the article HTML, and the docs index searches
+that file in the browser. Search needs no server, database or paid service. To
+add an article, add its entry to `docs.json`, add its page, and list it in
+`public/llms.txt`. The export check fails if any of the three is missing.
 
 ## The product repository
 

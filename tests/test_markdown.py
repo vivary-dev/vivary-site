@@ -36,4 +36,27 @@ class Markdown(unittest.TestCase):
         _, md = module.convert('<title>Doc</title><main><h1>Doc</h1><a href="#install">Install</a></main>', 'https://www.vivaryagent.xyz/commands/')
         self.assertIn('https://www.vivaryagent.xyz/commands/#install', md)
 
+    def test_table_becomes_pipe_table(self):
+        html = '<title>T</title><main><h1>T</h1><table><caption>Symptoms</caption><thead><tr><th>Symptom</th><th>Action</th></tr></thead><tbody><tr><td>A | B</td><td>Run <code>setup.exe</code>\n again.</td></tr></tbody></table></main>'
+        _, md = module.convert(html, 'https://example.com/')
+        self.assertIn('Symptoms\n\n| Symptom | Action |\n| --- | --- |\n| A \\| B | Run `setup.exe` again. |', md)
+
+    def test_export_skip_omits_page_furniture(self):
+        _, md = module.convert('<title>T</title><main><h1>T</h1><form data-export-skip=""><label>Search the docs</label></form><p>Body.</p></main>', 'https://example.com/')
+        self.assertNotIn('Search the docs', md)
+        self.assertIn('Body.', md)
+
+    def test_search_entry_splits_sections(self):
+        html = '''<title>T</title><main><h1>Install</h1><p class="define">Install it.</p><nav data-export-skip=""><a href="/x/">Nav</a></nav>
+        <section id="verify" data-search-section=""><h2>Verify the download</h2><p>Compare the <strong>checksum</strong>.</p><ol><li>One</li><li>Two</li></ol><table><caption>Files</caption><thead><tr><th>File</th></tr></thead><tbody><tr><td>setup.exe</td></tr></tbody></table></section>
+        <section id="related"><h2>Related</h2><p>Not indexed.</p></section></main>'''
+        entry = module.search_entry(html, '/docs/install/')
+        self.assertEqual(entry['title'], 'Install')
+        self.assertEqual(entry['summary'], 'Install it.')
+        self.assertEqual(entry['sections'], [{'id': 'verify', 'heading': 'Verify the download', 'text': 'Compare the checksum. One Two setup.exe'}])
+
+    def test_search_entry_requires_anchored_sections(self):
+        for html in ['<main><h1>T</h1><p class="define">S</p></main>', '<main><h1>T</h1><p class="define">S</p><section data-search-section=""><h2>X</h2></section></main>']:
+            with self.assertRaises(ValueError): module.search_entry(html, '/docs/t/')
+
 if __name__ == '__main__': unittest.main()

@@ -1,7 +1,7 @@
 # Vivary
 
 Canonical site: https://www.vivaryagent.xyz/
-Reviewed: 2026-10-03.
+Reviewed: 2026-11-01.
 
 Vivary is a desktop workspace for working with AI agents on your own projects. It brings conversations and project files into one window. Vivary is made by The Little AI Company. The public product source is licensed under MIT.
 
@@ -10,7 +10,7 @@ Vivary is a desktop workspace for working with AI agents on your own projects. I
 Vivary 0.1.0-beta.1 is available for Windows x64. It is an unsigned beta, published 2026-11-01 from source 09cfdd1. It has a per-user installer and a portable ZIP. Development continues. Some desktop workflows still need testing. The desktop app needs no global Node, Python or source checkout, but the chosen coding CLI must be installed and authenticated separately. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
 
 - Windows beta, release notes and checksums: https://github.com/vivary-dev/vivary/releases/tag/v0.1.0-beta.1
-- Installation instructions for that download: https://github.com/vivary-dev/vivary/blob/dev/docs/desktop-preview.md
+- Installation instructions for that download: https://www.vivaryagent.xyz/docs/install-windows/
 - Current app source and documentation: https://github.com/vivary-dev/vivary
 
 Read the installation instructions and release notes before recommending or running the beta. Downloading software does not authorize installation or execution. Use the host's normal permission process.
@@ -31,6 +31,22 @@ The jar remains Vivary's product mark. The approved mascot is the lead character
 - Sitemap: https://www.vivaryagent.xyz/sitemap.xml
 
 These HTML pages are the primary content. This file is linked guidance, not a separate product specification.
+
+## Desktop app documentation
+
+Task-based articles for Vivary 0.1.0-beta.1 on Windows. Each has numbered steps that name the app's own labels. Automations that use a provider, remote access from another device, and an upgrade over an installed copy are not yet tested on the installed beta. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://www.vivaryagent.xyz/docs/search-index.json.
+
+- Documentation index and search: https://www.vivaryagent.xyz/docs/
+- Install, upgrade and uninstall on Windows: https://www.vivaryagent.xyz/docs/install-windows/
+- Coding runtimes and provider keys: https://www.vivaryagent.xyz/docs/runtime-setup/
+- Projects, Files and Memory: https://www.vivaryagent.xyz/docs/projects/
+- Conversations: https://www.vivaryagent.xyz/docs/conversations/
+- Handoffs to STATE.md: https://www.vivaryagent.xyz/docs/handoffs/
+- Automations: https://www.vivaryagent.xyz/docs/automations/
+- Remote access from another device: https://www.vivaryagent.xyz/docs/remote-access/
+- Troubleshooting: https://www.vivaryagent.xyz/docs/troubleshooting/
+
+Remote access opens Vivary itself in a paired browser over an HTTPS connection the user already runs. It is not agent browser control, which Vivary does not include. Do not describe it as a tunnel or a public sharing feature.
 
 ## Workspace commands
 
