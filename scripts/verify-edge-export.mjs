@@ -10,7 +10,7 @@ for (const doc of docs) {
   const html = readFileSync(`out${doc.path}index.html`);
   assert.equal(createHash('sha256').update(html).digest('hex'), doc.htmlSha256, 'Markdown catalog must describe this exact HTML build');
   assert.equal(readFileSync(`out${doc.markdownPath}`, 'utf8'), doc.markdown);
-  assert(doc.markdown.includes('unsigned Windows x64 preview'), `${doc.path} preview qualifier`);
+  assert(doc.markdown.includes('It is an unsigned beta.'), `${doc.path} beta qualifier`);
   assert(!doc.markdown.includes('jeffkazzee.zo.computer'), 'No private host');
 }
 const source = readFileSync('out/_worker.js', 'utf8');

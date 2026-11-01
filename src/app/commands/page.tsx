@@ -54,7 +54,7 @@ export default function Commands() {
                 The examples below use the recorded 0.4.2 baseline.
               </p>
               <p className="packages">
-                Looking for the app? <Link href="/what-is-vivary/#install">Read Windows preview setup</Link>
+                Looking for the app? <Link href="/what-is-vivary/#install">Read Windows beta setup</Link>
                 {" or "}<a href={facts.links.preview}>open the desktop download</a>.
               </p>
             </div>
@@ -148,7 +148,7 @@ export default function Commands() {
         <div className="wrap command-desktop-note">
           <h2 className="display display-lg">Looking for the desktop app?</h2>
           <p className="lede">{facts.product.status}</p>
-          <Link className="text-link" href="/what-is-vivary/#install">Read Windows preview setup <span aria-hidden="true">→</span></Link>
+          <Link className="text-link" href="/what-is-vivary/#install">Read Windows beta setup <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </Shell>
