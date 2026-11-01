@@ -31,7 +31,8 @@
 .v9 .section-heading .lede { max-width: 48ch; }
 .v9 .product-figure { margin: 0; padding: .65rem; border: 1px solid var(--rule); background: var(--pane); }
 .v9 .product-figure > a { display: block; }
-.v9 .product-figure img { display: block; width: 100%; height: auto; }
+.v9 .product-figure img, .v9 .product-figure video { display: block; width: 100%; height: auto; }
+.v9 .product-figure video { aspect-ratio: 1280 / 676; background: #0b0b0a; }
 .v9 .product-figure figcaption { max-width: 92ch; padding: 1rem .5rem .35rem; color: var(--text-2); font-size: .75rem; line-height: 1.7; }
 .v9 .product-figure figcaption a { text-decoration: underline; text-underline-offset: .2em; }
 .v9 .workflow { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 2rem; padding: 0; margin: 0; list-style: none; }

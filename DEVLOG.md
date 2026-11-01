@@ -12,6 +12,16 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  feat/demo-video
+
+**Did:** Replaced the October 3 development screenshot in "Inside the workspace" with a 56-second demo of the beta.1 app that Jeff approved. The poster is a 55 KB WebP, taken from a recorded frame without the caption so it does not sit under the player controls. The 1 MB MP4 uses `preload="none"` and starts muted only when 40% of it is on screen. It pauses when it scrolls away and stays paused after a person pauses it. Reduced motion and `?still=1` keep the poster. The controls are always visible.
+
+**Decided:** MP4, not GIF. The 9-second GIF is 0.85 MB. The whole 56-second MP4 is 1.07 MB. The figure caption describes what the video shows, so readers and agents without video get the same content.
+
+**Next:** Replace the video when the app's main screens change.
+
+---
+
 ## 2026-11-01  feat/beta1-announcement
 
 **Did:** Added the beta.1 announcement that Jeff approved on 2026-11-01 to the home page: a banner line above the hero with the download and install guide links, and a short release notice (`#news`) after the hero.

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { pageMetadata } from "@/lib/page-metadata";
 import { SITE_URL } from "@/lib/site";
 import { facts } from "@/content/facts";
+import { DemoVideo } from "./demo-video";
 import { JsonLd, Shell } from "./shell";
 
 export const metadata = pageMetadata(
@@ -108,11 +109,8 @@ export default function Home() {
             <p className="lede">Open a project, choose a configured runtime and give the conversation a task. Your files and the conversation stay within reach.</p>
           </div>
           <figure className="product-figure">
-            <a href="/brand/product/workspace-development.png" aria-label="Open the full-size Vivary development screenshot">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/product/workspace-development.png" width={1280} height={900} loading="lazy" decoding="async" alt="Vivary development workspace with project navigation, an empty agent conversation and runtime setup controls." />
-            </a>
-            <figcaption>Browser capture of the development app, October 3, 2026. An empty workspace before Claude Code sign-in. The Windows beta differs. Read its <a href={facts.links.installGuide}>installation guide</a>.</figcaption>
+            <DemoVideo src="/brand/product/vivary-demo-beta1.mp4" poster="/brand/product/vivary-demo-beta1-poster.webp" describedBy="demo-caption" />
+            <figcaption id="demo-caption">Vivary 0.1.0-beta.1 on Windows, recorded November 1, 2026. A user creates a project, asks Claude Code to write a packing list, opens the new file, saves a project fact, checks project health and searches the project. The agent&apos;s work plays at three times its speed. The video has no sound. Read the <a href={facts.links.installGuide}>installation guide</a>.</figcaption>
           </figure>
           <ol id="how" className="workflow" role="list">
             <li><span className="step-number" aria-hidden="true">01</span><h3>Open your project</h3><p>Start with the files for your task. Keep separate conversations for separate pieces of work.</p></li>
