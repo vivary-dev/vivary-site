@@ -1,9 +1,9 @@
 # Cloudflare Pages deployment
 
 This target serves `https://www.vivaryagent.xyz` and
-`https://mcp.vivaryagent.xyz/` from the Pages project `vivary`. A push to `main`
-builds and deploys it through `.github/workflows/deploy.yml`, after the same
-checks as CI. The GitHub Pages copy keeps its own publisher.
+`https://mcp.vivaryagent.xyz/` from the Pages project `vivary`. When CI succeeds
+for a push to `main`, `.github/workflows/deploy.yml` builds and deploys that
+commit. The GitHub Pages copy keeps its own publisher.
 
 ## Automatic deployment
 
@@ -17,7 +17,7 @@ this repository's file does not carry the dashboard variables listed below.
 After the upload it checks that the live home page links the same release as the
 build. It uses two repository secrets: `CLOUDFLARE_API_TOKEN`, a token limited to
 Account > Cloudflare Pages > Edit, and `CLOUDFLARE_ACCOUNT_ID`. To deploy `main`
-again without a new merge, run the workflow from the Actions tab.
+again without a new merge, rerun the CI run for its latest commit.
 
 ## Build and content ownership
 

@@ -113,8 +113,8 @@ remain in place. See `docs/brand/09-humans-and-agents.md` for the policy.
 
 `wrangler.toml` describes the Cloudflare Pages target, the project `vivary`. It
 serves `www.vivaryagent.xyz` and the read-only documentation endpoint at
-`mcp.vivaryagent.xyz`. A push to `main` builds and deploys it through
-`.github/workflows/deploy.yml`, after the same checks as CI. The workflow does
+`mcp.vivaryagent.xyz`. When CI succeeds for a push to `main`,
+`.github/workflows/deploy.yml` builds and deploys that commit. The workflow does
 not change DNS. Build commands,
 operator enable flags, protocol limits and rollback are in
 [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md).

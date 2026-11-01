@@ -4,13 +4,15 @@ name: Deploy
 # which serves www.vivaryagent.xyz and mcp.vivaryagent.xyz. The project was
 # created by Direct Upload, so Cloudflare cannot build it from Git. This job
 # builds it here and uploads `out` with Wrangler. Merging dev into main is the
-# owner's approval to publish (AGENTS.md). The job runs the CI checks first and
-# deploys only when they pass. Secrets: CLOUDFLARE_API_TOKEN, a token limited to
-# Account > Cloudflare Pages > Edit, and CLOUDFLARE_ACCOUNT_ID.
+# owner's approval to publish (AGENTS.md). The job starts only after the CI
+# workflow succeeds for a push to main, and it deploys that exact commit.
+# Secrets: CLOUDFLARE_API_TOKEN, a token limited to Account > Cloudflare Pages >
+# Edit, and CLOUDFLARE_ACCOUNT_ID. To deploy main again, rerun its CI run.
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,11 +25,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    if: github.ref == 'refs/heads/main'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
 
     steps:
-      - name: Check out repository
+      - name: Check out the commit CI verified
         uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6.1.0
@@ -46,15 +50,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Typecheck
-        run: pnpm exec tsc --noEmit
-
-      - name: Transport and Markdown tests
-        run: pnpm test:transport
 
       - name: Build Cloudflare target
         run: VIVARY_DEPLOY_TARGET=cloudflare NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz NEXT_PUBLIC_PREVIEW=0 pnpm build
@@ -88,6 +83,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           PRODUCTION_BRANCH: ${{ steps.project.outputs.branch }}
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
         run: |
           upload="$RUNNER_TEMP/pages-upload"
           rm -rf "$upload"
@@ -96,8 +92,8 @@ jobs:
           pnpm dlx wrangler@4.155.0 pages deploy . \
             --project-name vivary \
             --branch "$PRODUCTION_BRANCH" \
-            --commit-hash "$GITHUB_SHA" \
-            --commit-message "main ${GITHUB_SHA::7}"
+            --commit-hash "$COMMIT" \
+            --commit-message "main ${COMMIT::7}"
 
       # The live home page must link the same release as the build just deployed.
       - name: Check the live site
