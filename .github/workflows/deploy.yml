@@ -17,15 +17,39 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: deploy-production
-  cancel-in-progress: false
-
 jobs:
+  # Runs outside the deploy queue. GitHub keeps one pending run per concurrency
+  # group, so a stale rerun that reached the queue could replace the newest
+  # commit's pending deploy. Reject stale commits before they get there.
+  tip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+    outputs:
+      current: ${{ steps.tip.outputs.current }}
+    steps:
+      - name: Check that the commit is the tip of main
+        id: tip
+        env:
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          test -n "$tip"
+          if [ "$tip" = "$COMMIT" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+          fi
+
   deploy:
+    needs: tip
+    if: needs.tip.outputs.current == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
 
     steps:
       - name: Check out the commit CI verified
@@ -57,9 +81,9 @@ jobs:
       - name: Verify Cloudflare export
         run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
 
-      # Rerunning CI for an older main commit must not deploy it over a newer one.
-      # Deploy only the commit that is still the tip of main. A deliberate
-      # rollback uses Cloudflare's deployment history instead.
+      # Check again just before upload, in case main moved while this job waited
+      # in the queue or built. A deliberate rollback uses Cloudflare's deployment
+      # history instead.
       - name: Skip a commit that is no longer the tip of main
         id: current
         env:
