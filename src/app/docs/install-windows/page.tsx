@@ -107,7 +107,8 @@ export default function InstallWindows() {
           apps.
         </p>
         <p>
-          To install without any windows, run <code>{setupFile} /S</code>. A silent install does not
+          To install without any windows, open PowerShell in the download folder and run{" "}
+          <code>.\{setupFile} /S</code>. A silent install does not
           start Vivary and does not create a desktop shortcut.
         </p>
       </DocSection>
