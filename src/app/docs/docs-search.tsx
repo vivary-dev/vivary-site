@@ -59,6 +59,8 @@ function search(index: Entry[], query: string): Hit[] {
       const { heading, text } = part;
       const haystack = `${title} ${heading} ${text}`;
       if (!wordPatterns.every((w) => w.test(haystack))) continue;
+      // A section must match on its own words. The summary hit stands for the title.
+      if (part.id && !wordPatterns.some((w) => w.test(`${heading} ${text}`))) continue;
       let score = 0;
       if (phrasePattern.test(text) || phrasePattern.test(heading)) score += 10;
       for (const w of wordPatterns) {
@@ -113,7 +115,11 @@ export function DocsSearch() {
   }
 
   let status = "";
-  if (index === "error") status = "Search could not load. Browse the articles below.";
+  if (index === "error") {
+    status = process.env.NODE_ENV === "development"
+      ? "The dev server has no search index. Run pnpm build and serve out/ to test search."
+      : "Search could not load. Browse the articles below.";
+  }
   else if (trimmed.length === 1) status = "Type at least two characters.";
   else if (trimmed && index === "loading") status = "Loading search…";
   else if (trimmed) status = hits.length === 0 ? `No results for “${trimmed}”. Try fewer or different words.` : `${hits.length === LIMIT ? `First ${LIMIT}` : hits.length} result${hits.length === 1 ? "" : "s"} for “${trimmed}”.`;

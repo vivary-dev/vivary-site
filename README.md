@@ -28,6 +28,10 @@ from the exported HTML. No Python packages are installed.
 Then open the printed local URL. `pnpm build` produces the production build
 and `pnpm lint` runs ESLint.
 
+Docs search reads `out/docs/search-index.json`, which only `pnpm build` writes.
+To test search, build and serve `out/`, for example with
+`python3 -m http.server 3177 --directory out`.
+
 ## Layout
 
 - `src/app/` holds routes and the root layout.
