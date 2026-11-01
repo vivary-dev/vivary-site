@@ -84,7 +84,7 @@ export default function Automations() {
 
       <DocSection id="manage" title="Pause, run, edit or delete an automation">
         <p>
-          Each automation in <Ui>Settings</Ui> &gt; <Ui>Automations</Ui> has a switch and a{" "}
+          Each automation in <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Automations</Ui> has a switch and a{" "}
           <Ui>Manage</Ui> menu.
         </p>
         <DocTable
@@ -127,7 +127,7 @@ export default function Automations() {
           you decide, chats and automation runs use the previous accepted version.
         </p>
         <Steps>
-          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Automation files</Ui>.</li>
+          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Automation files</Ui>.</li>
           <li>Read the proposed text for each file.</li>
           <li>Click <Ui>Accept</Ui> to use the proposed text, or <Ui>Discard</Ui> to reject it.</li>
         </Steps>

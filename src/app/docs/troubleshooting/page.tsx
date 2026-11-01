@@ -106,8 +106,8 @@ export default function Troubleshooting() {
           caption="Remote access problems"
           head={["Problem", "Action"]}
           rows={[
-            [<Ui key="l">Remote access listener unavailable</Ui>, <>Vivary could not use the saved loopback port. The desktop app continues to work. In <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui>, enter a different <Ui key="p">Loopback ingress port</Ui>. Click <Ui key="e">Enable remote access</Ui>, and confirm. Then send your HTTPS connection to the new port.</>],
-            [<>The other device shows <Ui key="w">Still waiting for approval on the desktop</Ui></>, <>On this computer, go to <Ui key="s">Settings</Ui> &gt; <Ui key="r">Remote access</Ui>. Click <Ui key="c">Compare and approve</Ui> for the request. Requests expire after five minutes.</>],
+            [<Ui key="l">Remote access listener unavailable</Ui>, <>Vivary could not use the saved loopback port. The desktop app continues to work. In <Ui key="s">Settings</Ui> &gt; <Ui key="ag">Agent</Ui> &gt; <Ui key="r">Remote access</Ui>, enter a different <Ui key="p">Loopback ingress port</Ui>. Click <Ui key="e">Enable remote access</Ui>, and confirm. Then send your HTTPS connection to the new port.</>],
+            [<>The other device shows <Ui key="w">Still waiting for approval on the desktop</Ui></>, <>On this computer, go to <Ui key="s">Settings</Ui> &gt; <Ui key="ag">Agent</Ui> &gt; <Ui key="r">Remote access</Ui>. Click <Ui key="c">Compare and approve</Ui> for the request. Requests expire after five minutes.</>],
             ["A remote browser cannot open a folder", <>Use <Ui key="o">Open folder</Ui> in the desktop app on this computer.</>],
           ]}
         />

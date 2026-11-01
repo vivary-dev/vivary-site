@@ -93,7 +93,7 @@ export default function RuntimeSetup() {
           only. Claude Code conversations accept file edits without asking, whichever mode you select.
         </p>
         <Steps>
-          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Coding runtimes</Ui>.</li>
+          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Coding runtimes</Ui>.</li>
           <li>Under <Ui>Codex permissions</Ui>, find <Ui>Execution mode</Ui>.</li>
           <li>Select <Ui>Normal</Ui>, <Ui>Read only</Ui> or <Ui>YOLO</Ui>.</li>
         </Steps>
@@ -155,7 +155,7 @@ export default function RuntimeSetup() {
           provider for Native chat.
         </p>
         <Steps>
-          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Overview</Ui>.</li>
+          <li>Go to <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Overview</Ui>.</li>
           <li>In the <Ui>LLM</Ui> section, click <Ui>Custom keys</Ui>, or <Ui>Manage</Ui> if a key is saved.</li>
           <li>Select Anthropic as the provider.</li>
           <li>Paste your Anthropic API key into the key field.</li>

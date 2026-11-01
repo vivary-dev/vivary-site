@@ -69,7 +69,7 @@ export default function RemoteAccess() {
           <li>On the other device, open your private HTTPS origin followed by <code>/pair</code> in a browser.</li>
           <li>On the <Ui>Connect to your Vivary host</Ui> page, fill in <Ui>Name this browser</Ui>, for example <code>My phone</code>.</li>
           <li>Click <Ui>Request pairing</Ui>. The page shows a six-digit code.</li>
-          <li>On this computer, go to <Ui>Settings</Ui> &gt; <Ui>Remote access</Ui>.</li>
+          <li>On this computer, go to <Ui>Settings</Ui> &gt; <Ui>Agent</Ui> &gt; <Ui>Remote access</Ui>.</li>
           <li>Under <Ui>Waiting for approval</Ui>, find the request.</li>
           <li>Make sure that the code is the same as the code on the other device.</li>
           <li>Click <Ui>Compare and approve</Ui>.</li>
