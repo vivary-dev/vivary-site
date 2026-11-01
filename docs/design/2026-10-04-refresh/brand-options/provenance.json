@@ -1,0 +1,50 @@
+{
+  "status": "proposal-only",
+  "options": [
+    {
+      "id": "a",
+      "name": "Quiet wordmark",
+      "summary": "Full name in the header. A bone jar on charcoal for the native icon. Recommended.",
+      "header": "wordmark",
+      "tile": "#0c100e",
+      "ink": "#edf4ef",
+      "tradeoff": "Most restrained header. The small jar carries less detail at 16px; the name stays legible beside it in taskbar labels."
+    },
+    {
+      "id": "b",
+      "name": "Jar + name",
+      "summary": "The existing jar-and-name pairing, fitted to a UI header. The established lime app icon.",
+      "header": "lockup",
+      "tile": "#0c100e",
+      "ink": "#b8f263",
+      "tradeoff": "Strongest continuity with the current website lockup. The jar repeats beside the app name and makes the header wider."
+    },
+    {
+      "id": "c",
+      "name": "Light tile",
+      "summary": "Full-name header with a charcoal jar on a bone tile. Same letterforms, stronger icon silhouette.",
+      "header": "wordmark",
+      "tile": "#ebe5d8",
+      "ink": "#0c100e",
+      "tradeoff": "Clear silhouette on a dark taskbar. The pale tile is more noticeable and less quiet beside the mascot\u2019s own bone tile."
+    }
+  ],
+  "sources": {
+    "docs/brand/system/assets/Wordmark/vivary-wordmark-bone.svg": "8734ecff893e4213126431944b6827459f391caa8366f7657d6e0b63dc90ac08",
+    "docs/brand/system/assets/Marks/vivary-mark-jar-bone.svg": "3b15a688b6fa71a9a93090e37c49ce2bd700b5f541ce4d366f6592ff74913a7c",
+    "docs/brand/system/assets/Lockups/vivary-lockup-horizontal-bone.svg": "5e7160744d247758b864ce16634c28e383d29a22966fbe3a816442df7c53b2ff",
+    "docs/brand/system/assets/App icon/vivary-appicon-1024.svg": "4a5b6f7862e5645fc361d22683b0518020defe73519c6a7a231e7d472fb80810"
+  },
+  "referenceScreenshot": {
+    "path": "/home/workspace/Projects/vivary-mascot-entry/.tmp/mascot-task7/app-dark-desktop.png",
+    "sha256": "6a5988dbd38e68fe2e42135583e55b409d87f24de086fb0513dd169562566227",
+    "captured": "2026-10-03",
+    "provenance": "PR179 QA Workbench browser render; not native Windows package"
+  },
+  "siteReferenceScreenshot": {
+    "path": "/home/workspace/Projects/vivary-site-mascot/.tmp/pages-functions/render/home-1440.png",
+    "sha256": "7f71ea7d1f1987416981d0141c48d675a07601772e303da288a64b4877271cec",
+    "provenance": "Reviewed Cloudflare preview render of prior site source9c4dc92; overlay only"
+  },
+  "pathDataPreserved": true
+}

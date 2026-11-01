@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "approvedDate": "2026-10-03",
+  "source": "Approved Vivary mascot review pack v1",
+  "publicCharacterName": null,
+  "brandGuide": "README.md#mascot-and-agent-character",
+  "identityRole": "Vivary product mascot. The jar remains the product mark. The Little AI Company retains its skullbunny identity.",
+  "consumerStatus": "Rollout destinations. Check each repository branch or PR before treating a placement as released.",
+  "assets": [
+    {
+      "path": "assets/Mascot/v1/lead-transparent.png",
+      "mediaType": "image/png",
+      "bytes": 1538349,
+      "sha256": "a76e7f87c91b9c0738b0ece038e7b62bad6df464626375a9bd77b158eb955b94",
+      "consumers": [
+        {
+          "repository": "vivary-dev/vivary-site",
+          "path": "public/brand/mascot/v1/lead-transparent.png",
+          "placement": "Home memory section, 120px wide, static decoration"
+        },
+        {
+          "repository": "vivary-dev/vivary",
+          "path": "docs/assets/vivary-mascot.png",
+          "placement": "Product README, rollout branch"
+        }
+      ],
+      "width": 1402,
+      "height": 1122
+    },
+    {
+      "path": "assets/Mascot/v1/lead-icon.svg",
+      "mediaType": "image/svg+xml",
+      "bytes": 874,
+      "sha256": "d11161fc0eeb7ac21a1a4439373d4e377589158f0eb78eea43fb54628f075ca2",
+      "consumers": [
+        {
+          "repository": "vivary-dev/vivary",
+          "path": "packages/workbench/app/assets/vivary-mascot.svg",
+          "placement": "Conversation empty state, 48px, static decoration"
+        }
+      ]
+    }
+  ]
+}

@@ -12,10 +12,552 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  fix/beta-download-link
+
+**Did:** Pointed every download link, status line and setup step at the Vivary 0.1.0-beta.1 release, which has a per-user installer. The September preview is a draft again, so the live links returned 404. Updated `public/llms.txt` and the export check's status qualifier. Added `.github/workflows/deploy.yml`, which deploys `main` to the Cloudflare Pages project `vivary` after the CI checks, with a Pages-only token Jeff created.
+
+**Broke / surprised me:** The live Pages project was created by Direct Upload, so Cloudflare's Git integration cannot be turned on. Its name is `vivary`, not the `vivary-site` in `wrangler.toml`. The GitHub Pages copy at vivary-dev.github.io was last published on 2026-10-03 and also links the dead preview.
+
+**Decided:** Jeff chose deploy-from-GitHub on 2026-11-01. A merge into `main` is the publish approval for the Cloudflare site. Zo is unreachable, so this work ran on Linveo.
+
+**Next:** Merge into `dev`, promote `dev` to `main`, and confirm the deploy run and the live links. Republish the GitHub Pages copy with `scripts/deploy-site.sh` or retire it. Rework PR #15's user docs against beta.1.
+
+---
+
+## 2026-10-04  feat/site-refresh
+
+**Did:** Built a review-only visual refresh of the existing three pages after Jeff asked to prioritize the product and website design. The home page now leads with the unchanged approved character, clear Windows download/setup links and a real, explicitly labeled development-interface capture. The setup page uses numbered steps and a page index. Commands appear before the layer explanation. Kept the palette, type roles, jar logo, sourced preview qualifications, runtime/data boundaries and existing routes/fragments. Fixed the phone menu panel and Escape focus restoration.
+
+**Brand proposals:** Prepared three wordmark/native-icon options under docs/design/2026-10-04-refresh/brand-options. Each reuses canonical path letterforms and jar geometry, with 16/24/32px light/dark comparisons, PNG/ICO exports and labeled overlays over real app/site captures. Option A is recommended for selection, not installed. The character name remains undecided. No frozen app binary, Windows acceptance process or desktop input was touched.
+
+**Broke / surprised me:** The first visual pass left guide introductions too long on a phone. Shortened them and inspected setup steps, wrapped commands and the memory example in the second pass. Independent review exposed a real Markdown defect after numbered multi-paragraph steps were introduced: a ten-item CommonMark fixture parsed as one item with instructions outside it. Added a failing regression before fixing continuation indentation to match marker width. The real parser now retains ten items/two paragraphs each, including the two-digit marker, and the actual setup export retains six items/two paragraphs each. Intermittent tool transport delayed the second pass; verified the completed mutation before resuming.
+
+**Validation:** Publication scan checked 674 packages with none flagged before the frozen install. Lint, TypeScript, 9 transport tests and 5 Markdown tests pass. Public www and preview edge export gates check exact HTML/Markdown hashes and the noindex/MCP-disabled review boundary. Browser checks cover three routes at 1440/390/360, no overflow/errors/broken images, visible keyboard focus, mobile menu Enter/Escape, reduced motion, FAQ/schema parity and no-JavaScript reading. Additional captures check the actual setup/command/memory sections and 200% text sizing. Three critique passes covered initial hierarchy, shorter mobile guides/detail views and independent final source/pixel review. Required pinned shadscan completed; its existing application-infrastructure findings do not justify adding unrelated UI. Detailed supplementary skill references remained unavailable, so this is a scoped frontend pass, not a full 386-rule audit.
+
+**Isolation:** Created a separate worktree from origin/dev at 534df27 because the branch helper would switch the occupied dev checkout. The hosting owner's chore/domain-cutover checkout remains unmodified. All preview builds explicitly use https://www.vivaryagent.xyz. Their pending canonical defaults/mirror changes must be preserved when integrating. No new dependencies, deployment, DNS changes, new credentials or spend. MCP-controller edits are outside Entire local hooks and are not claimed as captured.
+
+**Next:** Deliver the noindex preview bundle and branding choices with a draft PR into dev. Jeff's visual selection precedes a live replacement. Integrate the hosting owner's canonical-source changes before publication. Native icon integration and Windows taskbar/favicon acceptance remain later work.
+
+---
+
+## 2026-10-03  feat/pages-functions
+
+**Did:** Staged an optional Cloudflare Pages Free target for www.vivaryagent.xyz and a root-only public documentation MCP on mcp.vivaryagent.xyz. Preserved the GitHub canonical default, publisher, approved layout/artwork and private Entire configuration. The existing HTML main content generates three Markdown documents through Python's standard-library parser. A standalone worker handles Accept negotiation, HEAD, actual Link/Content-Signal headers and fixed resource reads. No new package, server-side Next route, private file access, arbitrary fetch, account integration or model call was added.
+
+**Decided:** The operator owns account/DNS/deployment actions. Both Function endpoints require explicit enable settings. Static assets bypass Functions and those flags. Cloudflare Runtime must be set to Fail closed before MCP exposure so quota exhaustion cannot serve HTML as an MCP response. Website variants use no-store and remove upstream validators. The pinned MCP protocol is 2025-11-25 with initialization, not the newer 2026-07-28 protocol. Read results include the exact source HTML digest. The current GitHub target remains the fallback until an approved live cutover.
+
+**Broke / surprised me:** The initial Markdown conversion joined adjacent labels whose spacing came only from CSS. Added a focused regression and preserved word boundaries. Independent review found inherited production Content-Signal could survive on a staging host. The handler now removes it and the test fixture covers inherited headers. Staging robots denies crawling. The detailed frontend skill references remain unavailable through the provider; read the main frontend and TypeScript skills plus installed Next export docs and primary Cloudflare/MCP specifications. Node's direct TypeScript test import emits a harmless module-format warning. No global module-mode change was made to silence it.
+
+**Validation:** Publication scan checked 674 packages with none flagged. Frozen install, lint, TypeScript, 9 transport tests and 4 Markdown tests passed. The GitHub build/public gate passed and contained no worker. The Cloudflare noindex build passed the compiled-module export gate, checking source HTML hashes, exact Markdown bytes and disabled preview MCP. CI now runs tests and both public export targets. A loopback adapter exercised the compiled worker for all three pages at 1440, 390 and 360px: 12 browser checks, 18 screenshots, no overflow or page errors, keyboard skip/menu, reduced motion, visible FAQ/schema parity and JavaScript-disabled reading. Visually inspected phone pages; exact screenshot receipts are ignored under .tmp/pages-functions/render. Pinned shadscan remains 57/100 with existing app-infrastructure findings, not suppressed or inflated with unrelated UI. The existing Big Shoulders font-metrics build warning remains. No deployment or provider setting was changed by this task.
+
+**Next:** Independent final review, PR into dev, and operator preview acceptance. Produce and publish the public Cloudflare artifact only after acceptance. Record platform-level fail-closed, TLS, DNS and live protocol evidence separately.
+
+---
+
+## 2026-10-03  routine recording delivery
+
+**Did:** Verified that the approved fresh review checkpoint reaches the private
+checkpoint destination during an ordinary source push. The supported pre-push
+hook reported successful transfer, the local queue cleared, and the GitHub and
+Entire checkpoint ref object IDs match. The private index holds the receipt.
+
+**Decided:** The website Git family has no historical backlog and can enable
+routine delivery locally. The app's separate 16-checkpoint historical queue
+stays held. Shared settings retain the safe upload hold for new checkouts until
+their own queue and project scope are checked. Existing workers stay intact.
+
+**Verification:** Merged current dev and retained both development log entries.
+The normal source push delivered the one approved checkpoint without importing
+history or manually changing queue markers. The CLI flag to clear an upload
+hold does not set an existing false value to true in 0.10.6; the documented local
+JSON setting does. Remote storage is verified; a website web trail link remains
+unverified.
+
+**Next:** Complete CI and the authorized PR merge. Start future coding work in a
+fresh supported project session and verify its checkpoint before delivery.
+
+---
+
+## 2026-10-03  controlled recording review
+
+**Did:** Completed the owner's approved website folder trust and seven-hook
+review through Codex's UI. A fresh Codex/GPT-6 Astra session then reviewed the
+actual recording change at `c01e444f2c95252b28c773d23ed0fc0ee89606d9` without
+editing source. Entire tracked its one completed turn. This is a controlled
+review task, not evidence that earlier website work was captured.
+
+**Verification:** The reviewer inspected the four changed files and parent
+settings, checked Entire status and ran the focused whitespace check. It found
+no blocking source or configuration defect. The runtime sandbox failed to
+initialize, so only the displayed read-only commands received one-time approval.
+No persistent command grant was added. The review did not independently prove
+remote privacy or delivery.
+
+**Decided:** Preserve the historical app queue and all existing workers. Use
+Entire's supported review attachment for this fresh session and identify its
+checkpoint through this receipt commit's trailer. No earlier commit is rewritten.
+The private index owns remote-delivery evidence. PRs remain unmerged.
+
+**Next:** Verify private delivery of this fresh review checkpoint. Keep normal
+automatic uploads held and keep configuration distinct from demonstrated capture.
+
+---
+
+## 2026-10-03  chore/private-recording
+
+**Did:** Added the approved dedicated private checkpoint destination to shared
+Entire settings, retained the automatic upload hold and documented the website
+hook trust check and source-to-checkpoint delivery record. Source branch roles
+and the public website are unchanged.
+
+**Broke / surprised me:** Local routing is insufficient for Entire's web lookup.
+The service reads committed project settings. The seven installed Codex hooks
+still require client trust review, and an external MCP controller is outside
+local agent capture.
+
+**Decided:** Keep previous source and checkpoint locations intact. Preserve the
+historical shared queue for its separate review. Use the next real fresh session
+for capture verification, with no imported history or dummy coding run.
+
+**Verification:** Entire 0.10.6 generated the settings. Effective status reports
+the private dedicated destination. JSON validation and whitespace checks cover
+this configuration and documentation change. No page, dependency or build input
+changed; existing visual and build evidence remains the prior session's evidence.
+The required pinned shadscan 0.17.0 audit also exited successfully. Existing
+application-infrastructure findings and browser-only advisories remain recorded
+in the earlier website verification. This change adds no UI to re-test.
+
+**Next:** Accept the shared settings, complete the actual client's hook review
+and verify the next real website checkpoint. Upload delivery remains held.
+
+---
+
+## 2026-10-03  feat/search-copy
+
+**Did:** Rewrote the three public pages around desktop use, preview setup, prerequisites, provider/data boundaries and terminal workspace commands. Kept the approved layout, mascot, full brand tagline and robots policy. Gave each route a descriptive title, description and matching social metadata. The home CTA now opens the dated preview release. Product FAQ markup comes from the visible answers. Removed the nonvisible creator claim from home structured data and extended export checks for unique metadata and canonical social URLs.
+
+**Evidence:** Read the current public app README, CLI command reference, dated original CLI quickstart and the September 22 `INSTALL-WINDOWS.md` release asset. The download remains unsigned Windows x64 source `9884670`; current development is separate. Preserved the explicit noninteractive npm and uv 0.4.2 commands. Independent inspection of the published npm launcher and Python 0.4.2 wheel confirmed the forwarded init arguments and --no-wizard flag. The npm path needs Python plus uv or pipx. No package versions changed and no CLI installation was executed.
+
+**Broke / surprised me:** Current copy still used internal acceptance terminology and implied bundled features were universal desktop behavior. It now names the remaining preview workflows and runtime-owned permissions. Both requested writing skills were read, but packaged references for the writing patterns, detailed clear-writing guide, frontend standards/exceptions and SEO rules failed through the skill provider. Applied the available main instructions and current primary Google Search documentation instead, without claiming a full checklist audit.
+
+**Validation:** Publication scan (674 packages, none flagged), frozen dependency install, lint excluding the existing git-ignored temporary export, TypeScript, static build and public-export gate passed. Rendered all three pages at 1440, 390 and 360 pixels, with 18 PNGs and a 12-check receipt including JavaScript-disabled pages. Verified no horizontal overflow or page errors, keyboard skip links, menu Enter/Escape, reduced-motion configuration, image alternatives, named links, exact visible FAQ/schema agreement and internal fragment targets. Visually inspected desktop home and all three phone pages. Nine external link targets returned HTTP 200. The npm website blocked the scripted request with 403, while the official npm registry returned 200 and confirmed pinned version 0.4.2. Pinned shadscan 0.17.0 stays at 57/100 with existing app-infrastructure findings. The existing Big Shoulders fallback-metrics warning remains. Search or ranking gains are not claimed.
+
+**Next:** Independent review and PR into dev. The rollout coordinator owns merge, publication and live verification.
+
+---
+
+## 2026-10-03  feat/content-signals
+
+**Did:** Added the explicit robots policy `Content-Signal: search=yes, ai-train=no` to the public wildcard group. Kept AI input permission unspecified, all four existing training-bot blocks, the canonical sitemap and the preview deny-all branch. Extended the public-export gate and current policy documentation.
+
+**Broke / surprised me:** Installed Next 16.3.5 documentation supports non-standard directives through the typed per-rule `other` field, added in 16.3.0. A custom response route or unsupported metadata property was unnecessary.
+
+**Decided:** Declare the requested search/training policy without adding AI input consent, new hosting, headers that the static host cannot emit, or unrelated UI. Content Signals are declarative crawler policy, not access control or an indexing guarantee. The Cloudflare score must be measured after publication rather than inferred from source.
+
+**Validation:** Lint (excluding the existing git-ignored temporary export), TypeScript, dependency publication scan (674 packages, none flagged), canonical static build and public-export gate passed. A loopback HTTP fetch of the exported robots file returned 200 text/plain, 226 bytes, SHA-256 `93cde7bf4343813adb215142ad3818fc07c67f5cff1965cf61b88436ce23d9a2`, with the exact wildcard signal, four disallow agents and canonical sitemap. Executing the preview branch through the installed Next serializer returned only deny-all rules. Required shadscan 0.17.0 remains 57/100 with the previously recorded app-infrastructure findings; no UI changes are warranted for this policy-only change. Existing Big Shoulders fallback-metrics build warning remains.
+
+**Next:** Review the PR into dev. Publication and live checker verification remain separate approved steps owned by the rollout coordinator.
+
+---
+
+## 2026-10-03  feat/public-site
+
+**Plan:** Publish the approved canonical Pages site for people, search and user-directed agents after a factual/link/privacy review. Preserve the approved mascot, layout and training-crawler restrictions; do not promote unrelated source history to main.
+
+**Did:** Set the default canonical origin, enabled public indexing and sitemap discovery, retained specific training crawler blocks, made revealed content visible without JavaScript, and replaced outdated availability/privacy claims with verified release evidence. Linked the unsigned September 22 Windows preview, installation guide, current source and separately published company skills. Added a public export validation gate to CI and an approved manual publisher that requires clean committed source, preserves Pages history and rejects concurrent updates with a normal push. Retired the public-host preview publisher to prevent reintroducing noindex.
+
+**Broke / surprised me:** Local lint initially scanned generated JavaScript inside a git-ignored temporary copy of the prior Pages export. Verification excludes only that temporary directory; clean CI has no such copy. The existing agent checker measures some host capabilities rather than factual readiness: GitHub Pages cannot supply custom content negotiation or HTTP Link headers through this static export.
+
+**Evidence:** Parent verified public release metadata and anonymous installation/documentation/skill links on October 3. A direct registry check at about 18:51 UTC found PyPI create-vivary 0.4.3 (September 3) and npm @vivary/create 0.4.2 (August 16); the command page retains its explicitly dated 0.4.2 baseline rather than calling it latest or changing an untested command. Validation passed: dependency publication scan (674, none flagged), lint excluding the git-ignored temporary export, TypeScript, public static build, export policy/local-link gate and independent source review. Headless browser checks passed at 1440, 390 and 360 pixels, including reduced motion, keyboard skip link, mobile menu, unchanged mascot and no overflow/errors. All three content routes remained readable, indexable and correctly canonical with JavaScript disabled. Visual inspection covered the phone memory and public-status sections. The pinned shadscan 0.17.0 audit remains 57/100 with the existing unresolved app-infrastructure findings (command menu, theme shortcut and similar features); no unused infrastructure was added to increase its score. Next still warns that Big Shoulders fallback-font metrics are unavailable; the built font rendered successfully.
+
+**Decided:** Public search and user-directed agent access do not add model-training consent. GPTBot, ClaudeBot, Google-Extended and Applebot-Extended remain blocked. Google-Extended also governs some Gemini grounding, not Google Search. No Content-Signal license is added. Newer development source does not change what the dated preview download contains.
+
+**Next:** Review the source PR into dev, publish the reviewed public export to the existing Pages repository, then verify live bytes and metadata.
+
+---
+
+## 2026-10-03  feat/mascot-brand
+
+**Plan:** Add the approved mascot as static decoration in the existing memory
+section, extend the current brand authority, verify exact copies and the real
+static export, then prepare a draft PR into dev. No deployment.
+
+**Did:** Added the exact approved hero and SVG under the versioned brand assets,
+a checksum manifest and consumer paths, and a 120px decorative hero in the
+home memory section. Rewrote the current guide around the approved lead character, voice, state,
+motion and accessibility rules. Replaced obsolete asset briefs and prompts in
+place and updated AGENTS and mark-study cross-references. The jar and TLAC
+skullbunny keep their roles.
+
+**Broke / surprised me:** The guide's Inter entry conflated the real app with
+the website specimen. Documented the existing Geist Sans specimen decision
+without changing either implementation or tokens. The site is public now and
+Vivary-New redirects to vivary-dev/vivary. Updated the repository map. The
+first isolated build rejected a node_modules symlink outside Turbopack's root.
+A frozen local install fixed that. One cache miss required a registry fetch.
+No dependency versions or lockfile entries changed.
+
+**Decided:** Reuse exact approved files. The public character name is undecided.
+No review-pack drafts or generation prompts enter public source. Created an
+isolated worktree from origin/dev with git worktree instead of branch.sh, which
+would switch the active canonical checkout. Existing checkpoints stay enabled.
+
+**Verification:** Publication scan checked 674 packages with no flags. Frozen
+install, lint, TypeScript and preview static export passed. Both master asset
+hashes and sizes match the approved originals. The served PNG is byte-identical.
+Independent source and guide review found no blocker. Real Chromium renders
+at 1440, 390 and 360px passed: no overflow or page errors, exact 120px mascot
+width, empty alt and no keyboard stop, reduced-motion static content, keyboard
+skip focus, preserved jar/hero/heading and working phone menu. Visually
+inspected desktop and both phone layouts. The mascot stays legible and quiet.
+Tall element captures include the sticky header at a scrolled offset, so the
+review evidence also includes clean phone viewport screenshots. No UI fix was
+needed. Screenshots and render-check.json are in `.tmp/mascot-review/`.
+
+Pinned shadscan 0.17.0 exited successfully, score 57/100. Its full JSON report
+is in `.tmp/mascot-review/`. Theme providers/shortcut, command menu/shortcut
+and toast providers are not added to this fixed-theme static marketing site.
+It has no data collection requiring an empty state. A custom runtime error
+boundary is outside this static image change. The existing mobile menu is
+not recognized by the audit, but opened and closed correctly in the real
+390px phone render.
+The audit's rendered accessibility advisories remain visible. This rollout
+adds no controls, status messages or text colors.
+
+**Next:** Review the draft PR into dev. Publication remains
+separate. The existing preview script force-pushes the Pages export and was
+not run.
+
+---
+
+## 2026-09-16  session end
+
+**Did:** Hosted the preview two ways: GitHub Pages at
+https://vivary-dev.github.io from a build-only repository, and a static server
+on Zo port 3177 behind the existing sshd tunnel, which Jeff then asked to turn
+off. It is off. Connected the product repository to the site: `facts.links.product`,
+the llms.txt links, the README, and the GitHub homepage fields on
+`vivary-dev/Vivary-New` and `vivary-dev/vivary-site`, both set to the preview.
+
+**Broke / surprised me:** This session runs on Zo itself, not a separate
+sandbox. Early work happened in a clone under `/root/projects` before the real
+checkout at `/home/workspace/Projects/vivary-site` was synced to the branch.
+Both are on `feat/site-pages` now. The Zo MCP connector never connected and
+the Zo ask API timed out three times, so no Zo Site was created. A `pkill`
+pattern matched its own shell twice. The workspace AGENTS.md says previews
+are not hosted on Zo; Jeff asked for one, then asked for it off.
+
+**Decided:** The preview stays on GitHub Pages, noindex, until the domain
+and publication decision. A Zo Site, if wanted, is one line in Jeff's Zo chat.
+
+**Next:** Review the home page copy on the preview. Decide the domain. Merge
+`feat/site-pages` into `dev` when satisfied. Delete the Pages repository when
+the real site is up.
+
+---
+
+## 2026-09-16  feat/site-pages, the design canvas
+
+**Did:** Jeff delivered the home page design as a canvas (desktop and phone
+HTML) and the brand system (jar mark, wordmark, lockups, app icon, hero,
+social, org hero, brand sheet, tokens, fonts) through GitHub. Both are in the
+repo: the system under `docs/brand/system/`, the canvas under
+`docs/design/2026-09-16-home/`, the served assets under `public/brand/`. The
+home route is rebuilt to the canvas as one responsive page: the claim beside
+the vivarium, four audience cards, capsule and receipt, the memory file, the
+drawn app window with three notes, the agents section, the four layers, and
+where the build is today from `facts.today`. The header carries the
+horizontal lockup and a phone menu. The favicon is the jar, the apple icon is
+the app icon, the social image is the brand's tagline card. The app interior
+is set in Geist Sans. No Inter anywhere. The documentation pages and 404 kept
+their structure on the new shell.
+
+**Broke / surprised me:** The zips could not arrive as chat attachments, so
+they came through GitHub's web upload onto this branch and were unpacked and
+removed from the tree. The canvas uses inline styles and two separate files;
+the stylesheet is new and the responsive rules are mine. On the phone the
+vivarium first landed after the status list because the copy column was one
+flex box; the hero children now flow in the grid with explicit order. The
+drawn app window clipped its approve row on the phone under a fixed height.
+The design's "Ask what changed since last week" line was dropped from the
+Researchers card because chat search is not yet working.
+
+**Visual critique:** three passes at 1440x900 and real 390 and 360
+viewports, plus the phone menu open. Pass one fixed the phone hero order, the
+documentation header alignment, and the lede spacing. Pass two fixed the app
+window clipping. Pass three found nothing. No page scrolls horizontally at
+360. Captures: `/tmp/shots/n3-*.png`.
+
+**Decided:** The 2026-09-16 canvas supersedes candidate 9. The mark is the
+jar. The tagline is "It knows you. Because you wrote it down." AGENTS.md
+records all of it under What is decided.
+
+**Verification:** Publication scan with no dependency added, lint,
+TypeScript, and the static build pass. The app repo was not touched.
+
+**Next:** Jeff reviews the built page against the canvas. The org hero and
+README header go to `vivary-dev/.github` and the READMEs when he says so.
+`Vivary.ico` goes to Vivary-New `packages/desktop/` with the app retheme.
+
+---
+
+## 2026-09-16  feat/site-pages
+
+**Did:** Built the site around the locked home page. A shared shell
+(`src/app/shell.tsx`) with the header, footer, skip link, and the three faces,
+used by every route. Two documentation pages, `/what-is-vivary/` and
+`/commands/`, written from the product guide and `facts.ts`, each with the
+agents line near the top. A styled 404. `robots.ts` and `sitemap.ts` marked
+static for the export. Root metadata with `metadataBase` from
+`NEXT_PUBLIC_SITE_URL`, Open Graph and Twitter card tags, a rendered
+1200x630 social image in `public/og/`, and a temporary "V" icon at
+`src/app/icon.png` and `apple-icon.png` until the real mark lands. JSON-LD
+for the product and organization on the home page and an FAQPage on the
+description page. `facts.ts` now calls the commands what they are: a part of
+Vivary. The home page's engine section is the commands section, and the nav
+reads What it is, Memory, Commands, GitHub. The Next starter SVGs and default
+favicon are gone.
+
+**Broke / surprised me:** `robots.ts` and `sitemap.ts` fail the static export
+unless they export `dynamic = "force-static"`. `pnpm build` empties `out/`, so
+scratch HTML used to render the social image and icons lives in `/tmp` now.
+The first social image wrapped its headline into the tagline at 128px; 98px
+fits. The 404 page showed white below the footer at 1440x900 because the
+`.v9` wrapper did not fill the viewport; it is a flex column now. Ledger keys
+on the documentation pages truncated with the home page's nowrap rule; the
+chapter ledgers wrap.
+
+**Visual critique:** three passes at 1440x900 and a real 390 and 360 viewport
+on every route. Pass one moved the page headers onto the 5:7 grid so the right
+half is not empty, fixed the truncated keys, put the two install commands in a
+ledger, and changed the title template. Pass two fixed the 404 fill and the
+social image. Pass three found nothing. No page scrolls horizontally at 360.
+Captures: `/tmp/shots/p3-*.png`.
+
+**Decided:** One product on the site. The commands are named as commands.
+Pages beyond the home route exist now: the description and the commands.
+Absolute URLs need `NEXT_PUBLIC_SITE_URL`; without it the build uses the local
+preview origin so nothing pretends to be production. The icon is a stand-in.
+
+**Verification:** Publication scan checked 674 packages, none flagged, no
+dependency added. Lint, TypeScript, and the static build pass. shadscan
+0.17.0 returns 57/100, up from 46. Its `html-lang-present` error is wrong,
+the root layout sets `lang="en"`. The remaining findings are the recorded
+static-site decisions: no theme provider, command menu, toast, mobile menu,
+loading boundary, or error retry, because the site has no application state.
+`focus-visible-not-suppressed` flags the composer rule inherited in
+`globals.css`; every visible control has an amber focus outline.
+
+Later still: Jeff asked to host it. Zo is unreachable from this session,
+so the export went to GitHub Pages at https://vivary-dev.github.io from a new
+repository that holds only the build. A preview mode
+(`NEXT_PUBLIC_PREVIEW=1`) sets noindex on every page and disallows all
+crawling, so the preview is not a publication. `scripts/deploy-preview.sh`
+repeats it. Pages built in 30 seconds, so Actions is not blocked for public
+repositories on the org, whatever blocked the private one.
+
+**Next:** Jeff reviews the two pages and the commands wording on the home
+page. The production domain unlocks canonical URLs, the sitemap, and robots.
+The real mark replaces the icon and the social image lockup. The brand zip
+lands in `public/brand/` when it arrives.
+
+---
+
+## 2026-09-16  docs/brand-brief
+
+**Did:** Read every Vivary repository, the live site, the registries, and the
+private Windows preview to build one account of what Vivary is. Wrote the
+brand and marketing working set under `docs/brand/`: product definition and
+vocabulary, repository map with cleanup steps, asset inventory with verdicts,
+URL map for the vivary.vercel.app handover, the Zo asset brief, and the prompt
+for Claude Design. No source, dependency, or page changed.
+
+**Broke / surprised me:** Nothing public says Vivary is a desktop app in
+development. The first draft of these docs split Vivary into an old and a new
+product. Jeff corrected that: one product, the workspace commands are a part
+of it. The docs were rewritten from the product guide. Three visual systems coexist
+and no tagline, palette, or vector logo is designated. No application icon
+exists for `Vivary.exe`. The Zo connectors and the preview browser were both
+unavailable in the session, so assets were briefed, not generated, and the
+home page was built but not screenshotted.
+
+**Decided:** Nothing new. The four brand decisions in
+`docs/brand/05-zo-asset-brief.md` are Jeff's. Candidate 9 stays locked and is
+the reference for the new brand.
+
+**Verification:** Frozen install, publication scan (674 packages, none
+flagged), and static build passed on this branch. Registry versions and the
+live sitemap were checked on 2026-09-16.
+
+Later the same day: Jeff asked for a concise, current, answer-engine-ready
+product description. First draft was `public/llms.txt`. Jeff pointed out that
+agents do not read that file, which the evidence confirms. The description
+now lives in `docs/brand/08-product-description.md` as page content, the
+rules for both readers are in `09-humans-and-agents.md`, and `AGENTS.md` has
+a Readers section. `llms.txt` stays as a courtesy only.
+
+**Next:** Jeff makes the four decisions. Run the Claude Design prompt. Decide
+where the product description lives on the site. Then the GitHub cleanup in
+`docs/brand/02-repo-map.md` once approved.
+
+---
+
+## 2026-09-15  docs/day-end-state
+
+**Did:** Reconciled foundations status with merged PR #4 at 5ddff98. Updated the
+plan, optional analytics wording, and scan-first command order. Removed the
+incorrect claim that private Vivary-New development is public. Pinned the engine
+install example to its dated verified creator version.
+
+**Broke / surprised me:** Current install instructions mixed the August 15
+verification baseline with an unpinned command. September 15 registry metadata
+reports PyPI create-vivary 0.4.3, while the documented baseline is 0.4.2.
+The pin preserves that boundary. It does not claim a new installation proof.
+The longer command exposed horizontal clipping on desktop. It now wraps using
+the same rule as the phone layout, without changing the locked page structure.
+
+**Decided:** Foundations are merged. Cloudflare, Umami, DNS, and publication
+remain unperformed. Candidate 9 remains locked. Current app status comes from
+the product repository. Native conversation persistence and Windows GUI
+acceptance remain open.
+
+**Verification:** The publication scan checked 674 resolved packages with none
+flagged before dependency-backed commands. The previous dev CI run
+34862012409 passed for the foundations merge. This branch passed frozen install, lint, TypeScript, static build, and shadscan.
+Shadscan remains 46/100 with the existing recorded static-site decisions.
+Three visual passes checked desktop composition, the real 390px layout, and
+the complete pinned command/status block at both widths. No page overflow or
+analytics script appeared in the unconfigured preview. Candidate 9 was not redesigned.
+
+**Next:** Follow the product's remaining acceptance before any website
+publication. Read the live PR state before taking on site work.
+
+---
+
+## 2026-09-14  feat/site-foundations review fixes
+**Did:** Fixed the four confirmed PR review findings. CI now checks pull requests
+into both long-lived branches and scans lockfile publication metadata before
+installing dependencies. The screenshot helper declares and bootstraps its pinned
+Playwright runtime and applies home-only waits only to the home route. A
+follow-up review aligned both README command sequences with the CI boundary:
+the publication scan runs before installation or dependency-backed commands.
+
+**Broke / surprised me:** The original capture helper used Playwright 1.52.0 and
+a browser executable from Zo's global cache without declaring either one. The
+helper now uses a reusable temporary virtual environment and Playwright's own
+browser resolution. Bootstrap downloads happen only when the pinned runtime or
+its Chromium revision is absent.
+The pinned [Playwright 1.52.0](https://pypi.org/project/playwright/1.52.0/),
+[pyee 13.0.1](https://pypi.org/project/pyee/13.0.1/),
+[greenlet 3.2.4](https://pypi.org/project/greenlet/3.2.4/), and
+[typing-extensions 4.16.0](https://pypi.org/project/typing-extensions/4.16.0/)
+wheels were published on 2025-04-30, 2026-02-14, 2025-08-07, and 2026-07-02.
+PyPI reports no known vulnerabilities for those releases. The bootstrap uses
+only wheels, so it never executes an sdist build or package install hook.
+
+
+**Decided:** Generic routes wait for navigation and fonts. The home route also
+waits for its footer and completed memory scene before capture.
+
+**Verification:** Publication scan, lint, TypeScript, production build, shell
+syntax, embedded Python syntax, README publication scan, and diff whitespace
+passed. A fresh temporary
+environment bootstrapped Playwright 1.52.0. Real home and generated-404 captures
+each produced desktop, full-page, and phone images. The 404 completed without
+waiting for home-only elements.
+
+**Next:** Let PR CI verify the review-fix commit before merge.
+
+---
+
+## 2026-09-14  feat/site-foundations
+**Did:** Tuned the locked home page, added Cloudflare Pages configuration, PR CI,
+optional Umami, two icons0 Lucide icons, and two static shieldcn README badges.
+Cloudflare, Umami, DNS, and publication remain untouched. All work ran over SSH
+in the existing Zo website checkout. No product-repository file was changed.
+
+**Broke / surprised me:** The dev-server health check still requested the removed
+`/candidates/` route, and the capture scripts lacked executable bits. The old
+capture used fixed window heights and could capture streaming content before it
+settled. The existing scripts now check `/`, wait for fonts and the settled
+scene, and capture real desktop and phone viewports plus the actual full page.
+No new screenshot framework or package was added.
+The first PR CI run exposed a clean-checkout type error: Next's generated
+`LayoutProps` existed after local development but not before CI's build. The root
+layout now types its only input, `children`, with ReactNode directly. No build
+step or generated-type dependency was added to make typechecking pass.
+
+**Visual critique:**
+1. The baseline deck was centered well below the memory scene's top. Aligned the
+   row at the top and added a folder/file object inside each existing lower
+   intro. Section order, columns, copy, fonts, and the fiction frame stayed intact.
+2. The first tune put the deck above the scene's file-header line and made the
+   icon strokes too heavy. Added desktop inset and reduced the object strokes.
+3. Inspected the static export at 1440x900 and real 390px and 360px viewports.
+   Increased small navigation/footer link hit areas through padding. Verified
+   keyboard focus, reduced motion, no overflow, and both intro objects. At 1440,
+   the headline, deck, complete memory scene, and primary action fit inside 900px.
+
+Before: `/tmp/shots/site-foundations-before-settled-hero.png`.
+After: `/tmp/shots/site-foundations-after-hero.png`.
+Each prefix also has full-page and mobile captures. Local measurements and
+reports remain in `.tmp/`, outside source commits.
+
+**Verification:** Frozen install, lint, `pnpm exec tsc --noEmit`, static build,
+publication scan, and pinned shadscan passed. The scan checked 674 resolved
+packages with no flags. `package.json` and the lockfile match `dev` exactly.
+The dated overrides remain in place until their recorded removal dates.
+Umami's actual component passed development, zero-variable, each single-variable,
+and configured-production cases. The unconfigured static export made no tracker.
+Independent source review approved the final implementation.
+
+**Audit decisions:** shadscan 0.17.0 returned 46/100 and a successful exit. Its
+JSON report remains visible as a CI artifact. These findings are not suppressed:
+- Command menu/shortcut, theme provider/shortcut, and toast provider: not added.
+  This is a locked, fixed-theme marketing page with anchor navigation and no
+  mutations. Those app-shell controls would add unrelated UI and dependencies.
+- Empty states and mobile navigation menu: no data-backed collection or separate
+  application navigation exists. The page keeps its anchor links and footer.
+- Custom error/not-found routes: deferred. The static export includes Next's
+  generated 404 and framework error handling. This job adds no data routes.
+- Social preview and public indexing files: deferred to publication preparation.
+  The site stays unpublished until the app ships.
+- Rendered contrast, overflow, landmark names, and pointer targets: verified in
+  the exported page. Muted text contrast is at least 4.72:1, no visible link target
+  is smaller than 24px, navigation is named Site, and no horizontal overflow occurs.
+
+**Decided:** The icons0 registry is confirmed from its pinned first-party source
+linked in AGENTS.md. Its two generated SVGs were reviewed and retain Lucide's
+license. A repository-wide website license is unspecified, so the badge says so.
+The CI badge labels PR checks and links to results instead of pretending to be
+live status. README records Cloudflare's build command separately from Wrangler's
+Pages output setting, following the cited Cloudflare documentation.
+
+**Next:** Review this PR into `dev`. Jeff chooses the Umami instance and creates
+Cloudflare/DNS resources when publication is authorized. His request for formatted
+file viewing, editing, and explicit Save belongs to the separate product work,
+not the website's locked demonstration.
+
+---
+
+## 2026-09-13  feat/landing-candidates
+**Did:** Nine landing candidates behind one index, all on Zo over ssh. Five parallel first-round pages, then a flagship built with a screenshot-and-critique loop, then two hyperstition variants, then candidate 9 as the blend of 7 and 8. Jeff locked 9. Promoted it to the home route, deleted the other eight and the switcher, static export builds to `out/` at 1.4 MB.
+**Broke / surprised me:** The first five were built blind and read as brochures. The turn came from giving builders eyes: `/tmp/shot.sh` renders any route headlessly with Playwright's Chromium at 1440 and full height, and a `?still=1` switch freezes animations and shows every reveal. Headless Chrome clamps window widths under about 500px, so phone layout is verified with a real 390px Playwright viewport, not the script. The Zo plan's ten hosted-service slots are full, so previews run as a detached dev server on port 3177 behind an ssh forward.
+**Decided:** The site markets the desktop app, with the shipped library as the engine underneath; claims come from `facts.product` and cite design.md. Three typefaces with one job each: Big Shoulders for the claim, Fraunces only where the file speaks, Geist Mono for the record. Amber is reserved for what the workspace recorded. The fiction is framed once, in three sentences.
+**Next:** Two tunes on the home page: the hero deck sits low against the scene, and two lower section intros want one visual object each. Then the site-foundations work: Cloudflare config, CI, Umami behind env, icons0 registry, badges.
+
+---
+
+## 2026-09-13  session
+**Did:** Rebuilt the scaffold on Next.js 16.3.5, Tailwind 4, shadcn 4.21.0 (Base UI), pnpm. Added button, card, badge, separator, sheet, navigation-menu. Pinned every dependency exactly and wrote `scripts/publish-scan.mjs`, which checks all 655 resolved packages. Rewrote AGENTS.md with the truth rules, design bar, and tool table.
+**Broke / surprised me:** Pinning `package.json` after pnpm wrote the lockfile made `--frozen-lockfile` refuse, so the lockfile was regenerated once. shadcn 4 pulls a package named `cn`. It is shadcn-ui's own, attested, 1.8M downloads a month. The host publish scanner skips symlinks and sees nothing in a pnpm tree, hence the lockfile-based scan. That scan flagged `@tybys/wasm-util` (published today, no attestation) and `open` (two days old, no attestation), both transitive. Both are pinned back through pnpm overrides until an attested or older release exists.
+**Decided:** The old Astro site is inspiration only. Dither Kit files get reviewed in-tree and its CLI never runs in CI. Umami cannot self-host on Zo (no Docker, no Postgres), so the instance is undecided. Hosting is undecided.
+**Next:** Three landing candidates on branches off `dev`.
+
 ---
 
 ## 2026-09-09  session
 **Did:** Scaffolded the project. Added README, AGENTS.md, plan, branching guide, this devlog, and the `dev` branch.
 **Broke / surprised me:** Nothing yet.
-**Decided:** `main` is production, `dev` is where work happens, feature branches come off `dev` with `feat/` `fix/` `chore/` style prefixes. See BRANCHING.md.
+**Decided:** `main` is production, `dev` is where work happens, feature branches come off `dev` with `feat/` `fix/` `chore/` style prefixes. Rules in AGENTS.md.
 **Next:** First real branch.

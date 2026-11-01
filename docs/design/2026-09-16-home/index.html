@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivary</title>
+<meta name="description" content="Vivary is a desktop workspace where your agents work from the files you own. It knows you. Because you wrote it down.">
+<link rel="icon" href="assets/vivary-mark-jar-bone.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,700..800&amp;family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,400,30,1&amp;family=Geist+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap">
+  <style>
+    body { margin: 0; background: #080705; color: #EBE5D8; font-family: "Geist Mono", ui-monospace, monospace; font-weight: 400; -webkit-font-smoothing: antialiased; }
+    a { color: #EBE5D8; text-decoration: none; }
+    a:hover { color: #A69D8D; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #E9A23B; outline-offset: 3px; }
+    ::selection { background: #E9A23B; color: #080705; }
+    .display { font-family: "Big Shoulders", "Big Shoulders Display", sans-serif; font-variation-settings: "opsz" 72; }
+    .speaks { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 400; font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 30; letter-spacing: -0.006em; }
+    .scan { background-image: repeating-linear-gradient(to bottom, rgba(235,229,216,0.035) 0 1px, transparent 1px 3px); }
+    .num { font-variant-numeric: tabular-nums; }
+    .app { font-family: Inter, system-ui, sans-serif; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 22px; border: 1px solid #EBE5D8; border-radius: 0; font-family: "Geist Mono", ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #EBE5D8; background: transparent; cursor: pointer; }
+    .btn:hover { background: #0E0C09; color: #EBE5D8; }
+    .btn.primary { background: #EBE5D8; color: #080705; }
+    .btn.primary:hover { background: #A69D8D; color: #080705; }
+    .navlink { font-size: 14px; color: #A69D8D; }
+    .navlink:hover { color: #EBE5D8; }
+    input::placeholder { color: #A6B4AB; }
+  </style>
+</head>
+<body>
+<div style="width: 100%; max-width: 1440px; min-height: 100vh; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; background: #080705; color: #EBE5D8;">
+
+  <!-- Header -->
+  <header style="display: flex; align-items: center; justify-content: space-between; height: 88px; padding: 0 80px; box-sizing: border-box; border-bottom: 1px solid #1A1712;">
+    <a href="#top" aria-label="Vivary home" style="display: flex; align-items: center; height: 88px; margin-left: -21px;">
+      <img src="assets/vivary-lockup-horizontal-bone.svg" alt="Vivary" style="height: 88px; width: 173px; display: block;">
+    </a>
+    <nav aria-label="Site" style="display: flex; align-items: center; gap: 36px;">
+      <a class="navlink" href="#for">Who it is for</a>
+      <a class="navlink" href="#how">How it works</a>
+      <a class="navlink" href="#memory">Memory</a>
+      <a class="navlink" href="#projects">Projects</a>
+      <a class="navlink" href="#engine">Engine</a>
+      <a class="navlink" href="#status">Status</a>
+      <a class="navlink" href="https://github.com/vivary-dev">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: center; padding: 96px 80px 88px; box-sizing: border-box;">
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <h1 class="display" style="margin: 0; font-size: 104px; font-weight: 800; line-height: 0.9; letter-spacing: 0; color: #EBE5D8;">It knows you. Because you wrote it down.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #A69D8D; max-width: 520px;">Vivary is a desktop workspace for people who think in files. Notes, research, drafts, plans and code, each in its own project, in one window. Your agents read what you wrote before they work. They leave a receipt after.</p>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a class="btn primary" href="https://github.com/vivary-dev">Follow the build on GitHub</a>
+        <a class="btn" href="#how">See how it works</a>
+      </div>
+      <dl class="num" style="margin: 8px 0 0; display: grid; grid-template-columns: 120px 1fr; row-gap: 6px; column-gap: 16px; font-size: 13px; line-height: 1.5;">
+        <dt style="color: #E9A23B; margin: 0;">status</dt><dd style="margin: 0; color: #EBE5D8;">in development</dd>
+        <dt style="color: #E9A23B; margin: 0;">platform</dt><dd style="margin: 0; color: #EBE5D8;">windows first</dd>
+        <dt style="color: #E9A23B; margin: 0;">account</dt><dd style="margin: 0; color: #EBE5D8;">none. it runs on your machine</dd>
+        <dt style="color: #E9A23B; margin: 0;">agents</dt><dd style="margin: 0; color: #EBE5D8;">claude code, codex. yours, with your keys</dd>
+      </dl>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img src="assets/vivary-hero-vivarium.png" alt="A vivarium in cross section: a glass cloche over four strata, ferns and sprouts, a door at the edge of the world, and a label leaning on the plate" style="width: 100%; height: auto; display: block;">
+    </div>
+  </section>
+
+  <!-- Who it is for -->
+  <section id="for" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">Made for people who write things down.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D; max-width: 560px;">Most agent tools were built for code and then pointed at everything else. Vivary starts from the other end. A project is a folder of things you wrote. Code is one kind of project. It is not the only kind.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+      <article class="scan" style="display: flex; flex-direction: column; gap: 20px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box; min-height: 340px;">
+        <img src="assets/vivary-mark-dome-sprout-bone.svg" alt="" style="width: 56px; height: 56px; display: block;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Writers</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">A book, a newsletter, a script. The agent reads your outline, your style notes and the last draft before it touches a word. It does not read your other projects.</p>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 20px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box; min-height: 340px;">
+        <img src="assets/vivary-mark-wave-globe-bone.svg" alt="" style="width: 56px; height: 56px; display: block;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Researchers</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Sources, notes and claims stay inside the project. Ask for a summary and the answer names the files it came from. Ask what changed since last week and it can tell you.</p>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 20px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box; min-height: 340px;">
+        <img src="assets/vivary-mark-seed-world-bone.svg" alt="" style="width: 56px; height: 56px; display: block;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Second brain keepers</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Your notes are already the memory. Vivary reads the files you keep instead of building a memory you cannot open. Obsidian vault, plain folder, either works.</p>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 20px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box; min-height: 340px;">
+        <img src="assets/vivary-mark-strata-sprout-bone.svg" alt="" style="width: 56px; height: 56px; display: block;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Builders</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Claude Code and Codex run here the same way they run in your terminal, with your keys and your permission settings. The plan and the decisions sit next to the code as files.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- How it works: capsule and receipt -->
+  
+
+  <!-- Memory -->
+  <section id="how" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">Before the agent works. After it is done.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D; max-width: 560px;">An agent with your whole disk in front of it guesses. An agent with six files in front of it reads. Vivary does the choosing before the turn starts and the accounting after it ends.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+      <article class="scan" style="display: flex; flex-direction: column; gap: 24px; padding: 32px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #1A1712; padding-bottom: 12px;">
+          <span style="font-size: 12px; color: #837C6F;">before the turn</span>
+          <span style="font-size: 12px; color: #837C6F;">capsule.json</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 500; color: #EBE5D8;">The capsule</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Before a turn starts, Vivary hands the agent a bounded set of files: the ones that matter for this conversation, and nothing else. You can open the list. You can change it.</p>
+        <dl class="num" style="margin: 0; display: grid; grid-template-columns: 140px 1fr; row-gap: 8px; column-gap: 16px; font-size: 13px; line-height: 1.5;">
+          <dt style="margin: 0; color: #E9A23B;">project</dt><dd style="margin: 0; color: #EBE5D8;">field-guide</dd>
+          <dt style="margin: 0; color: #E9A23B;">conversation</dt><dd style="margin: 0; color: #EBE5D8;">chapter four rewrite</dd>
+          <dt style="margin: 0; color: #E9A23B;">memory</dt><dd style="margin: 0; color: #EBE5D8;">MEMORY.md</dd>
+          <dt style="margin: 0; color: #E9A23B;">plan</dt><dd style="margin: 0; color: #EBE5D8;">plan.md</dd>
+          <dt style="margin: 0; color: #E9A23B;">files</dt><dd style="margin: 0; color: #EBE5D8;">6 <span style="color: #A69D8D;">chapter-03.md, chapter-04.md, outline.md, style.md, sources.md, plan.md</span></dd>
+          <dt style="margin: 0; color: #E9A23B;">left out</dt><dd style="margin: 0; color: #EBE5D8;">212 files</dd>
+        </dl>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 24px; padding: 32px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #1A1712; padding-bottom: 12px;">
+          <span style="font-size: 12px; color: #837C6F;">after the turn</span>
+          <span style="font-size: 12px; color: #837C6F;">receipts/2026-09-16-1412.md</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 500; color: #EBE5D8;">The receipt</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">After the turn ends, Vivary writes down what happened. What it saw, what it changed, what it left alone. It is a text file. Read it, keep it, or delete it.</p>
+        <dl class="num" style="margin: 0; display: grid; grid-template-columns: 140px 1fr; row-gap: 8px; column-gap: 16px; font-size: 13px; line-height: 1.5;">
+          <dt style="margin: 0; color: #E9A23B;">agent</dt><dd style="margin: 0; color: #EBE5D8;">claude code</dd>
+          <dt style="margin: 0; color: #E9A23B;">saw</dt><dd style="margin: 0; color: #EBE5D8;">6 files</dd>
+          <dt style="margin: 0; color: #E9A23B;">changed</dt><dd style="margin: 0; color: #EBE5D8;">2 <span style="color: #A69D8D;">chapter-03.md (+38, -4), plan.md (+2)</span></dd>
+          <dt style="margin: 0; color: #E9A23B;">left alone</dt><dd style="margin: 0; color: #EBE5D8;">everything else</dd>
+          <dt style="margin: 0; color: #E9A23B;">approved by</dt><dd style="margin: 0; color: #EBE5D8;">you, 14:12</dd>
+          <dt style="margin: 0; color: #E9A23B;">memory added</dt><dd style="margin: 0; color: #EBE5D8;">1 line, pending your review</dd>
+        </dl>
+      </article>
+    </div>
+  </section><section id="memory" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: center;">
+    <figure class="scan" style="margin: 0; padding: 40px 44px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #1A1712; padding-bottom: 12px;">
+        <span style="font-size: 12px; color: #837C6F;">field-guide / MEMORY.md</span>
+        <span style="font-size: 12px; color: #837C6F;">plain text, 11 lines</span>
+      </div>
+      <blockquote class="speaks" style="margin: 0; font-size: 30px; line-height: 1.35; color: #EBE5D8;">Short chapters. Plain names for plants, Latin in a footnote. The reader is a beginner with a shovel, not a botanist. Chapter four was cut on the twelfth. Do not bring it back as a chapter. A sidebar is fine.</blockquote>
+      <figcaption style="font-size: 13px; color: #837C6F;">Last line <span style="color: #E9A23B;">added 2026-09-16 14:12</span>, approved by you.</figcaption>
+    </figure>
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">The memory is a file you can open.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D;">That is a memory file. You wrote it, or the agent proposed a line and you approved it. It sits in the project folder as text. Open it in any editor. Change a line and the next conversation knows. Delete it and the agent forgets. There is no hidden store and no account holding a copy.</p>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D;">Memory is scoped to the project. Your field guide does not know about your grant application unless you say so.</p>
+    </div>
+  </section>
+
+  <!-- Projects: app mock -->
+  <section id="projects" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">One window. Every project.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D; max-width: 560px;">Projects on the left. One conversation in the middle. Files open beside it when you ask. A project can hold several conversations, each with its own history and its own context.</p>
+    </div>
+
+    <!-- app screenshot inside a rule frame -->
+    <div class="app" style="border: 1px solid #2A2419; padding: 12px; box-sizing: border-box; background: #0E0C09;">
+      <div style="display: grid; grid-template-columns: 240px minmax(0, 1fr) 320px; height: 640px; background: #121715; color: #EDF4EF; font-size: 13px; overflow: hidden;">
+        <!-- nav -->
+        <div style="background: #0C100E; border-right: 1px solid #35423B; display: flex; flex-direction: column; padding: 16px 12px; gap: 6px; box-sizing: border-box;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #A6B4AB; padding: 4px 8px 10px;">PROJECTS</div>
+          <div style="padding: 6px 8px; color: #B8F263; font-weight: 600;">Field guide</div>
+          <div style="padding: 6px 8px 6px 20px; background: #1C2420; color: #EDF4EF; border-radius: 4px;">Chapter four rewrite</div>
+          <div style="padding: 6px 8px 6px 20px; color: #A6B4AB;">Sources check</div>
+          <div style="padding: 6px 8px 6px 20px; color: #A6B4AB;">Intro draft</div>
+          <div style="padding: 12px 8px 6px; color: #EDF4EF;">Grant application</div>
+          <div style="padding: 6px 8px; color: #EDF4EF;">Newsletter, issue 31</div>
+          <div style="padding: 6px 8px; color: #EDF4EF;">Reading notes</div>
+          <div style="padding: 6px 8px; color: #EDF4EF;">Shop site</div>
+          <div style="flex-grow: 1;"></div>
+          <button type="button" style="height: 36px; border: 1px solid #B8F263; color: #B8F263; background: transparent; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;">New conversation</button>
+        </div>
+        <!-- conversation -->
+        <div style="display: flex; flex-direction: column; box-sizing: border-box; min-width: 0;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #35423B;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="font-weight: 600; color: #EDF4EF;">Field guide <span style="color: #A6B4AB; font-weight: 400;">/ Chapter four rewrite</span></div>
+              <div style="font-size: 12px; color: #A6B4AB;">C:\Users\you\Documents\field-guide · Claude Code · approval: ask</div>
+            </div>
+            <div style="display: flex; gap: 16px; color: #A6B4AB;"><span>Details</span><span style="color: #B8F263;">Files</span><span>Changes</span></div>
+          </div>
+          <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px; padding: 20px; overflow: hidden;">
+            <div style="align-self: flex-end; max-width: 520px; padding: 12px 14px; background: #1C2420; border-radius: 6px; line-height: 1.5;">Bring chapter four back as a short sidebar inside chapter three. Keep the plant names plain.</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A6B4AB;"><span style="width: 8px; height: 8px; background: #B8F263; border-radius: 50%; display: inline-block;"></span>Claude Code · working</div>
+              <div style="font-size: 12px; color: #A6B4AB; line-height: 1.6;">read MEMORY.md, plan.md, chapter-03.md, chapter-04.md, style.md</div>
+              <div style="line-height: 1.5;">Chapter four is 1,900 words. The memory says not to bring it back as a chapter. I cut it to a 240 word sidebar after the soil section in chapter three and kept the plain names. One edit, one file.</div>
+              <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; background: #1C2420; border: 1px solid #35423B; border-radius: 6px;">
+                <div style="font-size: 12px; color: #A6B4AB;">Requests permission to edit</div>
+                <div style="font-weight: 500;">chapter-03.md <span style="color: #A6B4AB; font-weight: 400;">+38 lines, -4 lines</span></div>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" style="height: 32px; padding: 0 14px; background: #B8F263; color: #0C100E; border: 0; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer;">Approve</button>
+                  <button type="button" style="height: 32px; padding: 0 14px; background: transparent; color: #EDF4EF; border: 1px solid #35423B; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;">Decline</button>
+                  <button type="button" style="height: 32px; padding: 0 14px; background: transparent; color: #EDF4EF; border: 1px solid #35423B; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;">Stop</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 20px; border-top: 1px solid #35423B;">
+            <input type="text" aria-label="Message" placeholder="Ask for the next step" style="height: 40px; padding: 0 12px; background: #0C100E; border: 1px solid #35423B; border-radius: 4px; color: #EDF4EF; font-family: Inter, system-ui, sans-serif; font-size: 13px; box-sizing: border-box; width: 100%;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; gap: 8px; font-size: 12px;">
+                <span style="padding: 4px 10px; border: 1px solid #35423B; border-radius: 4px; color: #EDF4EF;">Claude Code</span>
+                <span style="padding: 4px 10px; color: #A6B4AB;">Codex</span>
+              </div>
+              <button type="button" style="height: 32px; padding: 0 16px; background: #B8F263; color: #0C100E; border: 0; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer;">Send</button>
+            </div>
+          </div>
+        </div>
+        <!-- file panel -->
+        <div style="background: #0C100E; border-left: 1px solid #35423B; display: flex; flex-direction: column; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid #35423B;">
+            <span style="font-weight: 600;">chapter-03.md</span>
+            <span style="color: #A6B4AB; font-size: 12px;">Close</span>
+          </div>
+          <div style="padding: 16px; display: flex; flex-direction: column; gap: 10px; line-height: 1.55; color: #EDF4EF; flex-grow: 1;">
+            <div style="font-weight: 600; font-size: 15px;">3. Soil, and what it wants</div>
+            <div style="color: #A6B4AB;">Dig a hole the depth of your hand. If the bottom holds water for an hour, you have clay. If it drains before you find the kettle, you have sand. Most of us have something in between and a lot of opinions.</div>
+            <div style="padding: 10px 12px; border-left: 2px solid #B8F263; background: #1C2420; color: #EDF4EF; font-size: 12px;">Sidebar: The four plants that forgive a bad first year. Comfrey, chard, mint in a pot, and the potato you forgot.</div>
+            <div style="color: #A6B4AB;">Feed the soil, not the plant. Compost in autumn, mulch in spring, and the rest is patience.</div>
+          </div>
+          <div style="display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #35423B;">
+            <button type="button" style="height: 32px; padding: 0 14px; background: transparent; color: #EDF4EF; border: 1px solid #35423B; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;">Edit</button>
+            <button type="button" style="height: 32px; padding: 0 14px; background: transparent; color: #EDF4EF; border: 1px solid #35423B; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer;">Add to conversation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #2A2419;">
+        <div style="font-size: 12px; color: #E9A23B;">conversations</div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Each project holds several. Start another when the context is full or the work is separate. The old one stays where it was.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #2A2419;">
+        <div style="font-size: 12px; color: #E9A23B;">files</div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Open beside the conversation when you ask. Reading a file does not send it to the model. Adding it to the conversation is a separate, visible step.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #2A2419;">
+        <div style="font-size: 12px; color: #E9A23B;">control</div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Approve, decline and Stop stay in view while the agent works. The agent you chose keeps its own tools and permission rules. Vivary does not add a second set.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Your agents, your machine -->
+  <section style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: flex; flex-direction: column; gap: 48px;">
+    <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8; max-width: 900px;">Your agents. Your keys. Your machine.</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <article class="scan" style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box;">
+        <div style="font-size: 12px; color: #837C6F;">01</div>
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Runs the agents you already pay for</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Claude Code and Codex are your tools, installed on your machine, on your subscription. Vivary shows what the one you picked can actually do and keeps unknown states unknown.</p>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box;">
+        <div style="font-size: 12px; color: #837C6F;">02</div>
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">No account</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">There is no Vivary account and no cloud control plane. Vivary never sees your files. Nothing leaves your machine unless the agent you chose sends it, under the rules you gave it.</p>
+      </article>
+      <article class="scan" style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #0E0C09; border: 1px solid #2A2419; box-sizing: border-box;">
+        <div style="font-size: 12px; color: #837C6F;">03</div>
+        <h3 style="margin: 0; font-size: 18px; font-weight: 500; color: #EBE5D8;">Plain files</h3>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">Plans, memory, decisions and receipts are text files in the project folder. Git is optional. Sync them, back them up, or open them in another tool. Nothing is locked in.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Engine -->
+  <section id="engine" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">Four layers, named for the sky.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D;">Underneath the window is the original Vivary engine, open source. It is what decides which files go in the capsule, what gets written down, and what needs a human before it becomes permanent.</p>
+      <a href="https://github.com/vivary-dev/vivary" style="font-size: 14px; color: #EBE5D8; text-decoration: underline; text-underline-offset: 4px;">Read the engine source</a>
+    </div>
+    <dl class="num" style="margin: 0; display: grid; grid-template-columns: 120px 1fr; row-gap: 0; column-gap: 24px; font-size: 14px; line-height: 1.6;">
+      <dt style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #E9A23B;">tropo</dt><dd style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #EBE5D8;">What the workspace knows. Your files, indexed and typed, so the engine can tell a plan from a draft from a source.</dd>
+      <dt style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #E9A23B;">strato</dt><dd style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #EBE5D8;">One visible state. The boundaries between projects, and the loop a turn runs in: capsule, work, receipt.</dd>
+      <dt style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #E9A23B;">ozone</dt><dd style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; color: #EBE5D8;">Review. A change that would last, to memory, to a plan, to a rule, waits for you.</dd>
+      <dt style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; border-bottom: 1px solid #2A2419; color: #E9A23B;">exo</dt><dd style="margin: 0; padding: 20px 0; border-top: 1px solid #2A2419; border-bottom: 1px solid #2A2419; color: #EBE5D8;">Claims and conflicts. When more than one agent works in a project, who holds which file, and what happens when two want the same one.</dd>
+    </dl>
+  </section>
+
+  <!-- Status -->
+  <section id="status" style="padding: 88px 80px; box-sizing: border-box; border-top: 1px solid #1A1712; display: flex; flex-direction: column; gap: 48px;">
+    <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end;">
+      <h2 class="display" style="margin: 0; font-size: 64px; font-weight: 700; line-height: 0.95; color: #EBE5D8;">Where it is today.</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #A69D8D; max-width: 560px;">Vivary is in development, Windows first. It is not released. This page describes what it is built to do. The list below says what is working now and what is not. It is updated when the build moves.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+      <dl class="num" style="margin: 0; display: grid; grid-template-columns: 110px 1fr; column-gap: 16px; row-gap: 0; font-size: 13px; line-height: 1.6;">
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #2A2419; color: #E9A23B;">working</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #2A2419; color: #EBE5D8;">one window with projects and conversations</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #E9A23B;">working</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #EBE5D8;">project switching, history that stays with its project</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #E9A23B;">working</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #EBE5D8;">files open, read and edit beside the conversation</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; border-bottom: 1px solid #2A2419; color: #E9A23B;">working</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; border-bottom: 1px solid #2A2419; color: #EBE5D8;">codex conversations with approve, decline and stop, on windows</dd>
+      </dl>
+      <dl class="num" style="margin: 0; display: grid; grid-template-columns: 110px 1fr; column-gap: 16px; row-gap: 0; font-size: 13px; line-height: 1.6;">
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #2A2419; color: #E9A23B;">not yet</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #2A2419; color: #EBE5D8;">the full harness catalog and switching between agents in a linked conversation</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #E9A23B;">not yet</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #EBE5D8;">several conversations running at the same time</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #E9A23B;">not yet</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; color: #EBE5D8;">scheduled and automated work</dd>
+        <dt style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; border-bottom: 1px solid #2A2419; color: #E9A23B;">not yet</dt><dd style="margin: 0; padding: 14px 0; border-top: 1px solid #1A1712; border-bottom: 1px solid #2A2419; color: #EBE5D8;">a release. nothing on this page is a download</dd>
+      </dl>
+    </div>
+    <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #A69D8D;">The build happens in the open. Commits, decisions and the specification are on GitHub. <a href="https://github.com/vivary-dev" style="color: #EBE5D8; text-decoration: underline; text-underline-offset: 4px;">Follow the build</a> is the only ask on this page.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding: 40px 80px; box-sizing: border-box; border-top: 1px solid #1A1712;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <img src="assets/vivary-mark-jar-bone.svg" alt="" style="width: 28px; height: 28px; display: block;">
+      <span style="font-size: 13px; color: #837C6F;">Vivary is made by The Little AI Company.</span>
+    </div>
+    <nav aria-label="Footer" style="display: flex; gap: 28px; font-size: 13px;">
+      <a href="https://github.com/vivary-dev" style="color: #837C6F;">GitHub</a>
+      <a href="#status" style="color: #837C6F;">Status</a>
+      <a href="mailto:support@vivary.dev" style="color: #837C6F;">Email</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

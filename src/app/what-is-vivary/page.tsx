@@ -1,0 +1,211 @@
+import { pageMetadata } from "@/lib/page-metadata";
+import Link from "next/link";
+import { facts } from "@/content/facts";
+import { Ledger, type Row } from "../ledger";
+import { Section } from "../scenes";
+import { AgentsLine, GuideNav, JsonLd, Shell } from "../shell";
+
+// The product description as a real page. Same facts as public/llms.txt and
+// docs/brand/08-product-description.md. The first sentence defines the thing.
+
+export const metadata = pageMetadata(
+  "Vivary setup, features and beta limits",
+  "Learn what Vivary does, how to install its Windows beta, and how agent accounts, project files and provider context work. Read the current limitations.",
+  "/what-is-vivary/",
+);
+
+const define =
+  "Vivary is a desktop workspace for working with AI agents on your own projects. Keep conversations and project files in one window.";
+
+const steps: { k: string; v: string; why: string }[] = [
+  {
+    k: "Download and verify",
+    v: "On Windows x64, download the installer and its .sha256 file from the release page. Compare the checksum before you run the installer.",
+    why: "The release notes contain the verification command. A portable ZIP is also available.",
+  },
+  {
+    k: "Install and open",
+    v: "Run the installer. If Windows shows Windows protected your PC, select More info, then select Run anyway. Open Vivary from the Start menu.",
+    why: "The installer is not code signed. It needs no administrator rights and installs Vivary for your Windows account only. The app needs no global Node, Python or source checkout.",
+  },
+  {
+    k: "Set up your agent",
+    v: "Install and authenticate a supported coding CLI separately. Check runtime readiness in Vivary Settings before starting a model conversation.",
+    why: "Local Vivary use needs no Vivary account. Claude Code and Codex use their own accounts and permissions.",
+  },
+  {
+    k: "Choose a project and task",
+    v: "Open a project and use a conversation for the work you want to do. Choose the supported runtime you have configured.",
+    why: "Setting up an existing folder can show proposed changes. Applying those changes through the interface is unfinished in this beta.",
+  },
+  {
+    k: "Review the work",
+    v: "Ask for a specific change, inspect the result and respond to permission requests from your runtime. Check its tools and approval mode before relying on them.",
+    why: "The beta does not establish complete support for every provider, tool or workflow.",
+  },
+  {
+    k: "Keep a handoff and backup",
+    v: "Ask the agent to record the goal, decisions and next step in a project file. Before upgrading, close Vivary and back up its profile and your project folders.",
+    why: "Project notes and conversation history are separate. Follow the installation guide to preserve both.",
+  },
+];
+
+const promises: Row[] = facts.product.promises.map((p) => {
+  const [k, ...rest] = p.split(". ");
+  return { k, v: rest.join(". ") };
+});
+
+const limits: Row[] = [
+  { k: "Unsigned beta", v: "Vivary 0.1.0-beta.1, published November 1, 2026, is built from source 09cfdd1. It is not a stable release. The installer and the app are not code signed." },
+  { k: "Workflows still being tested", v: "Applying setup changes to existing folders is unfinished. Provider-backed automations, remote access from another device and upgrade over an earlier install still need testing. Vivary runs one coding conversation at a time." },
+  { k: "Newer source", v: "Changes on the development branch are not necessarily in the beta. Check the release notes for the version you use." },
+  { k: "Agent permissions", v: "Your selected runtime controls tools and approvals. A workspace example is not a guarantee that every action requires review." },
+  { k: "File and profile storage", v: "Project files stay in their folders. Conversation history and settings also use a local app profile and SQLite database." },
+];
+
+const faq: { q: string; a: string }[] = [
+  { q: "What is Vivary?", a: "Vivary is a desktop workspace for working with AI agents on your own projects. It brings conversations and project files into one window." },
+  { q: "Who is Vivary for?", a: "People working with agents on writing, research, notes or code. You need to install the beta and configure a supported agent runtime. You do not need to be a software developer to work with project files." },
+  { q: "Do I need a Vivary account?", a: "No Vivary account is needed for local desktop use. Claude Code and Codex require their own setup and authentication. Self-hosted browser access requires explicit setup and authentication." },
+  { q: "Does my data leave my computer?", a: facts.product.dataBoundary },
+  { q: "Which AI agents can I connect?", a: "Vivary has adapters for Claude Code and Codex. Install and authenticate the coding CLI separately, then check runtime readiness in Settings. Support depends on the runtime and the beta build." },
+  { q: "What can I download now?", a: "Vivary 0.1.0-beta.1, an unsigned Windows x64 beta published on November 1, 2026. It has a per-user installer and a portable ZIP. It is not a stable release. Some desktop workflows still need testing." },
+  { q: "Is Vivary open source?", a: "The app and command-line source repositories are public under the MIT license. Published command packages and the Windows desktop app have separate release histories." },
+  { q: "Does a skill link install a skill?", a: "No. The company skills collection is separate from the Vivary app. Read the skill and its prerequisites before installing it in a compatible agent host." },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+export default function WhatIsVivary() {
+  return (
+    <Shell current="what">
+      <JsonLd data={jsonLd} />
+      <Section className="doc in">
+        <div className="wrap">
+          <p className="eyebrow">The desktop guide</p>
+          <div className="two">
+            <div className="lead">
+              <h1 className="display display-lg">Meet your workspace.</h1>
+              <p className="define">{define}</p>
+            </div>
+            <div className="body">
+              <p className="lede">
+                Install the Windows beta, connect your coding runtime and open a project.
+                Start here for the setup steps and current limits.
+              </p>
+              <p className="status">{facts.product.status}</p>
+              <div className="cta">
+                <a className="btn btn-solid" href={facts.links.preview}>Download the Windows beta <span aria-hidden="true">↗</span></a>
+                <a className="text-link" href="#install">See the steps <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+          </div>
+          <GuideNav items={[
+            { href: "#install", label: "Installation" },
+            { href: "#workspace", label: "Files and agents" },
+            { href: "#limits", label: "Beta limits" },
+            { href: "#questions", label: "Questions" },
+          ]} />
+          <AgentsLine />
+        </div>
+      </Section>
+
+      <Section id="install" className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">Install and try the Windows beta.</h2>
+            <p className="lede">
+              These steps summarize the installation guide. Read the full{" "}
+              <a href={facts.links.installGuide}>Windows installation instructions</a> for
+              checksums, upgrades, backups and known limits.
+            </p>
+          </div>
+          <div className="body">
+            <ol className="setup-steps" role="list">
+              {steps.map((step, i) => (
+                <li key={step.k}>
+                  <span className="step-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  <div><h3>{step.k}</h3><p>{step.v}</p><p className="cap">{step.why}</p></div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="workspace" className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">How agents, files and memory fit together.</h2>
+            <p className="lede">Check the release notes for what the beta supports.</p>
+          </div>
+          <div className="body">
+            <Ledger rows={promises} plain label="Workspace and data boundaries" />
+          </div>
+        </div>
+      </Section>
+
+      <Section className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">Who it is for.</h2>
+          </div>
+          <div className="body">
+            <p className="lede" style={{ marginTop: 0 }}>
+              A writer can share an outline and a draft. A researcher can ask for a comparison
+              of source notes. A developer can ask for a patch and tests. Start with a clear task,
+              choose the files the agent needs and check its result.
+            </p>
+            <p className="lede quiet">
+              Claude Code and Codex keep their own authentication and settings. Read the
+              installation guide before choosing and connecting a runtime.
+            </p>
+            <p className="packages">
+              For reusable agent instructions, see <a href={facts.links.skills}>The Little AI Company skills collection</a>
+              {" and its "}<a href={facts.links.statechartSkill}>Statechart Design and Review skill</a>.
+              Read the skill before installing it. This website does not install skills or grant tools.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="limits" className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">Known beta limits.</h2>
+          </div>
+          <div className="body">
+            <Ledger rows={limits} plain label="Beta limits" />
+          </div>
+        </div>
+      </Section>
+
+      <Section id="questions" className="chapter in">
+        <div className="wrap two">
+          <div className="lead">
+            <h2 className="display display-lg">Questions about Vivary.</h2>
+            <p className="lede">
+              Looking for terminal setup? The workspace commands have their own installation path.{" "}
+              <Link href="/commands/">Read the CLI setup guide.</Link>
+            </p>
+          </div>
+          <div className="body">
+            <Ledger
+              rows={faq.map((f) => ({ k: <span className="q">{f.q}</span>, v: f.a }))}
+              plain
+              label="Questions and answers"
+            />
+          </div>
+        </div>
+      </Section>
+    </Shell>
+  );
+}
