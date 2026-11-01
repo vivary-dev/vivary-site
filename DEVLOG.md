@@ -12,6 +12,18 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  feat/beta1-announcement
+
+**Did:** Added the beta.1 announcement that Jeff approved on 2026-11-01 to the home page: a banner line above the hero with the download and install guide links, and a short release notice (`#news`) after the hero.
+
+**Decided:** The notice lives on the home page instead of a new `/news/` route, so no new route, sitemap entry or export check was needed.
+
+**Fixed:** The banner came before the product definition, which breaks the rule that a page's first sentence defines the thing (AGENTS.md). Jeff chose to keep it at the top and reword it to start with what Vivary is.
+
+**Next:** Remove or replace the banner at the next release.
+
+---
+
 ## 2026-11-01  feat/user-docs-20261019
 
 **Did:** Merged `dev` at b770631 into this branch and reworked the eight articles for Vivary 0.1.0-beta.1. Each article starts with a one-sentence definition, lists prerequisites where they apply, and uses numbered steps with one action each. The text follows the Google developer documentation style and ASD-STE100 limits: steps of at most 20 words, other sentences of at most 25 words, one term for each concept. New for beta.1: the real release file names and the tested checksum commands, a first-launch section, the minimum Claude Code and Codex versions with the Update required status, the Codex-only execution mode, the fixed runtime and model of a saved Code conversation, Codex requests, and the handoff save status. `facts.links.installGuide` now points at `/docs/install-windows/`, and the home page link lost its external-link arrow.
