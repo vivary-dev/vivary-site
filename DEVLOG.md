@@ -18,6 +18,8 @@ Template:
 
 **Decided:** MP4, not GIF. The 9-second GIF is 0.85 MB. The whole 56-second MP4 is 1.07 MB. The figure caption describes what the video shows, so readers and agents without video get the same content.
 
+**Also:** Jeff chose to keep the announcement banner and remove the release notice section. He tested remote access from another device over Tailscale on the installed beta.1 app, so the remote-access docs note, the What is Vivary limits and `llms.txt` no longer call it untested.
+
 **Next:** Replace the video when the app's main screens change.
 
 ---

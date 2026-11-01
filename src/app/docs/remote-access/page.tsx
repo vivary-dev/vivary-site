@@ -35,8 +35,9 @@ export default function RemoteAccess() {
           <li>Remote access opens the Vivary app. It does not let an agent control a browser.</li>
         </ul>
         <Note>
-          Remote access from a different device is not tested on the installed 0.1.0-beta.1 app yet. If
-          it does not work as this article describes, report it. See{" "}
+          Remote access from a different device over Tailscale was tested on the installed 0.1.0-beta.1
+          app (reported November 1, 2026). If it does not work as this article describes, report it.
+          See{" "}
           <Link href="/docs/troubleshooting/#report">Report a problem</Link>.
         </Note>
       </DocSection>

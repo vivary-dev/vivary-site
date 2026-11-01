@@ -25,7 +25,8 @@ export function DemoVideo({ src, poster, describedBy }: { src: string; poster: s
     video.addEventListener("play", onPlay);
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        // isIntersecting is true for any visible sliver, so the ratio decides.
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
           if (!readerPaused) void video.play().catch(() => {});
         } else if (!video.paused) {
           selfPausing = true;
