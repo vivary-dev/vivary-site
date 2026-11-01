@@ -132,6 +132,9 @@ export function DocsSearch() {
         aria-describedby="docs-search-status"
       />
       <p id="docs-search-status" className="docs-search-status" role="status" aria-live="polite">{status}</p>
+      <noscript>
+        <p className="docs-search-status">Search needs JavaScript. Browse the articles below.</p>
+      </noscript>
       {hits.length > 0 && (
         <ol className="docs-results">
           {hits.map((hit) => (

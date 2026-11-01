@@ -16,8 +16,9 @@ export function docMetadata(slug: string) {
   return pageMetadata(`${article.title} · Vivary docs`, article.description, docPath(slug));
 }
 
-// The search form sends the query to the docs index, which runs the search.
-// It works without JavaScript on any static host. The Markdown export skips it.
+// The search form sends the query to the docs index, which runs the search in the
+// browser. Without JavaScript the index shows a message and the article list.
+// The Markdown export skips the form.
 export function DocsSearchForm({ id }: { id: string }) {
   return (
     <form className="docs-search-form" role="search" action="/docs/" method="get" data-export-skip="">

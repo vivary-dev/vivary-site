@@ -27,7 +27,7 @@ const verify = String.raw`$file = '.\Vivary-Setup-0.1.0-beta.1.exe'
 $expected = (Get-Content "$file.sha256").Split(' ')[0].Trim()
 if ((Get-FileHash $file -Algorithm SHA256).Hash -ne $expected) { throw 'Checksum mismatch. Do not run this file.' }`;
 
-const silentUninstall = String.raw`"%LOCALAPPDATA%\Programs\Vivary\Uninstall Vivary.exe" /S`;
+const silentUninstall = String.raw`& "$env:LOCALAPPDATA\Programs\Vivary\Uninstall Vivary.exe" /S`;
 
 export default function InstallWindows() {
   return (
@@ -218,7 +218,7 @@ export default function InstallWindows() {
         </Steps>
         <p>
           You can also run <code>Uninstall Vivary.exe</code> in <code>%LOCALAPPDATA%\Programs\Vivary</code>.
-          To uninstall without any windows, run this command:
+          To uninstall without any windows, run this command in PowerShell:
         </p>
         <Code>{silentUninstall}</Code>
         <p>The silent uninstaller returns before the removal is complete.</p>
