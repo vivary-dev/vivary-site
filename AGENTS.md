@@ -30,15 +30,16 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
 - Copy in Jeff's voice: plain sentences, no em dashes, no semicolons in prose,
   no marketing adjectives, no AI tells. Run the unslop rules before commit.
 - Public-context guardrail: nothing about Jeff's location or living situation.
-- Publishing needs Jeff's approval per deploy. The current public site is hosted on
-  GitHub Pages at https://vivary-dev.github.io as a static export, selected
-  by Jeff on 2026-10-03. The public publisher is `scripts/deploy-site.sh` and
-  must allow crawling, link the canonical sitemap and use this address.
-  Local previews may set `NEXT_PUBLIC_PREVIEW=1`. Previews are not hosted on Zo.
-  Keep the Next application statically exportable. The separately authorized
-  Cloudflare Pages target adds a bounded edge handler after export, described
-  in `docs/CLOUDFLARE.md`. It does not change the default canonical or deploy
-  anything. The rollout coordinator owns infrastructure and cutover.
+- Publishing needs Jeff's approval per deploy. Merging `dev` into `main` is that
+  approval for the Cloudflare site (Jeff, 2026-11-01): `.github/workflows/deploy.yml`
+  builds the Cloudflare target of `main` and deploys it to the Pages project
+  `vivary`, which serves https://www.vivaryagent.xyz and `mcp.vivaryagent.xyz`.
+  The GitHub Pages copy at https://vivary-dev.github.io is still published by
+  `scripts/deploy-site.sh`, which must allow crawling, link the canonical sitemap
+  and use that address. Local previews may set `NEXT_PUBLIC_PREVIEW=1`. Previews
+  are not hosted on Zo. Keep the Next application statically exportable. The
+  Cloudflare target adds a bounded edge handler after export, described in
+  `docs/CLOUDFLARE.md`. Jeff owns the Cloudflare account and DNS.
 
 ## Readers
 

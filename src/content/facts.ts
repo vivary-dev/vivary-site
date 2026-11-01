@@ -1,9 +1,9 @@
 // The only source of product claims for every page. The `product` block
 // describes the Vivary desktop app from the program design documents.
 // The `shipped` and `commands` blocks describe the commands that ship today.
-// Public availability and links verified 2026-10-03 against vivary-dev/vivary.
-// Release: releases/tag/desktop-preview-2026-09-22, INSTALL-WINDOWS.md asset.
-// Keep downloaded-preview evidence separate from newer dev source.
+// Public availability and links verified 2026-11-01 against vivary-dev/vivary.
+// Release: releases/tag/v0.1.0-beta.1, installer, portable ZIP and SHA-256 files.
+// Keep release evidence separate from newer dev source.
 
 export const facts = {
   name: "Vivary",
@@ -49,16 +49,16 @@ export const facts = {
     { name: "exo", role: "Claims, conflicts, and role contracts for the moment one agent becomes many." },
   ],
 
-  // Public GitHub prerelease and its installation asset, verified 2026-10-03.
+  // Public GitHub prerelease, verified 2026-11-01.
   product: {
     name: "Vivary",
     line: "A desktop workspace for working with AI agents on your own projects.",
     status:
-      "A public, unsigned Windows x64 preview is available. Development continues. Some desktop workflows still need testing.",
-    previewTag: "desktop-preview-2026-09-22",
-    previewPublished: "2026-09-22",
-    previewSource: "9884670",
-    // Current public README and preview installation guide. These describe
+      "Vivary 0.1.0-beta.1 is available for Windows x64. It is an unsigned beta. Development continues. Some desktop workflows still need testing.",
+    previewTag: "v0.1.0-beta.1",
+    previewPublished: "2026-11-01",
+    previewSource: "09cfdd1",
+    // Current public README and installation guide. These describe
     // product boundaries, not acceptance claims for every provider or workflow.
     promises: [
       "Projects and conversations. Work with agents and files in one desktop workspace.",
@@ -66,7 +66,7 @@ export const facts = {
       "Your agent tools. Claude Code and Codex use their own authentication and provider settings.",
       "Local use. No Vivary account is needed for local desktop use. Self-hosted browser access is explicit and authenticated.",
       "Inspectable project memory. Keep instructions and handoffs in files you can read and edit. Conversation history is separate.",
-      "Preview limits. Read the dated installation guide and release notes before using the Windows preview.",
+      "Beta limits. Read the release notes and the installation guide before you install the Windows beta.",
     ],
     dataBoundary:
       "Project files and the app profile live on the host. The selected runtime or provider can receive context under your settings. Self-hosted browser access is explicit and authenticated.",
@@ -83,18 +83,18 @@ export const facts = {
     names: ["vivary", "create-vivary", "tropo", "strato", "ozone", "exo"],
   },
 
-  // Distribution facts verified from the September 22 public GitHub prerelease.
+  // Distribution facts verified from the 0.1.0-beta.1 public GitHub prerelease.
   // This is not a fresh acceptance matrix for all code currently on dev.
   today: {
     working: [
-      "public Windows x64 preview, published 2026-09-22",
-      "unsigned development build from source 9884670",
-      "installation instructions, release notes and SHA-256 file with the release",
+      "public Windows x64 beta 0.1.0-beta.1, published 2026-11-01",
+      "per-user installer and portable ZIP, unsigned, built from source 09cfdd1",
+      "release notes, SHA-256 files and build metadata with the release",
       "public app source under the MIT license",
     ],
     notYet: [
       "a stable desktop release",
-      "a guarantee that newer dev changes are in the September preview",
+      "code signing",
       "verified support for every provider, tool or workflow",
       "an automatic installation from a website or skill link",
     ],
@@ -105,8 +105,8 @@ export const facts = {
     org: "https://github.com/vivary-dev",
     // The product repository. Public since 2026-09-16. "Follow the build" goes here.
     product: "https://github.com/vivary-dev/vivary",
-    preview: "https://github.com/vivary-dev/vivary/releases/tag/desktop-preview-2026-09-22",
-    installGuide: "https://github.com/vivary-dev/vivary/releases/download/desktop-preview-2026-09-22/INSTALL-WINDOWS.md",
+    preview: "https://github.com/vivary-dev/vivary/releases/tag/v0.1.0-beta.1",
+    installGuide: "https://github.com/vivary-dev/vivary/blob/dev/docs/desktop-preview.md",
     skills: "https://github.com/The-Little-AI-Company/skills",
     statechartSkill: "https://github.com/The-Little-AI-Company/skills/blob/main/skills/design/statechart-design-review/SKILL.md",
     commandSource: "https://github.com/vivary-dev/vivary-cli",

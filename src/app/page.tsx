@@ -6,7 +6,7 @@ import { JsonLd, Shell } from "./shell";
 
 export const metadata = pageMetadata(
   "Vivary | Desktop workspace for AI agents",
-  "Work with AI agents, conversations and project files in one desktop workspace. Explore Vivary and its unsigned Windows preview for writing, research and code.",
+  "Work with AI agents, conversations and project files in one desktop workspace. Explore Vivary and its unsigned Windows beta for writing, research and code.",
   "/",
 );
 
@@ -47,10 +47,10 @@ export default function Home() {
               Keep conversations beside your notes, research, drafts and code.
             </p>
             <div className="cta">
-              <a className="btn btn-solid" href={facts.links.preview}>Get the Windows preview <span aria-hidden="true">↗</span></a>
+              <a className="btn btn-solid" href={facts.links.preview}>Download the Windows beta <span aria-hidden="true">↗</span></a>
               <Link className="text-link" href="/what-is-vivary/#install">Read the setup guide <span aria-hidden="true">→</span></Link>
             </div>
-            <p className="release-note">Windows x64 · Unsigned preview · September 22, 2026</p>
+            <p className="release-note">Windows x64 · Unsigned beta 0.1.0-beta.1 · November 1, 2026</p>
           </div>
           <div className="character">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -81,7 +81,7 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/product/workspace-development.png" width={1280} height={900} loading="lazy" decoding="async" alt="Vivary development workspace with project navigation, an empty agent conversation and runtime setup controls." />
             </a>
-            <figcaption>Browser capture of the development app, October 3, 2026. An empty workspace before Claude Code sign-in. The September 22 Windows download differs. Read its <a href={facts.links.installGuide}>preview guide</a>.</figcaption>
+            <figcaption>Browser capture of the development app, October 3, 2026. An empty workspace before Claude Code sign-in. The Windows beta differs. Read its <a href={facts.links.installGuide}>installation guide</a>.</figcaption>
           </figure>
           <ol id="how" className="workflow" role="list">
             <li><span className="step-number" aria-hidden="true">01</span><h3>Open your project</h3><p>Start with the files for your task. Keep separate conversations for separate pieces of work.</p></li>
@@ -141,7 +141,7 @@ export default function Home() {
         <div className="wrap download-panel">
           <div>
             <p className="eyebrow">Try Vivary</p>
-            <h2 className="display display-lg">Start with the Windows preview.</h2>
+            <h2 className="display display-lg">Start with the Windows beta.</h2>
             <p className="lede">{facts.product.status}</p>
             <div className="cta">
               <a className="btn btn-solid" href={facts.links.preview}>Download and release notes <span aria-hidden="true">↗</span></a>
@@ -150,7 +150,7 @@ export default function Home() {
           </div>
           <div className="download-details">
             <h3>Before you begin</h3>
-            <p>Read the installation guide, verify the ZIP checksum and keep your project folders and app profile backed up.</p>
+            <p>Read the installation guide, verify the installer checksum and keep your project folders and app profile backed up.</p>
             <p>{facts.product.dataBoundary}</p>
             <a className="text-link" href={facts.links.installGuide}>Windows installation instructions <span aria-hidden="true">↗</span></a>
           </div>

@@ -77,9 +77,9 @@ are in `src/app/pages.css`. Product claims still come only from
 ## The product repository
 
 The app this site markets is built in `vivary-dev/vivary`. Product claims in
-`src/content/facts.ts` cite its documents and the dated public Windows preview
-release. The September 22 download and newer development source have separate
-status; the preview does not establish complete desktop acceptance. The public
+`src/content/facts.ts` cite its documents and the dated public Windows beta
+release. The 0.1.0-beta.1 download and newer development source have separate
+status; the beta does not establish complete desktop acceptance. The public
 site links the release, installation guide, current source and company skills.
 
 ## Public site and publishing
@@ -100,8 +100,7 @@ The script builds with `NEXT_PUBLIC_SITE_URL=https://vivary-dev.github.io` and
 commits the export on top of the existing Pages history. A normal push rejects
 concurrent changes. Existing unrelated files and old hashed assets are preserved.
 Check the Pages run and live HTML, robots, sitemap and changed assets afterward.
-A source merge alone is not a deployment. Do not promote source `main` merely
-to publish this reviewed export.
+A merge into `main` deploys the Cloudflare site, not this GitHub Pages copy.
 
 The former `deploy-preview.sh` stops with a pointer to the public publisher,
 so an old command cannot restore noindex on the canonical site. An unpublished
@@ -112,10 +111,11 @@ allows search and declares `Content-Signal: search=yes, ai-train=no`. AI input
 permission remains unspecified and the four specific training-crawler blocks
 remain in place. See `docs/brand/09-humans-and-agents.md` for the policy.
 
-`wrangler.toml` describes the optional Cloudflare Pages target. It is staged
-for `www.vivaryagent.xyz` and the read-only documentation endpoint at
-`mcp.vivaryagent.xyz`. It does not deploy or change DNS. The GitHub origin
-remains the default until the approved cutover is verified. Build commands,
+`wrangler.toml` describes the Cloudflare Pages target, the project `vivary`. It
+serves `www.vivaryagent.xyz` and the read-only documentation endpoint at
+`mcp.vivaryagent.xyz`. When CI succeeds for a push to `main`,
+`.github/workflows/deploy.yml` builds and deploys that commit. The workflow does
+not change DNS. Build commands,
 operator enable flags, protocol limits and rollback are in
 [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md).
 

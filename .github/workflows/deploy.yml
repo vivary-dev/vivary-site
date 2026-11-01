@@ -1,0 +1,156 @@
+name: Deploy
+
+# Deploys the Cloudflare build of main to the Cloudflare Pages project `vivary`,
+# which serves www.vivaryagent.xyz and mcp.vivaryagent.xyz. The project was
+# created by Direct Upload, so Cloudflare cannot build it from Git. This job
+# builds it here and uploads `out` with Wrangler. Merging dev into main is the
+# owner's approval to publish (AGENTS.md). The job starts only after the CI
+# workflow succeeds for a push to main, and it deploys that exact commit.
+# Secrets: CLOUDFLARE_API_TOKEN, a token limited to Account > Cloudflare Pages >
+# Edit, and CLOUDFLARE_ACCOUNT_ID. To deploy main again, rerun its CI run.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # Runs outside the deploy queue. GitHub keeps one pending run per concurrency
+  # group, so a stale rerun that reached the queue could replace the newest
+  # commit's pending deploy. Reject stale commits before they get there.
+  tip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+    outputs:
+      current: ${{ steps.tip.outputs.current }}
+    steps:
+      - name: Check that the commit is the tip of main
+        id: tip
+        env:
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          test -n "$tip"
+          if [ "$tip" = "$COMMIT" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+          fi
+
+  deploy:
+    needs: tip
+    if: needs.tip.outputs.current == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+
+    steps:
+      - name: Check out the commit CI verified
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: pnpm
+
+      - name: Scan dependency publication metadata
+        run: node scripts/publish-scan.mjs .
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Cloudflare target
+        run: VIVARY_DEPLOY_TARGET=cloudflare NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz NEXT_PUBLIC_PREVIEW=0 pnpm build
+
+      - name: Verify Cloudflare export
+        run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
+
+      # Check again just before upload, in case main moved while this job waited
+      # in the queue or built. A deliberate rollback uses Cloudflare's deployment
+      # history instead.
+      - name: Skip a commit that is no longer the tip of main
+        id: current
+        env:
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          test -n "$tip"
+          if [ "$tip" = "$COMMIT" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+          fi
+
+      # A Direct Upload deployment becomes production only when its branch name
+      # matches the project's production branch, so read it instead of guessing.
+      - name: Read the production branch
+        if: steps.current.outputs.deploy == 'true'
+        id: project
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          branch=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/vivary" \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["result"]["production_branch"])')
+          test -n "$branch"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "Production branch: $branch"
+
+      # Wrangler 4.155.0 was the newest release at least three days old on 2026-11-01.
+      # Upload a copy of `out` from a folder with no wrangler.toml above it. A Pages
+      # deploy that finds a Wrangler file makes that file the project's source of
+      # truth, and this repository's file does not carry the dashboard variables
+      # (SITE_ENABLED, MCP_ENABLED, MCP_ALLOWED_ORIGINS) the edge handler needs.
+      - name: Deploy to Cloudflare Pages
+        if: steps.current.outputs.deploy == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PRODUCTION_BRANCH: ${{ steps.project.outputs.branch }}
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          upload="$RUNNER_TEMP/pages-upload"
+          rm -rf "$upload"
+          cp -R out "$upload"
+          cd "$upload"
+          pnpm dlx wrangler@4.155.0 pages deploy . \
+            --project-name vivary \
+            --branch "$PRODUCTION_BRANCH" \
+            --commit-hash "$COMMIT" \
+            --commit-message "main ${COMMIT::7}"
+
+      # The live home page must link the same release as the build just deployed.
+      - name: Check the live site
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          release=$(grep -o -m1 'https://github.com/vivary-dev/vivary/releases/tag/[^>)" ]*' out/index.md)
+          test -n "$release"
+          echo "Expected release link: $release"
+          for attempt in 1 2 3 4 5 6; do
+            sleep 15
+            if curl --fail --silent --show-error https://www.vivaryagent.xyz/index.md | grep -F -q "$release"; then
+              echo "Live site links $release"
+              exit 0
+            fi
+          done
+          echo "The live home page does not link $release"
+          exit 1
