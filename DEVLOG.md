@@ -18,6 +18,8 @@ Template:
 
 **Decided:** The notice lives on the home page instead of a new `/news/` route, so no new route, sitemap entry or export check was needed.
 
+**Fixed:** The banner came before the product definition, which breaks the rule that a page's first sentence defines the thing (AGENTS.md). Jeff chose to keep it at the top and reword it to start with what Vivary is.
+
 **Next:** Remove or replace the banner at the next release.
 
 ---

@@ -40,7 +40,7 @@ export default function Home() {
       <div className="announce-bar">
         <div className="wrap">
           <p>
-            <strong>Vivary 0.1.0-beta.1 for Windows is available.</strong>{" "}
+            <strong>Vivary, a desktop workspace for AI agents, is now available for Windows (0.1.0-beta.1).</strong>{" "}
             <a href={facts.links.preview}>Download</a> · <Link href={facts.links.installGuide}>Install guide</Link>
           </p>
         </div>
