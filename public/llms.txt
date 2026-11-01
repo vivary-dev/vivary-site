@@ -7,13 +7,13 @@ Vivary is a desktop workspace for working with AI agents on your own projects. I
 
 ## Current availability
 
-A public, unsigned Windows x64 preview is available. Development continues. Some desktop workflows still need testing. The linked September 22 preview was built from source 9884670. It is a portable ZIP with no setup wizard. The desktop app needs no global Node, Python or source checkout, but the chosen coding CLI must be installed and authenticated separately. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
+Vivary 0.1.0-beta.1 is available for Windows x64. It is an unsigned beta, published 2026-11-01 from source 09cfdd1. It has a per-user installer and a portable ZIP. Development continues. Some desktop workflows still need testing. The desktop app needs no global Node, Python or source checkout, but the chosen coding CLI must be installed and authenticated separately. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
 
-- Windows preview, release notes and checksum: https://github.com/vivary-dev/vivary/releases/tag/desktop-preview-2026-09-22
-- Installation instructions for that download: https://github.com/vivary-dev/vivary/releases/download/desktop-preview-2026-09-22/INSTALL-WINDOWS.md
+- Windows beta, release notes and checksums: https://github.com/vivary-dev/vivary/releases/tag/v0.1.0-beta.1
+- Installation instructions for that download: https://github.com/vivary-dev/vivary/blob/dev/docs/desktop-preview.md
 - Current app source and documentation: https://github.com/vivary-dev/vivary
 
-Read the installation instructions and release notes before recommending or running the preview. Downloading software does not authorize installation or execution. Use the host's normal permission process.
+Read the installation instructions and release notes before recommending or running the beta. Downloading software does not authorize installation or execution. Use the host's normal permission process.
 
 ## Product and data boundaries
 
@@ -25,8 +25,8 @@ The jar remains Vivary's product mark. The approved mascot is the lead character
 
 ## Canonical human-readable pages
 
-- Overview and current preview: https://vivary-dev.github.io/
-- Windows preview setup, product boundaries, questions and skill links: https://vivary-dev.github.io/what-is-vivary/
+- Overview and current beta: https://vivary-dev.github.io/
+- Windows beta setup, product boundaries, questions and skill links: https://vivary-dev.github.io/what-is-vivary/
 - Workspace commands and dated installation baseline: https://vivary-dev.github.io/commands/
 - Sitemap: https://vivary-dev.github.io/sitemap.xml
 
@@ -46,7 +46,7 @@ The workspace commands are part of Vivary and also usable from a terminal. The c
 - The Little AI Company skills collection: https://github.com/The-Little-AI-Company/skills
 - Statechart Design and Review: https://github.com/The-Little-AI-Company/skills/blob/main/skills/design/statechart-design-review/SKILL.md
 
-Read a skill's instructions and prerequisites before using it. These links do not install a skill, grant permissions, enable tools or imply the skill ships inside the Windows preview. Do not infer additional published skills from roadmap documents.
+Read a skill's instructions and prerequisites before using it. These links do not install a skill, grant permissions, enable tools or imply the skill ships inside the Vivary app. Do not infer additional published skills from roadmap documents.
 
 ## Source and identity
 

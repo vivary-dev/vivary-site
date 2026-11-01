@@ -9,8 +9,8 @@ import { AgentsLine, GuideNav, JsonLd, Shell } from "../shell";
 // docs/brand/08-product-description.md. The first sentence defines the thing.
 
 export const metadata = pageMetadata(
-  "Vivary setup, features and preview limits",
-  "Learn what Vivary does, how to install its Windows preview, and how agent accounts, project files and provider context work. Read the current limitations.",
+  "Vivary setup, features and beta limits",
+  "Learn what Vivary does, how to install its Windows beta, and how agent accounts, project files and provider context work. Read the current limitations.",
   "/what-is-vivary/",
 );
 
@@ -20,13 +20,13 @@ const define =
 const steps: { k: string; v: string; why: string }[] = [
   {
     k: "Download and verify",
-    v: "On Windows x64, download the preview ZIP and its SHA-256 file from the dated release. Compare the complete checksum before extracting.",
-    why: "The installation guide contains the exact filename, checksum and verification command.",
+    v: "On Windows x64, download the installer and its .sha256 file from the release page. Compare the checksum before you run the installer.",
+    why: "The release notes contain the verification command. A portable ZIP is also available.",
   },
   {
-    k: "Extract and open",
-    v: "Extract into a new directory. Keep the complete application folder together, including resources, then run Vivary.exe.",
-    why: "This portable preview has no setup wizard. The app itself needs no global Node, Python or source checkout.",
+    k: "Install and open",
+    v: "Run the installer. If Windows shows Windows protected your PC, select More info, then select Run anyway. Open Vivary from the Start menu.",
+    why: "The installer is not code signed. It needs no administrator rights and installs Vivary for your Windows account only. The app needs no global Node, Python or source checkout.",
   },
   {
     k: "Set up your agent",
@@ -36,12 +36,12 @@ const steps: { k: string; v: string; why: string }[] = [
   {
     k: "Choose a project and task",
     v: "Open a project and use a conversation for the work you want to do. Choose the supported runtime you have configured.",
-    why: "Setting up an existing folder can show proposed changes. Applying those changes through the interface is unfinished in this preview.",
+    why: "Setting up an existing folder can show proposed changes. Applying those changes through the interface is unfinished in this beta.",
   },
   {
     k: "Review the work",
     v: "Ask for a specific change, inspect the result and respond to permission requests from your runtime. Check its tools and approval mode before relying on them.",
-    why: "The preview does not establish complete support for every provider, tool or workflow.",
+    why: "The beta does not establish complete support for every provider, tool or workflow.",
   },
   {
     k: "Keep a handoff and backup",
@@ -56,22 +56,22 @@ const promises: Row[] = facts.product.promises.map((p) => {
 });
 
 const limits: Row[] = [
-  { k: "Unsigned preview", v: "The September 22, 2026 Windows x64 download is development software built from source 9884670. It is not a stable release." },
-  { k: "Workflows still being tested", v: "Applying setup changes to existing folders is unfinished. First launch with a new profile, some provider workflows and automation still need testing." },
-  { k: "Newer source", v: "Changes on the development branch are not necessarily included in the public ZIP. Check evidence for the version you use." },
+  { k: "Unsigned beta", v: "Vivary 0.1.0-beta.1, published November 1, 2026, is built from source 09cfdd1. It is not a stable release. The installer and the app are not code signed." },
+  { k: "Workflows still being tested", v: "Applying setup changes to existing folders is unfinished. Provider-backed automations, remote access from another device and upgrade over an earlier install still need testing. Vivary runs one coding conversation at a time." },
+  { k: "Newer source", v: "Changes on the development branch are not necessarily in the beta. Check the release notes for the version you use." },
   { k: "Agent permissions", v: "Your selected runtime controls tools and approvals. A workspace example is not a guarantee that every action requires review." },
   { k: "File and profile storage", v: "Project files stay in their folders. Conversation history and settings also use a local app profile and SQLite database." },
 ];
 
 const faq: { q: string; a: string }[] = [
   { q: "What is Vivary?", a: "Vivary is a desktop workspace for working with AI agents on your own projects. It brings conversations and project files into one window." },
-  { q: "Who is Vivary for?", a: "People working with agents on writing, research, notes or code. You need to install the preview and configure a supported agent runtime. You do not need to be a software developer to work with project files." },
+  { q: "Who is Vivary for?", a: "People working with agents on writing, research, notes or code. You need to install the beta and configure a supported agent runtime. You do not need to be a software developer to work with project files." },
   { q: "Do I need a Vivary account?", a: "No Vivary account is needed for local desktop use. Claude Code and Codex require their own setup and authentication. Self-hosted browser access requires explicit setup and authentication." },
   { q: "Does my data leave my computer?", a: facts.product.dataBoundary },
-  { q: "Which AI agents can I connect?", a: "Vivary has adapters for Claude Code and Codex. Install and authenticate the coding CLI separately, then check runtime readiness in Settings. Support depends on the runtime and the preview build." },
-  { q: "What can I download now?", a: "An unsigned Windows x64 preview published on September 22, 2026, from source 9884670. It is a portable ZIP, not a stable release. Some desktop workflows still need testing." },
-  { q: "Is Vivary open source?", a: "The app and command-line source repositories are public under the MIT license. Published command packages and the Windows desktop preview have separate release histories." },
-  { q: "Does a skill link install a skill?", a: "No. The company skills collection is separate from the Windows preview. Read the skill and its prerequisites before installing it in a compatible agent host." },
+  { q: "Which AI agents can I connect?", a: "Vivary has adapters for Claude Code and Codex. Install and authenticate the coding CLI separately, then check runtime readiness in Settings. Support depends on the runtime and the beta build." },
+  { q: "What can I download now?", a: "Vivary 0.1.0-beta.1, an unsigned Windows x64 beta published on November 1, 2026. It has a per-user installer and a portable ZIP. It is not a stable release. Some desktop workflows still need testing." },
+  { q: "Is Vivary open source?", a: "The app and command-line source repositories are public under the MIT license. Published command packages and the Windows desktop app have separate release histories." },
+  { q: "Does a skill link install a skill?", a: "No. The company skills collection is separate from the Vivary app. Read the skill and its prerequisites before installing it in a compatible agent host." },
 ];
 
 const jsonLd = {
@@ -98,12 +98,12 @@ export default function WhatIsVivary() {
             </div>
             <div className="body">
               <p className="lede">
-                Install the Windows preview, connect your coding runtime and open a project.
+                Install the Windows beta, connect your coding runtime and open a project.
                 Start here for the setup steps and current limits.
               </p>
               <p className="status">{facts.product.status}</p>
               <div className="cta">
-                <a className="btn btn-solid" href={facts.links.preview}>Get the Windows preview <span aria-hidden="true">↗</span></a>
+                <a className="btn btn-solid" href={facts.links.preview}>Download the Windows beta <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href="#install">See the steps <span aria-hidden="true">↓</span></a>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function WhatIsVivary() {
           <GuideNav items={[
             { href: "#install", label: "Installation" },
             { href: "#workspace", label: "Files and agents" },
-            { href: "#limits", label: "Preview limits" },
+            { href: "#limits", label: "Beta limits" },
             { href: "#questions", label: "Questions" },
           ]} />
           <AgentsLine />
@@ -121,9 +121,9 @@ export default function WhatIsVivary() {
       <Section id="install" className="chapter in">
         <div className="wrap two">
           <div className="lead">
-            <h2 className="display display-lg">Install and try the Windows preview.</h2>
+            <h2 className="display display-lg">Install and try the Windows beta.</h2>
             <p className="lede">
-              These steps summarize the September 22 preview guide. Read the full{" "}
+              These steps summarize the installation guide. Read the full{" "}
               <a href={facts.links.installGuide}>Windows installation instructions</a> for
               checksums, upgrades, backups and known limits.
             </p>
@@ -145,7 +145,7 @@ export default function WhatIsVivary() {
         <div className="wrap two">
           <div className="lead">
             <h2 className="display display-lg">How agents, files and memory fit together.</h2>
-            <p className="lede">Check the dated preview guide for what the downloaded build supports.</p>
+            <p className="lede">Check the release notes for what the beta supports.</p>
           </div>
           <div className="body">
             <Ledger rows={promises} plain label="Workspace and data boundaries" />
@@ -180,10 +180,10 @@ export default function WhatIsVivary() {
       <Section id="limits" className="chapter in">
         <div className="wrap two">
           <div className="lead">
-            <h2 className="display display-lg">Known preview limits.</h2>
+            <h2 className="display display-lg">Known beta limits.</h2>
           </div>
           <div className="body">
-            <Ledger rows={limits} plain label="Preview limits" />
+            <Ledger rows={limits} plain label="Beta limits" />
           </div>
         </div>
       </Section>
