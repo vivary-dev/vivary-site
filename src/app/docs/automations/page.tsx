@@ -99,15 +99,16 @@ export default function Automations() {
           ]}
         />
         <p>
-          Only scheduled automations have <Ui>Edit</Ui>. While a run is in progress or waits for your
-          approval, Vivary refuses <Ui>Run now</Ui> with <Ui>The automation is already running.</Ui>
+          Only scheduled automations have <Ui>Edit</Ui>. While a run is in progress, Vivary refuses{" "}
+          <Ui>Run now</Ui> with <Ui>The automation is already running.</Ui> While a run waits for your
+          approval, <Ui>Run now</Ui> tells you to approve or decline that run first.
         </p>
       </DocSection>
 
       <DocSection id="approvals" title="Approve a protected action">
         <p>
           When a run wants to use a tool that needs your approval, the run stops and waits. Its status in{" "}
-          <Ui>Past runs</Ui> is <code>waiting_approval</code>.
+          <Ui>Past runs</Ui> is <Ui>Waiting for approval</Ui>.
         </p>
         <Steps>
           <li>For the automation, click <Ui>Manage</Ui> &gt; <Ui>Details</Ui>.</li>

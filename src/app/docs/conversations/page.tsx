@@ -103,12 +103,12 @@ export default function Conversations() {
         <Steps>
           <li>In the conversation, click <Ui>Stop</Ui>. In a Native chat, the button is named <Ui>Stop response</Ui>.</li>
           <li>
-            If the agent works in a different project, use the bar at the top of the window. Click{" "}
-            <Ui>Stop</Ui> there.
+            If a Code conversation works in a different project, use the bar at the top of the window.
+            Click <Ui>Stop</Ui> there. For a Native chat, open that chat, and click <Ui>Stop response</Ui>.
           </li>
         </Steps>
         <p>
-          The bar at the top shows where the agent works, with <Ui>Open conversation</Ui> and{" "}
+          The bar at the top shows where a Code conversation works, with <Ui>Open conversation</Ui> and{" "}
           <Ui>Stop</Ui>. Work continues when you go to a different page.
         </p>
         <p>

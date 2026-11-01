@@ -30,7 +30,7 @@ export default function RuntimeSetup() {
           caption="What each feature needs"
           head={["Feature", "What it needs"]}
           rows={[
-            ["Code conversations", "Claude Code 2.1.286 or later, or Codex 0.160.0 or later. Install it on this computer and sign in with your own account."],
+            ["Code conversations", "Claude Code 2.1.286 or later, signed in with a Claude subscription. Or Codex 0.160.0 or later, signed in with ChatGPT."],
             ["Native chat", "An API key from a provider. The provider bills you for its use."],
             ["Automation conditions", "An Anthropic API key, whatever provider you use for Native chat."],
           ]}
@@ -56,7 +56,7 @@ export default function RuntimeSetup() {
           <li>Click <Ui>Install Claude Code</Ui> or <Ui>Install Codex</Ui>.</li>
           <li>Install the program with the official instructions.</li>
           <li>In a terminal, run <code>claude auth login</code> for Claude Code, or <code>codex login</code> for Codex.</li>
-          <li>Complete the sign-in in your browser.</li>
+          <li>Complete the sign-in in your browser. For Claude Code, use your Claude subscription. For Codex, use ChatGPT.</li>
           <li>In Vivary, click <Ui>Refresh</Ui>.</li>
         </Steps>
         <p><strong>Result:</strong> The status changes to <Ui>Signed in</Ui>.</p>
@@ -68,7 +68,7 @@ export default function RuntimeSetup() {
             [<Ui key="r">Sign-in required</Ui>, "The program is installed, but you are not signed in."],
             [<Ui key="u">Update required</Ui>, <>The installed version is too old. Click <Ui key="up">Update Claude Code</Ui> or <Ui key="uc">Update Codex</Ui>, update the program, and then click <Ui key="rf">Refresh</Ui>.</>],
             [<Ui key="n">Not installed</Ui>, "Vivary did not find the program."],
-            [<Ui key="c">Check needed</Ui>, "Vivary could not check the program. Click Refresh to try again."],
+            [<Ui key="c">Check needed</Ui>, "Vivary could not check the program, or the program uses a sign-in that Vivary does not support. Read the message under the status. If it asks you to sign in again, sign in with a Claude subscription or ChatGPT. Then click Refresh."],
           ]}
         />
         <p>
@@ -81,7 +81,9 @@ export default function RuntimeSetup() {
           uses the first copy that has a launcher, such as <code>codex.exe</code> or <code>codex.cmd</code>.
         </p>
         <p>
-          Codex in Vivary uses your ChatGPT sign-in. Vivary does not support Codex with an API key. Codex
+          Claude Code in Vivary uses your Claude subscription. Vivary does not support Claude Code with an
+          API key or a cloud provider. Codex in Vivary uses your ChatGPT sign-in. Vivary does not support
+          Codex with an API key. Codex
           keeps its own configuration and tools. The Codex row lists the connections that you set up in
           Codex.
         </p>

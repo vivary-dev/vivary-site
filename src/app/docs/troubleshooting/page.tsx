@@ -123,7 +123,7 @@ export default function Troubleshooting() {
             ["An automation waits after Vivary was ended during its run", "If you ended Vivary without quitting, for example from Task Manager, that automation waits up to ten minutes. Your other automations run on schedule."],
             ["A webhook or event automation with a condition never runs", <>Conditions need an Anthropic API key. Click <Ui key="m">Manage</Ui> &gt; <Ui key="d">Details</Ui> to read the reason. Add an Anthropic key, or remove the condition.</>],
             ["A webhook call cannot connect", <>Vivary must be open, and the caller must run on this computer. Compare the port in the URL of the caller with the <Ui key="w">Webhook URL</Ui> in <Ui key="d">Details</Ui>.</>],
-            [<>A run shows <code key="w">waiting_approval</code></>, <>Click <Ui key="i">Inspect run</Ui>. Then click <Ui key="a">Approve once</Ui> or <Ui key="dc">Decline</Ui>. See <Link key="l" href="/docs/automations/#approvals">Approve a protected action</Link>.</>],
+            [<>A run shows <Ui key="w">Waiting for approval</Ui></>, <>Click <Ui key="i">Inspect run</Ui>. Then click <Ui key="a">Approve once</Ui> or <Ui key="dc">Decline</Ui>. See <Link key="l" href="/docs/automations/#approvals">Approve a protected action</Link>.</>],
           ]}
         />
       </DocSection>

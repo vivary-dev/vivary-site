@@ -106,7 +106,7 @@ export default function Projects() {
         </p>
         <p>
           If the plan shows <Ui>Protect recovery records first</Ui>, do one more step before you apply.
-          Click <Ui>Confirm privacy preparation</Ui>, and then click <Ui>Preview Vivary setup</Ui> again.
+          Click <Ui>Confirm privacy preparation</Ui>, and then click <Ui>Review Vivary setup</Ui>.
         </p>
         <p>
           The plan marks each change as <Ui>Create</Ui>, <Ui>Append managed block</Ui> or{" "}
