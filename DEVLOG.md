@@ -22,7 +22,19 @@ Template:
 
 **Decided:** Windows and GitHub labels that readers click (More info, Run anyway, Finish, Installed apps) stay bold, although they are not Vivary's. A prose lint over `out/docs/*/index.md` checks sentence length, em dashes, semicolons, issue numbers, hashes and marketing words. It stays in the build server's evidence folder, not in this repo. The word "preview" appears only in app labels and as the verb for a setup preview.
 
-**Next:** Review the PR. If PR #18 merges first, merge `dev` again so that `llms.txt` and the docs links use the new origin. Publishing waits for Jeff.
+**Next:** PR #18 merged first, so `dev` was merged again and `llms.txt` and the docs links now use www.vivaryagent.xyz. Review the PR, then promote `dev` to `main`, which deploys the docs.
+
+---
+
+## 2026-11-01  chore/retire-github-pages
+
+**Did:** Retired the GitHub Pages copy at vivary-dev.github.io, at Jeff's request. Its repository now holds redirect pages to the same paths on www.vivaryagent.xyz. Every build and check now defaults to the public address, `public/llms.txt` names it, and `scripts/deploy-site.sh` stops with a pointer.
+
+**Broke / surprised me:** Both copies declared themselves canonical, and the GitHub Pages copy had not been published since 2026-10-03.
+
+**Decided:** www.vivaryagent.xyz is the only public site. GitHub Pages cannot send a 301, so the redirect pages use a canonical link, a meta refresh and a script that keeps the path.
+
+**Next:** Rework PR #15's user docs against beta.1.
 
 ---
 
