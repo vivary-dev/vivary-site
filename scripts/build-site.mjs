@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const target = process.env.VIVARY_DEPLOY_TARGET ?? 'github';
 if (!['github', 'cloudflare'].includes(target)) throw new Error('VIVARY_DEPLOY_TARGET must be github or cloudflare');
-const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vivary-dev.github.io').replace(/\/$/, '');
+const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.vivaryagent.xyz').replace(/\/$/, '');
 const parsed = new URL(origin);
 if (parsed.origin !== origin || !(parsed.protocol === 'https:' || parsed.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(parsed.hostname))) throw new Error('SITE_URL must be an HTTPS origin or local loopback origin');
 if (target === 'cloudflare' && origin !== 'https://www.vivaryagent.xyz') throw new Error('Cloudflare build requires NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz');

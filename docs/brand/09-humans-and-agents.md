@@ -1,6 +1,6 @@
 # Public discovery and agent access
 
-Updated 2026-10-03. The canonical site is https://vivary-dev.github.io/.
+Updated 2026-11-01. The canonical site is https://www.vivaryagent.xyz/.
 People and agents get the same content. HTML remains the authority. Markdown
 is derived from each exported page, never maintained as a second copy. Keep product information readable
 without JavaScript, semantic headings and named landmarks, accurate metadata,
@@ -61,7 +61,8 @@ changing the policy.
   assets. Confirm their bytes match the reviewed export.
 
 `NEXT_PUBLIC_PREVIEW=1` remains available for unpublished local previews.
-`scripts/deploy-site.sh` is the public publisher. Source CI does not deploy.
+When CI succeeds for a push to `main`, `.github/workflows/deploy.yml` deploys
+the public site. The GitHub Pages copy is retired and only redirects.
 
 ## Staged Cloudflare transport
 

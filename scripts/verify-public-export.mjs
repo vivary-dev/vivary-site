@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
+const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.vivaryagent.xyz").replace(/\/$/, "");
 const pages = ["/", "/commands/", "/what-is-vivary/"];
 const read = (file) => readFileSync(join("out", file), "utf8");
 const titles = new Set();

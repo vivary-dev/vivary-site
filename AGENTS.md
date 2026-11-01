@@ -34,10 +34,10 @@ on Base UI, pnpm 10, Node 24. All work runs on Zo over ssh in
   approval for the Cloudflare site (Jeff, 2026-11-01): `.github/workflows/deploy.yml`
   builds the Cloudflare target of `main` and deploys it to the Pages project
   `vivary`, which serves https://www.vivaryagent.xyz and `mcp.vivaryagent.xyz`.
-  The GitHub Pages copy at https://vivary-dev.github.io is still published by
-  `scripts/deploy-site.sh`, which must allow crawling, link the canonical sitemap
-  and use that address. Local previews may set `NEXT_PUBLIC_PREVIEW=1`. Previews
-  are not hosted on Zo. Keep the Next application statically exportable. The
+  The public site must allow crawling and link the canonical sitemap. The GitHub
+  Pages copy at vivary-dev.github.io was retired on 2026-11-01 and only redirects
+  to www.vivaryagent.xyz. Do not publish to it. Local previews may set
+  `NEXT_PUBLIC_PREVIEW=1`. Previews are not hosted on Zo. Keep the Next application statically exportable. The
   Cloudflare target adds a bounded edge handler after export, described in
   `docs/CLOUDFLARE.md`. Jeff owns the Cloudflare account and DNS.
 

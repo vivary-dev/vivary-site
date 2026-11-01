@@ -31,6 +31,6 @@ Review skill where relevant. Those links do not install skills or establish
 built-in runtime support. Agent-facing installation advice must preserve the
 user's normal approval and tool boundaries.
 
-The canonical site is https://vivary-dev.github.io/. Public statements must
+The canonical site is https://www.vivaryagent.xyz/. Public statements must
 come from public product, release or package evidence. Older research files
 retain their dates and do not override the current facts.

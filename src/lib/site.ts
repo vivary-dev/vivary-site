@@ -2,7 +2,7 @@
 // for canonical links, sitemap and Open Graph use it unless a local build
 // explicitly supplies another origin. GitHub publication fixes this value;
 // the optional Cloudflare build requires the separately approved www origin.
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://vivary-dev.github.io").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.vivaryagent.xyz").replace(/\/$/, "");
 
 // Explicit local/review builds can opt out of indexing. The public publisher
 // sets NEXT_PUBLIC_PREVIEW=0. Preview mode never changes the canonical host
