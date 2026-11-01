@@ -1,6 +1,6 @@
 # Public discovery and agent access
 
-Updated 2026-10-03. The canonical site is https://vivary-dev.github.io/.
+Updated 2026-11-01. The canonical site is https://www.vivaryagent.xyz/.
 People and agents get the same content. HTML remains the authority. Markdown
 is derived from each exported page, never maintained as a second copy. Keep product information readable
 without JavaScript, semantic headings and named landmarks, accurate metadata,

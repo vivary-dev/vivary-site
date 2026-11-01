@@ -1,6 +1,6 @@
 # Vivary
 
-Canonical site: https://vivary-dev.github.io/
+Canonical site: https://www.vivaryagent.xyz/
 Reviewed: 2026-10-03.
 
 Vivary is a desktop workspace for working with AI agents on your own projects. It brings conversations and project files into one window. Vivary is made by The Little AI Company. The public product source is licensed under MIT.
@@ -25,10 +25,10 @@ The jar remains Vivary's product mark. The approved mascot is the lead character
 
 ## Canonical human-readable pages
 
-- Overview and current beta: https://vivary-dev.github.io/
-- Windows beta setup, product boundaries, questions and skill links: https://vivary-dev.github.io/what-is-vivary/
-- Workspace commands and dated installation baseline: https://vivary-dev.github.io/commands/
-- Sitemap: https://vivary-dev.github.io/sitemap.xml
+- Overview and current beta: https://www.vivaryagent.xyz/
+- Windows beta setup, product boundaries, questions and skill links: https://www.vivaryagent.xyz/what-is-vivary/
+- Workspace commands and dated installation baseline: https://www.vivaryagent.xyz/commands/
+- Sitemap: https://www.vivaryagent.xyz/sitemap.xml
 
 These HTML pages are the primary content. This file is linked guidance, not a separate product specification.
 

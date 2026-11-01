@@ -12,6 +12,18 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  chore/retire-github-pages
+
+**Did:** Retired the GitHub Pages copy at vivary-dev.github.io, at Jeff's request. Its repository now holds redirect pages to the same paths on www.vivaryagent.xyz. Every build and check now defaults to the public address, `public/llms.txt` names it, and `scripts/deploy-site.sh` stops with a pointer.
+
+**Broke / surprised me:** Both copies declared themselves canonical, and the GitHub Pages copy had not been published since 2026-10-03.
+
+**Decided:** www.vivaryagent.xyz is the only public site. GitHub Pages cannot send a 301, so the redirect pages use a canonical link, a meta refresh and a script that keeps the path.
+
+**Next:** Rework PR #15's user docs against beta.1.
+
+---
+
 ## 2026-11-01  fix/beta-download-link
 
 **Did:** Pointed every download link, status line and setup step at the Vivary 0.1.0-beta.1 release, which has a per-user installer. The September preview is a draft again, so the live links returned 404. Updated `public/llms.txt` and the export check's status qualifier. Added `.github/workflows/deploy.yml`, which deploys `main` to the Cloudflare Pages project `vivary` after the CI checks, with a Pages-only token Jeff created.

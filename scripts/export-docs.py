@@ -150,7 +150,7 @@ def convert(html, canonical):
 
 def export():
     out = Path('out')
-    origin = os.environ.get('NEXT_PUBLIC_SITE_URL', 'https://vivary-dev.github.io').rstrip('/')
+    origin = os.environ.get('NEXT_PUBLIC_SITE_URL', 'https://www.vivaryagent.xyz').rstrip('/')
     docs = []
     for route in ROUTES:
         path = out / route.strip('/')
@@ -159,7 +159,7 @@ def export():
         (path / 'index.md').write_text(markdown)
         docs.append({'path': route, 'markdownPath': route + 'index.md', 'title': title, 'uri': origin + route, 'markdown': markdown, 'htmlSha256': hashlib.sha256(html.encode()).hexdigest()})
     # The checked-in guidance stays authoritative; only its origin is build-specific.
-    guidance = Path('public/llms.txt').read_text().replace('https://vivary-dev.github.io', origin)
+    guidance = Path('public/llms.txt').read_text().replace('https://www.vivaryagent.xyz', origin)
     (out / 'llms.txt').write_text(guidance)
     cache = Path('.tmp/pages-functions')
     cache.mkdir(parents=True, exist_ok=True)
