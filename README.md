@@ -49,7 +49,7 @@ The home page is built to Jeff's design canvas of 2026-09-16 as one
 responsive page, with the brand system's jar mark, lockup, hero illustration,
 social image, and app icon. Two documentation pages, `/what-is-vivary/` and
 `/commands/`, a styled 404, `robots.txt`, `sitemap.xml`, Open Graph
-metadata, and JSON-LD. Static export to `out/`, published on GitHub Pages.
+metadata, and JSON-LD. Static export to `out/`, published on Cloudflare Pages.
 
 ## Brand and design sources
 
