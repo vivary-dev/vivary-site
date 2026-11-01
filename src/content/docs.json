@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-11-01",
   "articles": [
     {
       "slug": "install-windows",
       "label": "Install on Windows",
       "title": "Install, upgrade and uninstall Vivary on Windows",
-      "description": "Download the Vivary Windows installer, verify its checksum, install it without administrator rights, then upgrade, back up, or uninstall it.",
-      "summary": "Install Vivary for your Windows account with the setup program, or use the optional portable ZIP. Then upgrade, back up, or remove it.",
+      "description": "Download Vivary 0.1.0-beta.1 for Windows, verify its checksum, install it without administrator rights, start it, and upgrade or uninstall it.",
+      "summary": "The Vivary setup program installs the Vivary desktop app for your Windows account, without administrator rights.",
       "related": ["runtime-setup", "troubleshooting"]
     },
     {
@@ -14,55 +14,55 @@
       "label": "Runtimes and keys",
       "title": "Set up coding runtimes and provider keys",
       "description": "Connect Claude Code or Codex to Vivary, choose Codex permissions, and add the provider keys that Native chat and automation conditions use.",
-      "summary": "Code conversations run Claude Code or Codex, which you install and sign in to yourself. Native chat and automation conditions use API keys that you add in Settings.",
+      "summary": "A coding runtime is a coding agent program, Claude Code or Codex, that you install on your computer and that Vivary uses for Code conversations.",
       "related": ["conversations", "automations"]
     },
     {
       "slug": "projects",
       "label": "Projects",
       "title": "Open and set up projects",
-      "description": "Open a folder or create a project in Vivary, set up an existing folder, reconnect a moved folder, and work with Files, search, health and Memory.",
-      "summary": "A project is a folder on your computer that Vivary and your agents work in. Open a folder you already have, or create a new project.",
+      "description": "Open a folder or create a project in Vivary, set up an existing folder, reconnect a moved folder, and use Files, search, health and Memory.",
+      "summary": "A project is a folder on your computer that Vivary and your agents work in.",
       "related": ["conversations", "handoffs"]
     },
     {
       "slug": "conversations",
       "label": "Conversations",
       "title": "Work in conversations",
-      "description": "Start Code conversations and Native chats in Vivary, choose a runtime and model, stop a run, link conversations, archive chats and search history.",
-      "summary": "Each project keeps its own conversations. A Code conversation runs Claude Code or Codex. A Native chat runs on the provider key you added.",
+      "description": "Start Code conversations and Native chats in Vivary, choose a runtime and model, answer Codex requests, stop a run, link, archive and search conversations.",
+      "summary": "A conversation is a series of messages between you and an agent in one project.",
       "related": ["runtime-setup", "handoffs"]
     },
     {
       "slug": "handoffs",
       "label": "Handoffs",
       "title": "Save a handoff to STATE.md",
-      "description": "Use Prepare handoff and Save handoff in Vivary to record goals, decisions and next steps in a project's state document, and keep that record current.",
-      "summary": "A handoff records where the work stands in the project's state document, such as STATE.md, so the next session or agent can pick it up from the file.",
+      "description": "Use Prepare handoff and Save handoff in Vivary to record goals, decisions and next steps in the state document of a project, and keep that record current.",
+      "summary": "A handoff is a work summary from the agent that Vivary saves at the end of the state document, such as STATE.md.",
       "related": ["projects", "conversations"]
     },
     {
       "slug": "automations",
       "label": "Automations",
       "title": "Run automations",
-      "description": "Create Vivary automations that run on a schedule, an event or a local webhook, run them now, approve protected actions, and review file changes.",
-      "summary": "An automation is a saved instruction that the agent runs on a schedule, on an event, when a program calls its webhook, or when you choose Run now.",
+      "description": "Create Vivary automations that run on a schedule, after an event or from a local webhook, run them now, approve protected actions, and review file changes.",
+      "summary": "An automation is a saved instruction that the agent runs on a schedule, after an event, or from a webhook call.",
       "related": ["runtime-setup", "troubleshooting"]
     },
     {
       "slug": "remote-access",
       "label": "Remote access",
       "title": "Open Vivary on another device",
-      "description": "Turn on Vivary remote access over a protected HTTPS connection you already run, pair a browser on another device, and revoke or disable access.",
-      "summary": "Remote access lets a browser on another device open the Vivary that runs on this computer. It is off until you turn it on and pair each browser.",
+      "description": "Turn on Vivary remote access over a protected HTTPS connection that you set up, pair a browser on another device, and revoke or turn off access.",
+      "summary": "Remote access lets a browser on a different device open the Vivary app that runs on this computer.",
       "related": ["projects", "troubleshooting"]
     },
     {
       "slug": "troubleshooting",
       "label": "Troubleshooting",
       "title": "Troubleshoot Vivary",
-      "description": "Fix common Vivary problems: installer messages, launch failures, runtimes that are not ready, unavailable projects, stuck runs and automation errors.",
-      "summary": "Find the symptom you see, then follow its action. Each table covers one part of Vivary.",
+      "description": "Correct common Vivary problems: installer messages, launch failures, coding runtimes that are not ready, unavailable projects, stopped runs and automation errors.",
+      "summary": "This troubleshooting guide lists the problems that you can see in Vivary and the action that corrects each one.",
       "related": ["install-windows", "runtime-setup"]
     }
   ]

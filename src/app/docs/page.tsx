@@ -12,7 +12,7 @@ import "../docs.css";
 
 export const metadata = pageMetadata(
   "Vivary documentation: install and use the desktop app",
-  "Task-based guides for the Vivary desktop app on Windows: installation, coding runtimes, projects, conversations, handoffs, remote access and troubleshooting.",
+  "Task-based guides for the Vivary desktop app on Windows: installation, coding runtimes, projects, conversations, handoffs, automations, remote access and troubleshooting.",
   "/docs/",
 );
 
@@ -42,8 +42,8 @@ export default function DocsIndex() {
           <p className="eyebrow">Vivary docs</p>
           <h1 className="display">Vivary documentation</h1>
           <p className="define">
-            These guides explain how to install and use the Vivary desktop app on Windows. Each
-            article covers one job with numbered steps.
+            The Vivary documentation tells you how to install and use the Vivary desktop app on
+            Windows. Each article covers one task with numbered steps.
           </p>
           <p className="docs-status">{facts.product.status}</p>
           <AgentsLine />

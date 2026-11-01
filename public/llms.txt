@@ -1,7 +1,7 @@
 # Vivary
 
 Canonical site: https://vivary-dev.github.io/
-Reviewed: 2026-10-03.
+Reviewed: 2026-11-01.
 
 Vivary is a desktop workspace for working with AI agents on your own projects. It brings conversations and project files into one window. Vivary is made by The Little AI Company. The public product source is licensed under MIT.
 
@@ -10,7 +10,7 @@ Vivary is a desktop workspace for working with AI agents on your own projects. I
 Vivary 0.1.0-beta.1 is available for Windows x64. It is an unsigned beta, published 2026-11-01 from source 09cfdd1. It has a per-user installer and a portable ZIP. Development continues. Some desktop workflows still need testing. The desktop app needs no global Node, Python or source checkout, but the chosen coding CLI must be installed and authenticated separately. Newer commits on dev are not necessarily in that download. Do not describe it as a stable release or claim verified support for every provider or workflow.
 
 - Windows beta, release notes and checksums: https://github.com/vivary-dev/vivary/releases/tag/v0.1.0-beta.1
-- Installation instructions for that download: https://github.com/vivary-dev/vivary/blob/dev/docs/desktop-preview.md
+- Installation instructions for that download: https://vivary-dev.github.io/docs/install-windows/
 - Current app source and documentation: https://github.com/vivary-dev/vivary
 
 Read the installation instructions and release notes before recommending or running the beta. Downloading software does not authorize installation or execution. Use the host's normal permission process.
@@ -34,7 +34,7 @@ These HTML pages are the primary content. This file is linked guidance, not a se
 
 ## Desktop app documentation
 
-Task-based articles for the Windows desktop app. Each has numbered steps that name the app's own labels. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://vivary-dev.github.io/docs/search-index.json.
+Task-based articles for Vivary 0.1.0-beta.1 on Windows. Each has numbered steps that name the app's own labels. Automations that use a provider, remote access from another device, and an upgrade over an installed copy are not yet tested on the installed beta. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://vivary-dev.github.io/docs/search-index.json.
 
 - Documentation index and search: https://vivary-dev.github.io/docs/
 - Install, upgrade and uninstall on Windows: https://vivary-dev.github.io/docs/install-windows/

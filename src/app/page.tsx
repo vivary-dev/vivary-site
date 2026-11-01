@@ -152,7 +152,7 @@ export default function Home() {
             <h3>Before you begin</h3>
             <p>Read the installation guide, verify the installer checksum and keep your project folders and app profile backed up.</p>
             <p>{facts.product.dataBoundary}</p>
-            <a className="text-link" href={facts.links.installGuide}>Windows installation instructions <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={facts.links.installGuide}>Windows installation instructions</a>
           </div>
         </div>
       </section>
