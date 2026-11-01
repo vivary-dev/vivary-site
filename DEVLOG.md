@@ -12,6 +12,20 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  feat/user-docs-20261019
+
+**Did:** Merged `dev` at b770631 into this branch and reworked the eight articles for Vivary 0.1.0-beta.1. Each article starts with a one-sentence definition, lists prerequisites where they apply, and uses numbered steps with one action each. The text follows the Google developer documentation style and ASD-STE100 limits: steps of at most 20 words, other sentences of at most 25 words, one term for each concept. New for beta.1: the real release file names and the tested checksum commands, a first-launch section, the minimum Claude Code and Codex versions with the Update required status, the Codex-only execution mode, the fixed runtime and model of a saved Code conversation, Codex requests, and the handoff save status. `facts.links.installGuide` now points at `/docs/install-windows/`, and the home page link lost its external-link arrow.
+
+**Sources:** UI labels were checked against vivary-dev/vivary tag v0.1.0-beta.1. Labels from the bundled Core package are not in the tag's Git tree, so they were checked in the installed beta.1 app, whose `build.json` names the tag commit. Areas that are not yet tested on the installed beta say so in one sentence: automation runs that use a provider, remote access from another device, and an upgrade over an installed copy.
+
+**Broke / surprised me:** The earlier Troubleshooting row told readers not to uninstall after a failed upgrade. The tag's own table says to run setup again and permits an uninstall first, so the row now follows the tag. The portable app is `vivary.exe` in lowercase, as the installer script and the installed folder show, although the product guide writes `Vivary.exe`.
+
+**Decided:** Windows and GitHub labels that readers click (More info, Run anyway, Finish, Installed apps) stay bold, although they are not Vivary's. A prose lint over `out/docs/*/index.md` checks sentence length, em dashes, semicolons, issue numbers, hashes and marketing words. It stays in the build server's evidence folder, not in this repo. The word "preview" appears only in app labels and as the verb for a setup preview.
+
+**Next:** Review the PR. If PR #18 merges first, merge `dev` again so that `llms.txt` and the docs links use the new origin. Publishing waits for Jeff.
+
+---
+
 ## 2026-11-01  fix/beta-download-link
 
 **Did:** Pointed every download link, status line and setup step at the Vivary 0.1.0-beta.1 release, which has a per-user installer. The September preview is a draft again, so the live links returned 404. Updated `public/llms.txt` and the export check's status qualifier. Added `.github/workflows/deploy.yml`, which deploys `main` to the Cloudflare Pages project `vivary` after the CI checks, with a Pages-only token Jeff created.
