@@ -57,7 +57,7 @@ const promises: Row[] = facts.product.promises.map((p) => {
 
 const limits: Row[] = [
   { k: "Unsigned beta", v: "Vivary 0.1.0-beta.1, published November 1, 2026, is built from source 09cfdd1. It is not a stable release. The installer and the app are not code signed." },
-  { k: "Workflows still being tested", v: "Applying setup changes to existing folders is unfinished. Provider-backed automations, remote access from another device and upgrade over an earlier install still need testing. Vivary runs one coding conversation at a time." },
+  { k: "Workflows still being tested", v: "Applying setup changes to existing folders is unfinished. Provider-backed automations and upgrade over an earlier install still need testing. Vivary runs one coding conversation at a time." },
   { k: "Newer source", v: "Changes on the development branch are not necessarily in the beta. Check the release notes for the version you use." },
   { k: "Agent permissions", v: "Your selected runtime controls tools and approvals. A workspace example is not a guarantee that every action requires review." },
   { k: "File and profile storage", v: "Project files stay in their folders. Conversation history and settings also use a local app profile and SQLite database." },
