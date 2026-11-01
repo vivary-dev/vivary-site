@@ -16,12 +16,6 @@
 .v9 .announce-bar { border-bottom: 1px solid var(--rule); background: var(--pane); color: var(--text-2); font-size: .8125rem; }
 .v9 .announce-bar p { margin: 0; padding: .65rem 0; }
 .v9 .announce-bar a { text-decoration: underline; text-underline-offset: .2em; }
-.v9 .announcement { border-block: 1px solid var(--rule); padding-block: 2.5rem; }
-.v9 .announcement-body { max-width: 62ch; }
-.v9 .announcement-body h2 { margin: 0 0 1rem; font-size: 1.25rem; line-height: 1.3; }
-.v9 .announcement-body p { color: var(--text-2); line-height: 1.7; }
-.v9 .announcement-body p + p { margin-top: .75rem; }
-.v9 .announcement-body a { text-decoration: underline; text-underline-offset: .2em; }
 .v9 .character { margin: 0; min-width: 0; text-align: center; }
 .v9 .character img { display: block; width: 100%; height: auto; }
 .v9 .character p { margin: .5rem 0 0; color: var(--text-2); font-size: .75rem; }
@@ -31,7 +25,8 @@
 .v9 .section-heading .lede { max-width: 48ch; }
 .v9 .product-figure { margin: 0; padding: .65rem; border: 1px solid var(--rule); background: var(--pane); }
 .v9 .product-figure > a { display: block; }
-.v9 .product-figure img { display: block; width: 100%; height: auto; }
+.v9 .product-figure img, .v9 .product-figure video { display: block; width: 100%; height: auto; }
+.v9 .product-figure video { aspect-ratio: 1280 / 676; background: #0b0b0a; }
 .v9 .product-figure figcaption { max-width: 92ch; padding: 1rem .5rem .35rem; color: var(--text-2); font-size: .75rem; line-height: 1.7; }
 .v9 .product-figure figcaption a { text-decoration: underline; text-underline-offset: .2em; }
 .v9 .workflow { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 2rem; padding: 0; margin: 0; list-style: none; }

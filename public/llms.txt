@@ -34,7 +34,7 @@ These HTML pages are the primary content. This file is linked guidance, not a se
 
 ## Desktop app documentation
 
-Task-based articles for Vivary 0.1.0-beta.1 on Windows. Each has numbered steps that name the app's own labels. Automations that use a provider, remote access from another device, and an upgrade over an installed copy are not yet tested on the installed beta. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://www.vivaryagent.xyz/docs/search-index.json.
+Task-based articles for Vivary 0.1.0-beta.1 on Windows. Each has numbered steps that name the app's own labels. Automations that use a provider and an upgrade over an installed copy are not yet tested on the installed beta. Remote access from another device over Tailscale was tested on the installed beta. Each page also has a Markdown copy at index.md under the same path. Search runs in the browser from https://www.vivaryagent.xyz/docs/search-index.json.
 
 - Documentation index and search: https://www.vivaryagent.xyz/docs/
 - Install, upgrade and uninstall on Windows: https://www.vivaryagent.xyz/docs/install-windows/
