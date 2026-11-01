@@ -1,9 +1,23 @@
-# Optional Cloudflare Pages deployment
+# Cloudflare Pages deployment
 
-This target is staged for `https://www.vivaryagent.xyz` and
-`https://mcp.vivaryagent.xyz/`. A source build or merge does not make either
-hostname live. The existing GitHub publisher and its canonical default remain
-intact until the rollout coordinator verifies an approved cutover.
+This target serves `https://www.vivaryagent.xyz` and
+`https://mcp.vivaryagent.xyz/` from the Pages project `vivary`. A push to `main`
+builds and deploys it through `.github/workflows/deploy.yml`, after the same
+checks as CI. The GitHub Pages copy keeps its own publisher.
+
+## Automatic deployment
+
+The project was created by Direct Upload, so Cloudflare cannot build it from Git.
+The deploy workflow builds it on GitHub Actions and uploads `out` with Wrangler
+4.155.0. It reads the project's production branch from the Cloudflare API and
+deploys under that branch name, so the upload becomes the production deployment.
+It uploads a copy of `out` from a folder with no `wrangler.toml` above it. A Pages
+deploy that finds a Wrangler file makes that file the project's source of truth, and
+this repository's file does not carry the dashboard variables listed below.
+After the upload it checks that the live home page links the same release as the
+build. It uses two repository secrets: `CLOUDFLARE_API_TOKEN`, a token limited to
+Account > Cloudflare Pages > Edit, and `CLOUDFLARE_ACCOUNT_ID`. To deploy `main`
+again without a new merge, run the workflow from the Actions tab.
 
 ## Build and content ownership
 
@@ -45,8 +59,9 @@ The build substitutes the chosen canonical origin in the existing agent guide.
 
 ## Operator settings before enabling traffic
 
-The rollout coordinator owns these settings and all account, DNS and deployment
-actions. Do not run a deployment just because the source checks pass.
+Jeff owns these settings and all account and DNS actions. Deployments run from
+`main` through the deploy workflow. Do not deploy a branch that has not merged
+into `main`.
 
 | Setting | Value and purpose |
 | --- | --- |

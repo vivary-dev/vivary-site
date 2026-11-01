@@ -12,6 +12,18 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-01  fix/beta-download-link
+
+**Did:** Pointed every download link, status line and setup step at the Vivary 0.1.0-beta.1 release, which has a per-user installer. The September preview is a draft again, so the live links returned 404. Updated `public/llms.txt` and the export check's status qualifier. Added `.github/workflows/deploy.yml`, which deploys `main` to the Cloudflare Pages project `vivary` after the CI checks, with a Pages-only token Jeff created.
+
+**Broke / surprised me:** The live Pages project was created by Direct Upload, so Cloudflare's Git integration cannot be turned on. Its name is `vivary`, not the `vivary-site` in `wrangler.toml`. The GitHub Pages copy at vivary-dev.github.io was last published on 2026-10-03 and also links the dead preview.
+
+**Decided:** Jeff chose deploy-from-GitHub on 2026-11-01. A merge into `main` is the publish approval for the Cloudflare site. Zo is unreachable, so this work ran on Linveo.
+
+**Next:** Merge into `dev`, promote `dev` to `main`, and confirm the deploy run and the live links. Republish the GitHub Pages copy with `scripts/deploy-site.sh` or retire it. Rework PR #15's user docs against beta.1.
+
+---
+
 ## 2026-10-04  feat/site-refresh
 
 **Did:** Built a review-only visual refresh of the existing three pages after Jeff asked to prioritize the product and website design. The home page now leads with the unchanged approved character, clear Windows download/setup links and a real, explicitly labeled development-interface capture. The setup page uses numbered steps and a page index. Commands appear before the layer explanation. Kept the palette, type roles, jar logo, sourced preview qualifications, runtime/data boundaries and existing routes/fragments. Fixed the phone menu panel and Escape focus restoration.

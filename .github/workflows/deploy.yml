@@ -1,0 +1,116 @@
+name: Deploy
+
+# Deploys the Cloudflare build of main to the Cloudflare Pages project `vivary`,
+# which serves www.vivaryagent.xyz and mcp.vivaryagent.xyz. The project was
+# created by Direct Upload, so Cloudflare cannot build it from Git. This job
+# builds it here and uploads `out` with Wrangler. Merging dev into main is the
+# owner's approval to publish (AGENTS.md). The job runs the CI checks first and
+# deploys only when they pass. Secrets: CLOUDFLARE_API_TOKEN, a token limited to
+# Account > Cloudflare Pages > Edit, and CLOUDFLARE_ACCOUNT_ID.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: pnpm
+
+      - name: Scan dependency publication metadata
+        run: node scripts/publish-scan.mjs .
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Transport and Markdown tests
+        run: pnpm test:transport
+
+      - name: Build Cloudflare target
+        run: VIVARY_DEPLOY_TARGET=cloudflare NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz NEXT_PUBLIC_PREVIEW=0 pnpm build
+
+      - name: Verify Cloudflare export
+        run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
+
+      # A Direct Upload deployment becomes production only when its branch name
+      # matches the project's production branch, so read it instead of guessing.
+      - name: Read the production branch
+        id: project
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          branch=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/vivary" \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["result"]["production_branch"])')
+          test -n "$branch"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "Production branch: $branch"
+
+      # Wrangler 4.155.0 was the newest release at least three days old on 2026-11-01.
+      # Upload a copy of `out` from a folder with no wrangler.toml above it. A Pages
+      # deploy that finds a Wrangler file makes that file the project's source of
+      # truth, and this repository's file does not carry the dashboard variables
+      # (SITE_ENABLED, MCP_ENABLED, MCP_ALLOWED_ORIGINS) the edge handler needs.
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PRODUCTION_BRANCH: ${{ steps.project.outputs.branch }}
+        run: |
+          upload="$RUNNER_TEMP/pages-upload"
+          rm -rf "$upload"
+          cp -R out "$upload"
+          cd "$upload"
+          pnpm dlx wrangler@4.155.0 pages deploy . \
+            --project-name vivary \
+            --branch "$PRODUCTION_BRANCH" \
+            --commit-hash "$GITHUB_SHA" \
+            --commit-message "main ${GITHUB_SHA::7}"
+
+      # The live home page must link the same release as the build just deployed.
+      - name: Check the live site
+        run: |
+          release=$(grep -o -m1 'https://github.com/vivary-dev/vivary/releases/tag/[^>)" ]*' out/index.md)
+          test -n "$release"
+          echo "Expected release link: $release"
+          for attempt in 1 2 3 4 5 6; do
+            sleep 15
+            if curl --fail --silent --show-error https://www.vivaryagent.xyz/index.md | grep -F -q "$release"; then
+              echo "Live site links $release"
+              exit 0
+            fi
+          done
+          echo "The live home page does not link $release"
+          exit 1
