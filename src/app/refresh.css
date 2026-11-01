@@ -13,6 +13,15 @@
 .v9 .landing-copy .deck { max-width: 44ch; margin: 1.75rem 0 2rem; font-size: 1rem; line-height: 1.8; }
 .v9 .landing-copy .cta { gap: .5rem 1.5rem; }
 .v9 .release-note { margin: .9rem 0 0; color: var(--text-3); font-size: .75rem; }
+.v9 .announce-bar { border-bottom: 1px solid var(--rule); background: var(--pane); color: var(--text-2); font-size: .8125rem; }
+.v9 .announce-bar p { margin: 0; padding: .65rem 0; }
+.v9 .announce-bar a { text-decoration: underline; text-underline-offset: .2em; }
+.v9 .announcement { border-block: 1px solid var(--rule); padding-block: 2.5rem; }
+.v9 .announcement-body { max-width: 62ch; }
+.v9 .announcement-body h2 { margin: 0 0 1rem; font-size: 1.25rem; line-height: 1.3; }
+.v9 .announcement-body p { color: var(--text-2); line-height: 1.7; }
+.v9 .announcement-body p + p { margin-top: .75rem; }
+.v9 .announcement-body a { text-decoration: underline; text-underline-offset: .2em; }
 .v9 .character { margin: 0; min-width: 0; text-align: center; }
 .v9 .character img { display: block; width: 100%; height: auto; }
 .v9 .character p { margin: .5rem 0 0; color: var(--text-2); font-size: .75rem; }

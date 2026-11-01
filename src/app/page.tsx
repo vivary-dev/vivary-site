@@ -37,6 +37,14 @@ export default function Home() {
   return (
     <Shell current="home">
       <JsonLd data={jsonLd} />
+      <div className="announce-bar">
+        <div className="wrap">
+          <p>
+            <strong>Vivary 0.1.0-beta.1 for Windows is available.</strong>{" "}
+            <a href={facts.links.preview}>Download</a> · <Link href={facts.links.installGuide}>Install guide</Link>
+          </p>
+        </div>
+      </div>
       <section id="top" className="landing-hero">
         <div className="wrap">
           <div className="landing-copy">
@@ -63,6 +71,29 @@ export default function Home() {
             <span>Use Claude Code or Codex</span>
             <span>Bring your own runtime and account</span>
             <span>Keep project files on your machine</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="news" className="sec announcement" aria-labelledby="news-title">
+        <div className="wrap">
+          <div className="announcement-body">
+            <h2 id="news-title">Vivary 0.1.0-beta.1 is available for Windows</h2>
+            <p>
+              Published November 1, 2026. Vivary 0.1.0-beta.1 is the first public beta of the desktop app.
+              It runs on 64-bit Windows 10 and Windows 11, and it uses your own Claude Code or Codex
+              sign-in. You do not need a Vivary account.
+            </p>
+            <p>
+              The beta is not code signed. Before you run the setup program, check its SHA-256 checksum.
+              The <Link href={facts.links.installGuide}>install guide</Link> gives the steps.
+            </p>
+            <p>
+              Some workflows are not yet tested on the installed app: automations that call a provider,
+              remote access from another device, and an upgrade over an older install. To report a
+              problem, open an issue in the{" "}
+              <a href="https://github.com/vivary-dev/vivary/issues">vivary-dev/vivary repository</a>.
+            </p>
           </div>
         </div>
       </section>
