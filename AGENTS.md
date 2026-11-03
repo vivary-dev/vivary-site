@@ -160,11 +160,12 @@ pnpm dlx @shadscan/cli@0.17.0
 
 ## Git
 
-- `main` = production. Only merges from `dev` or `hotfix/`. Never commit to it directly, never rebase it.
+- Follow the Git law in Jeff's `~/AGENTS.md` (2026-11-03). `prod` is the default branch and the finished product. All work happens on `dev`. Branch `task/<id>-<slug>` from `origin/dev`, open the PR into `dev`, never push or force-push `prod`, `main` or `dev`, and end every commit with `Task:`, `Agent:` and `Agent-Session:` trailers. `prod` changes only through a promotion PR from `dev`, and every merge waits for Jeff's approval.
+- `prod` = production. Only merges from `dev` or `hotfix/`. Never commit to it directly, never rebase it.
 - `dev` = integration and default work branch. Never rebase it.
-- Work branches come off `dev`, named `<type>/<slug>`: `feat/` `fix/` `chore/` `docs/` `refactor/` `test/`. `hotfix/` comes off `main` and merges back to both. Slug is lowercase, hyphenated, three words max. Create with `scripts/branch.sh <type> <slug>`.
+- Work branches come off `dev`, named `<type>/<slug>`: `feat/` `fix/` `chore/` `docs/` `refactor/` `test/`. `hotfix/` comes off `prod` and merges back to both. Slug is lowercase, hyphenated, three words max. Create with `scripts/branch.sh <type> <slug>`.
 - Commits use the same prefixes, imperative, under 72 chars: `feat: add landing hero`.
-- PRs squash into `dev`. Releases merge `dev` into `main` (merge commit) and tag `vX.Y.Z`.
+- PRs squash into `dev`. Releases merge `dev` into `prod` (merge commit) and tag `vX.Y.Z`.
 - Entire checkpoints are enabled. Do not disable them. Follow [the recording guide](docs/ENTIRE.md) before the next fresh agent session. Keep the configured private destination and historical upload hold; installed hooks are not capture proof.
 
 ## Next.js managed block

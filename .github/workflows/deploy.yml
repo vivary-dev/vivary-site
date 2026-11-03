@@ -1,18 +1,18 @@
 name: Deploy
 
-# Deploys the Cloudflare build of main to the Cloudflare Pages project `vivary`,
+# Deploys the Cloudflare build of prod to the Cloudflare Pages project `vivary`,
 # which serves www.vivaryagent.xyz and mcp.vivaryagent.xyz. The project was
 # created by Direct Upload, so Cloudflare cannot build it from Git. This job
-# builds it here and uploads `out` with Wrangler. Merging dev into main is the
+# builds it here and uploads `out` with Wrangler. Merging dev into prod is the
 # owner's approval to publish (AGENTS.md). The job starts only after the CI
-# workflow succeeds for a push to main, and it deploys that exact commit.
+# workflow succeeds for a push to prod, and it deploys that exact commit.
 # Secrets: CLOUDFLARE_API_TOKEN, a token limited to Account > Cloudflare Pages >
-# Edit, and CLOUDFLARE_ACCOUNT_ID. To deploy main again, rerun its CI run.
+# Edit, and CLOUDFLARE_ACCOUNT_ID. To deploy prod again, rerun its CI run.
 on:
   workflow_run:
     workflows: [CI]
     types: [completed]
-    branches: [main]
+    branches: [prod]
 
 permissions:
   contents: read
@@ -24,22 +24,22 @@ jobs:
   tip:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'prod'
     outputs:
       current: ${{ steps.tip.outputs.current }}
     steps:
-      - name: Check that the commit is the tip of main
+      - name: Check that the commit is the tip of prod
         id: tip
         env:
           COMMIT: ${{ github.event.workflow_run.head_sha }}
         run: |
-          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/prod | cut -f1)
           test -n "$tip"
           if [ "$tip" = "$COMMIT" ]; then
             echo "current=true" >> "$GITHUB_OUTPUT"
           else
             echo "current=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+            echo "::notice::Skipped: $COMMIT is not the tip of prod ($tip)."
           fi
 
   deploy:
@@ -81,21 +81,21 @@ jobs:
       - name: Verify Cloudflare export
         run: NEXT_PUBLIC_SITE_URL=https://www.vivaryagent.xyz node scripts/verify-public-export.mjs && node scripts/verify-edge-export.mjs
 
-      # Check again just before upload, in case main moved while this job waited
+      # Check again just before upload, in case prod moved while this job waited
       # in the queue or built. A deliberate rollback uses Cloudflare's deployment
       # history instead.
-      - name: Skip a commit that is no longer the tip of main
+      - name: Skip a commit that is no longer the tip of prod
         id: current
         env:
           COMMIT: ${{ github.event.workflow_run.head_sha }}
         run: |
-          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          tip=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/prod | cut -f1)
           test -n "$tip"
           if [ "$tip" = "$COMMIT" ]; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
             echo "deploy=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Skipped: $COMMIT is not the tip of main ($tip)."
+            echo "::notice::Skipped: $COMMIT is not the tip of prod ($tip)."
           fi
 
       # A Direct Upload deployment becomes production only when its branch name
@@ -136,7 +136,7 @@ jobs:
             --project-name vivary \
             --branch "$PRODUCTION_BRANCH" \
             --commit-hash "$COMMIT" \
-            --commit-message "main ${COMMIT::7}"
+            --commit-message "prod ${COMMIT::7}"
 
       # The live home page must link the same release as the build just deployed.
       - name: Check the live site
