@@ -16,7 +16,14 @@ through shadscan, and optional Umami analytics gated by production configuration
 
 ## Run it
 
+Select the exact Node version in `.node-version` before running commands.
+CI and the deployment build read the same file. The Node 24.22.3 pin includes
+the [November 2026 security fixes](https://nodejs.org/en/blog/release/v24.22.3).
+Node runs development, tests and build tooling. The published site serves static
+files and a Cloudflare edge handler.
+
 ```bash
+node --test tests/runtime.test.mjs
 node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm dev
@@ -139,11 +146,14 @@ See [Umami's tracker configuration](https://docs.umami.is/docs/tracker-configura
 ## Checks
 
 Pull requests run the publication scan before frozen installation or any
-dependency-backed command. They then run lint, TypeScript, the static build,
+dependency-backed command. A dependency-free runtime check first verifies the
+Node security minimum and that the running version matches `.node-version`.
+They then run lint, TypeScript, the static build,
 and the pinned shadscan CLI. The workflow retains its JSON report as an artifact.
 Dither Kit's CLI never runs in CI.
 
 ```bash
+pnpm test:runtime
 node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm lint

@@ -12,6 +12,56 @@ Template:
 **Next:** the first thing to do next time.
 ```
 
+## 2026-11-13  task/20261113-node-security
+
+**Did:** Updated `.node-version` from 24.15.0 to 24.22.3. Both setup-node jobs
+now read that file. A dependency-free runtime test checks the Node 24 security
+minimum and the running executable against the pin before either workflow's
+publication scan. Added `pnpm test:runtime` and documented local selection.
+
+**Evidence:** The [official release](https://nodejs.org/en/blog/release/v24.22.3)
+names November 11's 24.22.3 as a security release. The distribution index lists
+it as the latest Node 24 release with `security: true` on this verification date.
+The [November 3 CI job](https://github.com/vivary-dev/vivary-site/actions/runs/41673085874/job/126046346496)
+downloaded 24.15.0 and reported `node: v24.15.0`. Node runs development, tests,
+builds and upload tooling. Public requests use static files and the Cloudflare
+edge runtime. This work does not establish a reachable Node server vulnerability.
+
+**Verification:** Used the official Node 24.22.3 Linux binary after verifying
+SHA-256 against its published checksum, with pnpm 10.33.2. The new test rejected
+the original pin, 24.22.2 and an unselected 24.22.1 executable. Both runtime
+tests pass on 24.22.3. The publication scan checked 674 packages with none flagged.
+Frozen installation, lint, TypeScript, 9 transport tests, 9 Markdown tests, both
+static and Cloudflare builds, and both export gates passed. Each export checks
+12 documents. Workflow YAML parses and existing triggers, permissions,
+publication gates and deployment conditions are preserved. The pinned shadscan
+command exited successfully at 54/100, with the same findings and score as
+untouched origin/dev. Existing UI findings remain outside this runtime task.
+Independent investigation and patch review found no remaining old selector or
+concrete regression.
+
+**Broke / surprised me:** The workspace starts on Node 24.22.1 and pnpm 11.25.0,
+so the required versions were installed under `/tmp`. Node fetch needed the
+workspace proxy via `NODE_USE_ENV_PROXY=1` for the unchanged publication scan.
+The existing Big Shoulders font warning and TypeScript module-format warning
+remain. Entire is unavailable here, so no session checkpoint or upload is
+claimed. Recording configuration, private destination and upload hold are intact.
+GitHub rejected the first branch push because the inherited commit email is
+private. The successful retry uses the account's GitHub noreply address in commit metadata.
+The email privacy setting stays enabled.
+
+**Decided:** Work from origin/dev at e752aec in a fresh cloud clone. Keep the
+dependency graph, pnpm pin, Node type package, Cloudflare settings and production
+branches intact. No merge, deployment, spending or permission change.
+
+**Next:** The completed patch is pushed to its task branch. Automatic approval
+review denied draft PR creation into dev because trusted user messages do not
+explicitly authorize publishing a PR. No PR was created. Obtain explicit PR
+approval before opening it. Any promotion or deployment requires a separate
+approved action.
+
+---
+
 ## 2026-11-01  feat/demo-video
 
 **Did:** Replaced the October 3 development screenshot in "Inside the workspace" with a 56-second demo of the beta.1 app that Jeff approved. The poster is a 55 KB WebP, taken from a recorded frame without the caption so it does not sit under the player controls. The 1 MB MP4 uses `preload="none"` and starts muted only when 40% of it is on screen. It pauses when it scrolls away and stays paused after a person pauses it. Reduced motion and `?still=1` keep the poster. The controls are always visible.
