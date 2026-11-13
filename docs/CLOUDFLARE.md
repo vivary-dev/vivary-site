@@ -23,10 +23,13 @@ latest commit. To roll back, use the project's deployment history in Cloudflare.
 
 ## Build and content ownership
 
-Use Node 24, pnpm 10.33.2 and Python 3. Python uses only its standard library.
+Use the exact Node version in `.node-version`, pnpm 10.33.2 and Python 3.
+CI and the deployment build select Node from that file and verify the running
+version before the publication scan. Python uses only its standard library.
 Run the publication scan before frozen installation, then the normal checks.
 
 ```sh
+node --test tests/runtime.test.mjs
 node scripts/publish-scan.mjs .
 pnpm install --frozen-lockfile
 pnpm lint
