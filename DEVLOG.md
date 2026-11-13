@@ -47,15 +47,18 @@ The existing Big Shoulders font warning and TypeScript module-format warning
 remain. Entire is unavailable here, so no session checkpoint or upload is
 claimed. Recording configuration, private destination and upload hold are intact.
 GitHub rejected the first branch push because the inherited commit email is
-private. The retry uses the account's GitHub noreply address in commit metadata.
+private. The successful retry uses the account's GitHub noreply address in commit metadata.
 The email privacy setting stays enabled.
 
 **Decided:** Work from origin/dev at e752aec in a fresh cloud clone. Keep the
 dependency graph, pnpm pin, Node type package, Cloudflare settings and production
 branches intact. No merge, deployment, spending or permission change.
 
-**Next:** Review the draft PR into dev. Any promotion or deployment requires a
-separate approved action.
+**Next:** The completed patch is pushed to its task branch. Automatic approval
+review denied draft PR creation into dev because trusted user messages do not
+explicitly authorize publishing a PR. No PR was created. Obtain explicit PR
+approval before opening it. Any promotion or deployment requires a separate
+approved action.
 
 ---
 
